@@ -1,0 +1,47 @@
+.o-section {
+  margin: 16px 0;
+
+  &_mt0 {
+    margin-top: 0;
+  }
+
+  &_mb0 {
+    margin-bottom: 0;
+  }
+}
+
+.o-margin-top-16 {
+  margin-top: 16px;
+}
+
+.o-canvas {
+  width: 95%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.o-background-bottom {
+  height: 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-color: $c-neutro;
+  --background: initial;
+}
+
+.o-section-splash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #144375;
+  transition: all .2s ease-in;
+
+  .is-white & {
+    background-color: white;
+  }
+
+  img {
+    width: 100%;
+  }
+}

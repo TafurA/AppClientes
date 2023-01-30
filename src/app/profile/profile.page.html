@@ -1,0 +1,51 @@
+<ion-content>
+
+  <!-- Header back -->
+  <app-header-back></app-header-back>
+
+  <div class="o-canvas">
+
+    <header class="o-headline o-headline_big">
+      <h1 class="o-headline__title">Datos de perfil</h1>
+      <p class="o-headline__text">Modifica tus datos personales y manten tu cuenta actualizada.</p>
+    </header>
+
+    <!-- Personal information -->
+    <div class="o-information">
+
+      <h2 class="o-information__title">Datos personales</h2>
+
+      <div class="o-information__form">
+
+        <input class="o-information__input" type="text" value="{{ userName }}">
+        <input class="o-information__input" type="text" value="{{ userDocument }}">
+        <input class="o-information__input" type="text" value="{{ userEmal }}">
+        <input class="o-information__input" type="text" value="Tel: {{ userPhone }}">
+
+        <a class="o-link o-link_secondary" [routerLink]="['/update-personal-data']">EDITAR DETALLES</a>
+
+      </div>
+
+    </div>
+
+    <!-- Credentials -->
+    <div class="o-information">
+
+      <h2 class="o-information__title">Credenciales</h2>
+
+      <div class="o-information__form">
+
+        <label class="o-information__label" for="">IDENTIFICACION</label>
+        <input class="o-information__input" type="text" value="{{ userCredential }}">
+        <label class="o-information__label" for="">CONTRASEÑA</label>
+        <input class="o-information__input" type="password" value="1037659975">
+
+        <a class="o-link o-link_secondary" [routerLink]="['/update-credentials']">EDITAR CREDENCIALES</a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</ion-content>

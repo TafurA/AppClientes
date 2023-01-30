@@ -1,0 +1,94 @@
+<!-- Header component -->
+<app-header></app-header>
+
+<ion-content>
+
+  <div class="o-canvas">
+
+    <!-- Slider image -->
+    <div class="c-product-detail__star">
+      <ion-slides class="c-product-detail__wrap" pager="true" [options]="slideOpts">
+        <ion-slide  class="c-product-detail__slide" *ngFor="let img of product.galery">
+          <figure class="c-product-detail__figure">
+            <img class="c-product-detail__img o-img" src="{{ img }}" alt="">
+          </figure>
+        </ion-slide>
+      </ion-slides>
+
+      <span *ngIf="isDescuento" class="c-product-detail__ico i-star">{{ porDescuento }}%</span>
+    </div>
+
+    <div class="c-product-detail__amount">
+
+      <div class="c-product-detai__box">
+        <span class="c-product-detai__price">${{ product.price }}</span>
+        <span *ngIf="isDescuento" class="c-product-detai__discount">${{ valorDescuento }}</span>
+      </div>
+
+      <!-- Car component -->
+      <div class="c-add-car">
+  
+        <div class="c-add-car__box">
+          <button class="c-add-car__btn i-minor" (click)="removeQuantitifyProductToCar()"></button>
+          <span class="c-add-car__number js-number-card-product">{{ counterProductsCar }}</span>
+          <button class="c-add-car__btn c-add-car__btn_primary i-plus" (click)="addQuantitifyProductToCar()"></button>
+        </div>
+
+        <a
+          [routerLink]="['/car']"
+          class="
+            o-link o-link_primary
+            i-after-arrow-left i-after-arrow-left_right
+          "
+        >
+          Ver carrito
+        </a>
+
+      </div>
+
+    </div>
+
+    <header class="c-detail-product__header">
+      <h1 class="c-detail-product__title">{{ product.nameProduct }}</h1>
+
+      <!-- Button add to favorites -->
+      <button
+        class="c-product__favorite i-heart-outline"
+        (click)="addProductToFavorite(product.productCode)"
+        *ngIf="!isFavorite;else buttonAddFavorite"
+      ></button>
+
+      <ng-template #buttonAddFavorite>
+        <button
+          class="c-product__favorite i-heart-fill"
+          (click)="removeProductToFavorite(product.productCode)"
+        ></button>
+      </ng-template>
+
+    </header>
+
+    <div class="c-detail-product__description o-detail__dropdown">
+      <h2 class="c-detail-product__description-title">Detalles del producto</h2>
+      <p class="c-detail-product__lead">{{ product.description }}</p>
+      <div *ngIf="isDescriptionDropdown" style="position: relative;">
+        <span class="c-detail-product__shadow"></span>
+        <button
+          class="
+            c-detail-product__link
+            o-link o-link_secondary
+            i-after-arrow-down
+          "
+          (click)="toggleDropdown($event)"
+          data-text-btn="Ver menos"
+        >
+          Ver más
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Product list compontent -->
+  <app-list-product></app-list-product>
+
+</ion-content>

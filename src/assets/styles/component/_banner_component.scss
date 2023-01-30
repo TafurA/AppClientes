@@ -1,0 +1,19 @@
+.c-banner-wrap {
+  padding-top: 80px;
+}
+
+.c-banner {
+  padding-bottom: 32px;
+
+  .swiper-pagination-bullet {
+    background-color: $c-secondary;
+  }
+}
+
+.c-banner__slide {
+  width: 85%;
+}
+
+.c-banner__img {
+  border-radius: 16px;
+}

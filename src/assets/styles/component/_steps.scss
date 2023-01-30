@@ -1,0 +1,87 @@
+.c-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 240px;
+  margin: 24px auto;
+}
+
+.c-steps__step {
+  position: relative;
+  text-align: center;
+  color: $c-gray-disabled-10;
+
+  &:not( &:last-of-type) {
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      margin: auto;
+      width: 100%;
+      height: 1px;
+      top: -15px;
+      right: -134%;
+      bottom: 0;
+      background-color: $c-gray-disabled-10;
+    }
+
+    &.is-checked {
+      &::after {
+        background-color: $c-success;
+      }
+    }
+
+    &.is-current {
+      &::after {
+        background-color: $c-info;
+      }
+    }
+
+  }
+
+  i {
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 20px;
+    margin: 0 auto;
+  }
+
+  &.is-current {
+    i {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  span {
+    font-size: 14px;
+    color: $c-gray-disabled;
+  }
+
+  &.is-checked {
+    color: $c-success;
+    span {
+      color: $c-success;
+    }
+
+    i {
+      &::before {
+        content: $i-check;
+      }
+    }
+  }
+
+  &.is-current {
+    color: $c-info;
+
+    span {
+      color: $c-info;
+    }
+  }
+}

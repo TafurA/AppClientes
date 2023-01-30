@@ -1,0 +1,17 @@
+.o-loader {
+
+  ion-backdrop {
+    background-color: $c-neutro;
+  }
+
+  .loading-wrapper {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+  }
+
+  ion-spinner {
+    transform: scale(5);
+    color: $c-primary !important;
+  }
+
+}

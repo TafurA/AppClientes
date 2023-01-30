@@ -1,0 +1,51 @@
+.o-information {
+  margin-bottom: 24px;
+}
+
+.o-information__title {
+  font-family: $f-title;
+  margin-bottom: 16px;
+}
+
+.o-information__form {
+  padding: 16px 24px;
+  border-radius: 8px;
+  background-color: $c-gray-10;
+
+  .o-link {
+    justify-content: flex-end;
+    width: 100%;
+    font-size: 12px;
+  }
+}
+
+.o-information__input,
+.o-information__label {
+  font-family: $f-title;
+  font-size: 14px;
+  color: $c-gray-30;
+}
+
+.o-information__label {
+  font-weight: $f-semibold;
+}
+
+.o-information__input {
+  display: block;
+  width: 100%;
+  margin-bottom: 8px;
+  border: none;
+  padding: 0;
+  background: transparent;
+  pointer-events: none;
+
+  strong {
+    font-family: $f-title;
+  }
+}
+
+.o-information__kicker {
+  font-family: $f-title;
+  font-weight: $f-semibold;
+  color: $c-primary;
+}

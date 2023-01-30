@@ -1,0 +1,42 @@
+.c-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.c-welcome_figure {
+  max-width: 240px;
+  margin: 20px 0;
+}
+
+.c-welcome__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 16px;
+}
+
+.c-welcome__separator {
+  position: relative;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    z-index: 1;
+    background-color: rgba($color: $c-gray, $alpha: 0.4);
+  }
+}
+
+.c-welcome__separator-txt {
+  padding: 0 24px;
+  z-index: 2;
+  background-color: $c-neutro;
+}

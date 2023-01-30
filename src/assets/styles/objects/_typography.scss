@@ -1,0 +1,49 @@
+html,
+.theme {
+  color: $c-text;
+  font-size: 100%;
+  font-family: $f-default;
+}
+
+body,
+.o-text {
+  line-height: 1.2;
+  color: $c-text;
+  font-family: $f-default;
+  font-weight: $f-regular;
+  font-size: 16px;
+}
+
+i,
+em,
+.o-italic {
+  font-style: $f-italic;
+  font-family: $f-default;
+}
+
+u,
+.o-underline {
+  text-underline-position: under;
+}
+
+b,
+strong,
+.o-bold {
+  font-weight: $f-bold;
+}
+
+.o-light {
+  font-weight: $f-light;
+}
+
+.o-regular {
+  font-weight: $f-regular;
+}
+
+.o-medium {
+  font-weight: $f-medium;
+}
+
+.o-color-light {
+  color: $c-gray;
+}

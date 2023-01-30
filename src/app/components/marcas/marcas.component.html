@@ -1,0 +1,36 @@
+<section class="o-section">
+  <div class="o-canvas">
+
+    <div class="c-list-items">
+
+      <!-- Header component -->
+      <header class="o-subheadline">
+        <h2 class="o-title">Nuestros Proveedores</h2>
+        <a class="
+          o-link o-link_secondary
+          i-after-arrow-left i-after-arrow-left_right"
+          [routerLink]="['/tabs/providers']"
+        >
+          Ver marcas
+        </a>
+      </header>
+
+      <nav class="c-list-items__navigation">
+        <ion-slides [options]="optionsSlider">
+
+          <ion-slide class="c-list-items__slide" *ngFor="let marca of arrayDataMarcas">
+            <a [routerLink]="['/tabs/detail-providers', marca.nomlarg_b, marca.img_proveedor, marca.codter_b]">
+              <figure class="c-list-items__item">
+                <img src="{{ marca.img_proveedor }}"
+                  alt="{{ marca.nomlarg_b }}">
+              </figure>
+            </a>
+          </ion-slide>
+
+        </ion-slides>
+      </nav>
+
+    </div>
+
+  </div>
+</section>

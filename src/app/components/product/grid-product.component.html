@@ -1,0 +1,62 @@
+<section class="o-section o-section_mb0" *ngIf="loaded">
+  <div class="o-canvas">
+
+    <!-- GENERAL PRODUCT LIST -->
+    <div *ngIf="!isViewOfFavorite;else favoriteView">
+
+      <div *ngIf="isSearchProductsNull;else searchProducts">
+        <div class="c-product-wrap">
+          <!-- Product component -->
+          <app-product *ngFor="let product of arrayDataProducts | paginate: { itemsPerPage: 9, currentPage: p}"
+            [productObject]="product"></app-product>
+        </div>
+        <pagination-controls (pageChange)="p = $event" maxSize="6"></pagination-controls>
+      </div>
+
+      <ng-template #searchProducts>
+
+        <figure class="o-message">
+          <img class="o-img" src="assets/image/favorites_null.png" alt="">
+          <figcaption class="o-message__caption">No hay productos para tu búsqueda</figcaption>
+        </figure>
+
+      </ng-template>
+
+    </div>
+
+    <!-- FAVORITE PRODUCT LIST -->
+    <ng-template #favoriteView>
+
+      <div *ngIf="!isFavoriteNull;else favoriteNull">
+
+        <div class="c-product-wrap">
+          <!-- Product component -->
+          <app-product *ngFor="let product of arrayDataProducts | paginate: { itemsPerPage: 9, currentPage: p}"
+            [productObject]="product"></app-product>
+        </div>
+
+        <pagination-controls (pageChange)="p = $event" maxSize="6"></pagination-controls>
+
+      </div>
+
+      <ng-template #favoriteNull>
+
+        <figure class="o-message">
+          <img class="o-img" src="assets/image/favorites_null.png" alt="">
+          <figcaption class="o-message__caption">¡Aún no tienes favoritos en tu lista!</figcaption>
+        </figure>
+
+      </ng-template>
+
+    </ng-template>
+
+  </div>
+</section>
+
+<section class="o-section o-section_mb0" *ngIf="!loaded">
+  <div class="o-canvas">
+
+    <ion-skeleton-text [animated]="true" style="width: 100%; height: 150px"></ion-skeleton-text>
+
+  </div>
+</section>

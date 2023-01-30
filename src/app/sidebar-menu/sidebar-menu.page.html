@@ -1,0 +1,127 @@
+<ion-content>
+  <div class="o-canvas">
+
+    <!-- Name and cashback -->
+    <header class="c-sidebar-header">
+
+      <div class="o-headline o-headline_big">
+        <h1 class="o-kicker">¿Qué más Pues, veci?</h1>
+        <h2 class="o-headline__title">{{ userName }}</h2>
+      </div>
+
+      <div class="o-cashback">
+
+        <!-- Cashback value -->
+        <div class="o-cashback__box">
+          <span class="">cashback actual:</span>
+          <p class="o-cashback__value">${{ userCashback }}</p>
+        </div>
+
+        <!-- Link to redimir -->
+        <a
+          href=""
+          class="
+            o-link o-link_secondary
+            i-after-arrow-left i-after-arrow-left_right
+          "
+        >
+          Redimir
+        </a>
+
+      </div>
+
+    </header>
+
+    <!-- Banner component -->
+    <app-banner></app-banner>
+
+    <!-- navigation of support pages -->
+    <nav class="c-navigation-support">
+      
+      <a class="c-navigation-support__item" [routerLink]="['/tabs/profile']">
+        <span class="c-navigation-support__ico i-user"></span>
+        <span
+          class="
+            c-navigation-support__txt
+            i-after-arrow-left i-after-arrow-left_right
+          "
+        >
+          Mis Datos
+        </span>
+      </a>
+
+      <a class="c-navigation-support__item" [routerLink]="['/tabs/order-history']">
+        <span class="c-navigation-support__ico i-list-check"></span>
+        <span
+          class="
+            c-navigation-support__txt
+            i-after-arrow-left i-after-arrow-left_right
+          "
+        >
+          Historico de Pedidos
+        </span>
+      </a>
+
+      <a class="c-navigation-support__item" [routerLink]="['/tabs/favorite']">
+        <span class="c-navigation-support__ico i-heart-outline"></span>
+        <span
+          class="
+            c-navigation-support__txt
+            i-after-arrow-left i-after-arrow-left_right
+          "
+        >
+          Mis Favoritos
+        </span>
+      </a>
+
+      <div>
+
+        <button class="c-navigation-support__item o-dropdown" (click)="toggleDropdown($event)">
+          <span class="c-navigation-support__ico i-support"></span>
+          <span
+            class="
+              c-navigation-support__txt
+              i-after-arrow-left i-after-arrow-left_right
+            "
+          >
+            Soporte
+          </span>
+        </button>
+
+        <nav class="c-navigation-support__submenu">
+          <a
+              class="c-navigation-support__submenu-link"
+              [routerLink]="['/tabs/support/cashback']"
+          >
+            ¿Que es el cashback?
+          </a>
+          <a
+            class="c-navigation-support__submenu-link"
+            [routerLink]="['/tabs/support/journal']"
+          >
+            Nuestros horarios
+          </a>
+          <a
+            class="c-navigation-support__submenu-link"
+            [routerLink]="['/tabs/support/question']"
+          >
+            Preguntas frecuentes
+          </a>
+          <a class="c-navigation-support__submenu-link" href="">
+            Tratamiento de datos personales
+          </a>
+        </nav>
+
+      </div>
+
+      <button class="c-navigation-support__item" (click)="logOut()">
+        <span class="c-navigation-support__ico i-shutdown"></span>
+        <span class="c-navigation-support__txt">
+          Cerrar Sesión
+        </span>
+      </button>
+
+    </nav>
+
+  </div>
+</ion-content>

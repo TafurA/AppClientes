@@ -1,0 +1,18 @@
+@import "alignments";
+
+.is-visuallyHidden {
+  position: absolute;
+  top: -1000px;
+  opacity: 0;
+  z-index: -10000;
+}
+
+.c-header-back__brand {
+  .o-img-none & {
+    display: none;
+  }
+}
+
+.u-margin-bottom-16 {
+  margin-bottom: 16px;
+}

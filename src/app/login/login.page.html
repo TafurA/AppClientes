@@ -1,0 +1,60 @@
+<ion-content class="o-background-bottom" style="background-image: url('/assets/image/bg_bottom_login.png');">
+
+  <!-- Header back -->
+  <app-header-back></app-header-back>
+
+  <section class="o-section">
+    <div class="o-canvas">
+
+      <!-- Welcome header -->
+      <header class="o-headline u-text-align-center">
+        <h1 class="o-headline__title">¡Bienvenido de nuevo! 👋</h1>
+        <p class="o-headline__text o-color-light">
+          Ingresa tus credenciales para iniciar sesión.
+        </p>
+      </header>
+
+      <form class="o-form" [formGroup]="loginForm">
+
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              id="user"
+              class="o-form__input"
+              type="text"
+              placeholder="Identificación"
+              formControlName="user"
+            >
+            <label for="user" class="o-form__label i-user"></label>
+          </div>
+          <span class="o-form__error">{{ getError('user')}}</span>
+        </div>
+
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              id="password"
+              class="o-form__input"
+              type="password"
+              placeholder="*******"
+              formControlName="password"
+            >
+            <label for="password" class="o-form__label">
+              <button class="o-form__label-ico i-eye"></button>
+            </label>
+          </div>
+          <span class="o-form__error">{{ getError('password')}}</span>
+        </div>
+
+        <footer class="o-form__actions">
+          <button class="o-button" (click)="loginToSystem()" [disabled]="loginForm.invalid">Ingresar</button>
+          <button class="o-button o-button_secondary" [routerLink]="['/register']">Registrarse</button>
+          <a class="o-link" [routerLink]="['/forgot-password']">¿Olvidaste tu contraseña?</a>
+        </footer>
+
+      </form>
+
+    </div>
+  </section>
+
+</ion-content>

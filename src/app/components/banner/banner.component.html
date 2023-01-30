@@ -1,0 +1,28 @@
+<section class="o-section" *ngIf="loaded">
+  <div class="o-canvas">
+
+    <ion-slides class="c-banner" pager="true" [options]="slideOpts">
+
+      <ion-slide class="c-banner__slide" *ngFor="let banner of bannerList">
+        <a [routerLink]="['/detail-banner', banner.codigo ]">
+          <figure>
+            <img
+              src="https://intranet.surtilider.com:9001/IntranetSurti/Temp/fotosApp/banner/{{ banner.imagen }}"
+              alt="Marca {{ banner }}"
+              class="c-banner__img">
+          </figure>
+        </a>
+      </ion-slide>
+
+    </ion-slides>
+
+  </div>
+</section>
+
+<section class="o-section" *ngIf="!loaded">
+  <div class="o-canvas">
+
+    <ion-skeleton-text [animated]="true" style="width: 100%; height: 150px"></ion-skeleton-text>
+
+  </div>
+</section>

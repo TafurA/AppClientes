@@ -1,0 +1,141 @@
+.c-status {
+  margin-bottom: 40px;
+  border-radius: 8px;
+  border: 1px solid rgba($c-gray-25, 0.6);
+}
+
+.c-status__btn {
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba($c-gray-25, 0.6);
+  padding: 16px;
+  font-size: 24px;
+  text-align: center;
+  color: $c-gray-30;
+  background: transparent;
+
+  &::before {
+    transform: rotate(-90deg);
+    transition: all 0.2s ease-in;
+  }
+
+  .is-dropdown-show & {
+    &::before {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.c-status__list {
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: all 0.2s ease-in;
+  border-top: 1px solid #0000;
+
+  .is-dropdown-show & {
+    max-height: 2000px;
+    overflow: visible;
+    visibility: visible;
+    padding: 24px 0;
+  }
+}
+
+.c-status__item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 16px;
+  padding: 0 24px;
+
+  color: $c-gray-disabled;
+
+  &:not(:last-of-type) {
+    margin-bottom: 24px;
+
+    .c-status__ico {
+      &::after {
+        content: "";
+        position: absolute;
+        top: 118%;
+        width: 2px;
+        height: 60%;
+        background-color: $c-gray-disabled-10;
+      }
+    }
+  }
+
+  .is-confirm & {
+    &:nth-child(1) {
+
+      .c-status__ico {
+        background-color: $c-success;
+        &::before {
+          color: $c-neutro;
+        }
+      }
+
+      .c-status__text {
+        color: $c-text;
+      }
+
+      .c-status__date {
+        border-left: 1px solid;
+        padding-left: 16px;
+      }
+
+    }
+  }
+}
+
+.c-status__text,
+.c-status__date {
+  font-family: $f-title;
+}
+
+.c-status__text {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.c-status__date {
+  font-size: 13px;
+}
+
+.c-status__ico {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: $c-gray-disabled-10;
+
+  &::before {
+    font-weight: 800;
+    font-size: 12px;
+    color: transparent;
+  }
+}
+
+.c-status__current {
+  display: flex;
+  align-items: center;
+  column-gap: 16px;
+  padding: 24px;
+  color: $c-text;
+  background-color: $c-gray-20;
+
+  .c-status__ico {
+    background-color: $c-success;
+
+    &::before {
+      color: $c-neutro;
+    }
+  }
+
+  .c-status__text {
+    font-size: 20px;
+  }
+}

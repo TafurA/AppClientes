@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Open+Sans:wght@300;400;600;700&display=swap');
+
+
+// - Icommon Font Ico
+@font-face {
+  font-family: '#{$font-family-ico}';
+  src: url('#{$path-font}/#{$font-family-ico}.eot?qqnr5');
+  src: url('#{$path-font}/#{$font-family-ico}.eot?#iefix') format('embedded-opentype'), url('#{$path-font}/#{$font-family-ico}.ttf?qqnr5') format('truetype'), url('#{$path-font}/#{$font-family-ico}.woff?qqnr5') format('woff'), url('#{$path-font}/#{$font-family-ico}.svg?qqnr5##{$font-family-ico}') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+.i-,
+[class^="i-"],
+[class*=" i-"],
+.o-ico {
+  &::before {
+    font-family: '#{$font-family-ico}' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.i-after-,
+[class^="i-after-"],
+[class*="i-after-"] {
+  &:after {
+    font-family: '#{$font-family-ico}' !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+
+.i-mail {
+  &::before {
+    content: $i-mail;
+  }
+}
+
+.i-minor {
+  &::before {
+    content: $i-minor;
+  }
+}
+
+.i-support {
+  &::before {
+    content: $i-support;
+  }
+}
+
+.i-cash {
+  &::before {
+    content: $i-cash;
+  }
+}
+
+.i-check {
+  &::before {
+    content: $i-check;
+  }
+}
+
+.i-list-check {
+  &::before {
+    content: $i-list-check;
+  }
+}
+
+.i-credential {
+  &::before {
+    content: $i-credential;
+  }
+}
+
+.i-pin {
+  &::before {
+    content: $i-pin;
+  }
+}
+
+.i-send {
+  &::before {
+    content: $i-send;
+  }
+}
+
+.i-schedule {
+  &::before {
+    content: $i-schedule;
+  }
+}
+
+.i-phone {
+  &::before {
+    content: $i-phone;
+  }
+}
+
+.i-clock {
+  &::before {
+    content: $i-clock;
+  }
+}
+
+.i-calendar {
+  &::before {
+    content: $i-calendar;
+  }
+}
+
+.i-percent {
+  &::before {
+    content: $i-percent;
+  }
+}
+
+.i-plus {
+  &::before {
+    content: $i-plus;
+  }
+}
+
+.i-heart-outline {
+  &::before {
+    content: $i-heart-outline;
+  }
+}
+
+.i-after-arrow-left {
+  &_right {
+    &::after {
+      content: $i-arrow-left;
+      display: block;
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.i-arrow-left {
+  &::before {
+    content: $i-arrow-left;
+  }
+}
+
+.i-arrow-top {
+  &::before {
+    content: $i-arrow-left;
+    display: block;
+    transform: rotate(90deg);
+  }
+}
+
+.i-after-arrow-down {
+  &::after {
+    content: $i-arrow-left;
+    display: block;
+    transform: rotate(-90deg);
+  }
+}
+
+.i-car {
+  &::before {
+    content: $i-car;
+  }
+}
+
+.i-eye-lock {
+  &::before {
+    content: $i-eye-lock;
+  }
+}
+
+.i-eye {
+  &::before {
+    content: $i-eye;
+  }
+}
+
+.i-error {
+  &::before {
+    content: $i-error;
+  }
+}
+
+.i-heart-fill {
+  &::before {
+    content: $i-heart-fill;
+  }
+}
+
+.i-home {
+  &::before {
+    content: $i-home;
+  }
+}
+
+.i-menu {
+  &::before {
+    content: $i-menu;
+  }
+}
+
+.i-search {
+  &::before {
+    content: $i-search;
+  }
+}
+
+.i-star {
+  &::before {
+    content: $i-star;
+  }
+}
+
+.i-shutdown {
+  &::before {
+    content: $i-shutdown;
+  }
+}
+
+.i-user {
+  &::before {
+    content: $i-user;
+  }
+}
+
+.i-trash {
+  &::before {
+    content: $i-trash;
+  }
+}
+
+.i-pencil {
+  &::before {
+    content: $i-pencil;
+  }
+}

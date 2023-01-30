@@ -1,0 +1,51 @@
+<section class="o-section o-section_mt0">
+  <div class="o-canvas">
+
+    <div class="c-list-items">
+
+      <header class="o-subheadline" *ngIf="isOffer;else headerPrimaryCategory">
+        <h3 class="o-kicker">Filtrar por</h3>
+      </header>
+
+      <ng-template #headerPrimaryCategory>
+        <!-- Header component -->
+        <header class="o-subheadline" *ngIf="!isDetailCategory;else headerCategory">
+          <h2 class="o-title">Categorias</h2>
+          <a class="
+            o-link o-link_secondary
+            i-after-arrow-left i-after-arrow-left_right
+          " [routerLink]="['/tabs/category']">
+            Ver categorias
+          </a>
+        </header>
+      </ng-template>
+
+      <!-- Only for category page -->
+      <ng-template #headerCategory>
+        <header class="o-subheadline">
+          <h2 class="o-title">Todas las Categorias</h2>
+        </header>
+      </ng-template>
+
+      <nav class="c-list-items__navigation c-list-items__navigation_category">
+        <ion-slides [options]="optionsSlider">
+
+          <ion-slide class="c-list-items__slide c-list-items__slide_group"
+            [routerLink]="['/tabs/detail-category', category.categoria, category.codigo]"
+            routerLinkActive="is-active" *ngFor="let category of arrayDataCategory">
+            <a>
+              <figure class="c-list-items__item">
+                <img src="{{ category.img_category }}"
+                  alt="{{ category.categoria }}" class="c-list-items__img">
+                <figcaption class="c-list-items__caption">{{ category.categoria }}</figcaption>
+              </figure>
+            </a>
+          </ion-slide>
+
+        </ion-slides>
+      </nav>
+
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<section class="o-section o-section_mb0" *ngIf="loaded">
+  <div class="o-canvas">
+
+    <!-- Header component -->
+    <header class="o-subheadline o-subheadline_mb0">
+      <h2 class="o-title">Productos recomendados</h2>
+    </header>
+
+    <ion-slides class="c-product-slide" [options]="slideOpts">
+      <ion-slide class="c-product-slides" *ngFor="let product of arrayDataProducts">
+
+        <!-- Product component -->
+        <app-product [productObject]="product"></app-product>
+
+      </ion-slide>
+    </ion-slides>
+
+  </div>
+</section>
+
+<section class="o-section o-section_mb0" *ngIf="!loaded">
+  <div class="o-canvas">
+
+    <!-- Header component -->
+    <header class="o-subheadline o-subheadline_mb0">
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 40px"></ion-skeleton-text>
+    </header>
+
+    <ion-skeleton-text [animated]="true" style="width: 100%; height: 150px"></ion-skeleton-text>
+
+  </div>
+</section>

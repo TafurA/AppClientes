@@ -1,0 +1,67 @@
+.c-card-address-list {
+  margin-top: 16px;
+}
+
+.c-card-address-box {
+  margin-bottom: 16px;
+}
+
+.c-card-address {
+  padding: 16px;
+  border-radius: 8px;
+  color: $c-neutro;
+  background: $c-success;
+}
+
+.c-card-address__text {
+  font-family: $f-title;
+  font-weight: 600;
+
+  span {
+    font-family: $f-title;
+    color: $c-gray-30;
+  }
+}
+
+.c-card-address__text_top {
+  text-transform: uppercase;
+
+  &:not( &:last-of-type) {
+    margin-bottom: 16px;
+  }
+}
+
+.c-card-address_light {
+  color: $c-text;
+  background-color: $c-gray-15;
+
+  .c-card-address__text_top {
+    font-weight: 700;
+  }
+}
+
+.c-card-address__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.c-card-address__free {
+  color: $c-secondary;
+}
+
+.c-card-address__delivery {
+  display: flex;
+  align-items: flex-start;
+  column-gap: 8px;
+  margin-top: 16px;
+
+  i {
+    font-size: 24px;
+  }
+}
+
+.c-card-address__delivery-text {
+  display: block;
+  color: $c-gray-30;
+}

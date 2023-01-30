@@ -1,0 +1,41 @@
+<!-- Header component -->
+<app-header></app-header>
+
+<ion-content>
+
+  <div class="o-margin-top-16">
+
+    <div class="o-canvas">
+
+      <section class="o-section">
+        <!-- Header component -->
+        <header class="o-subheadline">
+          <h2 class="o-title">Nuestros proveedores</h2>
+        </header>
+
+        <nav class="c-provider">
+          <a
+            class="c-provider__item"
+            [routerLink]="['/tabs/detail-providers', provider.nomlarg_b, provider.img_proveedor, provider.codter_b]"
+            *ngFor="let provider of arrayDataMarcas"
+          >
+            <figure class="c-provider__figure">
+              <img class="c-provider__img" src="{{ provider.img_proveedor }}" alt="">
+              <figcaption class="c-provider__caption">{{ provider.nomlarg_b }}</figcaption>
+            </figure>
+          </a>
+        </nav>
+      </section>
+
+      <!-- Header component -->
+      <header class="o-subheadline">
+        <h2 class="o-title">Productos recomendados</h2>
+      </header>
+
+    </div>
+
+    <app-grid-product></app-grid-product>
+
+  </div>
+
+</ion-content>

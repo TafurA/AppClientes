@@ -1,0 +1,48 @@
+.o-headline {
+  margin-bottom: 24px;
+}
+
+.o-headline__title,
+.o-title,
+.o-kicker {
+  font-family: $f-title;
+}
+
+.o-headline__title {
+  margin-bottom: 16px;
+  font-weight: $f-bold;
+  font-size: 20px;
+
+  .o-headline_big & {
+    font-size: 24px;
+  }
+}
+
+.o-subheadline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .o-link {
+    font-size: 14px;
+  }
+
+  &_mb0 {
+    margin-bottom: 0;
+  }
+}
+
+.o-title {
+  font-weight: $f-bold;
+  font-size: 18px;
+}
+.o-title_light {
+  color: $c-gray-30;
+}
+
+.o-kicker {
+  margin-bottom: 8px;
+  font-weight: $f-medium;
+  color: $c-gray;
+}

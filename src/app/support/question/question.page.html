@@ -1,0 +1,49 @@
+<ion-content>
+  <!-- Header back -->
+  <app-header-back></app-header-back>
+
+  <div class="o-canvas">
+
+    <header class="o-headline o-headline_big">
+      <p class="o-kicker">Soporte</p>
+      <h1 class="o-headline__title">Preguntas frecuentes</h1>
+    </header>
+
+    <h3 class="o-box-support__title">¿Pregunta uno?</h3>
+    <article class="o-box-support">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when
+    </article>
+
+    <div class="">
+
+      <button class="c-navigation-support__item o-dropdown js-dropdown is-dropdown-show"
+        (click)="toggleDropdown($event)">
+        <span class="c-navigation-support__ico i-support"></span>
+        <span class="
+            c-navigation-support__txt
+            i-after-arrow-left i-after-arrow-left_right
+          ">
+          Soporte
+        </span>
+      </button>
+
+      <nav class="c-navigation-support__submenu">
+        <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/cashback']" routerLinkActive="is-active">
+          ¿Que es el cashback?
+        </a>
+        <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/journal']" routerLinkActive="is-active">
+          Nuestros horarios
+        </a>
+        <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/question']" routerLinkActive="is-active">
+          Preguntas frecuentes
+        </a>
+        <a class="c-navigation-support__submenu-link" href="">
+          Tratamiento de datos personales
+        </a>
+      </nav>
+
+    </div>
+
+  </div>
+</ion-content>

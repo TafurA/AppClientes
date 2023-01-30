@@ -1,0 +1,39 @@
+<header class="c-header">
+  <div class="o-canvas">
+
+    <div class="c-header__wrap">
+      <figure class="c-header__brand">
+        <img src="assets/image/logo_color.svg" alt="" class="o-img">
+      </figure>
+
+      <div>
+        <form
+          class="c-header__search js-search-header"
+          [ngClass]="{'is-none-car': productsIsNull, '': !productsIsNull}"
+        >
+          <input type="text" class="c-header__search-input js-input-search" placeholder="Buscar por producto" (keyup)="searchTerm$.next($event.target.value)">
+          <label class="c-header__search-label i-search" for=""></label>
+        </form>
+  
+        <div class="c-list-search-box">
+          <ul class="c-list-search">
+            <li *ngFor="let item of listFiltered" class="c-list-search__item" (click)="getUrlProduct($event)">
+                {{item}}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <a
+        class="c-header__car js-ico-car"
+        [ngClass]="{'test': productsIsNull, '': !productsIsNull}"
+        [routerLink]="['/tabs/car']"
+      >
+        <i class="i-car"></i>
+        <span class="c-header__car-number js-text-ico-car">{{ numberProductsCar }}</span>
+      </a>
+    </div>
+
+  </div>
+</header>

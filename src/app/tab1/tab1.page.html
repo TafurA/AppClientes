@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Categorias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-list>
+    <!-- <ion-title size="large">HOLA1</ion-title> -->
+    <ion-item *ngFor="let datos of datos" [routerLink]="['../tab2/' + datos.id]">
+      <ion-label>{{datos.name}}</ion-label>
+      <ion-avatar slot="start">
+        <img src="{{datos.image}}" alt="">
+        <!-- <img src="{{datos.img_prod}}" alt=""> -->
+      </ion-avatar>
+    </ion-item>
+  </ion-list>
+  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
+</ion-content>

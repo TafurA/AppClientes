@@ -1,0 +1,7 @@
+<div class="c-product-wrap">
+  <!-- Product component -->
+  <app-product
+    *ngFor="let product of arrayDataProducts | paginate: { itemsPerPage: 9, currentPage: p}"
+    [productObject]="product">
+  </app-product>
+</div>

@@ -1,0 +1,74 @@
+.o-ticket-wrap {
+  position: relative;
+
+  &:not( &:last-of-type) {
+    margin-bottom: 16px;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  input:checked+.o-ticket {
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 38px;
+      height: 100%;
+      border: 1px dashed $c-neutro;
+    }
+  }
+}
+
+.o-ticket {
+  position: relative;
+  display: block;
+  max-width: 270px;
+  margin: 0 auto;
+  border-radius: 16px;
+  padding: 12px 14px;
+  color: $c-neutro;
+  background: $c-success;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    margin: auto;
+    width: 50px;
+    height: 50px;
+    clip-path: circle(50% at -7%);
+    background-color: $c-neutro;
+    transform: rotate(180deg);
+  }
+
+  * {
+    font-family: $f-title;
+  }
+}
+
+.o-ticket__price,
+.o-ticket__price-value {
+  font-weight: $f-bold;
+  color: $c-text;
+}
+
+.o-ticket__price {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 20px;
+}
+
+.o-ticket__price-value {
+  margin-left: 8px;
+  font-size: 16px;
+}

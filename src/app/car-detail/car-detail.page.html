@@ -1,0 +1,244 @@
+<ion-content>
+
+  <!-- Header back -->
+  <app-header-back></app-header-back>
+
+  <div class="o-canvas">
+
+    <!-- STEP BY STEP -->
+    <ul class="c-steps">
+      <li class="c-steps__step is-checked">
+        <i class="i-car"></i>
+        <span>Carrito</span>
+      </li>
+      <li class="c-steps__step is-current">
+        <i class="i-send"></i>
+        <span>Entrega</span>
+      </li>
+      <li class="c-steps__step">
+        <i class="i-cash"></i>
+        <span>Pago</span>
+      </li>
+    </ul>
+
+    <!-- DIRECCION -->
+    <div [ngClass]="{'test': !groupAddres, '': groupAddres}">
+
+      <div class="c-card-address-box">
+        <h4 class="o-title o-title_light">Dirección de Entrega</h4>
+
+        <ul class="c-card-address-list">
+          <li class="c-card-address">
+            <p class="c-card-address__text c-card-address__text_top">{{ addressData.userCurrent }}</p>
+            <p class="c-card-address__text">{{ addressData.address }}</p>
+            <p class="c-card-address__text">{{ addressData.phone }}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="o-title o-title_light">Llegada estimada</h4>
+
+        <ul class="c-card-address-list">
+          <li class="c-card-address c-card-address_light">
+
+            <div class="c-card-address__header">
+              <div>
+                <p class="c-card-address__text c-card-address__text_top">El {{ formatDate }}</p>
+              </div>
+              <span class="c-card-address__free">GRATIS</span>
+            </div>
+            
+            <p class="c-card-address__delivery">
+              <i class="i-credential"></i>
+              <span>
+                <span class="c-card-address__delivery-text">Envio Estándar</span>
+                <span class="c-card-address__delivery-text">08:00 - 17:00</span>
+              </span>
+            </p>
+
+          </li>
+        </ul>
+      </div>
+
+      <button
+        class="c-cashback-box__btn o-button"
+        (click)="showPaymentStep()"
+      >
+        Revisar y Confirmar
+      </button>
+    </div>
+
+    <!-- PAGO -->
+    <div [ngClass]="{'test': !groupPago, '': groupPago}">
+
+      <div class="c-card-address-box">
+        <h4 class="o-title o-title_light">Método de Pago</h4>
+
+        <div class="c-cashback-box">
+
+          <header class="c-cashback-box__header">
+            <h4 class="c-cashback-box__title">EFECTIVO</h4>
+          </header> 
+    
+        </div>
+
+      </div>
+
+      <div class="c-card-address-box">
+        <h4 class="o-title o-title_light">Resumen del pedido</h4>
+
+        <div class="c-cashback-box">
+
+          <div class="c-card-address c-card-address_light">
+
+            <div class="c-card-address__header">
+              <div>
+                <p class="c-card-address__text c-card-address__text_top">
+                  <span>PRECIO ORIGINAL:</span> ${{ detailData.subtotal }} COP
+                </p>
+                <p class="c-card-address__text c-card-address__text_top">
+                  <span>DESCUENTO CASHBACK:</span> $ {{ detailData.cashback }} COP
+                </p>
+                <p class="c-card-address__text c-card-address__text_top">
+                  <span>{{ detailData.productsLength }} PRODUCTOS:</span> $ {{ detailData.total }} COP
+                </p>
+                <p class="c-card-address__text c-card-address__text_top">
+                  <span>ENTREGA:</span> GRATIS
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+    
+        </div>
+
+      </div>
+
+      <button
+        class="c-cashback-box__btn o-button"
+        (click)="sendOrder()"
+      >
+        Hacer pedido
+      </button>
+
+    </div>
+
+    <!-- CONFIRMACION -->
+    <div [ngClass]="{'test': !groupConfirm, '': groupConfirm}">
+
+      <figure class="o-message o-message_confirm">
+        <img class="o-message__img" src="assets/image/order_confirm.png" alt="">
+        <figcaption class="o-message__caption">¡Excelente! Hemos confirmado tu pedido con exito!</figcaption>
+      </figure>
+
+      <header class="o-subheadline">
+        <h1 class="o-title">Número pedido:
+          <span class="o-information__kicker">{{ order.orderId }}</span>
+        </h1>
+        <button class="o-link o-link_underline"> copiar </button>
+      </header>
+  
+      <!-- Status components -->
+      <!-- <div class="c-status">
+  
+        <div class="c-status__current">
+          <span class="c-status__ico i-check"></span>
+          <header>
+            <p class="c-status__text">PEDIDO CONFIRMADO</p>
+            <span class="c-status__date">Viernes 26/08</span>
+            <p class="c-status__date">Envio a domicilio</p>
+          </header>
+        </div>
+  
+        <ul class="c-status__list is-confirm">
+          <li class="c-status__item">
+            <span class="c-status__ico i-check"></span>
+            <p class="c-status__text">CONFIRMADO</p>
+            <span class="c-status__date">Viernes 26/08</span>
+          </li>
+          <li class="c-status__item">
+            <span class="c-status__ico i-check"></span>
+            <p class="c-status__text">EN PREPARACIÓN</p>
+            <span class="c-status__date">-- / --</span>
+          </li>
+          <li class="c-status__item">
+            <span class="c-status__ico i-check"></span>
+            <p class="c-status__text">EN REPARTO</p>
+            <span class="c-status__date">-- / --</span>
+          </li>
+          <li class="c-status__item">
+            <span class="c-status__ico i-check"></span>
+            <p class="c-status__text">ENTREGADO</p>
+            <span class="c-status__date">-- / --</span>
+          </li>
+        </ul>
+  
+        <button class="c-status__btn i-arrow-top" (click)="toggleDropdownProduct($event)"></button>
+  
+      </div> -->
+  
+      <ul class="o-checkout">
+  
+        <!-- Order detail -->
+        <li class="o-checkout__item">
+  
+          <h3 class="o-checkout__title">RESUMEN DE TU PEDIDO</h3>
+  
+          <div class="o-checkout__column">
+  
+            <p class="o-checkout__txt">{{ order.totalProducts }} articulos</p>
+  
+            <p class="o-checkout__txt">$ {{ order.totalValue }} COP</p>
+  
+          </div>
+  
+        </li>
+  
+        <!-- Address Data -->
+        <li class="o-checkout__item">
+  
+          <h3 class="o-checkout__title">DIRECCIÓN DEL ENVIO</h3>
+  
+          <p class="o-checkout__txt">
+            <strong class="o-checkout__txt_bold">{{ order.customerName }}</strong>
+          </p>
+          <p class="o-checkout__txt">{{ order.address }}</p>
+          <p class="o-checkout__txt">{{ order.phone }}</p>
+  
+        </li>
+  
+        <!-- Date -->
+        <li class="o-checkout__item">
+  
+          <h3 class="o-checkout__title">PEDIDO REALIZADO EL</h3>
+  
+          <p class="o-checkout__txt">{{ order.date }}</p>
+  
+        </li>
+  
+        <!-- Payment method -->
+        <li class="o-checkout__item">
+  
+          <h3 class="o-checkout__title">MEDIO DE PAGO</h3>
+  
+          <p class="o-checkout__txt">EFECTIVO</p>
+  
+        </li>
+  
+      </ul>
+  
+      <!-- <button class="o-checkout__btn o-button o-button_secondary">Cancelar pedido</button> -->
+      <button
+        class="o-checkout__btn o-button"
+        [routerLink]="['/order-detail/', order.orderId]"
+      >
+        Ver detalle
+      </button>
+
+    </div>
+
+  </div>
+
+</ion-content>

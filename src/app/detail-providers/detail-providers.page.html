@@ -1,0 +1,30 @@
+<!-- Header component -->
+<app-header></app-header>
+
+<ion-content>
+
+  <!-- Header back -->
+  <div class="o-img-none">
+    <section class="o-section">
+      <div class="o-canvas">
+    
+        <header class="c-header-back">
+          <a class="o-button-ico i-arrow-left" [routerLink]="['/tabs/providers']"></a>
+    
+          <!-- Logo Surtilider -->
+          <figure class="c-header-back__brand o-logo">
+            <img class="o-img" src="assets/image/logo_color.svg" alt="Logo a color de Surtilider SAS">
+          </figure>
+        </header>
+    
+      </div>
+    </section>
+  </div>
+
+  <div class="o-margin-top-16">
+
+    <app-provider-product></app-provider-product>
+    
+  </div>
+
+</ion-content>

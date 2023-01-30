@@ -1,0 +1,40 @@
+<ion-app>
+  <ion-router-outlet></ion-router-outlet>
+
+  <div class="c-product-alert js-alert-product">
+    <div class="c-product-alert__wrap">
+
+      <div class="c-product-alert__header">
+
+        <div style="position: relative;">
+          <h1 class="c-product-alert__title">Producto agregado</h1>
+          <small class="js-copyUriMsg has-ico-list__text">
+            ¡Link copiado!
+          </small>
+        </div>
+
+        <div class="c-add-car">
+
+          <div class="c-add-car__box">
+            <button class="c-add-car__btn i-minor" (click)="removeQuantitifyProductToCar()"></button>
+            <span class="c-add-car__number js-number-card-product">1</span>
+            <button class="c-add-car__btn c-add-car__btn_primary i-plus" (click)="addQuantitifyProductToCar()"></button>
+          </div>
+
+          <a 
+            [routerLink]="['/car']"
+            (click)="closeAlert()"
+            class="o-link o-link_primary i-after-arrow-left i-after-arrow-left_right">
+            Ver carrito
+          </a>
+
+          <a class="o-link o-link_secondary" (click)="closeAlert()">
+            Seguir comprando
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</ion-app>

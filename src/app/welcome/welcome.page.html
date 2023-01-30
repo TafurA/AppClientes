@@ -1,0 +1,51 @@
+<ion-content [fullscreen]="true">
+
+  <section class="o-section">
+    <div class="o-canvas">
+
+      <div class="c-welcome">
+
+        <!-- Logo Surtilider -->
+        <figure class="o-logo">
+          <img class="o-img" src="assets/image/logo_color.svg" alt="Logo a color de Surtilider SAS">
+        </figure>
+
+        <!-- Car image -->
+        <figure class="c-welcome_figure">
+          <img class="o-img" src="assets/image/car.png" alt="Carro repartidos de Surtilider SAS">
+        </figure>
+
+        <!-- Welcome header -->
+        <header class="o-headline u-text-align-center">
+          <h1 class="o-headline__title">¡Surtimos con Liderazgo!</h1>
+          <p class="o-headline__text o-color-light">
+            Somos la comercializadora de productos masivos aliada de su negocio.
+          </p>
+        </header>
+
+        <footer class="c-welcome__actions">
+
+          <button class="o-button" [routerLink]="['/tabs/login']">
+            Iniciar sesión con tu usuario
+          </button>
+
+          <p class="c-welcome__separator o-color-light">
+            <span class="c-welcome__separator-txt">ó tambien puedes</span>
+          </p>
+
+          <button class="o-button o-button_secondary" [routerLink]="['/tabs/register']">
+            Crear una cuenta
+          </button>
+
+          <button class="o-button o-button_outline" [routerLink]="['/tabs/home']">
+            Continuar sin usuario dentro
+          </button>
+
+        </footer>
+
+      </div>
+
+    </div>
+  </section>
+
+</ion-content>

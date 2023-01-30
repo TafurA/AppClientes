@@ -1,0 +1,34 @@
+.c-sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 40px;
+
+  .o-headline,
+  .o-headline__title {
+    margin-bottom: 0;
+    padding-right: 16px;
+  }
+}
+
+.c-list-search-box {
+  position: absolute;
+  top: -400%;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: #fff;
+  padding: 16px;
+  max-height: 250px;
+  overflow: scroll;
+  display: block;
+  transition: all 0.2s ease-in;
+
+  &.is-search-type {
+    top: 68px;
+  }
+}
+
+.c-list-search__item {
+  margin-bottom: 8px;
+}

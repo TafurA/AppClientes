@@ -1,0 +1,487 @@
+<ion-content [fullscreen]="true">
+
+  <!-- Header back -->
+  <app-header-back></app-header-back>
+    <div class="o-canvas" id="container">
+    <header class="o-headline u-text-align-center header">
+      <h1 class="o-headline__title">¡Se parte de nuestro Equipo!👋</h1>
+      <p class="o-headline__text o-color-light">
+        Registrate ahora para empezar a generar cashback por tus compras.
+      </p>
+    </header>
+    <!-- MIGA REGISTER -->
+    <div class="container-miga">
+      <!-- <div class="miga" *[ngClass]="{colorazul: }"(click)="continuarform1() "> -->
+      <div class="miga" [ngStyle]="{'color': form1? '#5199F0' : '#57D78F'  }"  (click)="continuarform1()"  >
+        <button class=" icon" [ngClass]="{'i-user': form1, 'i-check': !form1}" [ngStyle]="{'color': form1? '#5199F0' : '#57D78F', 'border-color':form1? '#5199F0': '#57D78F' }"  ></button>
+        <span class="span">Información personal</span>
+      </div>
+      <div class="miga" [ngStyle]="{ 'color': form2 && !form1 && !form3? '#5199F0' : !form2 &&  form3? '#57D78F': ''}" (click)="continuarform2()">
+        <button class=" icon" [ngClass]="{'i-schedule': form2 || form1, 'i-check': form3}" [ngStyle]="{ 'color': form2 && !form1 && !form3? '#5199F0' : !form2 &&  form3? '#57D78F': '', 'border-color': form2 && !form1 && !form3? '#5199F0' : !form2 &&  form3? '#57D78F': ''}"></button>
+        <span class=" span" >Contacto</span>
+      </div>
+      <div class="miga" [ngStyle]="{ 'color': form3 && !form1 && !form2? '#5199F0' : ''}"  (click)="continuarform3()" >
+        <button class="i-send icon"  [ngStyle]="{ 'color': form3 && !form1 && !form2? '#5199F0' : '',  'border-color': form3 && !form1 && !form2? '#5199F0' : ''}"  ></button>
+        <span class="span">Entrega</span>
+      </div>
+    </div>
+    <form class="o-form" [formGroup]="RegisterForm">
+
+
+      <!-- datos presonales -->
+      <fieldset class="o-form__fieldset" *ngIf="form1" >
+        <!-- <fieldset class="o-form__fieldset" > -->
+        
+        
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+
+          <ion-select interface="popover"
+                        class="o-form__input"
+                        placeholder="Tipo de documento" 
+                        id="tipo_doc" 
+                        formControlName="tipo_doc"
+                        (ionChange)="obtenerTipoDoc($event)">
+            <ion-select-option *ngFor="let food of tipo" [value]="food">{{ food.name }}</ion-select-option>
+            </ion-select>
+          
+            
+          </div>
+          <span class="o-form__error">{{ getError('tipo_doc')}}</span> 
+       </div>
+
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              
+              id="documento"
+              class="o-form__input"
+              type="tel"
+              placeholder="Número de Documento"
+              formControlName="documento"
+            >
+            
+          </div>
+          <span class="o-form__error">{{ getError('documento')}}</span>
+        </div>
+        <div class="o-form__field" *ngIf="form1_1">
+          <div class="o-form__field-wrap">
+            <input
+              
+              id="primerNombre"
+              class="input-colum2"
+              type="text"
+              placeholder="Primer Nombre"
+              formControlName="primerNombre"
+            >
+            
+          </div>
+          <span class="o-form__error">{{ getError('primerNombre')}}</span>
+        </div>
+        <div class="o-form__field" *ngIf="form1_1">
+          <div class="o-form__field-wrap">
+            <input 
+              
+              id="segundoNombre"
+              class="input-colum2"
+              type="text"
+              placeholder="Segundo Nombre"
+              formControlName="segundoNombre"
+            >
+            
+          </div>
+          <span class="o-form__error">{{ getError('segundoNombre')}}</span>
+        </div>
+        <div class="o-form__field" *ngIf="form1_1">
+          <div class="o-form__field-wrap">
+            <input
+              
+              id="primerApellido"
+              class="input-colum2"
+              type="text"
+              placeholder="Primer Apellido"
+              formControlName="primerApellido"
+            >
+            
+          </div>
+          <span class="o-form__error">{{ getError('primerApellido')}}</span>
+        </div>
+        <div class="o-form__field" *ngIf="form1_1">
+          <div class="o-form__field-wrap">
+            <input
+              
+              id="segundoApellido"
+              class="input-colum2"
+              type="text"
+              placeholder="Segundo Materno"
+              formControlName="segundoApellido"
+            >
+            
+          </div>
+          <span class="o-form__error">{{ getError('segundoApellido')}}</span>
+        </div>  
+
+          <div class="o-form__field" *ngIf="form1_2">
+            <div class="o-form__field-wrap">
+              <input
+                
+                id="digitoVer"
+                class="o-form__input"
+                type="text"
+                placeholder="Digito de Verificación (si no tiene '0')"
+                formControlName="digitoVer"
+              >
+            </div>
+            <span class="o-form__error">{{ getError('digitoVer')}}</span>
+        </div>
+        <div class="o-form__field" *ngIf="form1_2">
+            <div class="o-form__field-wrap">
+              <input
+                
+                id="razonSocial"
+                class="o-form__input"
+                type="text"
+                placeholder="Razón Social"
+                formControlName="razonSocial"
+              >
+            </div>
+            <span class="o-form__error">{{ getError('razonSocial')}}</span>
+        </div>
+       
+        <div  class="o-form__actions">
+          <button class="o-button" (click)="continuarform2();">Continuar</button>
+        </div>
+  
+        <footer>
+          <figure class="c-foot-back__brand o-logo">
+            <img class="o-img" src="assets/image/interaccion_Registro.png" alt="informacion personal">
+          </figure>
+        </footer>  
+      
+      
+      </fieldset>
+      
+      <!-- contacto -->
+     <!-- <fieldset  class="o-form__fieldset"  > -->
+      <fieldset  class="o-form__fieldset"  *ngIf="form2">
+        
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              id="email"
+              class="o-form__input"
+              type="email"
+              placeholder="Correo electrónico"
+              formControlName="email"
+            >
+            
+          </div>
+           <span class="o-form__error">{{ getError('email')}}</span> 
+        </div>
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              id="telefono"
+              class="o-form__input"
+              type="tel"
+              placeholder="teléfono"
+              formControlName="telefono"
+            >
+            
+            
+          </div>
+          <span class="o-form__error">{{ getError('telefono')}}</span> 
+        </div>
+        <div  class="o-form__actions">
+          <button class="o-button" (click)="continuarform3()" >continuar</button>
+          <!-- <button class="o-button" (click)="registrarCliente()" >continuar</button> -->
+        </div>
+
+      
+        <footer>
+          <figure class="c-foot-back__brand o-logo">
+            <img class="o-img" src="assets/image/Contacto.png" alt="Contacto">
+          </figure>
+        </footer>  
+      </fieldset>
+
+       <!--  Entrega -->
+      <!-- <fieldset class="o-form__fieldset" > -->
+        <fieldset class="o-form__fieldset" *ngIf="form3">
+
+
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <input
+              id="establecimiento"
+              class="o-form__input"
+              type="text"
+              placeholder="Nombre del Establecimiento"
+              formControlName="establecimiento"
+            >
+          </div>
+           <span class="o-form__error">{{ getError('establecimiento')}}</span> 
+        </div>
+        <div class="o-form__field">
+          <div class="o-form__field-wrap" id="open-modal" expand="block">
+            <input
+              
+              id="ver_direccion"
+              class="o-form__input"
+              type="text"
+              placeholder="Direccion"
+              formControlName="ver_direccion"
+              value="{{message}}"
+            >
+          </div>
+          <!-- <span class="o-form__error">{{ getError('ver_direccion')}}</span>  -->
+        </div>
+
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            <ion-select 
+            interface="popover"
+              id="barrio"
+              class="o-form__input"
+              type="text"
+              placeholder="barrio"
+              formControlName="barrio"
+            >
+            <ion-select-option *ngFor="let datos of listBarrios" value="{{datos.desbar_b}}" >
+              {{datos.desbar_b}}
+            </ion-select-option>
+          </ion-select>
+          </div>
+           <span class="o-form__error">{{ getError('barrio')}}</span> 
+        </div>
+        <div class="o-form__field">
+          <div class="o-form__field-wrap">
+            
+            <ion-select 
+              interface="popover"
+              id="municipio"
+              class="o-form__input"
+              placeholder="municipio"
+              formControlName="municipio"
+            >
+              <ion-select-option *ngFor="let datos of dataMunicipios" value="{{datos.nombre}}" >
+                {{datos.nombre}}
+              </ion-select-option>
+            </ion-select>
+          </div>
+           <span class="o-form__error">{{ getError('municipio')}}</span> 
+        </div>
+        <div class="o-form__field">
+          <div class="o-form__field">
+            <div class="o-form__field-wrap">
+              
+              <input 
+                interface="popover"
+                id="vendedor"
+                class="o-form__input"
+                placeholder="Login del Vendedor"
+                formControlName="vendedor"
+              >
+            </div> 
+          </div>
+        </div>
+          <div class="o-form__field">
+
+        <ion-list>
+          
+          <ion-radio-group [allowEmptySelection]="true" (ionChange)="validarTerminos($event)">
+
+
+            <ion-item>
+              <ion-label class="descargarPDF"> 
+                <a (click)="download('https://surtilider.com/files/SURTILIDER%20POLITICA%20HABEAS%20DATA.pdf')">
+                    Aceptar Tratamiento De Datos Personales
+                  </a>
+              </ion-label>
+              <ion-radio slot="end"
+                          color="secondary"
+                          id="tratamientoDatos"
+                          ></ion-radio>
+            </ion-item>
+            
+          </ion-radio-group>
+          
+        </ion-list>
+            <!-- <span class="o-form__error">{{ getError('tratamientoDatos')}}</span>  -->
+        </div>
+        <div  class="o-form__actions">
+          <button class="o-button " [disabled]="!validarterminos && !validar"  (click)="validarRegistro()">Ingresar</button>
+        </div>
+        <footer>
+          <figure class="c-foot-back__brand o-logo">
+            <img class="o-img" src="assets/image/interaccion_Mapa.png" alt="Entrega">
+          </figure>
+        </footer> 
+
+
+        <!-- //modal  -->
+        <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+          <ng-template>
+            <ion-header>
+              <ion-toolbar>
+                <ion-buttons slot="start">
+                  <ion-button (click)="cancel()">Cerrar</ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                  <ion-button (click)="confirm()" [strong]="true">Confirmar</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding content-modal">
+              <!-- // -->
+              <div class="section-dir">
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-select interface="popover"
+                      id="dirparam1"
+                      class="input"
+                      placeholder="Seleccione"
+                      formControlName="dirparam1"
+                      (ionChange)="validarNomenclatura($event)"
+                    >
+                    <ion-select-option value="">Seleccionar</ion-select-option>
+                    <ion-select-option  *ngFor="let paramNomen of tipo1" value="{{paramNomen.descripcion}}"> {{paramNomen.descripcion}} </ion-select-option>
+                    </ion-select>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="section-dir">
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-input
+                    
+                      id="dirparam2"
+                      class="input"
+                      type="tel"
+                      placeholder="#"
+                      formControlName="dirparam2"
+                    >
+                    
+                    </ion-input>	
+                  </div> 
+                  
+                  <span class="o-form__error">{{ getError('dirparam2')}}</span>                     
+                </div>
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-select
+                      interface="popover"
+                      id="param3"
+                      class="input"
+                      placeholder="Seleccione"
+                      formControlName="dirparam3"
+                    >
+                    <ion-select-option value="">Seleccionar</ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                    
+                    </ion-select>
+                  </div>
+                </div>
+
+
+               
+              </div>
+              <div class="section-dir">
+                <div class="section-dir" *ngIf="nomenclatura=='Mostrar'">
+            
+                  <div class="o-form__field content">
+                    <div class="content-input" >
+                      <ion-select
+                        interface="popover"
+                        id="param4"
+                        class="input"
+                        placeholder="mostrar"
+                        formControlName="dirparam4"
+                      >
+                      <ion-select-option value="">Seleccionar</ion-select-option>
+                      <ion-select-option  *ngFor="let param of tipo3" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                      
+                      </ion-select>
+                    </div>
+                  </div>
+                </div>
+                 
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-input
+                      id="param5"
+                      class="input"
+                      placeholder="#"
+                      type="tel"
+                      formControlName="dirparam5"
+                    ></ion-input>
+                  </div>
+                  <span class="o-form__error">{{ getError('dirparam5')}}</span>                        
+                </div>
+            
+              </div>
+              <div class="section-dir">
+            
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-select  interface="popover"
+                      id="param6"
+                      class="input"
+                      placeholder="Seleccione"
+                      formControlName="dirparam6"
+                    >
+                    <ion-select-option value="">Seleccionar</ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                    
+                    </ion-select>
+                  </div>
+                </div>
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-input interface="popover"
+                      id="param7"
+                      class="input"
+                      placeholder="#"
+                      type="tel"
+                      formControlName="dirparam7"
+                    >
+                    </ion-input>
+                  </div>                     
+                </div>
+              </div>
+              <div class="section-dir" *ngIf="nomenclatura2=='Mostrar'">
+            
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-select
+                      interface="popover"
+                      id="param8"
+                      class="input"
+                      placeholder="mostrar"
+                      formControlName="dirparam8"
+                    >
+                    <ion-select-option   value=""> Seleccione </ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo3" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                    
+                    </ion-select>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="section-dir">
+
+                <button class="o-button btn-modal"  (click)="confirm()" >Guardar</button>
+              </div>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+
+        
+      </fieldset>  
+    </form> 
+
+    
+    </div>
+
+</ion-content>

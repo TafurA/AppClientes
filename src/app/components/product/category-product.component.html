@@ -1,0 +1,23 @@
+<section class="o-section">
+  <div class="o-canvas">
+
+    <header class="o-headline">
+      <h2 class="o-kicker">Categoria actual</h2>
+      <p class="o-title o-medium">{{ nameCategory }}</p>
+    </header>
+
+    <div *ngFor="let item of arrayDataSubCategory">
+      <h2 class="o-title">{{ item.nameCategory }}</h2>
+
+      <ion-slides class="c-product-slide" [options]="slideOpts">
+        <ion-slide class="c-product-slides" *ngFor="let product of item.product">
+  
+          <!-- Product component -->
+          <app-product [productObject]="product"></app-product>
+  
+        </ion-slide>
+      </ion-slides>
+    </div>
+
+  </div>
+</section>

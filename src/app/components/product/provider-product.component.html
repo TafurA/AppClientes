@@ -1,0 +1,37 @@
+<div class="o-canvas">
+
+
+  <div class="o-header-provider">
+    <img class="o-header-provider__img" src="{{ providerImage }}" alt="">
+
+    <header class="o-header-provider__header o-headline">
+      <h2 class="o-kicker">Proveedor actual</h2>
+      <p class="o-title o-medium">{{ providerName }}</p>
+    </header>
+  </div>
+
+  <div *ngIf="!isProductsNull;else productsNull">
+    <div *ngFor="let provider of arrayDataDetailProvider">
+      <h2 class="o-title">{{ provider.nameCategory }}</h2>
+
+      <ion-slides class="c-product-slide" [options]="slideOpts">
+        <ion-slide class="c-product-slides" *ngFor="let product of provider.product">
+
+          <!-- Product component -->
+          <app-product [productObject]="product"></app-product>
+
+        </ion-slide>
+      </ion-slides>
+    </div>
+  </div>
+
+  <ng-template #productsNull>
+
+    <figure class="o-message">
+      <img class="o-message__img" src="assets/image/favorites_null.svg" alt="">
+      <figcaption class="o-message__caption">¡Este proveedor aún no tiene productos!</figcaption>
+    </figure>
+
+  </ng-template>
+
+</div>

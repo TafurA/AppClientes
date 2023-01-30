@@ -1,0 +1,65 @@
+<ion-content>
+
+  <!-- Header back -->
+  <app-header-back></app-header-back>
+
+  <div class="o-canvas">
+
+    <header class="o-headline o-headline_big">
+      <p class="o-kicker">Soporte</p>
+      <h1 class="o-headline__title">Nuestros horarios</h1>
+    </header>
+
+    <h3 class="o-box-support__title">SEDE CARVAJAL</h3>
+    <article class="o-box-support">
+      <ul class="o-box-support__list">
+        <li class="o-box-support__item i-calendar">Lunes a Sábados.</li>
+        <li class="o-box-support__item i-clock">07:00 A.M. - 06:00 P.M.</li>
+        <li class="o-box-support__item i-clock">Calle 77 #69H-62 Barrio las ferias.</li>
+        <li class="o-box-support__item i-phone">(57+ 1) 743 80 81_225 21 93</li>
+      </ul>
+    </article>
+
+    <h3 class="o-box-support__title">SEDE NORTE</h3>
+    <article class="o-box-support">
+      <ul class="o-box-support__list">
+        <li class="o-box-support__item i-calendar">Lunes a Sábados.</li>
+        <li class="o-box-support__item i-clock">07:00 A.M. - 06:00 P.M.</li>
+        <li class="o-box-support__item i-clock">Calle 77 #69H-62 Barrio las ferias.</li>
+        <li class="o-box-support__item i-phone">(57+ 1) 743 80 81_225 21 93</li>
+      </ul>
+    </article>
+
+    <div class="">
+
+      <button class="c-navigation-support__item o-dropdown js-dropdown is-dropdown-show"
+        (click)="toggleDropdown($event)">
+        <span class="c-navigation-support__ico i-support"></span>
+        <span class="
+            c-navigation-support__txt
+            i-after-arrow-left i-after-arrow-left_right
+          ">
+          Soporte
+        </span>
+      </button>
+
+      <nav class="c-navigation-support__submenu">
+        <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/cashback']" routerLinkActive="is-active">
+          ¿Que es el cashback?
+        </a>
+        <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/journal']" routerLinkActive="is-active">
+          Nuestros horarios
+        </a>
+        <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/question']" routerLinkActive="is-active">
+          Preguntas frecuentes
+        </a>
+        <a class="c-navigation-support__submenu-link" href="">
+          Tratamiento de datos personales
+        </a>
+      </nav>
+
+    </div>
+
+  </div>
+
+</ion-content>

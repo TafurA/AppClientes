@@ -1,0 +1,146 @@
+<ion-content>
+
+  <!-- Header back -->
+  <app-header-back></app-header-back>
+
+  <div class="o-canvas">
+
+    <header class="o-subheadline">
+      <h1 class="o-title">Número pedido:
+        <span class="o-information__kicker">{{ order.orderId }}</span>
+      </h1>
+      <button class="o-link o-link_underline"> copiar </button>
+    </header>
+
+    <!-- Status components -->
+    <!-- <div class="c-status">
+
+      <div class="c-status__current">
+        <span class="c-status__ico i-check"></span>
+        <header>
+          <p class="c-status__text">PEDIDO CONFIRMADO</p>
+          <span class="c-status__date">Viernes 26/08</span>
+          <p class="c-status__date">Envio a domicilio</p>
+        </header>
+      </div>
+
+      <ul class="c-status__list is-confirm">
+        <li class="c-status__item">
+          <span class="c-status__ico i-check"></span>
+          <p class="c-status__text">CONFIRMADO</p>
+          <span class="c-status__date">Viernes 26/08</span>
+        </li>
+        <li class="c-status__item">
+          <span class="c-status__ico i-check"></span>
+          <p class="c-status__text">EN PREPARACIÓN</p>
+          <span class="c-status__date">-- / --</span>
+        </li>
+        <li class="c-status__item">
+          <span class="c-status__ico i-check"></span>
+          <p class="c-status__text">EN REPARTO</p>
+          <span class="c-status__date">-- / --</span>
+        </li>
+        <li class="c-status__item">
+          <span class="c-status__ico i-check"></span>
+          <p class="c-status__text">ENTREGADO</p>
+          <span class="c-status__date">-- / --</span>
+        </li>
+      </ul>
+
+      <button class="c-status__btn i-arrow-top" (click)="toggleDropdownProduct($event)"></button>
+
+    </div> -->
+
+    <ul class="o-checkout">
+
+      <!-- Order detail -->
+      <li class="o-checkout__item">
+
+        <h3 class="o-checkout__title">RESUMEN DE TU PEDIDO</h3>
+
+        <div class="o-checkout__column">
+
+          <p class="o-checkout__txt">{{ order.totalProducts }} articulos</p>
+
+          <p class="o-checkout__txt">$ {{ order.totalValue }} COP</p>
+
+        </div>
+
+        <div class="o-checkout__dropdown">
+
+          <button class="
+              o-link o-link_secondary
+              i-after-arrow-left i-after-arrow-left_right
+            " (click)="toggleDropdown($event)">
+            DETALLE PRODUCTOS
+          </button>
+
+          <div *ngFor="let productList of productsCurrentOrderDetail">
+            <nav class="o-checkout__products">
+
+              <a class="c-product-horizontal" *ngFor="let product of productList">
+
+                <figure class="c-product-horizontal__figure">
+                  <img class="c-product-horizontal__img o-img" src="{{ product.img_prod }}" alt="">
+                  <figcaption class="c-product-horizontal__caption">
+                    <p class="c-product-horizontal__title">{{ product.nameProduct }}</p>
+                    <p class="c-product-horizontal__amount-wrap">Cantidad: <span class="c-product-horizontal__amount">{{
+                        product.cantidad }}</span></p>
+                  </figcaption>
+                </figure>
+
+                <div class="c-product-horizontal__price">
+                  <span class="c-product__amount">${{ product.valorUnitario }} COP</span>
+
+                  <div class="c-product__ico c-product__ico_discount i-star" data-percent="20%">
+                    <span class="c-product__ico-txt">$7586</span>
+                  </div>
+                </div>
+
+              </a>
+
+            </nav>
+          </div>
+
+        </div>
+
+      </li>
+
+      <!-- Address Data -->
+      <li class="o-checkout__item">
+
+        <h3 class="o-checkout__title">DIRECCIÓN DEL ENVIO</h3>
+
+        <p class="o-checkout__txt">
+          <strong class="o-checkout__txt_bold">{{ order.customerName }}</strong>
+        </p>
+        <p class="o-checkout__txt">{{ order.address }}</p>
+        <p class="o-checkout__txt">{{ order.phone }}</p>
+
+      </li>
+
+      <!-- Date -->
+      <li class="o-checkout__item">
+
+        <h3 class="o-checkout__title">PEDIDO REALIZADO EL</h3>
+
+        <p class="o-checkout__txt">{{ order.date }}</p>
+
+      </li>
+
+      <!-- Payment method -->
+      <li class="o-checkout__item">
+
+        <h3 class="o-checkout__title">MEDIO DE PAGO</h3>
+
+        <p class="o-checkout__txt">EFECTIVO</p>
+
+      </li>
+
+    </ul>
+
+    <!-- <button class="o-checkout__btn o-button o-button_secondary">Cancelar pedido</button> -->
+
+  </div>
+
+</ion-content>
