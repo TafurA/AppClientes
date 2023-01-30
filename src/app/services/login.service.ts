@@ -22,14 +22,11 @@ export class LoginService {
 
   async loginToSystem(user: string, pass: string) {
 
-    await this.http.get(`${environment.url}${environment.apiPath}authenticate?login=${user}&clave=${pass}`, "", environment.headers)
+    await this.http.get(`${environment.url}${environment.apiPath}authenticateClient?login=${user}&clave=${pass}`, "", environment.headers)
       .then(data => {
 
         const dataLoginTemp = JSON.parse(data.data)
 
-        console.log("NEUVOS VADOR")
-        console.log(dataLoginTemp)
-        console.log(atob(dataLoginTemp.dataSession))
 
         if (dataLoginTemp.response) {
           this.saveDataIntoLocalStorage(atob(dataLoginTemp.dataSession))
@@ -54,10 +51,10 @@ export class LoginService {
     const obj = []
 
     let jsonUserData = JSON.parse(encodeString)
-    let objectEntries = Object.entries(jsonUserData)
+    let objectEntries = Object.entries(jsonUserData.fields)
 
     for (let [key, value] of objectEntries) {
-      obj[key] = atob(String(value))
+      obj[key] = String(value)
     }
 
     localStorage.setItem("codeUserAddress", obj['codcli_b']);
@@ -81,10 +78,10 @@ export class LoginService {
       const encodeString = localStorage.userSessionData
 
       let jsonUserData = JSON.parse(encodeString)
-      let objectEntries = Object.entries(jsonUserData)
+      let objectEntries = Object.entries(jsonUserData.fields)
 
       for (let [key, value] of objectEntries) {
-        this.ProcessDataUserSession[key] = atob(String(value))
+        this.ProcessDataUserSession[key] = String(value)
       }
 
       return this.ProcessDataUserSession
