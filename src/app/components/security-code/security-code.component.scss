@@ -1,0 +1,49 @@
+.c-security-code {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 16px;
+}
+
+.c-security-code__input {
+  width: 34px;
+  height: 34px;
+  font-family: "Open Sans";
+  font-weight: 300;
+  font-size: 20px;
+  text-align: center;
+  color: #013D7E;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+
+.c-security-code__lead {
+  margin: 24px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  color: #333;
+
+  * {
+    font-family: "Open Sans", sans-serif;
+  }
+}
+
+.c-security-code__text {
+  font-family: inherit;
+
+  &_primary {
+    color: #013D7E;
+  }
+
+  &_secondary {
+    color: #FF0000;
+  }
+}

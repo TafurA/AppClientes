@@ -1,0 +1,32 @@
+<div class="c-security-code">
+  <input class="c-security-code__input o-form__field-wrap js-security-code-input" maxlength="1" minlength="1"
+    type="number" [(ngModel)]="firstNumberCode">
+  <input class="c-security-code__input o-form__field-wrap js-security-code-input" maxlength="1" minlength="1"
+    type="number" [(ngModel)]="secondNumberCode">
+  <input class="c-security-code__input o-form__field-wrap js-security-code-input" maxlength="1" minlength="1"
+    type="number" [(ngModel)]="thirdNumberCode">
+  <input class="c-security-code__input o-form__field-wrap js-security-code-input" maxlength="1" minlength="1"
+    type="number" [(ngModel)]="fourthNumberCode">
+</div>
+
+<div class="c-security-code__lead">
+  <p class="c-security-code__text">
+    <span class="c-security-code__text_primary js-counter">00:00</span>
+    <span class="c-security-code__text_primary"> segundos</span> para generar un nuevo código
+  </p>
+
+  <p class="c-security-code__text c-security-code__text_secondary" [ngClass]="{'test': !isTimerStop}">
+    Haz clic en <span class="o-bold">“Enviar código”</span> para generar un nuevo código.
+  </p>
+
+  <button class="c-security-code__btn o-button o-button_outline" [ngClass]="{'test': !isTimerStop}"
+    (click)="validateUserCredential()">
+    Enviar código
+  </button>
+</div>
+
+<input class="js-security-code" type="hidden"
+  value="{{firstNumberCode}}{{secondNumberCode}}{{thirdNumberCode}}{{fourthNumberCode}}">
+
+<p class="js-security-code-text is-visuallyHidden">
+  {{firstNumberCode}}{{secondNumberCode}}{{thirdNumberCode}}{{fourthNumberCode}}</p>
