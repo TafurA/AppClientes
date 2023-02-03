@@ -48,18 +48,42 @@ export class BannerService {
   }
 
   async getBannerDetail(bannerId) {
-    await axios.get(`${environment.apiPath}/getDetailBanner?codigo=${bannerId}`, environment.headerConfig).then(response => {
+    // await axios.get(`${environment.apiPath}/getDetailBanner?codigo=${bannerId}`, environment.headerConfig).then(response => {
 
-      this.arrayDataProducts = []
+    //   this.arrayDataProducts = []
 
-      this.arrayDetailBanner = response.data.dataBanner
+    //   this.arrayDetailBanner = response.data.dataBanner
 
-      for (let index = 0; index < response.data.dataProduct.length; index++) {
-        const element = response.data.dataProduct[index];
-        this.arrayDataProducts[index] = element
-      }
+    //   for (let index = 0; index < response.data.dataProduct.length; index++) {
+    //     const element = response.data.dataProduct[index];
+    //     this.arrayDataProducts[index] = element
+    //   }
 
-    })
+    // })
+
+    await this.http.get(`${environment.url}${environment.apiPath}getDetailBanner?codigo=${bannerId}`, "", environment.headers)
+      .then(data => {
+
+        const dataBennerTemp = JSON.parse(data.data)
+        console.log("dataBennerTemp")
+        console.log(dataBennerTemp)
+        console.log("dataBennerTemp.dataBanner")
+        console.log(dataBennerTemp.dataBanner)
+
+        this.arrayDataProducts = []
+
+        this.arrayDetailBanner = dataBennerTemp.dataBanner
+
+        for (let index = 0; index < dataBennerTemp.dataProduct.length; index++) {
+          const element = dataBennerTemp.dataProduct[index];
+          this.arrayDataProducts[index] = element
+        }
+
+      })
+      .catch(error => {
+        console.log("error getDetailBanner");
+        console.log(error);
+      });
   }
 
   public arrayBanner() {

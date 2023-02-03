@@ -115,6 +115,18 @@ const routes: Routes = [
         loadChildren: () => import('../car-detail/car-detail.module').then(m => m.CarDetailPageModule)
       },
       {
+        path: 'forgot-password',
+        loadChildren: () => import('../forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
+      },
+      {
+        path: 'updated-password',
+        loadChildren: () => import('../updated-password/updated-password.module').then(m => m.UpdatedPasswordPageModule)
+      },
+      {
+        path: 'detail-banner/:bannerId',
+        loadChildren: () => import('../detail-banner/detail-banner.module').then(m => m.DetailBannerPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/splash',
         pathMatch: 'full'

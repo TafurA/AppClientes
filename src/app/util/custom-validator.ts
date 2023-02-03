@@ -16,7 +16,7 @@ export class CustomValidator {
   constructor() { }
 
   public validateMatchPassword(control: AbstractControl) {
-    const password = control.get('password').value;
+    const password = control.get('passwordNew').value;
     const passwordConfirm = control.get('passwordConfirm').value;
 
     // Compare if the password match

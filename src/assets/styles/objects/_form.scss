@@ -21,6 +21,10 @@
   .is-field-error & {
     border-color: $c-secondary;
   }
+
+  .c-security-code & {
+    padding: 8px;
+  }
 }
 
 .o-form__label {

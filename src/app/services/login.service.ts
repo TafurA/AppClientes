@@ -22,20 +22,39 @@ export class LoginService {
 
   async loginToSystem(user: string, pass: string) {
 
-    await this.http.get(`${environment.url}${environment.apiPath}authenticate?login=${user}&clave=${pass}`, "", environment.headers)
+    await this.http.get(`${environment.url}${environment.apiPath}authenticateClient?login=${user}&clave=${pass}`, "", environment.headers)
       .then(data => {
 
         const dataLoginTemp = JSON.parse(data.data)
 
-        console.log("NEUVOS VADOR")
-        console.log(dataLoginTemp)
-        console.log(atob(dataLoginTemp.dataSession))
-
         if (dataLoginTemp.response) {
           this.saveDataIntoLocalStorage(atob(dataLoginTemp.dataSession))
+
           setTimeout(() => {
             this.setUserCode()
           }, 1000)
+
+          console.log("dataLoginTemp")
+          // Address
+          console.log(dataLoginTemp.data)
+          if (dataLoginTemp.data.length > 1) {
+            const listAddress = []
+
+            dataLoginTemp.data.forEach(element => {
+              const dataTempAddress = {
+                codcli_b: element.codcli_b,
+                dircli_b: element.dircli_b,
+                telcli_b: element.telcli_b
+              }
+
+              listAddress.push(dataTempAddress)
+            });
+
+            localStorage.setItem("AddressList", JSON.stringify(listAddress))
+          } else {
+            localStorage.setItem("AddressList", "default")
+          }
+
           this.nvCtrl.navigateForward("/tabs/home")
         } else {
           this.presentToast("¡Error de credenciales!", data.data.message, "is-error")
@@ -54,10 +73,10 @@ export class LoginService {
     const obj = []
 
     let jsonUserData = JSON.parse(encodeString)
-    let objectEntries = Object.entries(jsonUserData)
+    let objectEntries = Object.entries(jsonUserData.fields)
 
     for (let [key, value] of objectEntries) {
-      obj[key] = atob(String(value))
+      obj[key] = String(value)
     }
 
     localStorage.setItem("codeUserAddress", obj['codcli_b']);
@@ -81,10 +100,10 @@ export class LoginService {
       const encodeString = localStorage.userSessionData
 
       let jsonUserData = JSON.parse(encodeString)
-      let objectEntries = Object.entries(jsonUserData)
+      let objectEntries = Object.entries(jsonUserData.fields)
 
       for (let [key, value] of objectEntries) {
-        this.ProcessDataUserSession[key] = atob(String(value))
+        this.ProcessDataUserSession[key] = String(value)
       }
 
       return this.ProcessDataUserSession

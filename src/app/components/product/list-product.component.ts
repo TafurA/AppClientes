@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 import { ProductService } from 'src/app/services/product.service';
 
@@ -12,7 +13,7 @@ export class ListProductComponent implements OnInit {
 
   public loaded = false;
 
-  constructor(public productService: ProductService) { }
+  constructor(public productService: ProductService, public loginService: LoginService) { }
 
   ngOnInit() {
     this.getProducts()
@@ -32,8 +33,8 @@ export class ListProductComponent implements OnInit {
     setWrapperSize: true
   }
 
-  public getProducts() {
-    this.productService.getCurrentProducts().finally(() => {
+  public async getProducts() {
+    await this.productService.getCurrentProducts().finally(() => {
       if (this.productService.isproductsCharged) {
         this.loaded = true
       }

@@ -17,30 +17,36 @@ export class ProductService {
   constructor(private http: HTTP, public loginService: LoginService) { }
 
   async getProductsSearch() {
-    await axios.get(`${environment.apiPath}/consultarProductos`, environment.headerConfig).then(response => {
-
-      for (let index = 0; index < response.data.data.length; index++) {
-        const element = response.data.data[index];
-        this.arrayDataProductSearch[index] = element
-      }
-
-    }).finally(() => {
-      this.isproductsCharged = true
-    })
-  }
-
-  async getProducts() {
     // await axios.get(`${environment.apiPath}/consultarProductos`, environment.headerConfig).then(response => {
 
     //   for (let index = 0; index < response.data.data.length; index++) {
     //     const element = response.data.data[index];
-    //     this.arrayDataProducts[index] = element
+    //     this.arrayDataProductSearch[index] = element
     //   }
 
     // }).finally(() => {
     //   this.isproductsCharged = true
     // })
 
+    await this.http.get(`${environment.url}${environment.apiPath}consultarProductos`, "", environment.headers)
+      .then(data => {
+        const dataObjTemp = JSON.parse(data.data)
+
+        for (let index = 0; index < dataObjTemp.data.length; index++) {
+          const element = dataObjTemp.data[index];
+          this.arrayDataProductSearch[index] = element
+        }
+
+      }).finally(() => {
+        this.isproductsCharged = true
+      })
+      .catch(error => {
+        console.log("error search utos roductos");
+        console.log(error);
+      });
+  }
+
+  async getProducts() {
     await this.http.get(`${environment.url}${environment.apiPath}consultarProductos`, "", environment.headers)
       .then(data => {
 
@@ -61,10 +67,6 @@ export class ProductService {
   }
 
   async getProductDetail(productId) {
-    // await axios.get(`${environment.apiPath}/getProductoDetail?producto=${productId}`, environment.headerConfig).then(response => {
-    //   console.log(productId)
-    //   this.arrayDetailProduct = response.data.dataObjProduct
-    // })
 
     await this.http.get(`${environment.url}${environment.apiPath}getProductoDetail?producto=${productId}`, "", environment.headers)
       .then(data => {
@@ -77,31 +79,17 @@ export class ProductService {
         console.log(error);
       });
 
-
   }
 
   async getRecomendedProducts(nit) {
     this.arrayDataProducts = []
-    // await axios.get(`${environment.apiPath}/getRecommended?nit=${nit}`, environment.headerConfig).then(response => {
-
-    //   for (let index = 0; index < response.data.data.length; index++) {
-    //     const element = response.data.data[index];
-    //     this.arrayDataProducts[index] = element
-    //   }
-
-    // }).finally(() => {
-    //   this.isproductsCharged = true
-    // })
 
     await this.http.get(`${environment.url}${environment.apiPath}getRecommended?nit=${nit}`, "", environment.headers)
       .then(data => {
-
-        const dataObjTemp = JSON.parse(data.data)
-        for (let index = 0; index < dataObjTemp.data.length; index++) {
-          const element = dataObjTemp.data[index];
-          this.arrayDataProducts[index] = element
-        }
-
+        console.log(JSON.parse(data.data))
+        JSON.parse(data.data).data.forEach(element => {
+          this.arrayDataProducts.push(element)
+        });
       }).finally(() => {
         this.isproductsCharged = true
       })
@@ -113,16 +101,6 @@ export class ProductService {
 
   async getOffertProducts() {
     this.arrayDataProducts = []
-    // await axios.get(`${environment.apiPath}/getProductOffers`, environment.headerConfig).then(response => {
-
-    //   for (let index = 0; index < response.data.data.length; index++) {
-    //     const element = response.data.data[index];
-    //     this.arrayDataProducts[index] = element
-    //   }
-
-    // }).finally(() => {
-    //   this.isproductsCharged = true
-    // })
 
     await this.http.get(`${environment.url}${environment.apiPath}getProductOffers`, "", environment.headers)
       .then(data => {
@@ -170,7 +148,7 @@ export class ProductService {
         console.log(this.loginService.getUserCode())
         return await this.getRecomendedProducts(this.loginService.getUserCode()).finally(
           () => {
-            console.log(this.arrayDetailProduct)
+            console.log(this.arrayDataProducts)
             this.isproductsCharged = true
           }
         )

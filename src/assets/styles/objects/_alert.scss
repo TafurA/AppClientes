@@ -70,6 +70,103 @@
 
 }
 
+.o-button_alert {
+  position: relative;
+  z-index: 1000;
+  min-width: 100%;
+}
+
+.c-alert__form {
+  position: relative;
+  padding: 16px 16px 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    top: 0;
+    background: #F4F4F4;
+    left: 51px;
+  }
+}
+
+.c-alert__form-input {
+  display: flex;
+  align-items: center;
+  max-width: 314px;
+  position: relative;
+  margin: 0 auto 16px;
+
+  input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  input:checked+label {
+
+    &::before {
+      background-color: $c-success;
+    }
+
+    .box {
+      color: $c-neutro;
+      background-color: $c-success;
+    }
+  }
+
+  label {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 24px;
+      height: 24px;
+      z-index: 1000000;
+      border-radius: 50px;
+      background: #F4F4F4;
+      transition: all 0.2s ease-in;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 16px;
+      height: 16px;
+      z-index: 1000000;
+      border-radius: 50px;
+      background: #fff;
+    }
+
+    .box {
+      min-width: 260px;
+      box-shadow: -1px 1px 9px rgb(0 0 0 / 6%);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-left: 40px;
+      transition: all 0.2s ease-in;
+    }
+
+    span {
+      display: block;
+      font-family: $f-title;
+    }
+  }
+}
+
 .c-alert_product {
   .alert-head {
     max-width: 250px;
@@ -106,6 +203,7 @@
     top: 0;
     bottom: 0;
   }
+
 }
 
 .c-product-alert__wrap {
@@ -113,6 +211,10 @@
   padding: 16px;
   border-radius: 16px 16px 0 0;
   background: $c-neutro;
+
+  .js-alert-address & {
+    padding: 16px 0;
+  }
 }
 
 .c-product-alert__title {
@@ -160,6 +262,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  .js-alert-address & {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #F4F4F4;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
 }
 
 .c-add-car {

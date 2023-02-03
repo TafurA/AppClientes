@@ -18,6 +18,7 @@ export class ToggleMenuGuard implements CanActivate {
       else if (
         window.location.pathname.includes("splash") ||
         window.location.pathname.includes("welcome") ||
+        window.location.pathname.includes("login") ||
         window.location.pathname.includes("profile") ||
         window.location.pathname.includes("order-detail") ||
         window.location.pathname.includes("order-history") ||

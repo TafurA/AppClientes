@@ -57,11 +57,29 @@ export class CarDetailPage implements OnInit {
 
   ngOnInit() {
     this.addressData.userCurrent = this.loginService.validateSession()['nomcli_b'] + " " + this.loginService.validateSession()['ape1cli_b']
-    this.addressData.address = this.loginService.validateSession()['dircli_b']
-    this.addressData.phone = this.loginService.validateSession()['telcli_b']
+
+    if (localStorage.getItem("AddressList") != "default") {
+      // this.addressData.address = "AJAJ sisi"
+      this.validateCurrentAddress()
+    } else {
+      this.addressData.address = this.loginService.validateSession()['dircli_b']
+      this.addressData.phone = this.loginService.validateSession()['telcli_b']
+    }
+
     this.getOrderDeliveryDate()
 
     this.getOrderDetail()
+  }
+
+  public validateCurrentAddress() {
+    const dataList = JSON.parse(localStorage.getItem("AddressList"))
+    const listAddress = dataList
+    listAddress.forEach(element => {
+      if (element.codcli_b == localStorage.getItem("codeUserAddress")) {
+        this.addressData.address = element.dircli_b
+        this.addressData.phone = element.telcli_b
+      }
+    });
   }
 
   public getOrderDeliveryDate() {

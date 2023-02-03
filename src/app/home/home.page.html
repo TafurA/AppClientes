@@ -14,3 +14,34 @@
   <app-list-product></app-list-product>
 
 </ion-content>
+
+<div class="c-product-alert js-alert-address">
+  <div class="c-product-alert__wrap">
+
+    <div class="c-product-alert__header">
+      <h1 class="c-product-alert__title i-send">Confirmar Dirección de entrega ejemlo {{ listAddress }}</h1>
+    </div>
+
+    <form action="" class="c-alert__form">
+      <div *ngFor="let address of listAddress" class="c-alert__form-input">
+        <input id="{{ address.codcli_b }}" name="address" type="radio" value="{{ address.codcli_b }}">
+        <label for="{{ address.codcli_b }}">
+          <div class="box">
+            <span>{{ address.dircli_b }}</span>
+            <span>{{ address.telcli_b }}</span>
+          </div>
+        </label>
+      </div>
+
+      <button
+        *ngIf="buttonConfirmAddres js-address-btn"
+        (click)="changeAddressCode($event)"
+        class="o-button o-button_alert"
+        tye="button"
+      >
+        Confirmar
+      </button>
+    </form>
+
+  </div>
+</div>

@@ -28,13 +28,13 @@ export class HeaderBackComponent implements OnInit {
     if (this.loginService.validateSession()) {
       console.log("TIENE SESION")
       if (window.location.pathname.includes("car-detail")) {
-        return this.navCtrl.navigateForward("/home")
+        return this.navCtrl.navigateForward("/tabs/home")
       } else {
         return this.navCtrl.back()
       }
     } else {
       console.log("sin SESION")
-      this.navCtrl.navigateForward("/login")
+      this.navCtrl.navigateForward("/tabs/login")
     }
   }
 }
