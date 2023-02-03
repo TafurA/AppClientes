@@ -24,6 +24,16 @@ export class CredentialsValidator {
       
     }
   }
+  public validateMatchPasswordCredential(control: AbstractControl) {
+    const password = control.get('password').value;
+    const passwordConfirm = control.get('passwordConfirm').value;
+
+    // Compare if the password match
+    if (password !== passwordConfirm) {
+      control.get('passwordConfirm').setErrors({ NoPasswordMatch: true })
+      
+    }
+  }
 
   /**
    * Show and validate the respective error of input.

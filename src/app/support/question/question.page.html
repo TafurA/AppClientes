@@ -8,13 +8,12 @@
       <p class="o-kicker">Soporte</p>
       <h1 class="o-headline__title">Preguntas frecuentes</h1>
     </header>
-
-    <h3 class="o-box-support__title">¿Pregunta uno?</h3>
-    <article class="o-box-support">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when
-    </article>
-
+    <section *ngFor="let question of frequentQuestions">  
+      <h3 class="o-box-support__title">{{question.titulo}}</h3>
+      <article class="o-box-support">
+        {{question.pregunta}}
+      </article>
+    </section>
     <div class="">
 
       <button class="c-navigation-support__item o-dropdown js-dropdown is-dropdown-show"
@@ -38,7 +37,7 @@
         <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/question']" routerLinkActive="is-active">
           Preguntas frecuentes
         </a>
-        <a class="c-navigation-support__submenu-link" href="">
+        <a class="c-navigation-support__submenu-link" (click)="download('https://surtilider.com/files/SURTILIDER%20POLITICA%20HABEAS%20DATA.pdf')">
           Tratamiento de datos personales
         </a>
       </nav>

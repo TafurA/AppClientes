@@ -29,7 +29,7 @@
 
 
       <!-- datos presonales -->
-      <fieldset class="o-form__fieldset" *ngIf="form1" >
+      <fieldset class="o-form__fieldset o-background-bottom" *ngIf="form1" style="background-image: url('assets/image/interaccion_Registro.png');" >
         <!-- <fieldset class="o-form__fieldset" > -->
         
         
@@ -153,9 +153,9 @@
         </div>
   
         <footer>
-          <figure class="c-foot-back__brand o-logo">
+          <!-- <figure class="c-foot-back__brand o-logo">
             <img class="o-img" src="assets/image/interaccion_Registro.png" alt="informacion personal">
-          </figure>
+          </figure> -->
         </footer>  
       
       
@@ -163,7 +163,7 @@
       
       <!-- contacto -->
      <!-- <fieldset  class="o-form__fieldset"  > -->
-      <fieldset  class="o-form__fieldset"  *ngIf="form2">
+      <fieldset  class="o-form__fieldset o-background-bottom"  *ngIf="form2" style="background-image: url('assets/image/Contacto.png');" >
         
         <div class="o-form__field">
           <div class="o-form__field-wrap">
@@ -199,15 +199,15 @@
 
       
         <footer>
-          <figure class="c-foot-back__brand o-logo">
+          <!-- <figure class="c-foot-back__brand o-logo">
             <img class="o-img" src="assets/image/Contacto.png" alt="Contacto">
-          </figure>
+          </figure> -->
         </footer>  
       </fieldset>
 
        <!--  Entrega -->
       <!-- <fieldset class="o-form__fieldset" > -->
-        <fieldset class="o-form__fieldset" *ngIf="form3">
+        <fieldset class="o-form__fieldset o-background-bottom" *ngIf="form3" style="background-image: url('assets/image/interaccion_Mapa.png');" >
 
 
         <div class="o-form__field">
@@ -313,9 +313,9 @@
           <button class="o-button " [disabled]="!validarterminos && !validar"  (click)="validarRegistro()">Ingresar</button>
         </div>
         <footer>
-          <figure class="c-foot-back__brand o-logo">
+          <!-- <figure class="c-foot-back__brand o-logo">
             <img class="o-img" src="assets/image/interaccion_Mapa.png" alt="Entrega">
-          </figure>
+          </figure> -->
         </footer> 
 
 
@@ -345,7 +345,7 @@
                       (ionChange)="validarNomenclatura($event)"
                     >
                     <ion-select-option value="">Seleccionar</ion-select-option>
-                    <ion-select-option  *ngFor="let paramNomen of tipo1" value="{{paramNomen.descripcion}}"> {{paramNomen.descripcion}} </ion-select-option>
+                    <ion-select-option  *ngFor="let paramNomen of tipo1" value="{{paramNomen.abreviatura}}">{{paramNomen.abreviatura}} ({{paramNomen.descripcion}})</ion-select-option>
                     </ion-select>
                   </div>
                 </div>
@@ -378,7 +378,7 @@
                       formControlName="dirparam3"
                     >
                     <ion-select-option value="">Seleccionar</ion-select-option>
-                    <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}">{{param.descripcion}}</ion-select-option>
                     
                     </ion-select>
                   </div>
@@ -400,7 +400,7 @@
                         formControlName="dirparam4"
                       >
                       <ion-select-option value="">Seleccionar</ion-select-option>
-                      <ion-select-option  *ngFor="let param of tipo3" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                      <ion-select-option  *ngFor="let param of tipo3" value="{{param.abreviatura}}">{{param.abreviatura}} ({{param.descripcion}})</ion-select-option>
                       
                       </ion-select>
                     </div>
@@ -432,11 +432,12 @@
                       formControlName="dirparam6"
                     >
                     <ion-select-option value="">Seleccionar</ion-select-option>
-                    <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}">{{param.descripcion}}</ion-select-option>
                     
                     </ion-select>
                   </div>
                 </div>
+
                 <div class="o-form__field content">
                   <div class="content-input" >
                     <ion-input interface="popover"
@@ -462,12 +463,96 @@
                       formControlName="dirparam8"
                     >
                     <ion-select-option   value=""> Seleccione </ion-select-option>
-                    <ion-select-option  *ngFor="let param of tipo3" value="{{param.descripcion}}"> {{param.descripcion}} </ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo3" value="{{param.abreviatura}}"> {{param.abreviatura}} ({{param.descripcion}})</ion-select-option>
                     
                     </ion-select>
                   </div>
                 </div>
               </div>
+
+              <div class="section-dir" >
+
+                <button class="o-button btn-modal"  (click)="otherNomenclatures()" >{{textBotton}}</button>
+
+              </div>
+
+              <div class="section-dir" *ngIf="otherNomen">
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-select
+                      interface="popover"
+                      id="param9"
+                      class="input"
+                      placeholder="Seleccione"
+                      formControlName="dirparam9"
+                    >
+                    <ion-select-option value="">Seleccionar</ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo5" value="{{param.abreviatura}}"> {{param.abreviatura}} ({{param.descripcion}}) </ion-select-option>
+                    
+                    </ion-select>
+                    
+                  </div> 
+                  
+                                    
+                </div>
+                <div class="o-form__field content">
+                  <div class="content-input" >
+
+                    <ion-input
+                    
+                      id="dirparam10"
+                      class="input"
+                      type="tel"
+                      placeholder="#"
+                      formControlName="dirparam10"
+                    >
+                    </ion-input>	
+                    
+                  </div>
+                  <span class="o-form__error">{{ getError('dirparam10')}}</span>   
+                </div>
+
+
+               
+              </div>
+              <div class="section-dir" *ngIf="otherNomen" >
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-select
+                      interface="popover"
+                      id="dirparam11"
+                      class="input"
+                      placeholder="Seleccione"
+                      formControlName="dirparam11"
+                    >
+                    <ion-select-option value="">Seleccionar</ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo5" value="{{param.abreviatura}}"> {{param.abreviatura}} ({{param.descripcion}})</ion-select-option>
+                    
+                    </ion-select>
+                  </div>
+                </div>
+
+                <div class="o-form__field content">
+                  <div class="content-input" >
+                    <ion-input
+                    
+                      id="dirparam12"
+                      class="input"
+                      type="tel"
+                      placeholder="#"
+                      formControlName="dirparam12"
+                    >
+                    </ion-input>	
+                  </div> 
+                  
+                  <span class="o-form__error">{{ getError('dirparam12')}}</span>                     
+                </div>
+                
+
+               
+              </div>
+
+             
               
               <div class="section-dir">
 

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CashbackPageRoutingModule } from './cashback-routing.module';
 
 import { CashbackPage } from './cashback.page';
-import { HeaderBackComponent } from 'src/app/components/layout/header-back/header-back.component';
+import { HeaderBackComponent } from '../../components/layout/header-back/header-back.component';
 
 @NgModule({
   imports: [

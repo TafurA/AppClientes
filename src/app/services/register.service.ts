@@ -15,22 +15,12 @@ export class RegisterService {
   dataBarrios = [];
   dataDireccion = [];
   public nombre: string;
-  constructor(public nvCtrl: NavController, private alertController: AlertController, public http: HTTP) {
+  constructor(public nvCtrl: NavController, private alertController: AlertController, private http: HTTP) {
   }
 
   async DireccionNomenclaturas() {
-    // await axios.get(`${environment.apiPath}ComboDireccionApp`, environment.headerConfig).then(response => {
-    //   if (response.data) {
-    //     this.dataDireccion = response.data.data;
-    //   } else {
-    //     console.log("Ocurrío un error al traer las nomenclaturas de la dirección ");
-    //   }
-    // }).catch((error) => {
-    //   console.log("error.status");
-    //   console.log(error)
-    // })
-
-    await this.http.get(`${environment.url}${environment.apiPath}ComboDireccionApp`, "", environment.headers)
+    
+    await this.http.get(`${environment.url}${environment.apiPath}ComboDireccionApp`, "",environment.headers)
       .then(data => {
 
         const dataObjTemp = JSON.parse(data.data)
@@ -52,12 +42,14 @@ export class RegisterService {
     return this.dataDireccion;
   }
 
-  //municipios
+  // //municipios
   async tbl_municipios() {
 
-    await axios.get(`${environment.apiPath}ComboMunicipios`, environment.headerConfig).then(response => {
-      if (response.data) {
-        this.data_peticion = response.data.data;
+    await this.http.get(`${environment.url}${environment.apiPath}ComboMunicipios`,"",environment.headers)
+    .then(data => {
+      const dataObjTemp = JSON.parse(data.data)
+      if (dataObjTemp.data) {
+        this.data_peticion = dataObjTemp.data;
       }
       else {
         console.log("Ocurrío un error al traer los municipios ");
@@ -71,19 +63,19 @@ export class RegisterService {
     this.data_peticion;
     return this.data_peticion;
   }
-  //Barrios
+  // //Barrios
   async tbl_barrio() {
 
-    await axios.get(`${environment.apiPath}ComboBarrios`, environment.headerConfig).then(response => {
-      if (response.data) {
-        this.dataBarrios = response.data.data;
-
-
+    await this.http.get(`${environment.url}${environment.apiPath}ComboBarrios`,"",environment.headers)
+    .then(data => {
+      const dataObjTemp = JSON.parse(data.data)
+      if (dataObjTemp.data) {
+        this.dataBarrios = dataObjTemp.data;
       } else {
-        console.log("Ocurrío un error al traer los municipios ");
+        console.log("Ocurrío un error al traer los barrios ");
       }
     }).catch((error) => {
-      console.log("error.status");
+      console.log("ocurrioun problema al traer los barrios");
       console.log(error)
     })
 
@@ -121,16 +113,16 @@ export class RegisterService {
     }
 
 
-    await axios.get(`${environment.apiPath}preRegistroCliente?tipo_doc=${tipo_doc}&nomcli_b=${this.nombre}&nom2cli_b=${segundoNombre}&ape1cli_b=${primerApellido}&ape2cli_b=${segundoApellido}&nitcli_b=${documento}&dircli_b=${ver_direccion}&ciucli_b=${municipio}&telcli_b=${telefono}&empcli_b=${establecimiento}&emailcli_b=${email}&barcli_b=${barrio}&vendedor=${vendedor}`, environment.headerConfig).then(response => {
-
-      console.log(response);
-      if (response.data.response) {
+    await this.http.get(`${environment.url}${environment.apiPath}preRegistroCliente?tipo_doc=${tipo_doc}&nomcli_b=${this.nombre}&nom2cli_b=${segundoNombre}&ape1cli_b=${primerApellido}&ape2cli_b=${segundoApellido}&nitcli_b=${documento}&dircli_b=${ver_direccion}&ciucli_b=${municipio}&telcli_b=${telefono}&empcli_b=${establecimiento}&emailcli_b=${email}&barcli_b=${barrio}&vendedor=${vendedor}`,"", environment.headers)
+    .then(data => {
+      const dataObjTemp = JSON.parse(data.data)
+      if (dataObjTemp.response) {
 
         this.presentAlertRegister("¡Exelente! Muy pronto nos estaremos comunicando con usted para asignarle sus credenciales.");
-        this.nvCtrl.navigateForward("/welcome");
+        this.nvCtrl.navigateForward("/tabs/welcome");
       } else {
         console.log("no PASO")
-        this.presentAlert(response.data.message);
+        this.presentAlert(dataObjTemp.message);
 
       }
 
@@ -170,13 +162,11 @@ export class RegisterService {
           text: 'Aceptar',
           cssClass: 'alert-button-confirm',
           handler: () => {
-            this.nvCtrl.navigateForward("/welcome")
+            this.nvCtrl.navigateForward("/tabs/welcome")
           },
         },
       ],
     });
-
-
     await alert.present();
   }
 
