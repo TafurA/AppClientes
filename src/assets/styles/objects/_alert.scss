@@ -347,6 +347,11 @@
 }
 
 
+.clasificacion {
+  direction: rtl;
+  display: inline;
+}
+
 @keyframes rotateAnimation {
   0% {
     transform: rotateY(-60deg)
