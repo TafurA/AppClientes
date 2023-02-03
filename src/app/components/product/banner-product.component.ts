@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { BannerService } from 'src/app/service/banner/banner.service';
-
+import { BannerService } from 'src/app/services/banner.service';
 @Component({
   selector: 'app-banner-product',
   templateUrl: './banner-product.component.html',

@@ -12,9 +12,9 @@ export class WelcomePage implements OnInit {
   constructor(public sessionGuard: SessionGuard, public nav: NavController) { }
 
   ngOnInit() {
-    if (this.sessionGuard.canActivate()) {
-      this.nav.navigateRoot("/tabs/home")
-    }
+    // if (this.sessionGuard.canActivate()) {
+    //   this.nav.navigateRoot("/tabs/home")
+    // }
   }
 
 }

@@ -17,16 +17,33 @@ export class ProductService {
   constructor(private http: HTTP, public loginService: LoginService) { }
 
   async getProductsSearch() {
-    await axios.get(`${environment.apiPath}/consultarProductos`, environment.headerConfig).then(response => {
+    // await axios.get(`${environment.apiPath}/consultarProductos`, environment.headerConfig).then(response => {
 
-      for (let index = 0; index < response.data.data.length; index++) {
-        const element = response.data.data[index];
-        this.arrayDataProductSearch[index] = element
-      }
+    //   for (let index = 0; index < response.data.data.length; index++) {
+    //     const element = response.data.data[index];
+    //     this.arrayDataProductSearch[index] = element
+    //   }
 
-    }).finally(() => {
-      this.isproductsCharged = true
-    })
+    // }).finally(() => {
+    //   this.isproductsCharged = true
+    // })
+
+    await this.http.get(`${environment.url}${environment.apiPath}consultarProductos`, "", environment.headers)
+      .then(data => {
+        const dataObjTemp = JSON.parse(data.data)
+
+        for (let index = 0; index < dataObjTemp.data.length; index++) {
+          const element = dataObjTemp.data[index];
+          this.arrayDataProductSearch[index] = element
+        }
+
+      }).finally(() => {
+        this.isproductsCharged = true
+      })
+      .catch(error => {
+        console.log("error search utos roductos");
+        console.log(error);
+      });
   }
 
   async getProducts() {

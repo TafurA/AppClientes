@@ -5,6 +5,7 @@ import { LoadingController, NavController } from '@ionic/angular';
 // import { GridProductComponent } from '../../product/grid-product.component';
 
 import { Subject } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
 
 // import { ProductService } from 'src/app/service/product/product.service';
 
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit {
     // public searchService: SearchService,
     public loadingController: LoadingController,
     // public grid: GridProductComponent,
-    // public productService: ProductService
+    public productService: ProductService
   ) { }
 
   ngOnInit() {
@@ -43,36 +44,41 @@ export class HeaderComponent implements OnInit {
   }
 
   filterList(): void {
-    // this.productService.getProductsSearch().then(() => {
-    //   this.arraySearchProducts = this.productService.arrayDataProductSearch
-    // }).finally(() => {
-    //   this.arraySearchProducts.forEach(product => {
-    //     this.nameProducts.push(product.nameProduct)
-    //   });
+    console.log("LOKKK HHHHHHHHHHASD")
+    // setTimeout(() => {
+    this.productService.getProductsSearch().then(() => {
+      this.arraySearchProducts = this.productService.arrayDataProductSearch
+      console.log("arraySearchProducts")
+      console.log(this.arraySearchProducts)
+    }).finally(() => {
+      this.arraySearchProducts.forEach(product => {
+        this.nameProducts.push(product.nameProduct)
+      });
 
-    //   this.searchTerm$.subscribe(term => {
+      this.searchTerm$.subscribe(term => {
 
-    //     if (term.length >= 2) {
-    //       document.querySelectorAll(".c-list-search-box").forEach(element => {
-    //         element.classList.add("is-search-type")
-    //       });
-    //     } else if (term.length == 0) {
-    //       document.querySelectorAll(".c-list-search-box").forEach(element => {
-    //         element.classList.remove("is-search-type")
-    //       });
-    //     }
+        if (term.length >= 2) {
+          document.querySelectorAll(".c-list-search-box").forEach(element => {
+            element.classList.add("is-search-type")
+          });
+        } else if (term.length == 0) {
+          document.querySelectorAll(".c-list-search-box").forEach(element => {
+            element.classList.remove("is-search-type")
+          });
+        }
 
-    //     let newListProducts = []
-    //     this.nameProducts.forEach(element => {
-    //       if (element != null) {
-    //         newListProducts.push(element)
-    //       }
-    //     });
+        let newListProducts = []
+        this.nameProducts.forEach(element => {
+          if (element != null) {
+            newListProducts.push(element)
+          }
+        });
 
-    //     this.listFiltered = newListProducts
-    //       .filter(item => item.toLowerCase().indexOf(term.toLowerCase()) >= 0);
-    //   });
-    // })
+        this.listFiltered = newListProducts
+          .filter(item => item.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+      });
+    })
+    // }, 1000)
 
   }
 
@@ -117,7 +123,7 @@ export class HeaderComponent implements OnInit {
   async showLoader() {
     this.loader = await this.loadingController.create({
       spinner: "bubbles",
-      translucent: true,
+      translucent: false,
       cssClass: 'o-loader'
     });
     await this.loader.present();

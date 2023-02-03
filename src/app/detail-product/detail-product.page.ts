@@ -64,7 +64,6 @@ export class DetailProductPage implements OnInit {
   public slideOpts = {
     slidesPerView: "auto",
     centeredSlides: true,
-    loop: true,
     loopedSlides: 3,
     coverflowEffect: {
       rotate: 0,

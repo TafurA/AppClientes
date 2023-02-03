@@ -58,13 +58,13 @@ export class HomePage implements OnInit {
 
     setTimeout(() => {
       alert.classList.add("is-show")
+      const dataList = JSON.parse(localStorage.getItem("AddressList"))
+      this.listAddress = dataList
+
+      console.log("this.listAddress")
+      console.log(this.listAddress)
     }, 2000)
 
-    const dataList = JSON.parse(localStorage.getItem("AddressList"))
-    this.listAddress = dataList
-
-    console.log("this.listAddress")
-    console.log(this.listAddress)
 
     setTimeout(() => {
       this.validateAddressCode()

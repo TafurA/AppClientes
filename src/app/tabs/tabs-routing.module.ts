@@ -123,6 +123,10 @@ const routes: Routes = [
         loadChildren: () => import('../updated-password/updated-password.module').then(m => m.UpdatedPasswordPageModule)
       },
       {
+        path: 'detail-banner/:bannerId',
+        loadChildren: () => import('../detail-banner/detail-banner.module').then(m => m.DetailBannerPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/splash',
         pathMatch: 'full'

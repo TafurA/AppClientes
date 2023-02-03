@@ -4,7 +4,7 @@
     <ion-slides class="c-banner" pager="true" [options]="slideOpts">
 
       <ion-slide class="c-banner__slide" *ngFor="let banner of bannerList">
-        <a [routerLink]="['/detail-banner', banner.codigo ]">
+        <a [routerLink]="['/tabs/detail-banner', banner.codigo ]">
           <figure>
             <img
               src="https://intranet.surtilider.com:9001/IntranetSurti/Temp/fotosApp/banner/{{ banner.imagen }}"
