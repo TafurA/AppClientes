@@ -7,20 +7,20 @@
 
     <header class="o-headline o-headline_big">
       <p class="o-kicker">Soporte</p>
-      <h1 class="o-headline__title">¿Qué es cashback?</h1>
     </header>
+    <section *ngFor="let support of supportChasback">
+      <h1 class="o-headline__title">{{support.titulo}}</h1>
 
-    <article class="o-box-support">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-      type specimen book. It has survived not only five centuries, but also the leap into electronic
-    </article>
+      <article class="o-box-support">
+        {{support.pregunta}}
+      </article>
 
-    <h3 class="o-box-support__title">¿Como se pueden usar?</h3>
-    <article class="o-box-support">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-      standard dummy text ever since the 1500s, when
-    </article>
+      <!-- <h3 class="o-box-support__title">¿Como se pueden usar?</h3>
+      <article class="o-box-support">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s, when
+      </article> -->
+   </section>
 
     <div class="">
 
@@ -44,7 +44,7 @@
         <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/question']" routerLinkActive="is-active">
           Preguntas frecuentes
         </a>
-        <a class="c-navigation-support__submenu-link" href="">
+        <a class="c-navigation-support__submenu-link" (click)="download('https://surtilider.com/files/SURTILIDER%20POLITICA%20HABEAS%20DATA.pdf')">
           Tratamiento de datos personales
         </a>
       </nav>

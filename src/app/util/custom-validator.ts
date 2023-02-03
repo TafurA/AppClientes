@@ -8,7 +8,9 @@ export class CustomValidator {
   messageValidation: any = {
     'required': 'Este campo es obligatorio',
     'minLength': 'La contraseña debe contener mas de 4 caracteres',
-    'passwordMatch': 'Las contraseñas no coinciden'
+    'passwordMatch': 'Las contraseñas no coinciden',
+    'pattern': 'No es el formato solicitado',
+  
   };
 
   constructor() { }
@@ -22,7 +24,16 @@ export class CustomValidator {
       control.get('passwordConfirm').setErrors({ NoPasswordMatch: true })
     }
   }
+  public validateMatchPasswordCredential(control: AbstractControl) {
+    const password = control.get('password').value;
+    const passwordConfirm = control.get('passwordConfirm').value;
 
+    // Compare if the password match
+    if (password !== passwordConfirm) {
+      control.get('passwordConfirm').setErrors({ NoPasswordMatch: true })
+      
+    }
+  }
   /**
    * Show and validate the respective error of input.
    * @param {String} controlName - Related name´s of the input.
@@ -41,7 +52,9 @@ export class CustomValidator {
       } else if (control.errors.minlength) {
         error = this.messageValidation.minLength;
       } else if (control.errors.NoPasswordMatch) {
-        error = this.messageValidation.passwordMatch
+        error = this.messageValidation.passwordMatch;
+      } else if (control.errors.pattern) {
+        error = this.messageValidation.pattern;
       }
 
       this.addClassToError(controlName, true);

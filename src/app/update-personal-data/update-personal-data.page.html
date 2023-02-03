@@ -1,0 +1,128 @@
+
+<ion-content class="ion-padding">
+
+  <app-header-back></app-header-back>
+  <section class="o-section">
+    <div class="o-canvas">
+      <div class="container">
+
+        <header class="o-headline ">
+          <h1 class="o-headline__title">Actualizar Datos Personales </h1>
+          
+        </header>
+        <p class="o-headline__text o-color-light">
+          Actualiza tus datos personales para generar tus compras.
+        </p>
+
+        <div class="form">
+          <form class="o-form" [formGroup]="UpdateFormPersonal">
+            
+            <div class="o-form__field">
+              
+              <div class="o-form__field-wrap">
+                <input
+                  id="documento"
+                  class="input-colum2"
+                  type="tel"
+                  placeholder="Número de Documento"
+                  formControlName="documento"
+                >
+                
+              </div>
+            </div>
+            <div class="column">
+              <div class="colum2">
+                <div class="o-form__field " >
+                  <div class="o-form__field-wrap">
+                    <input
+                      id="primerNombre"
+                      class="input-colum2"
+                      type="text"
+                      placeholder="Primer Nombre"
+                      formControlName="primerNombre"
+                    >
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="colum2">
+                <div class="o-form__field" >
+                  <div class="o-form__field-wrap">
+                    <input
+                      id="segundoNombre"
+                      class="input-colum2"
+                      type="text"
+                      placeholder="Segundo Nombre"
+                      formControlName="segundoNombre"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="colum2">
+                <div class="o-form__field" >
+                  <div class="o-form__field-wrap">
+                    <input
+                      
+                      id="primerApellido"
+                      class="input-colum2"
+                      type="text"
+                      placeholder="Primer Apellido"
+                      formControlName="primerApellido"
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="colum2">
+                <div class="o-form__field" >
+                  <div class="o-form__field-wrap">
+                    <input
+                      
+                      id="segundoApellido"
+                      class="input-colum2"
+                      type="text"
+                      placeholder="Segundo Apellido"
+                      formControlName="segundoApellido"
+                    >
+                  </div>
+                </div>  
+              </div>
+            </div>
+            <div class="o-form__field">
+              <div class="o-form__field-wrap">
+                <input
+                  id="email"
+                  class="o-form__input"
+                  type="email"
+                  placeholder="Correo electrónico"
+                  formControlName="email"
+                >
+                
+              </div>
+               <span class="o-form__error">{{ getError('email')}}</span> 
+            </div>
+            <div class="o-form__field">
+              <div class="o-form__field-wrap">
+                <input
+                  id="telefono"
+                  class="o-form__input"
+                  type="tel"
+                  placeholder="teléfono"
+                  formControlName="telefono"
+                >
+                
+                
+              </div>
+              <span class="o-form__error">{{ getError('telefono')}}</span> 
+            </div>
+            <div  class="o-form__actions">
+              <button class="o-button" [disabled]="UpdateFormPersonal.invalid" (click)="updateRegister()">Continuar</button>
+              <!-- <button class="o-button" (click)="continuarform2();">Continuar</button> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+</ion-content>

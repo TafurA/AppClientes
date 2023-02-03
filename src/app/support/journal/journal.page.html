@@ -7,14 +7,14 @@
 
     <header class="o-headline o-headline_big">
       <p class="o-kicker">Soporte</p>
-      <h1 class="o-headline__title">Nuestros horarios</h1>
+      <h1 class="o-headline__title">Horarios de atención</h1>
     </header>
 
     <h3 class="o-box-support__title">SEDE CARVAJAL</h3>
     <article class="o-box-support">
       <ul class="o-box-support__list">
         <li class="o-box-support__item i-calendar">Lunes a Sábados.</li>
-        <li class="o-box-support__item i-clock">07:00 A.M. - 06:00 P.M.</li>
+        <li class="o-box-support__item i-clock">07:00 A.M. - 04:00 P.M.</li>
         <li class="o-box-support__item i-clock">Calle 77 #69H-62 Barrio las ferias.</li>
         <li class="o-box-support__item i-phone">(57+ 1) 743 80 81_225 21 93</li>
       </ul>
@@ -24,7 +24,7 @@
     <article class="o-box-support">
       <ul class="o-box-support__list">
         <li class="o-box-support__item i-calendar">Lunes a Sábados.</li>
-        <li class="o-box-support__item i-clock">07:00 A.M. - 06:00 P.M.</li>
+        <li class="o-box-support__item i-clock">07:00 A.M. - 04:00 P.M.</li>
         <li class="o-box-support__item i-clock">Calle 77 #69H-62 Barrio las ferias.</li>
         <li class="o-box-support__item i-phone">(57+ 1) 743 80 81_225 21 93</li>
       </ul>
@@ -53,7 +53,7 @@
         <a class="c-navigation-support__submenu-link" [routerLink]="['/tabs/support/question']" routerLinkActive="is-active">
           Preguntas frecuentes
         </a>
-        <a class="c-navigation-support__submenu-link" href="">
+        <a class="c-navigation-support__submenu-link" (click)="download('https://surtilider.com/files/SURTILIDER%20POLITICA%20HABEAS%20DATA.pdf')">
           Tratamiento de datos personales
         </a>
       </nav>

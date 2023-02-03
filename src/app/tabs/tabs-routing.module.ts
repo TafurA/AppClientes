@@ -92,6 +92,21 @@ const routes: Routes = [
         canActivate: [ToggleMenuGuard],
       },
       {
+        path: 'update-credentials',
+        loadChildren: () => import('../update-credentials/update-credentials.module').then(m => m.UpdateCredentialsPageModule),
+        canActivate: [ToggleMenuGuard],
+      },
+      {
+        path: 'update-personal-data',
+        loadChildren: () => import('../update-personal-data/update-personal-data.module').then(m => m.UpdatePersonalDataPageModule),
+        canActivate: [ToggleMenuGuard],
+      },
+      {
+        path: 'poll',
+        loadChildren: () => import('../poll/poll.module').then(m => m.PollPageModule),
+        canActivate: [ToggleMenuGuard],
+      },
+      {
         path: 'order-detail/:idPedido',
         loadChildren: () => import('../order-detail/order-detail.module').then(m => m.OrderDetailPageModule),
         canActivate: [ToggleMenuGuard],

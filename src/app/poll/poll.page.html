@@ -1,0 +1,133 @@
+
+<ion-content class="ion-padding">
+
+  <section class="o-section">
+    <div class="o-canvas">
+          
+      <div class="container">
+        
+      <!-- Header back -->
+      <app-header-back></app-header-back>
+
+        <div class="link-back">
+          <a routerLink="/home">Omitir encuesta</a>
+        </div>
+  
+        <figure class="img-poll">
+          <img class="img" src="assets/image/interaccion_Ingreso.png" alt="Carro repartidos de Surtilider SAS">
+        </figure>
+
+        <div class="description">
+          <p>En surtilider nos preocupamos por tí. Basado en tu experiencia por
+            favor responde la siguiente encuesta. 
+            Solo debes dar clic en el siguiente botón.</p>
+
+        </div>
+      
+        <div class="o-form__actions">
+          <button class="o-button" id="open-modal" >Diligenciar encuesta</button>
+        </div>
+
+
+      </div>
+
+      <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+      <ng-template>
+      <ion-content class="ion-content">
+            <header class="header">
+            <!-- Logo Surtilider -->
+            <figure class="o-logo">
+              <img class="o-img" src="assets/image/logo_color.svg" alt="Logo a color de Surtilider SAS">
+            </figure>
+            </header>
+            <div class="encabezado">
+              <h1 class="title">Encuesta de satisfacción</h1>
+              <p class="o-color-light">
+                Señor usuario; basado en su experiencia, responda las siguientes preguntas.
+              </p>
+            </div>
+            
+            <div class="content">
+              <form  id="form">
+                <div class="cuestions"  *ngIf="listQuestion[0].idencuesta == 1">
+                    <div class="cuestion">
+                      <p>¿{{listQuestion[0].pregunta}}</p> 
+                    </div>
+                    <div class="clasificacion">
+                      <input id="cuestion1-1" type="radio" name="question1" value="5" [(ngModel)]="question1">
+                      <label for="cuestion1-1">★</label>
+                      <input id="cuestion1-2" type="radio" name="question1" value="4" [(ngModel)]="question1">
+                      <label for="cuestion1-2">★</label>
+                      <input id="cuestion1-3" type="radio" name="question1" value="3" [(ngModel)]="question1">
+                      <label for="cuestion1-3">★</label>
+                      <input id="cuestion1-4" type="radio" name="question1" value="2" [(ngModel)]="question1">
+                      <label for="cuestion1-4">★</label>
+                      <input id="cuestion1-5" type="radio" name="question1" value="1" [(ngModel)]="question1">
+                      <label for="cuestion1-5">★</label>
+                    </div>
+                </div>
+                <div class="cuestions" *ngIf="listQuestion[1].idencuesta == 2">
+                  <div class="cuestion">
+                    <p >¿{{listQuestion[1].pregunta}}</p> 
+                  </div>
+                  <div class="clasificacion">
+                    <input id="cuestion2-1" type="radio" name="question2" value="5" [(ngModel)]="question2">
+                    <label for="cuestion2-1">★</label>
+                    <input id="cuestion2-2" type="radio" name="question2" value="4" [(ngModel)]="question2">
+                    <label for="cuestion2-2">★</label>
+                    <input id="cuestion2-3" type="radio" name="question2" value="3" [(ngModel)]="question2">
+                    <label for="cuestion2-3">★</label>
+                    <input id="cuestion2-4" type="radio" name="question2" value="2" [(ngModel)]="question2">
+                    <label for="cuestion2-4">★</label>
+                    <input id="cuestion2-5" type="radio" name="question2" value="1" [(ngModel)]="question2">
+                    <label for="cuestion2-5">★</label>
+                  </div>
+                </div>
+                <div class="cuestions" *ngIf="listQuestion[2].idencuesta == 3">
+                  <div class="cuestion">
+                    <p >¿{{listQuestion[2].pregunta}}</p> 
+                  </div>
+                  <div class="clasificacion">
+                    <input id="cuestion3-1" type="radio" name="question3" value="5" [(ngModel)]="question3">
+                    <label for="cuestion3-1">★</label>
+                    <input id="cuestion3-2" type="radio" name="question3" value="4" [(ngModel)]="question3">
+                    <label for="cuestion3-2">★</label> 
+                    <input id="cuestion3-3" type="radio" name="question3" value="3" [(ngModel)]="question3">
+                    <label for="cuestion3-3">★</label>
+                    <input id="cuestion3-4" type="radio" name="question3" value="2" [(ngModel)]="question3">
+                    <label for="cuestion3-4">★</label>
+                    <input id="cuestion3-5" type="radio" name="question3" value="1" [(ngModel)]="question3">
+                    <label for="cuestion3-5">★</label>
+                  </div>
+                </div>
+                
+              </form>
+            </div>
+            <div class="o-form__actions">
+              <button class="o-button" (click)="confirm()" [disabled]="!question1 || !question2 || !question3" >Envíar encuesta</button>
+            </div>
+            <footer>
+              <div class="redes">
+                <h6>Contáctanos</h6>
+                <div class="redes-img">
+                  <img src="../assets/image/facebook.png" alt="facebook">
+                  <img src="../assets/image/instagram.png" alt="instagram">
+                  <img src="../assets/image/linkedin.png" alt="linkedin">
+                  <img src="../assets/image/whattsap.png" alt="whattsap">
+                </div>
+              </div>
+              <div class="contact">
+                <ul>
+                  <li><img src="../assets/image/Telefono.png" alt="">(57+ 1) 743 80 81_225 21 93.</li>
+                  <li><img src="../assets/image/ubicacion.png" alt="">CLL 77 #69H-62 Barrio las Ferias.</li>
+                  <li><img src="../assets/image/Telefono.png" alt="">(57+1) 745 03 02_711 18 16.</li>
+                  <li><img src="../assets/image/ubicacion.png" alt="">CLL 37 B Sur 68i 36 Barrio Carvajal.</li>
+                </ul>
+              </div>
+            </footer>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</div>
+</section>
+</ion-content>

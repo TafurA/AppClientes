@@ -19,7 +19,7 @@ import { RegisterService } from '../services/register.service';
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  providers: [RegisterValidator, HTTP, LoginService, HeaderBackComponent]
+  providers: [RegisterValidator, HTTP, LoginService,RegisterService, HeaderBackComponent]
 })
 export class RegisterPage implements OnInit {
   public RegisterForm: FormGroup;
@@ -33,6 +33,8 @@ export class RegisterPage implements OnInit {
   public validar!: String;
   public nomenclatura !: string;
   public nomenclatura2 !: string;
+  public otherNomen !: string;
+  public textBotton !:string;
   public currentFood = undefined;
   public validarNomenc = undefined;
   //mostrar y ocultar
@@ -45,7 +47,7 @@ export class RegisterPage implements OnInit {
   public tipo5 = new Array;
   public tipo6 = new Array;
   public tipo7 = new Array;
-  message = 'S';
+  public message = 'S';
   //modal direccion
   @ViewChild(IonModal) modal: IonModal;
 
@@ -72,6 +74,7 @@ export class RegisterPage implements OnInit {
     this.barrios();
     this.DireccionNomenclaturas();
     this.validarExistenciaDireccion();
+    this.textBotton ='Agregar Campos'; 
   }
   tipo = [
     {
@@ -90,7 +93,7 @@ export class RegisterPage implements OnInit {
 
   private BuildRegisterForm() {
     //tipo
-    const mintipoLength = 4;
+    const mintipoLength = 7;
     //documento
     const mindocLength = 5;
     const maxdocLength = 10;
@@ -105,6 +108,8 @@ export class RegisterPage implements OnInit {
     //PATTERN LETRAS SIN ESPACIOS
     const letrasEspacio = '[a-zA-Z\s]*';
     const letras = '[a-zA-Z ]+$';
+    const razonSocial='^[a-zA-Z0-9 .]+$';
+    const email ='[^&#$%/!?¡]*';
 
     this.RegisterForm = this.formBuilder.group({
       tipo_doc: ['', [
@@ -140,7 +145,7 @@ export class RegisterPage implements OnInit {
 
       ]],
       razonSocial: ['', [
-        Validators.pattern("^[a-zA-Z0-9 ]+$"),
+        Validators.pattern(razonSocial),
         Validators.required,
         Validators.minLength(minNomLength),
         Validators.maxLength(maxRazonSocialLength)
@@ -153,17 +158,18 @@ export class RegisterPage implements OnInit {
       ]],
       email: ['', [
         Validators.email,
+        Validators.pattern(email),
         Validators.required,
         Validators.maxLength(maxRazonSocialLength)
       ]],
       telefono: ['', [
-        Validators.pattern("^[0-9]*$"),
+        Validators.pattern(soloNumeros),
         Validators.required,
-        Validators.minLength(maxdocLength),
+        Validators.minLength(mintipoLength),
         Validators.maxLength(maxdocLength)
       ]],
       establecimiento: ['', [
-        Validators.pattern(letras),
+        Validators.pattern(razonSocial),
         Validators.required,
         Validators.maxLength(maxEstablecimiento)
       ]],
@@ -179,7 +185,7 @@ export class RegisterPage implements OnInit {
         Validators.maxLength(maxRazonSocialLength)
       ]],
       vendedor: ['',],
-      dirparam1: ['', [Validators.required]],
+      dirparam1: ['', Validators.required],
       dirparam2: ['',
         [Validators.required,
         Validators.pattern(soloNumeros)
@@ -195,6 +201,10 @@ export class RegisterPage implements OnInit {
       Validators.pattern(soloNumeros)
       ]],
       dirparam8: [''],
+      dirparam9:       [''],
+      dirparam10:       ['',Validators.pattern(soloNumeros)],
+      dirparam11:       [''],
+      dirparam12:       ['',Validators.pattern(soloNumeros)],
       tratamientoDatos: ['', Validators.required
       ]
 
@@ -236,7 +246,7 @@ export class RegisterPage implements OnInit {
       this.form1 = "1";
       this.form2 = "";
       this.form3 = "";
-      this.RegisterService.presentAlert('Por favor Diligencie correctamente el formulario');
+      // this.RegisterService.presentAlert('Por favor Diligencie correctamente el formulario');
     }
     else {
       this.form1 = "";
@@ -297,6 +307,26 @@ export class RegisterPage implements OnInit {
       }
     });
   }
+  // OTRAS NOMENCLATURAS DIRECCION
+  public async otherNomenclatures(){
+
+    if(this.otherNomen=='habilitar'){
+      this.otherNomen='';
+      this.textBotton ='Agregar Campos';
+      this.RegisterForm.controls['dirparam9'].setValue('') ;
+      this.RegisterForm.controls['dirparam10'].setValue('');
+      this.RegisterForm.controls['dirparam11'].setValue('');
+      this.RegisterForm.controls['dirparam12'].setValue('');
+
+    }else{
+      this.otherNomen='habilitar';
+      this.textBotton ='Ocultar Campos';
+      this.RegisterForm.controls['dirparam9'].setValue('') ;
+      this.RegisterForm.controls['dirparam10'].setValue('');
+      this.RegisterForm.controls['dirparam11'].setValue('');
+      this.RegisterForm.controls['dirparam12'].setValue('');
+    }
+  }
 
   public async validarTerminos(ev) {
     if (ev.target.value) {
@@ -309,12 +339,12 @@ export class RegisterPage implements OnInit {
   public async validarNomenclatura(ev) {
     this.validarNomenc = ev.target.value;
     const dataForm = this.RegisterForm.value;
-    if (dataForm.dirparam1 == "CALLE") {
+    if (dataForm.dirparam1 == "CL") {
       this.nomenclatura = "Mostrar";
     } else {
       this.nomenclatura = "";
     }
-    if (dataForm.dirparam1 == "CARRERA") {
+    if (dataForm.dirparam1 == "CR") {
       this.nomenclatura2 = "Mostrar";
     } else {
       this.nomenclatura2 = "";
@@ -346,7 +376,11 @@ export class RegisterPage implements OnInit {
       dataForm.dirparam5 + ' ' +
       dataForm.dirparam6 + ' ' +
       dataForm.dirparam7 + ' ' +
-      dataForm.dirparam8;
+      dataForm.dirparam8 +' ' +
+      dataForm.dirparam9 +' ' +
+      dataForm.dirparam10 +' ' +
+      dataForm.dirparam11 + ' ' +
+      dataForm.dirparam12;
 
     if (this.RegisterForm.controls['barrio'].valid && this.RegisterForm.controls['establecimiento'].valid && this.RegisterForm.controls['municipio'].valid && this.RegisterForm.controls['dirparam1'].valid && this.RegisterForm.controls['dirparam2'].valid && this.RegisterForm.controls['dirparam5'].valid && this.RegisterForm.controls['dirparam7'].valid) {
       this.RegisterService.RegisterToSystem(dataForm.tipo_doc.id,
@@ -380,7 +414,11 @@ export class RegisterPage implements OnInit {
       dataForm.dirparam5 + ' ' +
       dataForm.dirparam6 + ' ' +
       dataForm.dirparam7 + ' ' +
-      dataForm.dirparam8, 'confirm');
+      dataForm.dirparam8+ ' ' +
+      dataForm.dirparam9+ ' ' +
+      dataForm.dirparam10+ ' ' +
+      dataForm.dirparam11+ ' ' +
+      dataForm.dirparam12, 'confirm');
 
   }
   onWillDismiss(event: Event) {

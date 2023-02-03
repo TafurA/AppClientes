@@ -16,4 +16,7 @@ export class JournalPage implements OnInit {
   public toggleDropdown(e) {
     this.supportPage.toggleDropdown(e)
   }
+  public download(url){
+    window.open(url, "_blank");
+  }
 }
