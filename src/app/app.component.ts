@@ -16,6 +16,8 @@ import { ShopingCarService } from './services/shoping-car.service';
   providers: [HTTP, ShopingCarService, SessionGuard, BannerService, BannerComponent, LoginService, FavoriteService, ProductService]
 })
 export class AppComponent {
+  public listAddress: []
+
   constructor(public shopingCarService: ShopingCarService, public productService: ProductService) {
   }
 

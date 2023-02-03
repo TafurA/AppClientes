@@ -69,6 +69,7 @@ export class ProductService {
 
     await this.http.get(`${environment.url}${environment.apiPath}getRecommended?nit=${nit}`, "", environment.headers)
       .then(data => {
+        console.log(JSON.parse(data.data))
         JSON.parse(data.data).data.forEach(element => {
           this.arrayDataProducts.push(element)
         });
@@ -130,7 +131,7 @@ export class ProductService {
         console.log(this.loginService.getUserCode())
         return await this.getRecomendedProducts(this.loginService.getUserCode()).finally(
           () => {
-            console.log(this.arrayDetailProduct)
+            console.log(this.arrayDataProducts)
             this.isproductsCharged = true
           }
         )

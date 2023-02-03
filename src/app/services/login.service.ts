@@ -27,12 +27,34 @@ export class LoginService {
 
         const dataLoginTemp = JSON.parse(data.data)
 
-
         if (dataLoginTemp.response) {
           this.saveDataIntoLocalStorage(atob(dataLoginTemp.dataSession))
+
           setTimeout(() => {
             this.setUserCode()
           }, 1000)
+
+          console.log("dataLoginTemp")
+          // Address
+          console.log(dataLoginTemp.data)
+          if (dataLoginTemp.data.length > 1) {
+            const listAddress = []
+
+            dataLoginTemp.data.forEach(element => {
+              const dataTempAddress = {
+                codcli_b: element.codcli_b,
+                dircli_b: element.dircli_b,
+                telcli_b: element.telcli_b
+              }
+
+              listAddress.push(dataTempAddress)
+            });
+
+            localStorage.setItem("AddressList", JSON.stringify(listAddress))
+          } else {
+            localStorage.setItem("AddressList", "default")
+          }
+
           this.nvCtrl.navigateForward("/tabs/home")
         } else {
           this.presentToast("¡Error de credenciales!", data.data.message, "is-error")
