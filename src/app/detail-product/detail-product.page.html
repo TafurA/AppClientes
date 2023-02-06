@@ -35,9 +35,10 @@
         </div>
 
         <a
-          [routerLink]="['/car']"
+          [routerLink]="['/tabs/car']"
+          [ngClass]="{'test': productsIsNull, '': !productsIsNull}"
           class="
-            o-link o-link_primary
+            o-link o-link_primary js-link-car
             i-after-arrow-left i-after-arrow-left_right
           "
         >

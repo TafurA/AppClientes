@@ -20,6 +20,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DetailBannerPageRoutingModule,
     NgxPaginationModule
   ],
-  declarations: [DetailBannerPage, HeaderComponent, BannerProductComponent, ProductComponent]
+  declarations: [DetailBannerPage, BannerProductComponent, ProductComponent]
 })
 export class DetailBannerPageModule { }

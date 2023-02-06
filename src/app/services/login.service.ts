@@ -52,7 +52,7 @@ export class LoginService {
 
             localStorage.setItem("AddressList", JSON.stringify(listAddress))
           } else {
-            localStorage.setItem("AddressList", "default")
+            localStorage.setItem("AddressList", null)
           }
 
           this.nvCtrl.navigateForward("/tabs/home")
@@ -88,6 +88,7 @@ export class LoginService {
 
   logOutIntoSystem() {
     localStorage.removeItem("userSessionData")
+    localStorage.clear()
     this.nvCtrl.navigateForward("/tabs/welcome")
   }
 

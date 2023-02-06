@@ -33,7 +33,14 @@
 
     <!-- Value and discount -->
     <div>
-      <span class="c-product__amount">${{ productObject.totalValue }}</span>
+      <span
+        *ngIf="totalValueShow"
+        class="c-product__amount"
+        [ngClass]="{'test': !totalValueShow}"
+
+      >
+        ${{ productObject.totalValue }}
+      </span>
 
       <div
         class="c-product__ico c-product__ico_discount i-star"

@@ -5,6 +5,7 @@ import { LoadingController, NavController } from '@ionic/angular';
 // import { GridProductComponent } from '../../product/grid-product.component';
 
 import { Subject } from 'rxjs';
+import { LoginService } from 'src/app/services/login.service';
 import { ProductService } from 'src/app/services/product.service';
 
 // import { ProductService } from 'src/app/service/product/product.service';
@@ -28,10 +29,12 @@ export class HeaderComponent implements OnInit {
   constructor(
     // public shopinCarService: ShopingCarService,
     public nvCtrl: NavController,
+    public loginService: LoginService,
     // public searchService: SearchService,
     public loadingController: LoadingController,
     // public grid: GridProductComponent,
-    public productService: ProductService
+    public productService: ProductService,
+    public navController: NavController
   ) { }
 
   ngOnInit() {
@@ -44,8 +47,7 @@ export class HeaderComponent implements OnInit {
   }
 
   filterList(): void {
-    console.log("LOKKK HHHHHHHHHHASD")
-    // setTimeout(() => {
+
     this.productService.getProductsSearch().then(() => {
       this.arraySearchProducts = this.productService.arrayDataProductSearch
       console.log("arraySearchProducts")
@@ -76,9 +78,9 @@ export class HeaderComponent implements OnInit {
 
         this.listFiltered = newListProducts
           .filter(item => item.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+
       });
     })
-    // }, 1000)
 
   }
 

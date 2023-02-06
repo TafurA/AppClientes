@@ -1,6 +1,13 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
+import {
+  ActionPerformed,
+  PushNotificationSchema,
+  PushNotifications,
+  Token,
+} from '@capacitor/push-notifications';
+
 import { LoginService } from '../services/login.service';
 import { BannerService } from '../services/banner.service';
 import { BannerComponent } from '../components/banner/banner.component';
@@ -41,14 +48,51 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem("AddressList") != "default") {
+    if (
+      localStorage.getItem("AddressList") != null) {
       this.listOfAddress()
+    } else {
+      console.log("ES NULL O DEFAULT NO DEBERIA HACER MAS")
     }
+
+    console.log('Initializing HomePage');
+
+    // Request permission to use push notifications
+    // iOS will prompt user and return if they granted permission or not
+    // Android will just grant without prompting
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') {
+        // Register with Apple / Google to receive push via APNS/FCM
+        PushNotifications.register();
+      } else {
+        // Show some error
+      }
+    });
+
+    PushNotifications.addListener('registration', (token: Token) => {
+      alert('Toca ver como regunto: ' + token.value);
+    });
+
+    // PushNotifications.addListener('registrationError', (error: any) => {
+    //   alert('Error on registration: ' + JSON.stringify(error));
+    // });
+
+    PushNotifications.addListener(
+      'pushNotificationReceived',
+      (notification: PushNotificationSchema) => {
+        alert('Push received: ' + JSON.stringify(notification));
+      },
+    );
+
+    PushNotifications.addListener(
+      'pushNotificationActionPerformed',
+      (notification: ActionPerformed) => {
+        alert('acción de notificación push realizada: ' + JSON.stringify(notification));
+      },
+    );
   }
 
   public listOfAddress() {
-    console.log("si entro al listOfAddress")
-
     const alert = document.querySelector(".js-alert-address")
 
     setTimeout(() => {
@@ -60,9 +104,6 @@ export class HomePage implements OnInit {
       alert.classList.add("is-show")
       const dataList = JSON.parse(localStorage.getItem("AddressList"))
       this.listAddress = dataList
-
-      console.log("this.listAddress")
-      console.log(this.listAddress)
     }, 2000)
 
 
@@ -72,32 +113,16 @@ export class HomePage implements OnInit {
   }
 
   public validateAddressCode() {
-    console.log("entro a validateAddressCode")
     const radios = document.getElementsByName('address');
-    const action = document.querySelector(".js-address-btn");
-
-    console.log(radios)
 
     for (let index = 0; index < radios.length; index++) {
       const element = radios[index];
       element.addEventListener("click", e => {
         this.codeConfirmAddress = (e.target as HTMLInputElement).value
         this.buttonConfirmAddres = true;
-        console.log("this.codeConfirmAddress")
-        console.log(this.codeConfirmAddress)
       })
     }
-    // Iteramos sobre ellos y agregamos un escuchador de eventos a cada uno
-    // radios.forEach(radio => {
-    //   radio.addEventListener('change', e => {
-    //     // Obtenemos el valor del radio seleccionado
-    //     const value = e.target;
 
-    //     // Aquí puedes hacer lo que quieras con ese valor
-    //     console.log("value");
-    //     console.log(value);
-    //   });
-    // });
   }
 
   public changeAddressCode() {
@@ -112,7 +137,6 @@ export class HomePage implements OnInit {
     }, 1000)
 
     setTimeout(() => {
-      console.log("AQUIIIIIIII")
       alert.classList.add("none")
       this.presentAlert()
     }, 1500)

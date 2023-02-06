@@ -20,7 +20,7 @@ export class DetailBannerPage implements OnInit {
   constructor(public bannerService: BannerService, private rutaActiva: ActivatedRoute, private loginService: LoginService, public navControler: NavController) { }
 
   ngOnInit() {
-    this.validateSession()
+    this.getDataCurrentBanner()
   }
 
   getDataCurrentBanner() {
@@ -37,16 +37,6 @@ export class DetailBannerPage implements OnInit {
     );
 
     return this.bannerId;
-  }
-
-  private validateSession() {
-    if (this.loginService.validateSession()) {
-      console.log("TIENE SESION")
-      this.getDataCurrentBanner()
-    } else {
-      console.log("sin SESION")
-      this.navControler.navigateForward("/tabs/login")
-    }
   }
 
 }

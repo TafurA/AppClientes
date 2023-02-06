@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
+  appId: 'co.surtilider.AppClientes',
   appName: 'AppClientes',
   webDir: 'www',
   bundledWebRuntime: false

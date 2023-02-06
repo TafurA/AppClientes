@@ -75,10 +75,10 @@
             DETALLE PRODUCTOS
           </button>
 
-          <div *ngFor="let productList of productsCurrentOrderDetail">
+          <div>
             <nav class="o-checkout__products">
 
-              <a class="c-product-horizontal" *ngFor="let product of productList">
+              <a class="c-product-horizontal" *ngFor="let product of productsCurrentOrderDetail">
 
                 <figure class="c-product-horizontal__figure">
                   <img class="c-product-horizontal__img o-img" src="{{ product.img_prod }}" alt="">
@@ -92,8 +92,20 @@
                 <div class="c-product-horizontal__price">
                   <span class="c-product__amount">${{ product.valorUnitario }} COP</span>
 
-                  <div class="c-product__ico c-product__ico_discount i-star" data-percent="20%">
-                    <span class="c-product__ico-txt">$7586</span>
+                  <div
+                    class="c-product__ico c-product__ico_discount i-star"
+                    [ngClass]="{'test': !product.isOffert, '': product.isOffert}"
+                  >
+                    <span class="c-product__ico_discount-txt">{{ product.porcDescuento }}%</span>
+                    <span class="c-product__ico-txt">${{ product.precioSinDcto }} cop</span>
+                  </div>
+  
+                  <div [ngClass]="{'test': !product.isCashback, '': product.isCashback}">
+                    <div
+                      class="c-product__ico c-product__ico_cash i-cash"
+                    >
+                      <span style="width: 100%" class="c-product__ico-txt"> ${{ product.valor }} cop</span>
+                    </div>
                   </div>
                 </div>
 

@@ -139,7 +139,8 @@ const routes: Routes = [
       },
       {
         path: 'detail-banner/:bannerId',
-        loadChildren: () => import('../detail-banner/detail-banner.module').then(m => m.DetailBannerPageModule)
+        loadChildren: () => import('../detail-banner/detail-banner.module').then(m => m.DetailBannerPageModule),
+        canActivate: [ToggleMenuGuard]
       },
       {
         path: '',

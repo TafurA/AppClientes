@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { SessionGuard } from '../guard/session.guard';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-welcome',
@@ -9,12 +10,12 @@ import { SessionGuard } from '../guard/session.guard';
 })
 export class WelcomePage implements OnInit {
 
-  constructor(public sessionGuard: SessionGuard, public nav: NavController) { }
+  constructor(public loginService: LoginService, public nav: NavController) { }
 
   ngOnInit() {
-    // if (this.sessionGuard.canActivate()) {
-    //   this.nav.navigateRoot("/tabs/home")
-    // }
+    if (this.loginService.validateSession()) {
+      this.nav.navigateForward("/tabs/home")
+    }
   }
 
 }

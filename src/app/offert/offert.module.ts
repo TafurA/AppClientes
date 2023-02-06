@@ -22,6 +22,6 @@ import { ProductComponent } from '../components/product/product/product.componen
     OffertPageRoutingModule,
     NgxPaginationModule
   ],
-  declarations: [OffertPage, HeaderComponent, CategoryComponent, GridProductComponent, ProductComponent]
+  declarations: [OffertPage, HeaderComponent, GridProductComponent, ProductComponent]
 })
 export class OffertPageModule { }

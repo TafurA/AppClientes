@@ -19,20 +19,13 @@ export class ProvidersPage implements OnInit {
   constructor(public marcasService: MarcasService, public loginService: LoginService, public navControler: NavController) { }
 
   ngOnInit() {
-    this.validateSession()
+    this.marcasService.getListMarcas().then(() => {
+      this.fillArrayMarcas();
+    })
   }
 
   fillArrayMarcas() {
     this.arrayDataMarcas = this.marcasService.arrayMarcas()
   }
 
-  private validateSession() {
-    if (this.loginService.validateSession()) {
-      this.marcasService.getListMarcas().then(() => {
-        this.fillArrayMarcas();
-      })
-    } else {
-      this.navControler.navigateForward("/login")
-    }
-  }
 }

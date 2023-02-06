@@ -59,4 +59,21 @@ export class UpdatedPasswordPage implements OnInit {
     )
   }
 
+  passwordChange(e) {
+    const inputToChange = e.target.closest(".o-form__field-wrap").querySelector("input")
+    if (e.target.classList.contains("i-eye")) {
+      e.target.classList.remove("i-eye")
+      e.target.classList.add("i-eye-lock")
+      inputToChange.setAttribute("type", "text")
+    } else {
+      e.target.classList.add("i-eye")
+      e.target.classList.remove("i-eye-lock")
+      inputToChange.setAttribute("type", "password")
+    }
+
+    console.log("e.target")
+    console.log(e.target)
+
+  }
+
 }

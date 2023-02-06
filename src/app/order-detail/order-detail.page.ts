@@ -22,7 +22,11 @@ export class OrderDetailPage implements OnInit {
     image: ""
   };
 
-  public productsCurrentOrderDetail;
+  public productsCurrentOrderDetail = new Array;
+  isCashbackProduct: boolean;
+  isDiscountProduct: boolean;
+  totalProductDiscount: any;
+  totalProductValue: number;
 
   constructor(public rutaActiva: ActivatedRoute, public orderService: OrderService) { }
 
@@ -50,21 +54,54 @@ export class OrderDetailPage implements OnInit {
         console.log(params)
         this.order.orderId = params.idPedido;
         this.orderService.getOrderDetail(this.order.orderId).finally(() => {
-          this.productsCurrentOrderDetail = JSON.parse(localStorage.productsCurrentOrderDetail);
+          this.productsCurrentOrderDetail = []
+          // this.productsCurrentOrderDetail = JSON.parse(localStorage.productsCurrentOrderDetail);
+          const tem = JSON.parse(localStorage.productsCurrentOrderDetail)
 
-          for (let index = 0; index < this.productsCurrentOrderDetail.length; index++) {
-            const element = this.productsCurrentOrderDetail[index];
+          for (let index = 0; index < tem.length; index++) {
+            const element = tem[index];
 
             this.order.totalProducts = element.length
 
             element.forEach(product => {
-              product.cantidad = Math.round(product.cantidad)
+              const temproduct = {
+                "img_prod": product.img_prod,
+                "nameProduct": product.nameProduct,
+                "cantidad": product.cantidad,
+                "valor": product.valor,
+                "valorUnitario": product.valorUnitario,
+                "precioSinDcto": product.precioSinDcto,
+                "porcDescuento": product.porcDescuento,
+                "isOffert": false,
+                "isCashback": false
+              }
+              temproduct.cantidad = Math.round(temproduct.cantidad)
+              this.productWithCashback(temproduct)
+              this.productWithDiscount(temproduct)
+              this.productsCurrentOrderDetail.push(temproduct)
             });
           };
+          console.log("this.productsCurrentOrderDetail")
+          console.log(this.productsCurrentOrderDetail)
 
         });
       }
     );
+  }
+
+  public productWithCashback(productObject) {
+    if (productObject.valor > "0") {
+      productObject.isCashback = true
+    }
+  }
+
+  public productWithDiscount(productObject) {
+
+    const descuentoFormated = parseInt(productObject.porcDescuento)
+
+    if (descuentoFormated.toFixed(0) > "0") {
+      productObject.isOffert = true
+    }
   }
 
   toggleDropdown(e) {

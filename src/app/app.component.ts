@@ -40,4 +40,5 @@ export class AppComponent {
     this.shopingCarService.closeAlert()
   }
 
+
 }

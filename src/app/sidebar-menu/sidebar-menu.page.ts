@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-import { BannerComponent } from '../components/banner/banner.component';
-import { BannerService } from '../services/banner.service';
+
 import { LoginService } from '../services/login.service';
+import { BannerService } from '../services/banner.service';
+import { NavController } from '@ionic/angular';
+import { BannerComponent } from '../components/banner/banner.component';
 
 @Component({
   selector: 'app-sidebar-menu',
@@ -13,10 +16,31 @@ import { LoginService } from '../services/login.service';
 export class SidebarMenuPage implements OnInit {
   public userName = ""
   public userCashback = ""
-  constructor(public loginService: LoginService) { }
+  private refreshSubject = new Subject<void>();
+  refresh$ = this.refreshSubject.asObservable();
+
+  constructor(public loginService: LoginService, public navController: NavController) { }
 
   ngOnInit() {
-    this.setUserData()
+    this.refresh$.subscribe(() => {
+      this.validateSession()
+    })
+
+    setInterval(() => {
+      this.refresh()
+    }, 200)
+  }
+
+  refresh() {
+    this.refreshSubject.next();
+  }
+
+  validateSession() {
+    if (!this.loginService.validateSession()) {
+      this.navController.navigateForward("/tabs/login")
+    } else {
+      this.setUserData()
+    }
   }
 
   setUserData() {

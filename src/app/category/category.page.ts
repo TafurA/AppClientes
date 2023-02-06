@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { CategoryComponent } from '../components/category/category.component';
 import { GridProductComponent } from '../components/product/grid-product.component';
 import { ProductComponent } from '../components/product/product/product.component';
 import { CategoryService } from '../services/category.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-category-page',
@@ -12,7 +14,7 @@ import { CategoryService } from '../services/category.service';
 })
 export class CategoryPage implements OnInit {
 
-  constructor() { }
+  constructor(public loginService: LoginService, public navController: NavController) { }
 
   ngOnInit() {
   }

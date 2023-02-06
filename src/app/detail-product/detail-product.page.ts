@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { Subject } from 'rxjs';
+
 import { FavoriteService } from '../services/favorite.service';
 import { LoginService } from '../services/login.service';
 import { ProductService } from '../services/product.service';
@@ -11,6 +13,9 @@ import { ShopingCarService } from '../services/shoping-car.service';
   templateUrl: './detail-product.page.html',
 })
 export class DetailProductPage implements OnInit {
+
+  private refreshSubject = new Subject<void>();
+  refresh$ = this.refreshSubject.asObservable();
 
   public product = {
     productCode: "",
@@ -27,6 +32,8 @@ export class DetailProductPage implements OnInit {
     valpun_b: "0",
     valor: "0"
   }
+
+  public productsIsNull = true;
 
   isProductInCar = false
   counterProductsCar = 0
@@ -57,14 +64,12 @@ export class DetailProductPage implements OnInit {
 
   ngOnInit() {
     this.validateSession()
-    console.log("this.product")
-    console.log(this.product)
+    this.getCounterCarProducts()
   }
 
   public slideOpts = {
     slidesPerView: "auto",
     centeredSlides: true,
-    loopedSlides: 3,
     coverflowEffect: {
       rotate: 0,
       stretch: -20,
@@ -157,6 +162,7 @@ export class DetailProductPage implements OnInit {
       (params: Params) => {
         this.product.productCode = params.idProduct;
         this.productService.getProductDetail(this.product.productCode).then(() => {
+          console.log("this.productService.arrayDetailProduct[0]")
           console.log(this.productService.arrayDetailProduct[0])
           this.product.nameProduct = this.productService.arrayDetailProduct[0].nameProduct
           this.product.description = this.productService.arrayDetailProduct[0].descrProduct
@@ -179,15 +185,35 @@ export class DetailProductPage implements OnInit {
     }
   }
 
+
+  public getCounterCarProducts() {
+    const counterLocalStorage = localStorage.productsCar
+    if (counterLocalStorage) {
+      this.productsIsNull = !this.productsIsNull
+    } else {
+      this.productsIsNull = this.productsIsNull
+    }
+  }
+
   public showcategoryProduct() {
     const category = localStorage.getItem("categoryProduct")
     if (category == "cashback") {
       this.isCashback = true;
     } else if (category == "descuento") {
       this.isDescuento = true;
-      this.porDescuento = localStorage.getItem("porDescuento")
-      this.valorDescuento = localStorage.getItem("precioSinDcto")
+      this.refresh$.subscribe(() => {
+        this.porDescuento = localStorage.getItem("porDescuento")
+        this.valorDescuento = localStorage.getItem("precioConDcto")
+        this.product.price = localStorage.getItem("precioSinDcto")
+      })
+      setInterval(() => {
+        this.refresh()
+      }, 100)
     }
+  }
+
+  refresh() {
+    this.refreshSubject.next();
   }
 
   public addQuantitifyProductToCar() {
@@ -265,10 +291,12 @@ export class DetailProductPage implements OnInit {
         });
       }
 
-      this.showcategoryProduct()
+      setTimeout(() => {
+        this.showcategoryProduct()
+      }, 100)
 
     } else {
-      this.navControler.navigateForward("/login")
+      this.navControler.navigateForward("/tabs/login")
     }
   }
 }

@@ -20,8 +20,10 @@ export class ProductComponent implements OnInit {
   public isNormalProduct = true;
   public isDiscountProduct = false;
   public isCashbackProduct = false;
+  public totalValueShow = false;
 
-  public totalProductDiscount = 0
+
+  public totalProductDiscount: any
   public totalProductValue = 0
 
   public totalValueCashback = 0
@@ -47,6 +49,7 @@ export class ProductComponent implements OnInit {
     } else {
       this.getFavoriteTagAnotherPages()
     }
+    this.userWithoutSession()
   }
 
   addProductToFavorite(idProduct) {
@@ -68,6 +71,12 @@ export class ProductComponent implements OnInit {
         this.isFavorite = false
       }
     });
+  }
+
+  public userWithoutSession() {
+    if (this.loginService.validateSession()) {
+      this.totalValueShow = true
+    }
   }
 
   public productWithCashback() {
@@ -97,7 +106,8 @@ export class ProductComponent implements OnInit {
     } else if (descuentoFormated.toFixed(0) > "0") {
       localStorage.setItem("categoryProduct", "descuento")
       localStorage.setItem("porDescuento", object.porcDescuento)
-      localStorage.setItem("precioSinDcto", object.precioSinDcto)
+      localStorage.setItem("precioSinDcto", this.productObject.totalValue)
+      localStorage.setItem("precioConDcto", this.totalProductDiscount)
     } else {
       localStorage.removeItem("categoryProduct")
     }
