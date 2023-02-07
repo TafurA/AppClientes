@@ -9,7 +9,7 @@ export class CustomValidator {
     'required': 'Este campo es obligatorio',
     'minLength': 'La contraseña debe contener mas de 4 caracteres',
     'passwordMatch': 'Las contraseñas no coinciden',
-    'pattern': 'No es el formato solicitado',
+    'pattern': 'Tu nueva contraseña debe tener MAYÚSCULAS, MINÚSCULAS, NÚMEROS y CARACTERES no alfanuméricos',
   
   };
 

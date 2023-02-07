@@ -33,10 +33,12 @@ export class UpdatedPasswordPage implements OnInit {
         passwordNew: ['', [
           Validators.required,
           // Validators.minLength(minPassLength),
+          Validators.pattern("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
         ]],
         passwordConfirm: ['', [
           Validators.required,
           Validators.minLength(minPassLength),
+          Validators.pattern("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$")
         ]]
       },
       {

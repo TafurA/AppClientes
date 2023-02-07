@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NavController, ToastController } from '@ionic/angular';
+import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
 // Connect with http
@@ -17,7 +17,7 @@ export class LoginService {
 
   public ProcessDataUserSession = {};
 
-  constructor(public nvCtrl: NavController, private toastController: ToastController, public sessionGuard: SessionGuard, private http: HTTP) {
+  constructor(public nvCtrl: NavController, private toastController: ToastController, public sessionGuard: SessionGuard, private http: HTTP, private alertController: AlertController) {
   }
 
   async loginToSystem(user: string, pass: string) {
@@ -57,7 +57,7 @@ export class LoginService {
 
           this.nvCtrl.navigateForward("/tabs/home")
         } else {
-          this.presentToast("¡Error de credenciales!", data.data.message, "is-error")
+          this.presentAlert("¡Error de credenciales!", data.data.message, "is-error")
         }
 
       })
@@ -113,16 +113,18 @@ export class LoginService {
     }
   }
 
-  async presentToast(title: string, description: string, alertType: string) {
-    const toast = await this.toastController.create({
+  async presentAlert(title: string, description: string, alertType: string) {
+    const alert = await this.alertController.create({
       header: title,
-      message: description,
-      duration: 8000,
-      position: 'bottom',
+      subHeader: description,
       cssClass: `c-alert ${alertType}`,
     });
 
-    await toast.present();
+    await alert.present();
+
+    setTimeout(() => {
+      alert.dismiss()
+    }, 2000)
   }
 
 }
