@@ -19,5 +19,18 @@
       </ion-slides>
     </div>
 
+    <!-- <div *ngFor="let item of arrayDataSubCategory" *ngIf="!loaded">
+      <h2 class="o-title">{{ item.nameCategory }}</h2>
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 21px"></ion-skeleton-text>
+
+      <ion-slides class="c-product-slide" [options]="slideOpts">
+        <ion-slide class="c-product-slides" *ngFor="let product of item.product">
+  
+          <app-product [productObject]="product"></app-product>
+  
+        </ion-slide>
+      </ion-slides>
+    </div> -->
+
   </div>
 </section>

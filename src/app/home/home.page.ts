@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
     });
 
     PushNotifications.addListener('registration', (token: Token) => {
-      alert('Toca ver como regunto: ' + token.value);
+      // alert('Toca ver como regunto: ' + token.value);
     });
 
     // PushNotifications.addListener('registrationError', (error: any) => {

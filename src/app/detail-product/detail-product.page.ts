@@ -162,8 +162,7 @@ export class DetailProductPage implements OnInit {
       (params: Params) => {
         this.product.productCode = params.idProduct;
         this.productService.getProductDetail(this.product.productCode).then(() => {
-          console.log("this.productService.arrayDetailProduct[0]")
-          console.log(this.productService.arrayDetailProduct[0])
+          this.product.galery = []
           this.product.nameProduct = this.productService.arrayDetailProduct[0].nameProduct
           this.product.description = this.productService.arrayDetailProduct[0].descrProduct
           this.product.price = this.productService.arrayDetailProduct[0].precioSinDcto

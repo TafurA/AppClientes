@@ -67,7 +67,6 @@ export class LoginService {
       });
   }
 
-
   setUserCode() {
     const encodeString = localStorage.userSessionData
     const obj = []
@@ -79,6 +78,7 @@ export class LoginService {
       obj[key] = String(value)
     }
 
+    console.log("RIMERO ESTEEEEE", obj['codcli_b'])
     localStorage.setItem("codeUserAddress", obj['codcli_b']);
   }
 

@@ -434,7 +434,7 @@ export class ShopingCarService {
 
       setTimeout(() => {
         alertProduct.classList.remove("is-show")
-      }, 3000)
+      }, 1500)
     } else {
       alertProduct.querySelector(".c-add-car").classList.remove("test")
     }

@@ -50,16 +50,18 @@ export class HeaderComponent implements OnInit {
 
     this.productService.getProductsSearch().then(() => {
       this.arraySearchProducts = this.productService.arrayDataProductSearch
-      console.log("arraySearchProducts")
-      console.log(this.arraySearchProducts)
     }).finally(() => {
       this.arraySearchProducts.forEach(product => {
-        this.nameProducts.push(product.nameProduct)
+        const data = {
+          keyWord: product.palabrasClaves,
+          word: product.nameProduct
+        }
+        this.nameProducts.push(data)
       });
 
       this.searchTerm$.subscribe(term => {
 
-        if (term.length >= 2) {
+        if (term.length >= 1) {
           document.querySelectorAll(".c-list-search-box").forEach(element => {
             element.classList.add("is-search-type")
           });
@@ -71,13 +73,17 @@ export class HeaderComponent implements OnInit {
 
         let newListProducts = []
         this.nameProducts.forEach(element => {
-          if (element != null) {
+          if (element.word != null && element.keyWord != null) {
             newListProducts.push(element)
           }
         });
 
         this.listFiltered = newListProducts
-          .filter(item => item.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+          .filter(item => item.keyWord.toLowerCase().indexOf(term.toLowerCase()) >= 0);
+
+        this.listFiltered.forEach(element => {
+          console.log(element.word)
+        });
 
       });
     })

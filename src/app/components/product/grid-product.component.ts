@@ -37,7 +37,6 @@ export class GridProductComponent implements OnInit {
     // For list of favorite products
     if (window.location.pathname.includes("favorite")) {
       if (localStorage.getItem("userSessionData")) {
-        console.log("AQUIII")
         this.isViewOfFavorite = true;
         this.isFavoriteNull = this.favoriteService.getIsFavoriteNull();
 

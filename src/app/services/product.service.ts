@@ -144,9 +144,9 @@ export class ProductService {
           console.log(this.arrayDetailProduct)
         })
       } else {
-        console.log("llega aqui")
+        console.log("llega aqui 2")
         console.log(this.loginService.getUserCode())
-        return await this.getRecomendedProducts(this.loginService.getUserCode()).finally(
+        return await this.getRecomendedProducts(this.loginService.validateSession()['codcli_b']).finally(
           () => {
             console.log(this.arrayDataProducts)
             this.isproductsCharged = true
