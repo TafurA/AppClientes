@@ -54,43 +54,9 @@ export class HomePage implements OnInit {
     } else {
       console.log("ES NULL O DEFAULT NO DEBERIA HACER MAS")
     }
-
-    console.log('Initializing HomePage');
-
-    // Request permission to use push notifications
-    // iOS will prompt user and return if they granted permission or not
-    // Android will just grant without prompting
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Show some error
-      }
-    });
-
-    PushNotifications.addListener('registration', (token: Token) => {
-      // alert('Toca ver como regunto: ' + token.value);
-    });
-
-    // PushNotifications.addListener('registrationError', (error: any) => {
-    //   alert('Error on registration: ' + JSON.stringify(error));
-    // });
-
-    PushNotifications.addListener(
-      'pushNotificationReceived',
-      (notification: PushNotificationSchema) => {
-        alert('Push received: ' + JSON.stringify(notification));
-      },
-    );
-
-    PushNotifications.addListener(
-      'pushNotificationActionPerformed',
-      (notification: ActionPerformed) => {
-        alert('acción de notificación push realizada: ' + JSON.stringify(notification));
-      },
-    );
   }
+
+
 
   public listOfAddress() {
     const alert = document.querySelector(".js-alert-address")

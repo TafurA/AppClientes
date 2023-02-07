@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import {
+  PushNotifications,
+} from '@capacitor/push-notifications';
+
 import { SessionGuard } from '../guard/session.guard';
 import { LoginService } from '../services/login.service';
 
@@ -14,8 +18,18 @@ export class WelcomePage implements OnInit {
 
   ngOnInit() {
     if (this.loginService.validateSession()) {
-      this.nav.navigateForward("/tabs/home")
+      PushNotifications.requestPermissions().then(result => {
+        if (result.receive === 'granted') {
+          // Register with Apple / Google to receive push via APNS/FCM
+          PushNotifications.register();
+        } else {
+          // Show some error
+        }
+      }).finally(() => {
+        this.nav.navigateForward("/tabs/home")
+      });
     }
+
   }
 
 }

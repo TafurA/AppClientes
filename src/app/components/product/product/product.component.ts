@@ -20,7 +20,6 @@ export class ProductComponent implements OnInit {
   public isNormalProduct = true;
   public isDiscountProduct = false;
   public isCashbackProduct = false;
-  public totalValueShow = false;
 
 
   public totalProductDiscount: any
@@ -49,7 +48,6 @@ export class ProductComponent implements OnInit {
     } else {
       this.getFavoriteTagAnotherPages()
     }
-    this.userWithoutSession()
   }
 
   addProductToFavorite(idProduct) {
@@ -71,12 +69,6 @@ export class ProductComponent implements OnInit {
         this.isFavorite = false
       }
     });
-  }
-
-  public userWithoutSession() {
-    if (this.loginService.validateSession()) {
-      this.totalValueShow = true
-    }
   }
 
   public productWithCashback() {
