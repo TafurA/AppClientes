@@ -222,6 +222,8 @@ export class ShopingCarService {
             element.quantityProduct = element.quantityProduct - 1
           }
 
+          console.log("element.quantityProduct", element.quantityProduct)
+
           newDataCarProducts.push(element)
 
           if (themeage == "detail") {
