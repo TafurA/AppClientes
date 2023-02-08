@@ -17,7 +17,6 @@ export class BannerService {
   constructor(private http: HTTP) { }
 
   async getBannerList() {
-    console.log("aasda")
     // await axios.get(`${environment.apiPath}${environment.apiPath}getBanner`, environment.headerConfig).then(response => {
 
     //   if (response.data.response) {
@@ -65,10 +64,6 @@ export class BannerService {
       .then(data => {
 
         const dataBennerTemp = JSON.parse(data.data)
-        console.log("dataBennerTemp")
-        console.log(dataBennerTemp)
-        console.log("dataBennerTemp.dataBanner")
-        console.log(dataBennerTemp.dataBanner)
 
         this.arrayDataProducts = []
 

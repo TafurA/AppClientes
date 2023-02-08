@@ -9,6 +9,8 @@ export class CategoryProductComponent implements OnInit {
   public categoryId: any;
   public nameCategory: string;
   public arrayDataSubCategory = new Array();
+  public loaded = false;
+  public productsNull = false;
 
   constructor(private rutaActiva: ActivatedRoute, public categoryService: CategoryService) { }
 
@@ -19,6 +21,16 @@ export class CategoryProductComponent implements OnInit {
         this.nameCategory = params.nameCategory
         this.categoryService.getSubCategoryList(this.categoryId).then(() => {
           this.arrayDataSubCategory = JSON.parse(localStorage.test)
+          console.log("this.arrayDataSubCategory")
+
+          if (this.arrayDataSubCategory.length <= 1) {
+            this.productsNull = true;
+          }
+
+        }).finally(() => {
+          if (this.categoryService.isSubCategoryCharged) {
+            this.loaded = true
+          }
         })
       }
     );

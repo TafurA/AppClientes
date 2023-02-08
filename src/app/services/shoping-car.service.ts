@@ -76,7 +76,7 @@ export class ShopingCarService {
         }
 
         newDataCarProducts.push(this.product) // Guarda producto actual
-        this.updateStorageCarProduct(newDataCarProducts, true, this.product.productCode) // Actualiza local storage
+        this.updateStorageCarProduct(newDataCarProducts, true, this.product.productCode, "general") // Actualiza local storage
 
       } else {
         // Guardar producto por primera vez
@@ -99,7 +99,7 @@ export class ShopingCarService {
   }
 
   public addProductQuantity(codeProduct) {
-    this.updateProductQuantity(codeProduct, "sum")
+    this.updateProductQuantity(codeProduct, "sum", "general")
   }
 
   public addProductQuantityDetail(product) {
@@ -126,16 +126,30 @@ export class ShopingCarService {
       if (storageCarProduct) {
 
         const newDataCarProducts = JSON.parse(storageCarProduct) // Guardar array de productos
+        const alertProduct = document.querySelector(".js-alert-product");
+        let booleanTest: boolean = true;
 
         for (let index = 0; index < newDataCarProducts.length; index++) {
           const element = newDataCarProducts[index];
           if (element.productCode == product.productCode) {
             product.quantityProduct = element.quantityProduct
-            this.alertProduct("informative")
-          } else {
-            this.alertProduct("success")
+            booleanTest = false;
           }
         }
+
+        // setTimeout(() => {
+        if (booleanTest) {
+          alertProduct.querySelector(".c-add-car").classList.add("test")
+          this.alertProduct("success")
+          setTimeout(() => {
+            alertProduct.classList.remove("is-show")
+          }, 1500)
+          setTimeout(() => {
+            alertProduct.querySelector(".c-add-car").classList.remove("test")
+          }, 1600)
+        }
+        // }, 600)
+
 
         temporalProduct.productCode = product.productCode
         temporalProduct.nameProduct = product.nameProduct
@@ -150,7 +164,7 @@ export class ShopingCarService {
         temporalProduct.isCashback = temporalProduct.isCashback
 
         newDataCarProducts.push(temporalProduct) // Guarda producto actual
-        this.updateStorageCarProduct(newDataCarProducts, true, temporalProduct.productCode) // Actualiza local storage
+        this.updateStorageCarProduct(newDataCarProducts, true, temporalProduct.productCode, "detail") // Actualiza local storage
 
       } else {
         // Guardar producto por primera vez
@@ -172,7 +186,7 @@ export class ShopingCarService {
 
         localStorage.setItem("productsCar", JSON.stringify(this.products))
         this.alertProduct("success")
-        this.updateProductQuantity(temporalProduct.productCode, "sum")
+        this.updateProductQuantity(temporalProduct.productCode, "sum", "detail")
       }
 
     }).finally(() => {
@@ -181,18 +195,19 @@ export class ShopingCarService {
   }
 
   public removeProductQuantity(codeProduct) {
-    this.updateProductQuantity(codeProduct, "rest")
+    this.updateProductQuantity(codeProduct, "rest", "general")
 
     const storageCarProducts = JSON.parse(localStorage.productsCar)
 
     const filteredLibraries = storageCarProducts.filter((item) => item.quantityProduct !== 0)
-    this.updateStorageCarProduct(filteredLibraries, false, 0)
+    this.updateStorageCarProduct(filteredLibraries, false, 0, "general")
 
     this.resetAlertAndCarIcon()
     this.changeCurrentValueCounterProduct()
   }
 
-  public updateProductQuantity(codeProduct, action) {
+  public updateProductQuantity(codeProduct, action, themeage) {
+    console.log("en el udateeeeeeeeEEEEE")
     const storageCarProducts = JSON.parse(localStorage.productsCar)
     const newDataCarProducts = JSON.parse(localStorage.productsCar)
 
@@ -209,16 +224,22 @@ export class ShopingCarService {
           }
 
           newDataCarProducts.push(element)
-          this.changeCurrentValueQuantityProduct(element.quantityProduct)
+
+          if (themeage == "detail") {
+            console.log("tiene que ser detail")
+            this.changeCurrentValueQuantityProductDetail(element.quantityProduct)
+          } else {
+            this.changeCurrentValueQuantityProduct(element.quantityProduct)
+          }
         }
       }
     }
 
-    this.updateStorageCarProduct(newDataCarProducts, false, 0)
+    this.updateStorageCarProduct(newDataCarProducts, false, 0, "general")
   }
 
   public resetAlertAndCarIcon() {
-    const numberCardAddProduct = document.querySelector(".js-number-card-product");
+    const numberCardAddProduct = document.querySelector(".js-number-card-product-card");
 
     if (numberCardAddProduct.innerHTML == "0") {
       if (document.querySelector(".js-alert-product").classList.contains("is-show")) {
@@ -270,10 +291,22 @@ export class ShopingCarService {
     }
   }
 
+  private changeCurrentValueQuantityProductDetail(quantity) {
+    const numberQuantityProdudct = document.querySelector(".js-detail-number");
+
+    numberQuantityProdudct.innerHTML = quantity
+
+    numberQuantityProdudct.classList.add("is-animated")
+    setTimeout(() => {
+      numberQuantityProdudct.classList.remove("is-animated")
+    }, 500)
+  }
+
   private changeCurrentValueQuantityProduct(quantity) {
-    const numberQuantityProdudct = document.querySelectorAll(".js-number-card-product");
+    const numberQuantityProdudct = document.querySelectorAll(".js-number-card-product-card");
 
     numberQuantityProdudct.forEach(element => {
+
       element.innerHTML = quantity
 
       element.classList.add("is-animated")
@@ -283,7 +316,7 @@ export class ShopingCarService {
     });
   }
 
-  private updateStorageCarProduct(newDataCarProducts, save, codeProduct) {
+  private updateStorageCarProduct(newDataCarProducts, save, codeProduct, themeage) {
     // Remover ID de productos duplicados
     var uniqueArray = this.removeDuplicates(newDataCarProducts, "productCode");
     localStorage.setItem("productsCar", JSON.stringify(uniqueArray))
@@ -299,7 +332,11 @@ export class ShopingCarService {
     }
 
     if (save) {
-      this.updateProductQuantity(codeProduct, "sum")
+      if (themeage == "detail") {
+        this.updateProductQuantity(codeProduct, "sum", "detail")
+      } else {
+        this.updateProductQuantity(codeProduct, "sum", "general")
+      }
     }
 
   }
@@ -327,7 +364,6 @@ export class ShopingCarService {
     //   }
 
     // })
-    console.log("EN CASHBACK", userCredential)
     await this.http.get(`${environment.url}${environment.apiPath}/accumulatedMoney?codigo=${userCredential}`, "", environment.headers)
       .then(data => {
         console.log(data)
@@ -354,8 +390,6 @@ export class ShopingCarService {
     // })
     await this.http.get(`${environment.url}${environment.apiPath}GetSeller?code=${userSeller}`, "", environment.headers)
       .then(data => {
-        console.log("EN EL PUTO SERVICE")
-        console.log(data)
         const dataObjTemp = JSON.parse(data.data)
         for (let index = 0; index < dataObjTemp.data.length; index++) {
           const element = dataObjTemp.data[index];
@@ -392,8 +426,6 @@ export class ShopingCarService {
 
   public getArrayOfOrder() {
     let shoppingCart = window.localStorage.getItem("orderService")
-    console.log("LO QUE VOY A MOSTAR COMO LE LLEGA")
-    console.log(shoppingCart)
     return shoppingCart
   }
 
@@ -430,29 +462,35 @@ export class ShopingCarService {
     alertProduct.classList.remove("is-show")
 
     if (window.location.pathname.includes("detail-product")) {
-      alertProduct.querySelector(".c-add-car").classList.add("test")
-
-      setTimeout(() => {
-        alertProduct.classList.remove("is-show")
-      }, 1500)
+      // alertProduct.querySelector(".c-add-car").classList.add("test")
+      // setTimeout(() => {
+      //   alertProduct.classList.remove("is-show")
+      // }, 1500)
     } else {
       alertProduct.querySelector(".c-add-car").classList.remove("test")
     }
 
-    if (action == "success") {
+    if (action == "null") {
+      console.log("ES ESTEEE")
+      alertProduct.classList.remove("is-show")
+
+    } else if (action == "informative") {
+      setTimeout(() => {
+        alertProduct.classList.remove("is-success")
+        alertProduct.classList.add("is-informative")
+        alertProduct.querySelector(".c-product-alert__title").innerHTML = "Cantidad actualizada"
+      }, 100)
+
+      alertProduct.classList.add("is-show")
+
+    } else if (action == "success") {
+
       alertProduct.classList.add("is-success")
       alertProduct.querySelector(".c-product-alert__title").innerHTML = "Producto agregado"
       alertProduct.classList.remove("is-informative")
-    } else if (action == "informative") {
-      setTimeout(() => {
-        alertProduct.classList.add("is-informative")
-        alertProduct.querySelector(".c-product-alert__title").innerHTML = "Cantidad actualizada"
-        alertProduct.classList.remove("is-success")
-      }, 100)
 
+      alertProduct.classList.add("is-show")
     }
-
-    alertProduct.classList.add("is-show")
 
   }
 

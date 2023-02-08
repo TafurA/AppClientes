@@ -6,6 +6,15 @@
       <p class="o-title o-medium">{{ nameCategory }}</p>
     </header>
 
+    <div *ngIf="!loaded">
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 21px"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 150px"></ion-skeleton-text>
+  
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 21px"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 150px"></ion-skeleton-text>
+    </div>
+
+    <div *ngIf="!productsNull;else productsNullT" >
     <div *ngFor="let item of arrayDataSubCategory">
       <h2 class="o-title">{{ item.nameCategory }}</h2>
 
@@ -18,19 +27,16 @@
         </ion-slide>
       </ion-slides>
     </div>
+    </div>
 
-    <!-- <div *ngFor="let item of arrayDataSubCategory" *ngIf="!loaded">
-      <h2 class="o-title">{{ item.nameCategory }}</h2>
-      <ion-skeleton-text [animated]="true" style="width: 100%; height: 21px"></ion-skeleton-text>
+    <ng-template #productsNullT>
 
-      <ion-slides class="c-product-slide" [options]="slideOpts">
-        <ion-slide class="c-product-slides" *ngFor="let product of item.product">
-  
-          <app-product [productObject]="product"></app-product>
-  
-        </ion-slide>
-      </ion-slides>
-    </div> -->
+      <figure class="o-message">
+        <img class="o-img" src="assets/image/favorites_null.png" alt="">
+        <figcaption class="o-message__caption">No hay productos en esta categoría</figcaption>
+      </figure>
+
+    </ng-template>
 
   </div>
 </section>
