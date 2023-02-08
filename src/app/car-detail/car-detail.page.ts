@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { HeaderBackComponent } from '../components/layout/header-back/header-back.component';
 import { LoginService } from '../services/login.service';
 import { OrderService } from '../services/order.service';
@@ -52,7 +52,8 @@ export class CarDetailPage implements OnInit {
     public loginService: LoginService,
     public shopingService: ShopingCarService,
     public orderService: OrderService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    public navController: NavController
   ) { }
 
   ngOnInit() {
@@ -105,18 +106,22 @@ export class CarDetailPage implements OnInit {
   }
 
   public showPaymentStep() {
-    this.groupAddres = false;
-    this.groupPago = true
 
-    const step = document.querySelector(".c-steps")
-    const childrenStep = step.querySelector(".is-current")
+    this.navController.navigateForward("/tabs/poll").then(() => {
+      this.groupAddres = false;
+      this.groupPago = true
 
-    if (childrenStep) {
-      childrenStep.classList.remove("is-current")
-      childrenStep.classList.add("is-checked")
+      const step = document.querySelector(".c-steps")
+      const childrenStep = step.querySelector(".is-current")
 
-      childrenStep.nextElementSibling.classList.add("is-current")
-    }
+      if (childrenStep) {
+        childrenStep.classList.remove("is-current")
+        childrenStep.classList.add("is-checked")
+
+        childrenStep.nextElementSibling.classList.add("is-current")
+        console.log("YA CUANDO LLEGUES DEBE CAMBIAR")
+      }
+    })
   }
 
   public showConfirmOrder() {

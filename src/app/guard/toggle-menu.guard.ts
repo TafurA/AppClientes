@@ -23,6 +23,8 @@ export class ToggleMenuGuard implements CanActivate {
         window.location.pathname.includes("order-detail") ||
         window.location.pathname.includes("order-history") ||
         window.location.pathname.includes("favorite") ||
+        window.location.pathname.includes("poll") ||
+        window.location.pathname.includes("register") ||
         window.location.pathname.includes("car")
       ) {
         document.querySelector("app-header").classList.add("test")
