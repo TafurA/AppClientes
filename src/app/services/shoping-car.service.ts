@@ -207,7 +207,6 @@ export class ShopingCarService {
   }
 
   public updateProductQuantity(codeProduct, action, themeage) {
-    console.log("en el udateeeeeeeeEEEEE")
     const storageCarProducts = JSON.parse(localStorage.productsCar)
     const newDataCarProducts = JSON.parse(localStorage.productsCar)
 
@@ -226,7 +225,6 @@ export class ShopingCarService {
           newDataCarProducts.push(element)
 
           if (themeage == "detail") {
-            console.log("tiene que ser detail")
             this.changeCurrentValueQuantityProductDetail(element.quantityProduct)
           } else {
             this.changeCurrentValueQuantityProduct(element.quantityProduct)
@@ -356,17 +354,9 @@ export class ShopingCarService {
   }
 
   public async getClientCashback(userCredential) {
-    // await axios.get(`${environment.apiPath}/accumulatedMoney?codigo=${userCredential}`, environment.headerConfig).then(response => {
 
-    //   for (let index = 0; index < response.data.data.length; index++) {
-    //     const element = response.data.data[index];
-    //     this.arrayDataCashback[index] = element
-    //   }
-
-    // })
     await this.http.get(`${environment.url}${environment.apiPath}/accumulatedMoney?codigo=${userCredential}`, "", environment.headers)
       .then(data => {
-        console.log(data)
         const dataObjTemp = JSON.parse(data.data)
         for (let index = 0; index < dataObjTemp.data.length; index++) {
           const element = dataObjTemp.data[index];
@@ -380,14 +370,7 @@ export class ShopingCarService {
   }
 
   public async getClientSeller(userSeller) {
-    // await axios.get(`${environment.apiPath}/GetSeller?code=${userSeller}`, environment.headerConfig).then(response => {
 
-    //   for (let index = 0; index < response.data.data.length; index++) {
-    //     const element = response.data.data[index];
-    //     this.arrayDataSeller[index] = element
-    //   }
-
-    // })
     await this.http.get(`${environment.url}${environment.apiPath}GetSeller?code=${userSeller}`, "", environment.headers)
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
@@ -430,14 +413,6 @@ export class ShopingCarService {
   }
 
   public async sendOrder() {
-    // await axios.get(`${environment.apiPath}/sendOrder?idOrder=${this.getArrayOfOrder()}`, environment.headerConfig).then(response => {
-    //   if (response.data.response) {
-    //     this.idOrderCurrent = response.data.idpedido
-    //   } else {
-    //     console.log("ERROR CREANDO LA ORDEN")
-    //     console.log(response)
-    //   }
-    // })
 
     await this.http.get(`${environment.url}${environment.apiPath}sendOrder?idOrder=${this.getArrayOfOrder()}`, "", environment.headers)
       .then(data => {
@@ -471,7 +446,6 @@ export class ShopingCarService {
     }
 
     if (action == "null") {
-      console.log("ES ESTEEE")
       alertProduct.classList.remove("is-show")
 
     } else if (action == "informative") {
