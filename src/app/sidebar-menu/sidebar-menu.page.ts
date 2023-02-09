@@ -46,6 +46,10 @@ export class SidebarMenuPage implements OnInit {
   setUserData() {
     this.userName = `${this.loginService.validateSession()['nomcli_b']} ${this.loginService.validateSession()['ape1cli_b']}`
     this.userCashback = `${this.loginService.validateSession()['valor_acomulado']}`
+
+    if (this.userCashback == "0.00") {
+      this.userCashback = "0"
+    }
   }
 
   logOut() {

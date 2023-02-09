@@ -48,15 +48,14 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    if (
-      localStorage.getItem("AddressList") != null) {
-      this.listOfAddress()
-    } else {
-      console.log("ES NULL O DEFAULT NO DEBERIA HACER MAS")
-    }
+    setTimeout(() => {
+      console.log("1")
+      if (
+        localStorage.getItem("AddressList") != null) {
+        this.listOfAddress()
+      }
+    }, 1000)
   }
-
-
 
   public listOfAddress() {
     const alert = document.querySelector(".js-alert-address")
@@ -64,17 +63,20 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       document.querySelector(".c-header").classList.add("opacity-2")
       document.querySelector("ion-tab-bar").classList.add("test")
+      console.log("2")
     }, 1000)
 
     setTimeout(() => {
       alert.classList.add("is-show")
       const dataList = JSON.parse(localStorage.getItem("AddressList"))
       this.listAddress = dataList
+      console.log("3")
     }, 2000)
 
 
     setTimeout(() => {
       this.validateAddressCode()
+      console.log("4")
     }, 3000);
   }
 

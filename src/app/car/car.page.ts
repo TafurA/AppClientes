@@ -29,9 +29,9 @@ export class CarPage implements OnInit {
   public sellerReferenceId = 0
   public arraySeller = new Array()
   public disabled = true;
+  public loaded = false;
 
   public isCashbackProduct = false
-
 
 
   constructor(
@@ -43,7 +43,11 @@ export class CarPage implements OnInit {
 
   ngOnInit() {
     this.refresh$.subscribe(() => {
-      this.setProductsIntoArray()
+      this.setProductsIntoArray().finally(() => {
+        // setTimeout(() => {
+        this.loaded = true;
+        // }, 1000)
+      })
       this.getPriceTotalProducts()
       this.getPriceProcess()
     })
@@ -68,10 +72,10 @@ export class CarPage implements OnInit {
     return JSON.parse(window.localStorage.getItem("productsCar"))
   }
 
-  public setProductsIntoArray() {
+  public async setProductsIntoArray() {
     this.arrayProducts = []
 
-    this.getCarLocalStorage().forEach(product => {
+    await this.getCarLocalStorage().forEach(product => {
       this.arrayProducts.push(product)
       this.productWithCashback(product)
       this.productWithDiscount(product)

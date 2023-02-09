@@ -9,205 +9,217 @@
       <h1 class="o-title">Mi carrito ({{ currentProductsCarNumber() }})</h1>
     </header>
 
-    <div class="c-product-list">
+    <div *ngIf="!loaded;else car">
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 74px; margin-bottom:8px"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 74px; margin-bottom:24px"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 32px; margin-bottom:8px"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 32px; margin-bottom:8px"></ion-skeleton-text>
+      <ion-skeleton-text [animated]="true" style="width: 100%; height: 32px; margin-bottom:8px"></ion-skeleton-text>
+    </div>
 
-      <article *ngFor="let productObject of arrayProducts">
+    <ng-template #car>
 
-        <div class="c-product-car">
+      <div class="c-product-list">
 
-          <!-- Image and title -->
-          <figure class="c-product__figure">
-
-            <img
-            src="{{ productObject.imgProduct }}" alt="" class="c-product__img" *ngIf="productObject.imgProduct != 'http://intranet.surtilider.com:9090/IntranetSurti/Temp/fotosApp/producto-sin-imagen.jpg';else productImageNull">
-
-            <!-- Only for products without image -->
-            <ng-template #productImageNull>
-              <img src="{{ productObject.imgProduct }}" alt="" class="c-product__img c-product__img_null">
-            </ng-template>
-
-          </figure>
-
-          <div>
-            <h3 class="c-product__title" *ngIf="productObject.nameProduct != null">
-              {{ productObject.nameProduct }}
-            </h3>
-
-            <!-- Value and discount -->
+        <article *ngFor="let productObject of arrayProducts">
+  
+          <div class="c-product-car">
+  
+            <!-- Image and title -->
+            <figure class="c-product__figure">
+  
+              <img
+              src="{{ productObject.imgProduct }}" alt="" class="c-product__img" *ngIf="productObject.imgProduct != 'http://intranet.surtilider.com:9090/IntranetSurti/Temp/fotosApp/producto-sin-imagen.jpg';else productImageNull">
+  
+              <!-- Only for products without image -->
+              <ng-template #productImageNull>
+                <img src="{{ productObject.imgProduct }}" alt="" class="c-product__img c-product__img_null">
+              </ng-template>
+  
+            </figure>
+  
             <div>
-
-              <div
-                class="c-product__ico c-product__ico_discount i-star"
-                [ngClass]="{'test': !productObject.isOffert, '': productObject.isOffert}"
-              >
-                <span class="c-product__ico_discount-txt">{{ productObject.porcDescuento }}%</span>
-                <span class="c-product__ico-txt">${{ productObject.precioSinDcto }}</span>
-              </div>
-
-              <div [ngClass]="{'test': !productObject.isCashback, '': productObject.isCashback}">
+              <h3 class="c-product__title" *ngIf="productObject.nameProduct != null">
+                {{ productObject.nameProduct }}
+              </h3>
+  
+              <!-- Value and discount -->
+              <div>
+  
                 <div
-                  class="c-product__ico c-product__ico_cash i-cash"
+                  class="c-product__ico c-product__ico_discount i-star"
+                  [ngClass]="{'test': !productObject.isOffert, '': productObject.isOffert}"
                 >
-                  <span class="c-product__ico-txt">Recibe cashback</span>
+                  <span class="c-product__ico_discount-txt">{{ productObject.porcDescuento }}%</span>
+                  <span class="c-product__ico-txt">${{ productObject.precioSinDcto }}</span>
                 </div>
+  
+                <div [ngClass]="{'test': !productObject.isCashback, '': productObject.isCashback}">
+                  <div
+                    class="c-product__ico c-product__ico_cash i-cash"
+                  >
+                    <span class="c-product__ico-txt">Recibe cashback</span>
+                  </div>
+                </div>
+  
+                <span class="c-product__amount">
+                  ${{ productObject.price }}
+  
+                  <p class="c-product-horizontal__amount-wrap">
+                    Cantidad:
+                    <span class="c-product-horizontal__amount">
+                      {{ productObject.quantityProduct }}
+                    </span>
+                  </p>
+                </span>
+  
+  
+                <!-- <div class="c-product__ico c-product__ico_cash i-cash">
+                                          <span class="c-product__ico-txt">Recibe cashback</span>
+                                        </div> -->
+  
               </div>
-
-              <span class="c-product__amount">
-                ${{ productObject.price }}
-
-                <p class="c-product-horizontal__amount-wrap">
-                  Cantidad:
-                  <span class="c-product-horizontal__amount">
-                    {{ productObject.quantityProduct }}
-                  </span>
-                </p>
-              </span>
-
-
-              <!-- <div class="c-product__ico c-product__ico_cash i-cash">
-                                        <span class="c-product__ico-txt">Recibe cashback</span>
-                                      </div> -->
-
             </div>
+  
+            <!-- Call to action -->
+            <footer>
+              <button
+                class="c-product-car__action i-pencil"
+                [routerLink]="['/tabs/detail-product', productObject.productCode]"
+              ></button>
+              <button
+                (click)="removeProductIntoCar(productObject.productCode)"
+                class="c-product-car__action i-trash"
+              ></button>
+            </footer>
+  
           </div>
-
-          <!-- Call to action -->
-          <footer>
-            <button
-              class="c-product-car__action i-pencil"
-              [routerLink]="['/tabs/detail-product', productObject.productCode]"
-            ></button>
-            <button
-              (click)="removeProductIntoCar(productObject.productCode)"
-              class="c-product-car__action i-trash"
-            ></button>
-          </footer>
-
-        </div>
-
-      </article>
-
-    </div>
-
-    <div class="c-cashback-box js-car-dropdown">
-
-      <header class="c-cashback-box__header" (click)="toggleDropdown($event)">
-        <h4 class="c-cashback-box__title i-cash">Descuento por cashback</h4>
-        <button
-          class="o-link o-link_secondary i-after-arrow-down"
-        >
-          Aplicar
-        </button>
-      </header>
-
-      <ul class="c-cashback__list">
-
-        <div *ngFor="let cashback of arrayCashback" class="o-ticket-wrap" (click)="selectCashback(cashback)">
-          <input type="radio" id="{{ cashback.referencia }}" name="cashback" value="{{ cashback.referencia }}">
-
-          <label class="o-ticket" for="{{ cashback.referencia }}">
   
-            <p class="o-ticket__title">Fecha pedido:  <strong>{{ cashback.fecha }}</strong></p>
-            <p>
-              <span class="o-ticket__price">${{ cashback.dinero }}</span>
-              <span class="o-ticket__price-value">COP</span>
-            </p>
-            <span class="o-ticket__txt">Disponible</span>
+        </article>
   
-          </label>
-        </div>
-
-      </ul>
-
-    </div>
-
-    <div class="c-cashback-box js-car-dropdown js-car-dropdown-seller">
-
-      <header class="c-cashback-box__header" (click)="toggleDropdown($event)">
-        <h4 class="c-cashback-box__title i-user">¿Te ayudo algún vendedor?</h4>
-        <button
-          class="o-link o-link_secondary i-after-arrow-down"
-        >
-          Añadir
-        </button>
-      </header>
-
-      <ul class="c-cashback__list">
-
-        <div *ngFor="let seller of arraySeller" class="o-ticket-wrap" (click)="selectSeller(seller)">
-          <input type="radio" id="{{ seller.codigoVen }}" name="seller" value="{{ seller.codigoVen }}">
-
-          <label class="o-ticket" for="{{ seller.codigoVen }}">
-  
-            <p class="o-ticket__title">Nombre:</p>
-            <p>
-              <span class="o-ticket__price">{{ seller.vendedor }}</span>
-            </p>
-  
-          </label>
-        </div>
-
-      </ul>
-
-    </div>
-
-    <div class="c-cashback-box"  [ngClass]="{'test': !isSellerApply, '': isSellerApply}">
-
-      <header class="c-cashback-box__header">
-        <h4 class="c-cashback-box__title">Nombre vendedor</h4>
-
-        <strong class="c-cashback-box__name">{{ sellerReference }}</strong>
-      </header> 
-
-    </div>
-
-    <div class="c-cashback-box"  [ngClass]="{'test': !isCashbackApply, '': isCashbackApply}">
-
-      <header class="c-cashback-box__header c-cashback-box__header_cash">
-        <h4 class="c-cashback-box__title">Descuento cashback</h4>
-
-        <strong class="c-cashback-box__price">$ - {{ totalCashback }} COP</strong>
-      </header> 
-
-    </div>
-
-    <div class="c-cashback-box" [ngClass]="{'test': !isCashbackApply, '': isCashbackApply}">
-
-      <header class="c-cashback-box__header">
-        <h4 class="c-cashback-box__title">Subtotal</h4>
-
-        <strong class="c-cashback-box__price">$ {{ subtotalProductPrice }} COP</strong>
-      </header> 
-
-    </div>
-
-    <div class="c-cashback-box">
-
-      <header class="c-cashback-box__header">
-        <h4 class="c-cashback-box__title">Total</h4>
-
-        <strong class="c-cashback-box__price">$ {{ totalProductPriceProcess }} COP</strong>
-      </header>
-
-      <div class="o-cashback-bigger" [ngClass]="{'test': isTotalCompra, '': !isTotalCompra}">
-        <header class="o-cashback-bigger__header i-cash">
-          <div>
-            <h3 class="o-cashback-bigger__title">Minimo de compra:</h3>
-            <p class="o-cashback-bigger__text">El minimo de compra es de $30.000 COP.</p>
-          </div>
-        </header>
       </div>
+  
+      <div class="c-cashback-box js-car-dropdown">
+  
+        <header class="c-cashback-box__header" (click)="toggleDropdown($event)">
+          <h4 class="c-cashback-box__title i-cash">Descuento por cashback</h4>
+          <button
+            class="o-link o-link_secondary i-after-arrow-down"
+          >
+            Aplicar
+          </button>
+        </header>
+  
+        <ul class="c-cashback__list">
+  
+          <div *ngFor="let cashback of arrayCashback" class="o-ticket-wrap" (click)="selectCashback(cashback)">
+            <input type="radio" id="{{ cashback.referencia }}" name="cashback" value="{{ cashback.referencia }}">
+  
+            <label class="o-ticket" for="{{ cashback.referencia }}">
+    
+              <p class="o-ticket__title">Fecha pedido:  <strong>{{ cashback.fecha }}</strong></p>
+              <p>
+                <span class="o-ticket__price">${{ cashback.dinero }}</span>
+                <span class="o-ticket__price-value">COP</span>
+              </p>
+              <span class="o-ticket__txt">Disponible</span>
+    
+            </label>
+          </div>
+  
+        </ul>
+  
+      </div>
+  
+      <div class="c-cashback-box js-car-dropdown js-car-dropdown-seller">
+  
+        <header class="c-cashback-box__header" (click)="toggleDropdown($event)">
+          <h4 class="c-cashback-box__title i-user">¿Te ayudo algún vendedor?</h4>
+          <button
+            class="o-link o-link_secondary i-after-arrow-down"
+          >
+            Añadir
+          </button>
+        </header>
+  
+        <ul class="c-cashback__list">
+  
+          <div *ngFor="let seller of arraySeller" class="o-ticket-wrap" (click)="selectSeller(seller)">
+            <input type="radio" id="{{ seller.codigoVen }}" name="seller" value="{{ seller.codigoVen }}">
+  
+            <label class="o-ticket" for="{{ seller.codigoVen }}">
+    
+              <p class="o-ticket__title">Nombre:</p>
+              <p>
+                <span class="o-ticket__price">{{ seller.vendedor }}</span>
+              </p>
+    
+            </label>
+          </div>
+  
+        </ul>
+  
+      </div>
+  
+      <div class="c-cashback-box"  [ngClass]="{'test': !isSellerApply, '': isSellerApply}">
+  
+        <header class="c-cashback-box__header">
+          <h4 class="c-cashback-box__title">Nombre vendedor</h4>
+  
+          <strong class="c-cashback-box__name">{{ sellerReference }}</strong>
+        </header> 
+  
+      </div>
+  
+      <div class="c-cashback-box"  [ngClass]="{'test': !isCashbackApply, '': isCashbackApply}">
+  
+        <header class="c-cashback-box__header c-cashback-box__header_cash">
+          <h4 class="c-cashback-box__title">Descuento cashback</h4>
+  
+          <strong class="c-cashback-box__price">$ - {{ totalCashback }} COP</strong>
+        </header> 
+  
+      </div>
+  
+      <div class="c-cashback-box" [ngClass]="{'test': !isCashbackApply, '': isCashbackApply}">
+  
+        <header class="c-cashback-box__header">
+          <h4 class="c-cashback-box__title">Subtotal</h4>
+  
+          <strong class="c-cashback-box__price">$ {{ subtotalProductPrice }} COP</strong>
+        </header> 
+  
+      </div>
+  
+      <div class="c-cashback-box">
+  
+        <header class="c-cashback-box__header">
+          <h4 class="c-cashback-box__title">Total</h4>
+  
+          <strong class="c-cashback-box__price">$ {{ totalProductPriceProcess }} COP</strong>
+        </header>
+  
+        <div class="o-cashback-bigger" [ngClass]="{'test': isTotalCompra, '': !isTotalCompra}">
+          <header class="o-cashback-bigger__header i-cash">
+            <div>
+              <h3 class="o-cashback-bigger__title">Minimo de compra:</h3>
+              <p class="o-cashback-bigger__text">El minimo de compra es de $30.000 COP.</p>
+            </div>
+          </header>
+        </div>
+  
+      </div>
+  
+      <button
+        class="c-cashback-box__btn o-button"
+        (click)="saveOrderIntoLocalStorage()"
+        [disabled]='disabled'
+        [ngClass]="{'test': !isTotalCompra, '': isTotalCompra}"
+      >
+        Continuar
+      </button>
 
-    </div>
-
-    <button
-      class="c-cashback-box__btn o-button"
-      (click)="saveOrderIntoLocalStorage()"
-      [disabled]='disabled'
-      [ngClass]="{'test': !isTotalCompra, '': isTotalCompra}"
-    >
-      Continuar
-    </button>
+    </ng-template>
 
   </div>
 
