@@ -44,13 +44,12 @@ export class CarPage implements OnInit {
   ngOnInit() {
     this.refresh$.subscribe(() => {
       this.setProductsIntoArray().finally(() => {
-        // setTimeout(() => {
         this.loaded = true;
-        // }, 1000)
       })
-      this.getPriceTotalProducts()
-      this.getPriceProcess()
     })
+
+    this.getPriceProcess()
+    this.getPriceTotalProducts()
 
     this.shopingService.getClientCashback(this.loginService.getUserCode()).then(() => {
       this.arrayCashback = this.shopingService.arrayDataCashback
@@ -102,16 +101,20 @@ export class CarPage implements OnInit {
     this.presentAlert().finally(() => {
 
       if (this.isRemoved) {
+
         localStorage.setItem("productsCar", JSON.stringify(updatedCarProduct))
         this.arrayProducts = updatedCarProduct
 
         this.totalProductPrice = 0
-        this.getPriceTotalProducts()
+
+        this.getPriceTotalProductsRemove()
 
         if (this.currentProductsCarNumber() == 0) {
           localStorage.removeItem("productsCar")
           this.totalProductPriceProcess = 0
+          this.subtotalProductPrice = 0
         }
+
       }
 
     })
@@ -127,12 +130,50 @@ export class CarPage implements OnInit {
   }
 
   public getPriceTotalProducts() {
+
     this.totalProductPrice = 0
-    this.getCarLocalStorage().forEach(product => {
-      const productQuantity = parseFloat(product.price) * product.quantityProduct
-      this.totalProductPrice = this.totalProductPrice + productQuantity
-      this.getPriceProcess()
-    });
+
+    if (this.getCarLocalStorage()) {
+      this.getCarLocalStorage().forEach(product => {
+        const productQuantity = parseFloat(product.price) * product.quantityProduct
+        this.totalProductPrice = this.totalProductPrice + productQuantity
+        this.getPriceProcess()
+      });
+    } else {
+      this.nvCtrl.navigateForward("/tabs/home")
+    }
+
+  }
+
+  public getPriceTotalProductsRemove() {
+    setTimeout(() => {
+      if (this.getCarLocalStorage()) {
+        this.subtotalProductPrice = 0
+
+        this.getCarLocalStorage().forEach(product => {
+          const productQuantity = parseFloat(product.price) * product.quantityProduct
+
+          this.subtotalProductPrice = this.subtotalProductPrice + productQuantity
+
+          if (this.isCashbackApply) {
+            this.totalProductPrice = this.subtotalProductPrice - this.totalCashback
+          } else {
+            this.totalProductPrice = this.subtotalProductPrice
+          }
+
+        });
+
+        this.subtotalProductPrice = parseFloat(this.subtotalProductPrice).toFixed(3)
+        this.getPriceProcess()
+      } else {
+        this.nvCtrl.navigateForward("/tabs/home").then(() => {
+          document.querySelector(".js-ico-car").classList.add("test")
+          document.querySelector(".js-search-header").classList.add("is-none-car")
+
+          document.querySelector(".js-number-card-product-card").innerHTML = "1"
+        })
+      }
+    }, 400)
   }
 
   public selectCashback(cashbackObject) {

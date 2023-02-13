@@ -59,7 +59,7 @@ export class CarDetailPage implements OnInit {
   ngOnInit() {
     this.addressData.userCurrent = this.loginService.validateSession()['nomcli_b'] + " " + this.loginService.validateSession()['ape1cli_b']
 
-    if (localStorage.getItem("AddressList") != "default") {
+    if (localStorage.getItem("AddressList") != "null") {
       // this.addressData.address = "AJAJ sisi"
       this.validateCurrentAddress()
     } else {

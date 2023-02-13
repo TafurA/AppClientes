@@ -1,12 +1,5 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-
-import {
-  ActionPerformed,
-  PushNotificationSchema,
-  PushNotifications,
-  Token,
-} from '@capacitor/push-notifications';
 
 import { LoginService } from '../services/login.service';
 import { BannerService } from '../services/banner.service';
@@ -49,9 +42,8 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      console.log("1")
       if (
-        localStorage.getItem("AddressList") != null) {
+        localStorage.getItem("AddressList") != "null") {
         this.listOfAddress()
       }
     }, 1000)

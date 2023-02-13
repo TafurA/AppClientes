@@ -36,7 +36,6 @@ export class LoginService {
 
           console.log("dataLoginTemp")
           // Address
-          console.log(dataLoginTemp.data)
           if (dataLoginTemp.data.length > 1) {
             const listAddress = []
 
@@ -72,14 +71,8 @@ export class LoginService {
     const obj = []
 
     let jsonUserData = JSON.parse(encodeString)
-    let objectEntries = Object.entries(jsonUserData.fields)
 
-    for (let [key, value] of objectEntries) {
-      obj[key] = String(value)
-    }
-
-    console.log("RIMERO ESTEEEEE", obj['codcli_b'])
-    localStorage.setItem("codeUserAddress", obj['codcli_b']);
+    localStorage.setItem("codeUserAddress", jsonUserData[0]);
   }
 
   getUserCode() {
@@ -98,16 +91,9 @@ export class LoginService {
 
   validateSession() {
     if (this.sessionGuard.canActivate()) {
-      const encodeString = localStorage.userSessionData
+      const encodeString = JSON.parse(localStorage.userSessionData)
 
-      let jsonUserData = JSON.parse(encodeString)
-      let objectEntries = Object.entries(jsonUserData.fields)
-
-      for (let [key, value] of objectEntries) {
-        this.ProcessDataUserSession[key] = String(value)
-      }
-
-      return this.ProcessDataUserSession
+      return encodeString
     } else {
       return this.sessionGuard.canActivate();
     }
