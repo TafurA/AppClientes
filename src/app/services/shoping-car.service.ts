@@ -194,6 +194,21 @@ export class ShopingCarService {
     })
   }
 
+  public async getMinimoCompra(bodegaId) {
+    await this.http.get(`https://intranet.surtilider.com:9001/IntranetSurti/WebServicesSurtiAppRest/GetValidation?bodega=${bodegaId}`, "", environment.headers)
+      .then(data => {
+        console.log("data-data")
+        console.log(data)
+        const dataTem = JSON.parse(data.data)
+        console.log(dataTem)
+        localStorage.setItem("MinimoCompra", dataTem.data.minimo_compra)
+      })
+      .catch(error => {
+        console.log("error getMaximoCompra");
+        console.log(error);
+      });
+  }
+
   public removeProductQuantity(codeProduct) {
     this.updateProductQuantity(codeProduct, "rest", "general")
 

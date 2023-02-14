@@ -30,6 +30,7 @@ export class CarPage implements OnInit {
   public arraySeller = new Array()
   public disabled = true;
   public loaded = false;
+  public minimoComra: any
 
   public isCashbackProduct = false
 
@@ -48,14 +49,20 @@ export class CarPage implements OnInit {
       })
     })
 
-    this.getPriceProcess()
-    this.getPriceTotalProducts()
 
     this.shopingService.getClientCashback(this.loginService.getUserCode()).then(() => {
       this.arrayCashback = this.shopingService.arrayDataCashback
     })
+
     this.shopingService.getClientSeller(this.loginService.getUserCode()).then(() => {
       this.arraySeller = this.shopingService.arrayDataSeller
+    })
+
+    this.shopingService.getMinimoCompra(this.loginService.validateSession()['bodcli_b']).then(() => {
+      this.minimoComra = parseFloat(localStorage.getItem("MinimoCompra")).toFixed(3)
+    }).finally(() => {
+      this.getPriceTotalProducts()
+      this.getPriceProcess()
     })
 
     setInterval(() => {
@@ -201,7 +208,11 @@ export class CarPage implements OnInit {
 
   public getPriceProcess(): any {
     this.totalProductPriceProcess = parseFloat(this.totalProductPrice).toFixed(3)
-    if (this.totalProductPriceProcess > 30.000) {
+
+    console.log("ORFAVOOOR")
+    console.log(this.minimoComra)
+
+    if (this.totalProductPriceProcess > this.minimoComra) {
       this.isTotalCompra = true
     } else {
       this.isTotalCompra = false
