@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -18,9 +18,6 @@ import { CredentialsValidator } from '../util/update-credentials-validator';
 export class UpdateCredentialsPage implements OnInit {
 
   public UpdateCredentialsForm: FormGroup;
-  public passwordTypeInput  =  'password';
-  public passwordInput  =  'password';
-  public passwordCurrentInput  =  'password';
   public codcli_b !: string;
 
   constructor(
@@ -70,31 +67,30 @@ export class UpdateCredentialsPage implements OnInit {
     public getError(controlName: any) {
       return this.credentialsValidator.getError(controlName, this.UpdateCredentialsForm);
     }
-    //ocultar/mostrar password
-    @ViewChild('passwordEyeRegister', { read: ElementRef }) passwordEye: ElementRef;
-    @ViewChild('passwordEye1', { read: ElementRef }) password: ElementRef;
-    @ViewChild('passwordEye2', { read: ElementRef }) passwordCurrent: ElementRef; 
-    togglePasswordMode() {
-    this.passwordTypeInput = this.passwordTypeInput === 'text' ? 'password' : 'text';
-    }
-    togglePassword() {
-      this.passwordInput = this.passwordInput === 'text' ? 'password' : 'text';
-    }
-    togglePasswordCurrent(){
-      this.passwordCurrentInput = this.passwordCurrentInput === 'text' ? 'password' : 'text';
-    }
+
+    passwordChange(e) {
+      const inputToChange = e.target.closest(".o-form__field-wrap").querySelector("input")
+      if (e.target.classList.contains("i-eye")) {
+        e.target.classList.remove("i-eye")
+        e.target.classList.add("i-eye-lock")
+        inputToChange.setAttribute("type", "text")
+      } else {
+        e.target.classList.add("i-eye")
+        e.target.classList.remove("i-eye-lock")
+        inputToChange.setAttribute("type", "password")
+      }
   
-    // borrar
+      console.log("e.target")
+      console.log(e.target)
+  
+    }
+
     setUserData() {
       console.log(`${this.loginService.validateSession()['nitcli_b']}`);
     }
     public ConfirmPassword(){
       const dataForm= this.UpdateCredentialsForm.value;
       this.codcli_b=`${this.loginService.validateSession()['nitcli_b']}`
-      // console.log(this.codcli_b);
-      // console.log(dataForm.passCurrent);
-      // console.log(dataForm.PasswordNew);
-      // console.log(dataForm.validNewPassword);
       this.updateCredentialsService.UpdatecredentialsCustomer(this.codcli_b,dataForm.passCurrent,dataForm.PasswordNew)
   
     }

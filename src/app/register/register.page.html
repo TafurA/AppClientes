@@ -239,35 +239,33 @@
 
         <div class="o-form__field">
           <div class="o-form__field-wrap">
-            <ion-select 
-            interface="popover"
-              id="barrio"
-              class="o-form__input"
-              type="text"
-              placeholder="barrio"
-              formControlName="barrio"
+            <select 
+            id="barrio"
+            class="o-form__input"
+            type="text"
+            formControlName="barrio"
             >
-            <ion-select-option *ngFor="let datos of listBarrios" value="{{datos.desbar_b}}" >
+            <option value="" >Barrio</option>
+            <option *ngFor="let datos of listBarrios" value="{{datos.desbar_b}}" >
               {{datos.desbar_b}}
-            </ion-select-option>
-          </ion-select>
-          </div>
-           <span class="o-form__error">{{ getError('barrio')}}</span> 
+            </option>
+          </select>
+        </div>
+        <span class="o-form__error">{{ getError('barrio')}}</span> 
         </div>
         <div class="o-form__field">
           <div class="o-form__field-wrap">
             
-            <ion-select 
-              interface="popover"
+            <select 
               id="municipio"
               class="o-form__input"
-              placeholder="municipio"
               formControlName="municipio"
             >
-              <ion-select-option *ngFor="let datos of dataMunicipios" value="{{datos.nombre}}" >
+            <option  value="" >Municipio</option>
+              <option *ngFor="let datos of dataMunicipios" value="{{datos.nombre}}" >
                 {{datos.nombre}}
-              </ion-select-option>
-            </ion-select>
+              </option>
+            </select>
           </div>
            <span class="o-form__error">{{ getError('municipio')}}</span> 
         </div>

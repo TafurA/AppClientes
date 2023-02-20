@@ -29,19 +29,15 @@ export class LoginPage implements OnInit {
 
   private buildLoginForm() {
     const minPassLength = 4;
+    const soloNumeros ="^[0-9]*$";
     this.loginForm = this.formBuilder.group({
-      user: ['', Validators.required],
+      user: ['', [Validators.required,Validators.pattern(soloNumeros)]],
       password: ['', [
         Validators.required,
         Validators.minLength(minPassLength),
-        // this.customValidator.validatePassword
       ]]
-      // email: ['john@angular.io', [
-      //   Validators.required, Validators.email
-      // ]],
     });
   }
-
   public getError(controlName: any) {
     return this.customValidator.getError(controlName, this.loginForm);
   }

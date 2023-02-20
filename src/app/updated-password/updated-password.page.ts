@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { CustomValidator } from 'src/app/util/custom-validator';
+import { CredentialsValidator } from 'src/app/util/update-credentials-validator';
 import { SecurityCodeComponent } from '../components/security-code/security-code.component';
 import { ForgotPasswordService } from '../services/forgot-password.service';
 
 @Component({
   selector: 'app-updated-password',
   templateUrl: './updated-password.page.html',
-  providers: [CustomValidator, ForgotPasswordService, SecurityCodeComponent]
+  providers: [CredentialsValidator, ForgotPasswordService, SecurityCodeComponent]
 })
 
 export class UpdatedPasswordPage implements OnInit {
@@ -17,7 +17,7 @@ export class UpdatedPasswordPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private customValidator: CustomValidator,
+    private credentialsValidator: CredentialsValidator,
     private forgotPasswordService: ForgotPasswordService,
     public securityCodeComponent: SecurityCodeComponent
   ) { }
@@ -42,13 +42,13 @@ export class UpdatedPasswordPage implements OnInit {
         ]]
       },
       {
-        validators: this.customValidator.validateMatchPassword
+        validators: this.credentialsValidator.validateMatchPasswordCredential
       }
     );
   }
 
   public getError(controlName: any) {
-    return this.customValidator.getError(controlName, this.updatedPasswordForm);
+    return this.credentialsValidator.getError(controlName, this.updatedPasswordForm);
   }
 
   // update password

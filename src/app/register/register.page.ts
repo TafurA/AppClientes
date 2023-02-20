@@ -246,7 +246,7 @@ export class RegisterPage implements OnInit {
       this.form1 = "1";
       this.form2 = "";
       this.form3 = "";
-      // this.RegisterService.presentAlert('Por favor Diligencie correctamente el formulario');
+      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
     }
     else {
       this.form1 = "";
@@ -260,12 +260,12 @@ export class RegisterPage implements OnInit {
       this.form1 = "1";
       this.form2 = "";
       this.form3 = "";
-      this.RegisterService.presentAlert('Por favor Diligencie correctamente el formulario');
+      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
     } else if (this.RegisterForm.controls['email'].invalid || this.RegisterForm.controls['telefono'].invalid) {
       this.form1 = "";
       this.form2 = "2";
       this.form3 = "";
-      this.RegisterService.presentAlert('Por favor Diligencie correctamente el formulario');
+      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
     } else {
       this.form1 = "";
       this.form2 = "";
@@ -398,7 +398,7 @@ export class RegisterPage implements OnInit {
         dataForm.municipio,
         dataForm.vendedor);
     } else {
-      this.RegisterService.presentAlert('Por favor Diligencie correctamente el formulario');
+      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
     }
   }
   //modal direccion
