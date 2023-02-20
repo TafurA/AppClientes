@@ -13,7 +13,7 @@ export class SplashPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       document.querySelector("body").classList.add("is-white")
-    }, 4000)
+    }, 5000)
 
 
     setTimeout(() => {

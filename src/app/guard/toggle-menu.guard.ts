@@ -25,7 +25,12 @@ export class ToggleMenuGuard implements CanActivate {
         window.location.pathname.includes("favorite") ||
         window.location.pathname.includes("poll") ||
         window.location.pathname.includes("register") ||
-        window.location.pathname.includes("car")
+        window.location.pathname.includes("car")||
+        window.location.pathname.includes("update-personal-data") ||
+        window.location.pathname.includes("update-credentials") ||
+        window.location.pathname.includes("updated-password") ||
+        window.location.pathname.includes("forgot-password")
+
       ) {
         document.querySelector("app-header").classList.add("test")
         document.querySelector("ion-tab-bar").classList.add("test")

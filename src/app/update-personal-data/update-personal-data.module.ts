@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { UpdatePersonalDataPageRoutingModule } from './update-personal-data-routing.module';
-
+import { HeaderBackComponent } from '../components/layout/header-back/header-back.component';
 import { UpdatePersonalDataPage } from './update-personal-data.page';
 
 @NgModule({
@@ -16,6 +16,6 @@ import { UpdatePersonalDataPage } from './update-personal-data.page';
     IonicModule,
     UpdatePersonalDataPageRoutingModule
   ],
-  declarations: [UpdatePersonalDataPage]
+  declarations: [UpdatePersonalDataPage,HeaderBackComponent]
 })
 export class UpdatePersonalDataPageModule {}

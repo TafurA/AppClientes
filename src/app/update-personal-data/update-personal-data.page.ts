@@ -6,11 +6,12 @@ import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { UpdatePersonalDataService } from '../services/update-personal-data.service';
 import { LoginService } from '../services/login.service';
 import { UpdatePersonalData } from '../util/update-personal-data-validator';
+import { HeaderBackComponent } from '../components/layout/header-back/header-back.component';
 @Component({
   selector: 'app-update-personal-data',
   templateUrl: './update-personal-data.page.html',
   styleUrls: ['./update-personal-data.page.scss'],
-  providers: [UpdatePersonalData,LoginService,UpdatePersonalDataService, HTTP]
+  providers: [UpdatePersonalData,LoginService,UpdatePersonalDataService, HTTP,HeaderBackComponent]
 })
 export class UpdatePersonalDataPage implements OnInit {
 

@@ -15,6 +15,7 @@ export class RegisterService {
   dataBarrios = [];
   dataDireccion = [];
   public nombre: string;
+  public alert;
   constructor(public nvCtrl: NavController, private alertController: AlertController, private http: HTTP) {
   }
 
@@ -118,11 +119,11 @@ export class RegisterService {
       const dataObjTemp = JSON.parse(data.data)
       if (dataObjTemp.response) {
 
-        this.presentAlertRegister("¡Exelente! Muy pronto nos estaremos comunicando con usted para asignarle sus credenciales.");
+        this.presentAlert("¡Exelente!"," Muy pronto nos estaremos comunicando con usted para asignarle sus credenciales.", "is-success");
         this.nvCtrl.navigateForward("/tabs/welcome");
       } else {
         console.log("no PASO")
-        this.presentAlert(dataObjTemp.message);
+        this.presentAlert("¡Error!", dataObjTemp.message, "is-error");
 
       }
 
@@ -133,43 +134,19 @@ export class RegisterService {
 
   }
 
-  async presentAlert(description: string) {
-    let imagen = "../assets/image/interaccion_Registro.png";
-    const alert = await this.alertController.create({
-
-      // header: ,
-      message: `<img src="${imagen}"><br>` + description,
-      cssClass: 'custom-alert',
-      buttons: [
-        {
-          text: 'Aceptar',
-          cssClass: 'alert-button-confirm',
-        },
-      ],
+  async presentAlert(title: string, description: string, alertType: string) {
+    this.alert = await this.alertController.create({
+      header: title,
+      subHeader: description,
+      cssClass: `c-alert ${alertType}`
+      // buttons: ['OK'],
     });
 
+    await this.alert.present();
 
-    await alert.present();
+    setTimeout(() => {
+      this.alert.dismiss()
+    }, 4000)
   }
-  async presentAlertRegister(description: string) {
-    let imagen = "../assets/image/interaccion_Register.png";
-    const alert = await this.alertController.create({
-
-      message: `<img src="${imagen}"><br>` + description,
-      cssClass: 'custom-alert',
-      buttons: [
-        {
-          text: 'Aceptar',
-          cssClass: 'alert-button-confirm',
-          handler: () => {
-            this.nvCtrl.navigateForward("/tabs/welcome")
-          },
-        },
-      ],
-    });
-    await alert.present();
-  }
-
-
 }
 

@@ -43,7 +43,7 @@ export class ForgotPasswordPage implements OnInit {
 
   private buildValidateCredentialForm() {
     this.validateCredentialForm = this.formBuilder.group({
-      credential: ['', [Validators.required,]],
+       credential: ['', [Validators.required,Validators.pattern("^[0-9]*$")]],
       code: ['', Validators.required],
       email: ['', Validators.required],
     });

@@ -14,7 +14,6 @@ import { UpdateCredentialsPage } from './update-credentials.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    HeaderBackComponent,
     UpdateCredentialsPageRoutingModule
   ],
   declarations: [UpdateCredentialsPage,HeaderBackComponent]
