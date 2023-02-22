@@ -76,6 +76,9 @@ export class OrderService {
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
 
+        console.log("DASDADASD")
+        console.log(dataObjTemp)
+
         const currentOrderDetail = {
           address: dataObjTemp.data[0].dircli_b,
           status: dataObjTemp.data[0].estped_b,

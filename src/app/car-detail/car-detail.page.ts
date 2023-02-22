@@ -45,6 +45,7 @@ export class CarDetailPage implements OnInit {
   public groupPago = false;
   public groupConfirm = false;
   productsCurrentOrderDetail: any;
+  public mensajeUno = "";
 
   public loader: any;
 
@@ -119,7 +120,6 @@ export class CarDetailPage implements OnInit {
         childrenStep.classList.add("is-checked")
 
         childrenStep.nextElementSibling.classList.add("is-current")
-        console.log("YA CUANDO LLEGUES DEBE CAMBIAR")
       }
     })
   }
@@ -148,8 +148,6 @@ export class CarDetailPage implements OnInit {
       this.getConfirmOrderDetail();
       this.getConfirmProductsOrderDetail();
     }).finally(() => {
-      console.log('TERMINADO');
-      console.log(this.order);
       this.showConfirmOrder();
       this.removeLoader();
     });
@@ -164,6 +162,8 @@ export class CarDetailPage implements OnInit {
       this.order.phone = this.orderService.arrayCurrentOrderDetial[0].phone;
       this.order.date = this.orderService.arrayCurrentOrderDetial[0].date;
       this.order.image = this.orderService.arrayCurrentOrderDetial[0].img_prod;
+    }).finally(() => {
+      this.mensajeUno = this.shopingService.msjOrder
     });
   }
 

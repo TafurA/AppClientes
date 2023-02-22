@@ -12,43 +12,60 @@
     </header>
 
     <!-- Status components -->
-    <!-- <div class="c-status">
+    <div class="c-status">
 
       <div class="c-status__current">
         <span class="c-status__ico i-check"></span>
         <header>
-          <p class="c-status__text">PEDIDO CONFIRMADO</p>
-          <span class="c-status__date">Viernes 26/08</span>
-          <p class="c-status__date">Envio a domicilio</p>
+          <div *ngIf="order.status == 'pedido'">
+            <p class="c-status__text">PEDIDO CONFIRMADO</p>
+            <p class="c-status__date">Estamos confirmando tu pedido</p>
+          </div>
+          <div *ngIf="order.status == 'factura'">
+            <p class="c-status__text">EN PREPARACIÓN</p>
+            <p class="c-status__date">Tu pedido ha sido confirmado</p>
+          </div>
+          <div *ngIf="order.status == 'cargado'">
+            <p class="c-status__text">EN DESPACHO</p>
+            <p class="c-status__date">Estamos alistando tu pedido</p>
+          </div>
+          <div *ngIf="order.status == 'despachado'">
+            <p class="c-status__text">EN REPARTO</p>
+            <p class="c-status__date">Tu pedido esta en proceso de entrega</p>
+          </div>
+          <div *ngIf="order.status == 'entregado'">
+            <p class="c-status__text">ENTREGADO</p>
+            <p class="c-status__date">Tu pedido ha sido entregado</p>
+          </div>
         </header>
       </div>
 
-      <ul class="c-status__list is-confirm">
+      <ul class="c-status__list is-{{ order.status }}">
         <li class="c-status__item">
           <span class="c-status__ico i-check"></span>
           <p class="c-status__text">CONFIRMADO</p>
-          <span class="c-status__date">Viernes 26/08</span>
         </li>
         <li class="c-status__item">
           <span class="c-status__ico i-check"></span>
           <p class="c-status__text">EN PREPARACIÓN</p>
-          <span class="c-status__date">-- / --</span>
+        </li>
+        <li class="c-status__item">
+          <span class="c-status__ico i-check"></span>
+          <p class="c-status__text">EN DESPACHO</p>
         </li>
         <li class="c-status__item">
           <span class="c-status__ico i-check"></span>
           <p class="c-status__text">EN REPARTO</p>
-          <span class="c-status__date">-- / --</span>
         </li>
         <li class="c-status__item">
           <span class="c-status__ico i-check"></span>
           <p class="c-status__text">ENTREGADO</p>
-          <span class="c-status__date">-- / --</span>
         </li>
       </ul>
 
       <button class="c-status__btn i-arrow-top" (click)="toggleDropdownProduct($event)"></button>
 
-    </div> -->
+    </div>
 
     <ul class="o-checkout">
 

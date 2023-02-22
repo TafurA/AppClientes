@@ -130,7 +130,7 @@
 
       <figure class="o-message o-message_confirm">
         <img class="o-message__img" src="assets/image/order_confirm.png" alt="">
-        <figcaption class="o-message__caption">¡Excelente! Hemos confirmado tu pedido con exito!</figcaption>
+        <figcaption class="o-message__caption">{{ mensajeUno }}</figcaption>
       </figure>
 
       <header class="o-subheadline">
@@ -231,7 +231,7 @@
       <!-- <button class="o-checkout__btn o-button o-button_secondary">Cancelar pedido</button> -->
       <button
         class="o-checkout__btn o-button"
-        [routerLink]="['/order-detail/', order.orderId]"
+        [routerLink]="['/tabs/order-detail/', order.orderId]"
       >
         Ver detalle
       </button>

@@ -31,12 +31,6 @@ export class HeaderBackComponent implements OnInit {
       } else {
         return this.navCtrl.back()
       }
-    } else {
-      if (window.location.pathname.includes("tabs/login")) {
-        this.navCtrl.navigateForward("/tabs/welcome")
-      } else {
-        this.navCtrl.navigateForward("/tabs/login")
-      }
-    }
+    } 
   }
 }

@@ -18,6 +18,7 @@ export class OrderDetailPage implements OnInit {
     customerName: "",
     address: "",
     phone: "",
+    status: "",
     date: "",
     image: ""
   };
@@ -36,10 +37,13 @@ export class OrderDetailPage implements OnInit {
       console.log("ANTES DE ENTRAR AL SERVICE")
       console.log(this.order.orderId)
       this.orderService.getDataUserOrderDetail(this.order.orderId).finally(() => {
+        console.log("DATOS QUE NECESITO")
+        console.log(this.orderService.arrayCurrentOrderDetial[0])
         this.order.orderId = this.orderService.arrayCurrentOrderDetial[0].orderId;
         this.order.totalValue = this.orderService.arrayCurrentOrderDetial[0].totalValue;
         this.order.customerName = this.orderService.arrayCurrentOrderDetial[0].name;
         this.order.address = this.orderService.arrayCurrentOrderDetial[0].address;
+        this.order.status = this.orderService.arrayCurrentOrderDetial[0].status;
         this.order.phone = this.orderService.arrayCurrentOrderDetial[0].phone;
         this.order.date = this.orderService.arrayCurrentOrderDetial[0].date;
         this.order.image = this.orderService.arrayCurrentOrderDetial[0].img_prod;
@@ -48,14 +52,12 @@ export class OrderDetailPage implements OnInit {
   }
 
   public async getOrderDetail() {
-    console.log("el puto param")
     await this.rutaActiva.params.subscribe(
       (params: Params) => {
         console.log(params)
         this.order.orderId = params.idPedido;
         this.orderService.getOrderDetail(this.order.orderId).finally(() => {
           this.productsCurrentOrderDetail = []
-          // this.productsCurrentOrderDetail = JSON.parse(localStorage.productsCurrentOrderDetail);
           const tem = JSON.parse(localStorage.productsCurrentOrderDetail)
 
           for (let index = 0; index < tem.length; index++) {
@@ -81,8 +83,6 @@ export class OrderDetailPage implements OnInit {
               this.productsCurrentOrderDetail.push(temproduct)
             });
           };
-          console.log("this.productsCurrentOrderDetail")
-          console.log(this.productsCurrentOrderDetail)
 
         });
       }

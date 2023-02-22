@@ -39,6 +39,7 @@ export class ShopingCarService {
   public arrayDataCashback = new Array()
   public arrayDataSeller = new Array()
   public idOrderCurrent: any;
+  msjOrder: any;
 
   constructor(public loginService: LoginService, private http: HTTP) { }
 
@@ -452,8 +453,11 @@ export class ShopingCarService {
     await this.http.get(`${environment.url}${environment.apiPath}sendOrder?idOrder=${this.getArrayOfOrder()}`, "", environment.headers)
       .then(data => {
 
-        if (data.data.response) {
-          this.idOrderCurrent = data.data.idpedido
+        const dataTem = JSON.parse(data.data)
+
+        if (dataTem.response) {
+          this.idOrderCurrent = dataTem.idpedido
+          this.msjOrder = dataTem.msj
         } else {
           console.log("ERROR CREANDO LA ORDEN")
           console.log(data)

@@ -65,16 +65,14 @@
     }
   }
 
-  .is-confirm & {
+  .is-pedido & {
     &:nth-child(1) {
-
       .c-status__ico {
         background-color: $c-success;
         &::before {
           color: $c-neutro;
         }
       }
-
       .c-status__text {
         color: $c-text;
       }
@@ -83,7 +81,92 @@
         border-left: 1px solid;
         padding-left: 16px;
       }
+    }
+  }
 
+  .is-factura & {
+    &:nth-child(1),
+    &:nth-child(2) {
+      .c-status__ico {
+        background-color: $c-success;
+        &::before {
+          color: $c-neutro;
+        }
+      }
+      .c-status__text {
+        color: $c-text;
+      }
+
+      .c-status__date {
+        border-left: 1px solid;
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .is-cargado & {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3) {
+      .c-status__ico {
+        background-color: $c-success;
+        &::before {
+          color: $c-neutro;
+        }
+      }
+      .c-status__text {
+        color: $c-text;
+      }
+
+      .c-status__date {
+        border-left: 1px solid;
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .is-despachado & {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4) {
+      .c-status__ico {
+        background-color: $c-success;
+        &::before {
+          color: $c-neutro;
+        }
+      }
+      .c-status__text {
+        color: $c-text;
+      }
+
+      .c-status__date {
+        border-left: 1px solid;
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .is-entregado & {
+    &:nth-child(1),
+    &:nth-child(2),
+    &:nth-child(3),
+    &:nth-child(4),
+    &:nth-child(5) {
+      .c-status__ico {
+        background-color: $c-success;
+        &::before {
+          color: $c-neutro;
+        }
+      }
+      .c-status__text {
+        color: $c-text;
+      }
+
+      .c-status__date {
+        border-left: 1px solid;
+        padding-left: 16px;
+      }
     }
   }
 }
