@@ -208,11 +208,11 @@ export class CarPage implements OnInit {
 
   public getPriceProcess(): any {
     this.totalProductPriceProcess = parseFloat(this.totalProductPrice).toFixed(3)
-
-    console.log("ORFAVOOOR")
-    console.log(this.minimoComra)
-
-    if (this.totalProductPriceProcess > this.minimoComra) {
+    
+    if (
+      parseFloat(parseFloat(this.totalProductPriceProcess).toFixed(3))
+      > parseFloat(parseFloat(this.minimoComra).toFixed(3))
+    ) {
       this.isTotalCompra = true
     } else {
       this.isTotalCompra = false

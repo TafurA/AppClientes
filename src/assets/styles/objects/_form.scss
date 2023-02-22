@@ -12,6 +12,8 @@
 
 .o-form__field-wrap {
   position: relative;
+  display: flex;
+  align-items: center;
   border-radius: 8px;
   border: 1px solid $c-gray-15;
   padding: 16px;
@@ -28,11 +30,6 @@
 }
 
 .o-form__label {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   display: flex;
   justify-content: flex-end;
   align-items: center;

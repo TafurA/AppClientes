@@ -256,6 +256,14 @@
       color: rgba($color: $c-primary, $alpha: 0.6);
     }
   }
+
+  .is-error & {
+    &::before {
+      content: $i-error;
+      border-color: rgba($color: $c-secondary, $alpha: 0.6);
+      color: rgba($color: $c-secondary, $alpha: 0.6);
+    }
+  }
 }
 
 .c-product-alert__header {

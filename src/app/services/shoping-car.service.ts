@@ -137,10 +137,10 @@ export class ShopingCarService {
           }
         }
 
-        // setTimeout(() => {
         if (booleanTest) {
           alertProduct.querySelector(".c-add-car").classList.add("test")
           this.alertProduct("success")
+          console.log("AQUIIIII")
           setTimeout(() => {
             alertProduct.classList.remove("is-show")
           }, 1500)
@@ -148,17 +148,18 @@ export class ShopingCarService {
             alertProduct.querySelector(".c-add-car").classList.remove("test")
           }, 1600)
         }
-        // }, 600)
 
+        console.log("ES ESTEEE AQUIIII")
+        console.log(product)
 
         temporalProduct.productCode = product.productCode
         temporalProduct.nameProduct = product.nameProduct
         temporalProduct.imgProduct = product.imgProduct
         temporalProduct.quantityProduct = product.quantityProduct
         temporalProduct.price = product.price
+        temporalProduct.precioSinDcto = product.precioSinDcto
         temporalProduct.valor = product.valor
         temporalProduct.valpun_b = product.valpun_b
-        temporalProduct.precioSinDcto = product.precioSinDcto
         temporalProduct.porcDescuento = product.porcDescuento
         temporalProduct.isOffert = temporalProduct.isOffert
         temporalProduct.isCashback = temporalProduct.isCashback
@@ -186,6 +187,16 @@ export class ShopingCarService {
 
         localStorage.setItem("productsCar", JSON.stringify(this.products))
         this.alertProduct("success")
+        const alertProduct = document.querySelector(".js-alert-product");
+        alertProduct.querySelector(".c-add-car").classList.add("test")
+        this.alertProduct("success")
+        setTimeout(() => {
+          alertProduct.classList.remove("is-show")
+        }, 1500)
+        setTimeout(() => {
+          alertProduct.querySelector(".c-add-car").classList.remove("test")
+        }, 1600)
+
         this.updateProductQuantity(temporalProduct.productCode, "sum", "detail")
       }
 
@@ -197,10 +208,7 @@ export class ShopingCarService {
   public async getMinimoCompra(bodegaId) {
     await this.http.get(`https://intranet.surtilider.com:9001/IntranetSurti/WebServicesSurtiAppRest/GetValidation?bodega=${bodegaId}`, "", environment.headers)
       .then(data => {
-        console.log("data-data")
-        console.log(data)
         const dataTem = JSON.parse(data.data)
-        console.log(dataTem)
         localStorage.setItem("MinimoCompra", dataTem.data.minimo_compra)
       })
       .catch(error => {
@@ -209,8 +217,8 @@ export class ShopingCarService {
       });
   }
 
-  public removeProductQuantity(codeProduct) {
-    this.updateProductQuantity(codeProduct, "rest", "general")
+  public removeProductQuantity(codeProduct, detail) {
+    this.updateProductQuantity(codeProduct, "rest", detail)
 
     const storageCarProducts = JSON.parse(localStorage.productsCar)
 
@@ -236,8 +244,6 @@ export class ShopingCarService {
           } else {
             element.quantityProduct = element.quantityProduct - 1
           }
-
-          console.log("element.quantityProduct", element.quantityProduct)
 
           newDataCarProducts.push(element)
 
@@ -278,6 +284,7 @@ export class ShopingCarService {
 
   }
 
+  // Actualiza el número de productos en el icono del carrito
   public changeCurrentValueCounterProduct() {
     if (localStorage.productsCar) {
       const domNumberCount = JSON.parse(localStorage.productsCar).length
@@ -302,7 +309,6 @@ export class ShopingCarService {
         element.classList.remove("is-none-car")
       });
 
-
     }
   }
 
@@ -315,6 +321,18 @@ export class ShopingCarService {
     setTimeout(() => {
       numberQuantityProdudct.classList.remove("is-animated")
     }, 500)
+
+    if (quantity == "0") {
+      this.alertProduct("delete")
+      const alertProduct = document.querySelector(".js-alert-product");
+      alertProduct.querySelector(".c-add-car").classList.add("test")
+      setTimeout(() => {
+        alertProduct.classList.remove("is-show")
+      }, 1500)
+      setTimeout(() => {
+        alertProduct.classList.remove("is-error")
+      }, 1600)
+    }
   }
 
   private changeCurrentValueQuantityProduct(quantity) {
@@ -478,6 +496,12 @@ export class ShopingCarService {
 
       alertProduct.classList.add("is-success")
       alertProduct.querySelector(".c-product-alert__title").innerHTML = "Producto agregado"
+      alertProduct.classList.remove("is-informative")
+
+      alertProduct.classList.add("is-show")
+    } else if (action == "delete") {
+      alertProduct.classList.add("is-error")
+      alertProduct.querySelector(".c-product-alert__title").innerHTML = "Producto eliminado"
       alertProduct.classList.remove("is-informative")
 
       alertProduct.classList.add("is-show")

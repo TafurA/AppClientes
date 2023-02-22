@@ -22,6 +22,8 @@ export class DetailProductPage implements OnInit {
     nameProduct: "",
     description: "",
     price: "",
+    precioSinDcto: "",
+    porcDescuento: "0",
     imgProduct: "",
     galery: [],
     discount: "",
@@ -162,10 +164,14 @@ export class DetailProductPage implements OnInit {
       (params: Params) => {
         this.product.productCode = params.idProduct;
         this.productService.getProductDetail(this.product.productCode).then(() => {
+          console.log("this.productService.arrayDetailProduct[0]")
+          console.log(this.productService.arrayDetailProduct[0])
           this.product.galery = []
           this.product.nameProduct = this.productService.arrayDetailProduct[0].nameProduct
           this.product.description = this.productService.arrayDetailProduct[0].descrProduct
           this.product.price = this.productService.arrayDetailProduct[0].precioSinDcto
+          this.product.precioSinDcto = window.localStorage.getItem("precioConDcto")
+          this.product.porcDescuento = this.productService.arrayDetailProduct[0].porcDescuento
           this.product.imgProduct = this.productService.arrayDetailProduct[0].img_prod1
           this.product.galery.push(this.productService.arrayDetailProduct[0].img_prod1)
           this.product.galery.push(this.productService.arrayDetailProduct[0].img_prod2)
@@ -217,10 +223,12 @@ export class DetailProductPage implements OnInit {
 
   public addQuantitifyProductToCar() {
     this.shopingCarService.addProductQuantityDetail(this.product)
+    console.log("RODUCTO QUE SE VA A GUARDAD")
+    console.log(this.product)
   }
 
   public removeQuantitifyProductToCar() {
-    this.shopingCarService.removeProductQuantity(this.product.productCode)
+    this.shopingCarService.removeProductQuantity(this.product.productCode, "detail")
 
     if (this.counterProductsCar == 0) {
       const alert = document.querySelector(".js-alert-product")

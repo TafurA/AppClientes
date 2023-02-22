@@ -33,7 +33,7 @@ export class AppComponent {
 
   public removeQuantitifyProductToCar() {
     const productId = document.querySelector(".js-alert-product").getAttribute("id");
-    this.shopingCarService.removeProductQuantity(productId)
+    this.shopingCarService.removeProductQuantity(productId, "general")
   }
 
   public closeAlert() {

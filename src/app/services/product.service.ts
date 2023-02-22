@@ -71,7 +71,7 @@ export class ProductService {
     await this.http.get(`${environment.url}${environment.apiPath}getProductoDetail?producto=${productId}`, "", environment.headers)
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
-        console.log("DETAIL", data)
+        console.log("DETAIL", dataObjTemp)
         this.arrayDetailProduct = dataObjTemp.dataObjProduct
       })
       .catch(error => {

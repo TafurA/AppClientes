@@ -41,12 +41,14 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      if (
-        localStorage.getItem("AddressList") != "null") {
-        this.listOfAddress()
-      }
-    }, 1000)
+    if (this.loginService.validateSession()) {
+      setTimeout(() => {
+        if (
+          localStorage.getItem("AddressList") != "null") {
+          this.listOfAddress()
+        }
+      }, 1000)
+    }
   }
 
   public listOfAddress() {
@@ -55,20 +57,17 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       document.querySelector(".c-header").classList.add("opacity-2")
       document.querySelector("ion-tab-bar").classList.add("test")
-      console.log("2")
     }, 1000)
 
     setTimeout(() => {
       alert.classList.add("is-show")
       const dataList = JSON.parse(localStorage.getItem("AddressList"))
       this.listAddress = dataList
-      console.log("3")
     }, 2000)
 
 
     setTimeout(() => {
       this.validateAddressCode()
-      console.log("4")
     }, 3000);
   }
 

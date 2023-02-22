@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -21,6 +21,7 @@ export class LoginPage implements OnInit {
     private loginService: LoginService,
     private formBuilder: FormBuilder,
     private customValidator: CustomValidator,
+    private el: ElementRef
   ) { }
 
   ngOnInit() {
@@ -29,9 +30,9 @@ export class LoginPage implements OnInit {
 
   private buildLoginForm() {
     const minPassLength = 4;
-    const soloNumeros ="^[0-9]*$";
+    const soloNumeros = "^[0-9]*$";
     this.loginForm = this.formBuilder.group({
-      user: ['', [Validators.required,Validators.pattern(soloNumeros)]],
+      user: ['', [Validators.required, Validators.pattern(soloNumeros)]],
       password: ['', [
         Validators.required,
         Validators.minLength(minPassLength),
@@ -53,18 +54,16 @@ export class LoginPage implements OnInit {
 
   passwordChange(e) {
     const inputToChange = e.target.closest(".o-form__field-wrap").querySelector("input")
+
     if (e.target.classList.contains("i-eye")) {
       e.target.classList.remove("i-eye")
       e.target.classList.add("i-eye-lock")
-      inputToChange.setAttribute("type", "text")
+      inputToChange.type = 'text';
     } else {
       e.target.classList.add("i-eye")
       e.target.classList.remove("i-eye-lock")
-      inputToChange.setAttribute("type", "password")
+      inputToChange.type = 'password';
     }
-
-    console.log("e.target")
-    console.log(e.target)
 
   }
 
