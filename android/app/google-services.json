@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "104891019349",
+    "project_id": "appclientessurtilider",
+    "storage_bucket": "appclientessurtilider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:104891019349:android:69866e9a7ea0d8ee3f24dc",
+        "android_client_info": {
+          "package_name": "com.surtilider.SurtiTiendas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "104891019349-9ii2r6kdak03lrdu3hub8ckh64t1a170.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJYQbwRvzUm27OUavM_ioQrGZnAnNJ7u4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "104891019349-9ii2r6kdak03lrdu3hub8ckh64t1a170.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
