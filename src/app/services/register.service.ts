@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 import { AlertController, NavController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 // Connect with http
 import axios from 'axios';
 
@@ -16,7 +17,8 @@ export class RegisterService {
   dataDireccion = [];
   public nombre: string;
   public alert;
-  constructor(public nvCtrl: NavController, private alertController: AlertController, private http: HTTP) {
+  public loader: any;
+  constructor(public nvCtrl: NavController, public loadingController: LoadingController,private alertController: AlertController, private http: HTTP) {
   }
 
   async DireccionNomenclaturas() {
@@ -118,6 +120,7 @@ export class RegisterService {
     .then(data => {
       const dataObjTemp = JSON.parse(data.data)
       if (dataObjTemp.response) {
+        this.removeLoader();
 
         this.presentAlert("¡Exelente!"," Muy pronto nos estaremos comunicando con usted para asignarle sus credenciales.", "is-success");
         this.nvCtrl.navigateForward("/tabs/welcome");
@@ -147,6 +150,18 @@ export class RegisterService {
     setTimeout(() => {
       this.alert.dismiss()
     }, 4000)
+  }
+  async showLoader() {
+    this.loader = await this.loadingController.create({
+      spinner: "bubbles",
+      translucent: true,
+      cssClass: 'o-loader'
+    });
+    await this.loader.present();
+  }
+
+  async removeLoader() {
+    this.loader = await this.loadingController.dismiss();
   }
 }
 

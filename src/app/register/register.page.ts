@@ -397,6 +397,7 @@ export class RegisterPage implements OnInit {
         dataForm.barrio,
         dataForm.municipio,
         dataForm.vendedor);
+        this.RegisterService.showLoader();
     } else {
       this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
     }

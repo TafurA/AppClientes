@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UpdatePersonalDataService {
-
+public alert;
 constructor(public nvCtrl: NavController, private toastController: ToastController, private alertController:AlertController , private http: HTTP) { }
 
 
@@ -24,11 +24,11 @@ async UpdateCustomer(
     console.log(data);
     const dataForgotTemp = JSON.parse(data.data)
     if (dataForgotTemp.response) {
-      this.presentAlertRegister("¡Exelente! su solicitud se realizó con éxito");
+      this.presentAlert("Bien","¡Exelente! su solicitud se realizó con éxito","is-success");
       this.nvCtrl.navigateForward("/tabs/home");
   } else {
     console.log("Error al actualizar el cliente")
-    this.presentAlert(dataForgotTemp.message);
+    this.presentAlert("Error",dataForgotTemp.message,"is-error");
 
   }
 
@@ -40,43 +40,57 @@ async UpdateCustomer(
 }
 
 
-async presentAlert(description: string) {
-  let imagen ="../assets/image/interaccion_Registro.png";
-  const alert = await this.alertController.create({
+// async presentAlert(description: string) {
+//   let imagen ="../assets/image/interaccion_Registro.png";
+//   const alert = await this.alertController.create({
     
-    // header: ,
-    message:`<img src="${imagen}"><br>`+description,
-    cssClass: 'custom-alert',
-    buttons: [
-      {
-        text: 'Aceptar',
-        cssClass: 'alert-button-confirm', 
-      },
-    ],
+//     // header: ,
+//     message:`<img src="${imagen}"><br>`+description,
+//     cssClass: 'custom-alert',
+//     buttons: [
+//       {
+//         text: 'Aceptar',
+//         cssClass: 'alert-button-confirm', 
+//       },
+//     ],
+//   });
+
+
+//   await alert.present();
+// }
+// async presentAlertRegister(description: string) {
+//   let imagen ="../assets/image/interaccion_Register.png";
+//   const alert = await this.alertController.create({
+    
+//     message:`<img src="${imagen}"><br>`+description,
+//     cssClass: 'custom-alert',
+//     buttons: [
+//       {
+//         text: 'Aceptar',
+//         cssClass: 'alert-button-confirm',
+//         handler: () => {
+//           this.nvCtrl.navigateForward("/tabs/home")
+//         },
+//       },
+//     ],
+//   });
+
+
+//   await alert.present();
+// }
+async presentAlert(title: string, description: string, alertType: string) {
+  this.alert = await this.alertController.create({
+    header: title,
+    subHeader: description,
+    cssClass: `c-alert ${alertType}`
+    // buttons: ['OK'],
   });
 
+  await this.alert.present();
 
-  await alert.present();
-}
-async presentAlertRegister(description: string) {
-  let imagen ="../assets/image/interaccion_Register.png";
-  const alert = await this.alertController.create({
-    
-    message:`<img src="${imagen}"><br>`+description,
-    cssClass: 'custom-alert',
-    buttons: [
-      {
-        text: 'Aceptar',
-        cssClass: 'alert-button-confirm',
-        handler: () => {
-          this.nvCtrl.navigateForward("/tabs/home")
-        },
-      },
-    ],
-  });
-
-
-  await alert.present();
+  setTimeout(() => {
+    this.alert.dismiss()
+  }, 6000)
 }
 
 }

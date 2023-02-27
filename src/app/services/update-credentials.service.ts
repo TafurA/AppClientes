@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UpdateCredentialsService {
+  public alert;
 
 constructor(public nvCtrl: NavController, private toastController: ToastController, private alertController:AlertController,  private http: HTTP) { }
 
@@ -28,11 +29,11 @@ await this.http.get(`${environment.url}${environment.apiPath}Updatepassword?codi
 
   const dataForgotTemp = JSON.parse(data.data)
   if (dataForgotTemp.response) {
-    this.presentAlertRegister("¡Exelente! su contraseña se actualizó con éxito");
+    this.presentAlert("Bien","¡Exelente! su contraseña se actualizó con éxito","is-success");
     this.nvCtrl.navigateForward("/tabs/home");
   } else {
     console.log("Error al actualizar contraseña")
-    this.presentAlert(dataForgotTemp.message);
+    this.presentAlert("Error",dataForgotTemp.message,"is-error");
 
   }
 
@@ -44,45 +45,59 @@ console.log(error)
 }
 
 
-async presentAlert(description: string) {
-let imagen ="../assets/image/interaccion_Registro.png";
-const alert = await this.alertController.create({
+// async presentAlert(description: string) {
+// let imagen ="../assets/image/interaccion_Registro.png";
+// const alert = await this.alertController.create({
   
-  // header: ,
-  message:`<img src="${imagen}"><br>`+description,
-  cssClass: 'custom-alert',
-  buttons: [
-    {
-      text: 'Aceptar',
-      cssClass: 'alert-button-confirm', 
-    },
-  ],
-});
+//   // header: ,
+//   message:`<img src="${imagen}"><br>`+description,
+//   cssClass: 'custom-alert',
+//   buttons: [
+//     {
+//       text: 'Aceptar',
+//       cssClass: 'alert-button-confirm', 
+//     },
+//   ],
+// });
 
 
-await alert.present();
-}
-async presentAlertRegister(description: string) {
-let imagen ="../assets/image/interaccion_Register.png";
-const alert = await this.alertController.create({
+// await alert.present();
+// }
+// async presentAlertRegister(description: string) {
+// let imagen ="../assets/image/interaccion_Register.png";
+// const alert = await this.alertController.create({
   
-  message:`<img src="${imagen}"><br>`+description,
-  cssClass: 'custom-alert',
-  buttons: [
-    {
-      text: 'Aceptar',
-      cssClass: 'alert-button-confirm',
-      handler: () => {
-        this.nvCtrl.navigateForward("tabs/home")
-      },
-    },
-  ],
-});
+//   message:`<img src="${imagen}"><br>`+description,
+//   cssClass: 'custom-alert',
+//   buttons: [
+//     {
+//       text: 'Aceptar',
+//       cssClass: 'alert-button-confirm',
+//       handler: () => {
+//         this.nvCtrl.navigateForward("tabs/home")
+//       },
+//     },
+//   ],
+// });
 
 
-await alert.present();
+// await alert.present();
+// }
+
+async presentAlert(title: string, description: string, alertType: string) {
+  this.alert = await this.alertController.create({
+    header: title,
+    subHeader: description,
+    cssClass: `c-alert ${alertType}`
+    // buttons: ['OK'],
+  });
+
+  await this.alert.present();
+
+  setTimeout(() => {
+    this.alert.dismiss()
+  }, 4000)
 }
-
 
 
 }
