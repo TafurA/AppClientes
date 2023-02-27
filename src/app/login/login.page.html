@@ -53,15 +53,20 @@
               formControlName="password"
             >
             <label for="password" class="o-form__label">
-              <button (click)="passwordChange($event)" class="o-form__label-ico i-eye"></button>
+              <button
+                title="cambiar contraseña"
+                type="button"
+                (click)="passwordChange($event)"
+                class="o-form__label-ico i-eye">
+              </button>
             </label>
           </div>
           <span class="o-form__error">{{ getError('password')}}</span>
         </div>
 
         <footer class="o-form__actions">
-          <button class="o-button" (click)="loginToSystem()" [disabled]="loginForm.invalid">Ingresar</button>
-          <button class="o-button o-button_secondary" [routerLink]="['/tabs/register']">Registrarse</button>
+          <button type="button" class="o-button" (click)="loginToSystem()" [disabled]="loginForm.invalid">Ingresar</button>
+          <button type="button" class="o-button o-button_secondary" [routerLink]="['/tabs/register']">Registrarse</button>
           <a class="o-link" [routerLink]="['/tabs/forgot-password']">¿Olvidaste tu contraseña?</a>
         </footer>
 
