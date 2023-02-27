@@ -30,7 +30,7 @@ export class BannerService {
     //   this.isBannersCharged = true
     // })
 
-    await this.http.get('https://intranet.surtilider.com:9001/IntranetSurti/WebServicesSurtiAppRest/getBanner', "", environment.headers)
+    await this.http.get(`${environment.url}${environment.apiPath}getBanner`, "", environment.headers)
       .then(data => {
 
         const dataBennerTemp = JSON.parse(data.data)
