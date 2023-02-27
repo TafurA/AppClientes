@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Subject } from 'rxjs';
 
 import { FavoriteService } from '../services/favorite.service';
 import { LoginService } from '../services/login.service';
@@ -222,7 +221,6 @@ export class DetailProductPage {
     this.navControler.back()
   }
 
-
   public getCounterCarProducts() {
     const counterLocalStorage = localStorage.productsCar
     if (counterLocalStorage) {
@@ -243,14 +241,19 @@ export class DetailProductPage {
 
   public addQuantitifyProductToCar() {
     this.shopingCarService.addProductQuantityDetail(this.product)
-    console.log("RODUCTO QUE SE VA A GUARDAD")
-    console.log(this.product)
   }
 
   public removeQuantitifyProductToCar() {
     this.shopingCarService.removeProductQuantity(this.product.productCode, "detail")
-    console.log("this.counterProductsCar")
-    console.log(this.counterProductsCar)
+
+    if (localStorage.getItem("productsCar")) {
+      const localStorageProduct = JSON.parse(localStorage.getItem("productsCar"))
+      localStorageProduct.forEach(element => {
+        if (element.productCode == this.product.productCode) {
+          this.counterProductsCar = element.quantityProduct
+        }
+      });
+    }
 
     if (this.counterProductsCar == 0) {
       const alert = document.querySelector(".js-alert-product")

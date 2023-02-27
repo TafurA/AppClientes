@@ -42,6 +42,8 @@
               <h3 class="c-product__title" *ngIf="productObject.nameProduct != null">
                 {{ productObject.nameProduct }}
               </h3>
+
+              <span class="c-product__amount">Precio Unit: ${{ productObject.price }}</span>
   
               <!-- Value and discount -->
               <div>
@@ -63,7 +65,7 @@
                 </div>
   
                 <span class="c-product__amount">
-                  ${{ productObject.price }}
+                  ${{ (productObject.quantityProduct * productObject.price).toFixed(3) }}
   
                   <p class="c-product-horizontal__amount-wrap">
                     Cantidad:
