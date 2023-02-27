@@ -100,13 +100,19 @@
                   <img class="c-product-horizontal__img o-img" src="{{ product.img_prod }}" alt="">
                   <figcaption class="c-product-horizontal__caption">
                     <p class="c-product-horizontal__title">{{ product.nameProduct }}</p>
-                    <p class="c-product-horizontal__amount-wrap">Cantidad: <span class="c-product-horizontal__amount">{{
-                        product.cantidad }}</span></p>
+                    <p class="c-product-horizontal__amount-wrap">Cantidad:
+                      <span class="c-product-horizontal__amount">
+                        {{ product.cantidad }}
+                      </span>
+                    </p>
+                    <p class="c-product-horizontal__amount-wrap">
+                      Unidad: ${{ product.valorUnitario }} COP
+                    </p>
                   </figcaption>
                 </figure>
 
                 <div class="c-product-horizontal__price">
-                  <span class="c-product__amount">${{ product.valorUnitario }} COP</span>
+                  <span class="c-product__amount">${{ product.totalProducts }} COP</span>
 
                   <div
                     class="c-product__ico c-product__ico_discount i-star"

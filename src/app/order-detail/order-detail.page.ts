@@ -60,10 +60,13 @@ export class OrderDetailPage implements OnInit {
           this.productsCurrentOrderDetail = []
           const tem = JSON.parse(localStorage.productsCurrentOrderDetail)
 
+          let totalProduct = 0
+
           for (let index = 0; index < tem.length; index++) {
             const element = tem[index];
 
             this.order.totalProducts = element.length
+            let cantTem = 0
 
             element.forEach(product => {
               const temproduct = {
@@ -75,9 +78,13 @@ export class OrderDetailPage implements OnInit {
                 "precioSinDcto": product.precioSinDcto,
                 "porcDescuento": product.porcDescuento,
                 "isOffert": false,
-                "isCashback": false
+                "isCashback": false,
+                "totalProducts": ""
               }
+
               temproduct.cantidad = Math.round(temproduct.cantidad)
+              cantTem = temproduct.cantidad * parseFloat(temproduct.valorUnitario)
+              temproduct.totalProducts = cantTem.toFixed(3)
               this.productWithCashback(temproduct)
               this.productWithDiscount(temproduct)
               this.productsCurrentOrderDetail.push(temproduct)
