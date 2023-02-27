@@ -11,6 +11,7 @@ export class MarcasService {
   public arrayDataMarcas = new Array();
   public arrayDataSubProvider;
   public isProductsNull = false;
+  isProvidersCharded: boolean = false;
 
   constructor(private http: HTTP) { }
 
@@ -66,6 +67,8 @@ export class MarcasService {
           this.setIsProductsNull(true)
         }
 
+      }).finally(() => {
+        this.isProvidersCharded = true
       })
       .catch(error => {
         console.log("error detalle de provedor");

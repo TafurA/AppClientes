@@ -12,6 +12,7 @@ export class ProviderProductComponent implements OnInit {
   public detailProvider: string;
   public arrayDataDetailProvider = new Array();
   public isProductsNull;
+  public loaded = false;
 
   constructor(private rutaActiva: ActivatedRoute, public providerService: MarcasService) { }
 
@@ -26,6 +27,10 @@ export class ProviderProductComponent implements OnInit {
           this.arrayDataDetailProvider = JSON.parse(localStorage.providersDetail)
         }).finally(() => {
           this.isProductsNull = this.providerService.getIsProductsNull();
+
+          if (this.providerService.isProvidersCharded) {
+            this.loaded = true
+          }
         })
       }
     );
@@ -34,9 +39,6 @@ export class ProviderProductComponent implements OnInit {
   public slideOpts = {
     slidesPerView: 3,
     autoHeight: true,
-    // autoplay: {
-    //   delay: 2000
-    // },
     preventClicksPropagation: true,
     preventClicks: true,
     preventInteractionOnTransition: true,

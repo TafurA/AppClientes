@@ -11,6 +11,7 @@ import { HeaderComponent } from '../components/layout/header/header.component';
 import { BannerProductComponent } from '../components/product/banner-product.component';
 import { ProductComponent } from '../components/product/product/product.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CategoryComponent } from '../components/category/category.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     DetailBannerPageRoutingModule,
     NgxPaginationModule
   ],
-  declarations: [DetailBannerPage, BannerProductComponent, ProductComponent]
+  declarations: [DetailBannerPage, BannerProductComponent, ProductComponent, CategoryComponent]
 })
 export class DetailBannerPageModule { }

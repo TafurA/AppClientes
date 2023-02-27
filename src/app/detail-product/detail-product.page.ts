@@ -218,6 +218,10 @@ export class DetailProductPage {
     }
   }
 
+  clickToGoBack() {
+    this.navControler.back()
+  }
+
 
   public getCounterCarProducts() {
     const counterLocalStorage = localStorage.productsCar

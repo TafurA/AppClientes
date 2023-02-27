@@ -10,6 +10,7 @@ import { DetailProvidersPage } from './detail-providers.page';
 import { HeaderComponent } from '../components/layout/header/header.component';
 import { ProductComponent } from '../components/product/product/product.component';
 import { ProviderProductComponent } from '../components/product/provider-product.component';
+import { MarcasComponent } from '../components/marcas/marcas.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ProviderProductComponent } from '../components/product/provider-product
     IonicModule,
     DetailProvidersPageRoutingModule
   ],
-  declarations: [DetailProvidersPage, HeaderComponent, ProductComponent, ProviderProductComponent]
+  declarations: [DetailProvidersPage, HeaderComponent, ProductComponent, ProviderProductComponent, MarcasComponent]
 })
 export class DetailProvidersPageModule { }

@@ -44,8 +44,6 @@ export class ProductComponent implements OnInit {
       this.isAnonymousUser = true
     }
 
-    console.log("isAnonymousUser")
-    console.log(this.isAnonymousUser)
   }
 
   async initAllFunctionsProduct() {
@@ -61,7 +59,6 @@ export class ProductComponent implements OnInit {
   addProductToFavorite(idProduct) {
     if (this.loginService.validateSession()) {
       this.favoriteService.addProductToFavorite(idProduct).finally(() => {
-        console.log(idProduct)
         if (this.favoriteService.productAddSuccess()) {
           this.isFavorite = true
         }
@@ -111,9 +108,6 @@ export class ProductComponent implements OnInit {
     } else {
       localStorage.removeItem("categoryProduct")
     }
-
-    console.log("AQUIIIIII SI DEVERIAAA")
-    console.log(this.productObject)
 
   }
 

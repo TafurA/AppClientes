@@ -207,7 +207,6 @@ export class CarPage implements OnInit {
 
     this.sellerReference = sellerObject.vendedor
     this.sellerReferenceId = sellerObject.codigoVen
-    this.disabled = false
   }
 
   public getPriceProcess(): any {
