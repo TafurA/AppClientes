@@ -34,6 +34,7 @@
     <!-- Value and discount -->
     <div>
       <span
+        [ngClass]="{'test': isAnonymousUser, '': !isAnonymousUser}"
         class="c-product__amount"
 
       >

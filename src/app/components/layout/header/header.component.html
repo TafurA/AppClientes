@@ -18,7 +18,10 @@
         <div class="c-list-search-box">
           <ul class="c-list-search">
             <li *ngFor="let item of listFiltered" class="c-list-search__item" (click)="getUrlProduct($event)">
-                {{item.word}}
+                <span>{{ item.word }}</span>
+                <figure>
+                  <img src="{{ item.img_prod }}" alt="">
+                </figure>
             </li>
           </ul>
         </div>

@@ -55,3 +55,16 @@
 .none {
   display: none;
 }
+
+#chatIframe {
+  bottom: 56px !important;
+
+  &.expanded-height {
+    bottom: 0 !important;
+  }
+}
+
+.hide-chat {
+  opacity: 0;
+  visibility: hidden;
+}

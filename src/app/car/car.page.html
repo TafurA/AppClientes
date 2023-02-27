@@ -86,6 +86,7 @@
               <button
                 class="c-product-car__action i-pencil"
                 [routerLink]="['/tabs/detail-product', productObject.productCode]"
+                (click)="storageCategoryProduct(productObject)"
               ></button>
               <button
                 (click)="removeProductIntoCar(productObject.productCode)"

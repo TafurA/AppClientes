@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './login.service';
 
@@ -17,17 +16,6 @@ export class ProductService {
   constructor(private http: HTTP, public loginService: LoginService) { }
 
   async getProductsSearch() {
-    // await axios.get(`${environment.apiPath}/consultarProductos`, environment.headerConfig).then(response => {
-
-    //   for (let index = 0; index < response.data.data.length; index++) {
-    //     const element = response.data.data[index];
-    //     this.arrayDataProductSearch[index] = element
-    //   }
-
-    // }).finally(() => {
-    //   this.isproductsCharged = true
-    // })
-
     await this.http.get(`${environment.url}${environment.apiPath}consultarProductos`, "", environment.headers)
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
@@ -71,7 +59,6 @@ export class ProductService {
     await this.http.get(`${environment.url}${environment.apiPath}getProductoDetail?producto=${productId}`, "", environment.headers)
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
-        console.log("DETAIL", dataObjTemp)
         this.arrayDetailProduct = dataObjTemp.dataObjProduct
       })
       .catch(error => {
@@ -86,7 +73,6 @@ export class ProductService {
 
     await this.http.get(`${environment.url}${environment.apiPath}getRecommended?nit=${nit}`, "", environment.headers)
       .then(data => {
-        console.log(JSON.parse(data.data))
         JSON.parse(data.data).data.forEach(element => {
           this.arrayDataProducts.push(element)
         });
@@ -95,6 +81,23 @@ export class ProductService {
       })
       .catch(error => {
         console.log("error productos recomendados");
+        console.log(error);
+      });
+  }
+
+  async getRelatedProducts(bannerId) {
+    this.arrayDataProducts = []
+
+    await this.http.get(`${environment.url}${environment.apiPath}getProductoRelated?searchword=${bannerId}`, "", environment.headers)
+      .then(data => {
+        JSON.parse(data.data).dataObjRelated.forEach(element => {
+          this.arrayDataProducts.push(element)
+        });
+      }).finally(() => {
+        this.isproductsCharged = true
+      })
+      .catch(error => {
+        console.log("error productos relacionados");
         console.log(error);
       });
   }
@@ -126,14 +129,12 @@ export class ProductService {
 
     if (this.loginService.validateSession()['codcli_b']) {
       session = true
-      console.log("ESTA LOGEUADO EL USUARIO")
     }
 
     if (!session) {
 
       return await this.getProducts().finally(() => {
         this.isproductsCharged = true
-        console.log(this.arrayDetailProduct)
       })
 
     } else {
@@ -141,14 +142,10 @@ export class ProductService {
       if (window.location.pathname.includes("category")) {
         return await this.getProducts().finally(() => {
           this.isproductsCharged = true
-          console.log(this.arrayDetailProduct)
         })
       } else {
-        console.log("llega aqui 2")
-        console.log(this.loginService.getUserCode())
         return await this.getRecomendedProducts(this.loginService.validateSession()['codcli_b']).finally(
           () => {
-            console.log(this.arrayDataProducts)
             this.isproductsCharged = true
           }
         )

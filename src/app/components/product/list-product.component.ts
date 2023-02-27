@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login.service';
 
 import { ProductService } from 'src/app/services/product.service';
@@ -7,7 +7,7 @@ import { ProductService } from 'src/app/services/product.service';
   selector: 'app-list-product',
   templateUrl: './list-product.component.html',
 })
-export class ListProductComponent implements OnInit {
+export class ListProductComponent implements AfterViewInit {
 
   public arrayDataProducts = new Array();
 
@@ -16,11 +16,11 @@ export class ListProductComponent implements OnInit {
   constructor(public productService: ProductService, public loginService: LoginService) { }
 
   ngOnInit() {
-    this.getProducts()
   }
 
   ngAfterViewInit() {
-    this.fillArrayProducts();
+    console.log("aqui no hace ni chimba")
+    this.getProducts()
   }
 
   public slideOpts = {
@@ -34,10 +34,12 @@ export class ListProductComponent implements OnInit {
   }
 
   public async getProducts() {
-    await this.productService.getCurrentProducts().finally(() => {
+    await this.productService.getCurrentProducts().then(() => {
       if (this.productService.isproductsCharged) {
         this.loaded = true
       }
+    }).finally(() => {
+      this.arrayDataProducts = this.productService.arrayDataProducts
     })
   }
 

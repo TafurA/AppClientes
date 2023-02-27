@@ -30,6 +30,9 @@ export class WelcomePage implements OnInit {
       }).finally(() => {
         this.nav.navigateForward("/tabs/home")
       });
+    } else {
+      this.nav.navigateForward("/tabs/welcome")
+      console.log("aquis")
     }
 
   }

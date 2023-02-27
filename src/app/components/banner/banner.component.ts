@@ -16,24 +16,27 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
   // providers: [BannerService]
 })
 
-export class BannerComponent implements OnInit {
+export class BannerComponent {
 
   public bannerList = new Array();
   public loaded = false;
 
   constructor(private bannerService: BannerService) { }
 
-  ngOnInit() {
-    this.bannerService.getBannerList().finally(() => {
+  ngAfterViewInit() {
+    console.log("ajkkjajka si o si")
+    this.bannerService.getBannerList().then(() => {
       if (this.bannerService.isBannersCharged) {
         this.loaded = true
       }
+    }).finally(() => {
+      this.bannerList = this.bannerService.arrayBanner()
     });
   }
 
-  ngAfterViewInit() {
-    this.fillArrayList()
-  }
+  // ngAfterViewInit() {
+  //   this.fillArrayList()
+  // }
 
   public slideOpts = {
     slidesPerView: "auto",
@@ -69,7 +72,6 @@ export class BannerComponent implements OnInit {
   }
 
   async fillArrayList() {
-    this.bannerList = this.bannerService.arrayBanner()
   }
 
 }

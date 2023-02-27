@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 import { LoginService } from '../services/login.service';
 import { BannerService } from '../services/banner.service';
-import { NavController } from '@ionic/angular';
+
 import { BannerComponent } from '../components/banner/banner.component';
 
 @Component({
@@ -16,27 +18,39 @@ import { BannerComponent } from '../components/banner/banner.component';
 export class SidebarMenuPage implements OnInit {
   public userName = ""
   public userCashback = ""
-  private refreshSubject = new Subject<void>();
-  refresh$ = this.refreshSubject.asObservable();
 
-  constructor(public loginService: LoginService, public navController: NavController) { }
+  constructor(
+    public loginService: LoginService,
+    public navController: NavController,
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
+  ) { }
 
   ngOnInit() {
-    this.refresh$.subscribe(() => {
-      this.validateSession()
-    })
-
-    setInterval(() => {
-      this.refresh()
-    }, 200)
+    this.initChat()
   }
 
-  refresh() {
-    this.refreshSubject.next();
+  ionViewDidEnter() {
+    console.log("jKAJAJJAJAJA ME MUESTRA SIEMRE ESTE H Y YO SUFRIENDO")
+
+    const shouldCache = this.route.snapshot.data.cache !== false;
+    if (!shouldCache) {
+      console.log("ESTA AQUI dos")
+      this.cdr.markForCheck();
+      this.validateSession();
+    } else {
+      this.validateSession();
+    }
+  }
+
+  // Custom chat init
+  initChat() {
+    (function () { var ldk = document.createElement('script'); ldk.type = 'text/javascript'; ldk.async = true; ldk.src = 'https://s.cliengo.com/weboptimizer/607f436680b80a002a5056b7/63f7e25f6a109300257b7523.js?platform=view_installation_code'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ldk, s); })();
   }
 
   validateSession() {
-    if (!this.loginService.validateSession()) {
+    console.log("EEEEE")
+    if (!localStorage.userSessionData) {
       this.navController.navigateForward("/tabs/login")
     } else {
       this.setUserData()
@@ -47,9 +61,20 @@ export class SidebarMenuPage implements OnInit {
     this.userName = `${this.loginService.validateSession()['nomcli_b']} ${this.loginService.validateSession()['ape1cli_b']}`
     this.userCashback = `${this.loginService.validateSession()['valor_acomulado']}`
 
-    if (this.userCashback == "0.00") {
-      this.userCashback = "0"
+    console.log("this.userName")
+    console.log(this.userName)
+    if (this.userName.includes("undefined")) {
+      this.navController.navigateForward("/tabs/welcome")
+
+    } else {
+      if (this.userCashback == "0.00") {
+        this.userCashback = "0"
+      } else {
+        this.userCashback = parseFloat(this.userCashback).toFixed(3)
+      }
     }
+
+
   }
 
   logOut() {

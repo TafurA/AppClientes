@@ -5,13 +5,15 @@
 export const environment = {
   production: false,
   apiPath: 'IntranetSurti/WebServicesSurtiAppRest/',
-  url: 'https://surtiapp.surtilider.com:9001/',
+  // url: 'https://surtiapp.surtilider.com:9001/',
+  url: 'https://intranet.surtilider.com:9001/',
   headerConfig: {
     headers: {
       'Authorization': `Basic U3VydGlBcHA6MzFhNWE1YjAxNDBlMDEzN2UwOGFhZGFhNjBlYjAxNmE0YjQzNDgxMg==`,
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Credentials': true,
+      'Cache-Control': 'no-cache',
       'Access-Control-Allow-Headers': "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
     }

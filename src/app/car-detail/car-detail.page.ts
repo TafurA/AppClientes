@@ -148,8 +148,27 @@ export class CarDetailPage implements OnInit {
       this.getConfirmOrderDetail();
       this.getConfirmProductsOrderDetail();
     }).finally(() => {
-      this.showConfirmOrder();
       this.removeLoader();
+      if (!this.shopingService.isOrderOkey) {
+        this.groupPago = false
+        this.groupConfirm = false
+        this.groupAddres = true
+
+        const stes = document.querySelectorAll(".c-steps__step");
+        stes.forEach((e, i) => {
+          if (i != 0) {
+            e.classList.remove("is-checked")
+          }
+          if (i != 1) {
+            e.classList.remove("is-current")
+          } else {
+            e.classList.add("is-current")
+          }
+        })
+        this.navController.navigateForward("/tabs/car")
+      } else {
+        this.showConfirmOrder();
+      }
     });
   }
 

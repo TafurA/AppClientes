@@ -83,6 +83,23 @@ export class LoginService {
     localStorage.removeItem("userSessionData")
     localStorage.clear()
     this.nvCtrl.navigateForward("/tabs/welcome")
+    console.log("asdad")
+    this.resetNumberCar()
+  }
+
+  resetNumberCar() {
+    const numberCar = document.querySelector(".js-text-ico-car")
+    const search = document.querySelector(".js-search-header");
+    const icoCar = document.querySelector(".js-ico-car");
+
+    console.log("numberCar.innerHTML")
+    console.log(numberCar.innerHTML)
+
+    if (numberCar.innerHTML.toString() == "1") {
+      numberCar.innerHTML == "0"
+      search.classList.add("is-none-car")
+      icoCar.classList.add("test")
+    }
   }
 
   saveDataIntoLocalStorage(data: string) {

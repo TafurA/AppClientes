@@ -127,6 +127,10 @@
   font-weight: $f-bold;
   margin: 4px 0;
   line-height: 1;
+
+  &.test {
+    display: none;
+  }
 }
 
 .c-product__ico {

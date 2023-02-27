@@ -1,7 +1,18 @@
-<div class="c-product-wrap">
-  <!-- Product component -->
-  <app-product
-    *ngFor="let product of arrayDataProducts | paginate: { itemsPerPage: 9, currentPage: p}"
-    [productObject]="product">
-  </app-product>
+<div *ngIf="!productsNull;else productsNullT">
+  <div class="c-product-wrap">
+    <!-- Product component -->
+    <app-product
+      *ngFor="let product of arrayDataProducts | paginate: { itemsPerPage: 9, currentPage: p}"
+      [productObject]="product">
+    </app-product>
+  </div>
 </div>
+
+<ng-template #productsNullT>
+
+  <figure class="o-message">
+    <img class="o-img" src="assets/image/favorites_null.png" alt="">
+    <figcaption class="o-message__caption">No hay productos en este Banner</figcaption>
+  </figure>
+
+</ng-template>

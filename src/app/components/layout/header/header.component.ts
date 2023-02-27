@@ -1,20 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, NavController } from '@ionic/angular';
-// import { SearchService } from 'src/app/service/search/search.service';
-// import { ShopingCarService } from 'src/app/service/shoping-car.service';
-// import { GridProductComponent } from '../../product/grid-product.component';
-
 import { Subject } from 'rxjs';
+
 import { LoginService } from 'src/app/services/login.service';
 import { ProductService } from 'src/app/services/product.service';
-
-// import { ProductService } from 'src/app/service/product/product.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  // providers: [GridProductComponent]
 })
+
 export class HeaderComponent implements OnInit {
 
   public numberProductsCar;
@@ -27,18 +22,14 @@ export class HeaderComponent implements OnInit {
   listFiltered = [];
 
   constructor(
-    // public shopinCarService: ShopingCarService,
     public nvCtrl: NavController,
     public loginService: LoginService,
-    // public searchService: SearchService,
     public loadingController: LoadingController,
-    // public grid: GridProductComponent,
     public productService: ProductService,
     public navController: NavController
   ) { }
 
   ngOnInit() {
-    console.log("lo hace")
     this.getCounterCarProducts()
     this.filterList();
     this.hideSearchAnyClickDos()
@@ -47,14 +38,14 @@ export class HeaderComponent implements OnInit {
   }
 
   filterList(): void {
-
     this.productService.getProductsSearch().then(() => {
       this.arraySearchProducts = this.productService.arrayDataProductSearch
     }).finally(() => {
       this.arraySearchProducts.forEach(product => {
         const data = {
           keyWord: product.palabrasClaves,
-          word: product.nameProduct
+          word: product.nameProduct,
+          img_prod: product.img_prod
         }
         this.nameProducts.push(data)
       });
@@ -80,10 +71,6 @@ export class HeaderComponent implements OnInit {
 
         this.listFiltered = newListProducts
           .filter(item => item.keyWord.toLowerCase().indexOf(term.toLowerCase()) >= 0);
-
-        this.listFiltered.forEach(element => {
-          console.log(element.word)
-        });
 
       });
     })

@@ -25,12 +25,16 @@ export class HeaderBackComponent implements OnInit {
   */
   clickToGoBack() {
 
-    if (this.loginService.validateSession()) {
-      if (window.location.pathname.includes("car-detail")) {
-        return this.navCtrl.navigateForward("/tabs/home")
-      } else {
+    setTimeout(() => {
+
+      if (this.loginService.validateSession()) {
+        console.log("ESTE NO")
         return this.navCtrl.back()
+      } else {
+        console.log("ESTE SI")
+        return this.navCtrl.navigateForward("/tabs/welcome")
       }
-    } 
+
+    }, 1000)
   }
 }

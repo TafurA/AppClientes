@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Subject } from 'rxjs';
@@ -12,10 +12,7 @@ import { ShopingCarService } from '../services/shoping-car.service';
   selector: 'app-detail-product',
   templateUrl: './detail-product.page.html',
 })
-export class DetailProductPage implements OnInit {
-
-  private refreshSubject = new Subject<void>();
-  refresh$ = this.refreshSubject.asObservable();
+export class DetailProductPage {
 
   public product = {
     productCode: "",
@@ -48,6 +45,8 @@ export class DetailProductPage implements OnInit {
   isDescuento = false
   porDescuento = "0";
   valorDescuento = "0";
+  public arrayDataProducts = new Array();
+  public loaded = false;
 
   public isDiscountProduct = false
   totalProductDiscount: any;
@@ -59,14 +58,43 @@ export class DetailProductPage implements OnInit {
     public shopingCarService: ShopingCarService,
     public loginService: LoginService,
     public navControler: NavController,
-    public favoriteService: FavoriteService
+    public favoriteService: FavoriteService,
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
   ) {
 
   }
 
-  ngOnInit() {
-    this.validateSession()
+  ionViewDidEnter() {
+    const shouldCache = this.route.snapshot.data.cache !== false;
+    if (!shouldCache) {
+      this.cdr.markForCheck();
+    }
     this.getCounterCarProducts()
+    this.validateSession()
+    this.getProducts()
+  }
+
+  public slideOpts2 = {
+    slidesPerView: "auto",
+    autoHeight: true,
+    preventClicksPropagation: true,
+    preventClicks: true,
+    preventInteractionOnTransition: true,
+    spaceBetween: 16,
+    setWrapperSize: true
+  }
+
+  public async getProducts() {
+    this.loaded = false
+
+    await this.productService.getRelatedProducts(this.product.productCode).then(() => {
+      if (this.productService.isproductsCharged) {
+        this.loaded = true
+      }
+    }).finally(() => {
+      this.arrayDataProducts = this.productService.arrayDataProducts
+    })
   }
 
   public slideOpts = {
@@ -164,14 +192,14 @@ export class DetailProductPage implements OnInit {
       (params: Params) => {
         this.product.productCode = params.idProduct;
         this.productService.getProductDetail(this.product.productCode).then(() => {
-          console.log("this.productService.arrayDetailProduct[0]")
-          console.log(this.productService.arrayDetailProduct[0])
           this.product.galery = []
           this.product.nameProduct = this.productService.arrayDetailProduct[0].nameProduct
           this.product.description = this.productService.arrayDetailProduct[0].descrProduct
-          this.product.price = this.productService.arrayDetailProduct[0].precioSinDcto
-          this.product.precioSinDcto = window.localStorage.getItem("precioConDcto")
+          this.product.price = this.productService.arrayDetailProduct[0].totalValue
+          this.product.precioSinDcto = this.productService.arrayDetailProduct[0].precioSinDcto
           this.product.porcDescuento = this.productService.arrayDetailProduct[0].porcDescuento
+          this.porDescuento = this.productService.arrayDetailProduct[0].porcDescuento
+          this.valorDescuento = this.productService.arrayDetailProduct[0].precioSinDcto
           this.product.imgProduct = this.productService.arrayDetailProduct[0].img_prod1
           this.product.galery.push(this.productService.arrayDetailProduct[0].img_prod1)
           this.product.galery.push(this.productService.arrayDetailProduct[0].img_prod2)
@@ -206,19 +234,7 @@ export class DetailProductPage implements OnInit {
       this.isCashback = true;
     } else if (category == "descuento") {
       this.isDescuento = true;
-      this.refresh$.subscribe(() => {
-        this.porDescuento = localStorage.getItem("porDescuento")
-        this.valorDescuento = localStorage.getItem("precioConDcto")
-        this.product.price = localStorage.getItem("precioSinDcto")
-      })
-      setInterval(() => {
-        this.refresh()
-      }, 100)
     }
-  }
-
-  refresh() {
-    this.refreshSubject.next();
   }
 
   public addQuantitifyProductToCar() {
@@ -229,6 +245,8 @@ export class DetailProductPage implements OnInit {
 
   public removeQuantitifyProductToCar() {
     this.shopingCarService.removeProductQuantity(this.product.productCode, "detail")
+    console.log("this.counterProductsCar")
+    console.log(this.counterProductsCar)
 
     if (this.counterProductsCar == 0) {
       const alert = document.querySelector(".js-alert-product")
@@ -286,7 +304,9 @@ export class DetailProductPage implements OnInit {
 
   private validateSession() {
     if (this.loginService.validateSession()) {
-      this.getProcessDataProductDetail();
+      this.getProcessDataProductDetail().then(() => {
+        this.showcategoryProduct()
+      });
       this.fillArrayFavoriteList();
 
       if (localStorage.getItem("productsCar")) {
@@ -297,10 +317,6 @@ export class DetailProductPage implements OnInit {
           }
         });
       }
-
-      setTimeout(() => {
-        this.showcategoryProduct()
-      }, 100)
 
     } else {
       this.navControler.navigateForward("/tabs/login")

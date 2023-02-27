@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
 
 import { environment } from 'src/environments/environment';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
@@ -17,19 +16,6 @@ export class BannerService {
   constructor(private http: HTTP) { }
 
   async getBannerList() {
-    // await axios.get(`${environment.apiPath}${environment.apiPath}getBanner`, environment.headerConfig).then(response => {
-
-    //   if (response.data.response) {
-    //     for (let index = 0; index < response.data.data.length; index++) {
-    //       const element = response.data.data[index];
-    //       this.arrayDataBanner[index] = element
-    //     }
-    //   }
-
-    // }).finally(() => {
-    //   this.isBannersCharged = true
-    // })
-
     await this.http.get(`${environment.url}${environment.apiPath}getBanner`, "", environment.headers)
       .then(data => {
 
@@ -47,23 +33,14 @@ export class BannerService {
   }
 
   async getBannerDetail(bannerId) {
-    // await axios.get(`${environment.apiPath}/getDetailBanner?codigo=${bannerId}`, environment.headerConfig).then(response => {
-
-    //   this.arrayDataProducts = []
-
-    //   this.arrayDetailBanner = response.data.dataBanner
-
-    //   for (let index = 0; index < response.data.dataProduct.length; index++) {
-    //     const element = response.data.dataProduct[index];
-    //     this.arrayDataProducts[index] = element
-    //   }
-
-    // })
 
     await this.http.get(`${environment.url}${environment.apiPath}getDetailBanner?codigo=${bannerId}`, "", environment.headers)
       .then(data => {
 
         const dataBennerTemp = JSON.parse(data.data)
+
+        console.log("BANNER SERVICE")
+        console.log(dataBennerTemp)
 
         this.arrayDataProducts = []
 

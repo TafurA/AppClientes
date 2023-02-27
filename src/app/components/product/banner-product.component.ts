@@ -9,6 +9,7 @@ export class BannerProductComponent implements OnInit {
 
   public arrayDataProducts = new Array();
   public bannerId;
+  productsNull = false;
 
   constructor(public bannerService: BannerService, private rutaActiva: ActivatedRoute) { }
 
@@ -20,6 +21,9 @@ export class BannerProductComponent implements OnInit {
     this.bannerService.getBannerDetail(this.getActiveBannerId()).finally(() => {
       this.fillArrayProducts().then(() => {
         console.log(this.arrayDataProducts)
+        if (this.arrayDataProducts.length < 1) {
+          this.productsNull = true;
+        }
       })
     })
   }

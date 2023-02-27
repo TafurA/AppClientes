@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   public isNormalProduct = true;
   public isDiscountProduct = false;
   public isCashbackProduct = false;
+  public isAnonymousUser = false;
 
 
   public totalProductDiscount: any
@@ -38,6 +39,13 @@ export class ProductComponent implements OnInit {
 
   ngOnInit() {
     this.initAllFunctionsProduct()
+
+    if (!this.loginService.validateSession()) {
+      this.isAnonymousUser = true
+    }
+
+    console.log("isAnonymousUser")
+    console.log(this.isAnonymousUser)
   }
 
   async initAllFunctionsProduct() {
@@ -103,6 +111,9 @@ export class ProductComponent implements OnInit {
     } else {
       localStorage.removeItem("categoryProduct")
     }
+
+    console.log("AQUIIIIII SI DEVERIAAA")
+    console.log(this.productObject)
 
   }
 

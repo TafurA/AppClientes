@@ -37,7 +37,7 @@ export class CategoryProductComponent implements OnInit {
   }
 
   public slideOpts = {
-    slidesPerView: 3,
+    slidesPerView: "auto",
     autoHeight: true,
     // autoplay: {
     //   delay: 2000

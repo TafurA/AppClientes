@@ -47,7 +47,9 @@ export class LoginPage implements OnInit {
     const dataForm = this.loginForm.value;
 
     if (dataForm.user != "" || dataForm.password != "") {
-      this.loginService.loginToSystem(dataForm.user, dataForm.password);
+      this.loginService.loginToSystem(dataForm.user, dataForm.password).finally(() => {
+        this.loginForm.reset()
+      });
     }
 
   }

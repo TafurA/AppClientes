@@ -4,15 +4,12 @@ import { HeaderBackComponent } from '../components/layout/header-back/header-bac
 
 import { LoginService } from '../services/login.service';
 import { ShopingCarService } from '../services/shoping-car.service';
-import { Subject } from 'rxjs';
 @Component({
   selector: 'app-car',
   templateUrl: './car.page.html',
   providers: [HeaderBackComponent]
 })
 export class CarPage implements OnInit {
-  private refreshSubject = new Subject<void>();
-  refresh$ = this.refreshSubject.asObservable();
 
   public arrayProducts = new Array()
   public arrayCashback = new Array()
@@ -42,13 +39,14 @@ export class CarPage implements OnInit {
     public nvCtrl: NavController,
   ) { }
 
-  ngOnInit() {
-    this.refresh$.subscribe(() => {
-      this.setProductsIntoArray().finally(() => {
-        this.loaded = true;
-      })
-    })
+  ngOnInit(): void {
 
+  }
+
+  ionViewDidEnter() {
+    this.setProductsIntoArray().finally(() => {
+      this.loaded = true;
+    })
 
     this.shopingService.getClientCashback(this.loginService.getUserCode()).then(() => {
       this.arrayCashback = this.shopingService.arrayDataCashback
@@ -64,14 +62,6 @@ export class CarPage implements OnInit {
       this.getPriceTotalProducts()
       this.getPriceProcess()
     })
-
-    setInterval(() => {
-      this.refresh()
-    }, 1000)
-  }
-
-  refresh() {
-    this.refreshSubject.next();
   }
 
   public getCarLocalStorage() {
@@ -141,37 +131,29 @@ export class CarPage implements OnInit {
     this.totalProductPrice = 0
 
     if (this.getCarLocalStorage()) {
-      this.getCarLocalStorage().forEach(product => {
-        const productQuantity = parseFloat(product.price) * product.quantityProduct
-        this.totalProductPrice = this.totalProductPrice + productQuantity
-        this.getPriceProcess()
-      });
+      this.getTotalAndSubtotal()
     } else {
       this.nvCtrl.navigateForward("/tabs/home")
     }
 
   }
 
+  storageCategoryProduct(object) {
+    const descuentoFormated = parseInt(object.porcDescuento)
+
+    if (object.valor > "0") {
+      localStorage.setItem("categoryProduct", "cashback")
+    } else if (descuentoFormated.toFixed(0) > "0") {
+      localStorage.setItem("categoryProduct", "descuento")
+    } else {
+      localStorage.removeItem("categoryProduct")
+    }
+  }
+
   public getPriceTotalProductsRemove() {
     setTimeout(() => {
       if (this.getCarLocalStorage()) {
-        this.subtotalProductPrice = 0
-
-        this.getCarLocalStorage().forEach(product => {
-          const productQuantity = parseFloat(product.price) * product.quantityProduct
-
-          this.subtotalProductPrice = this.subtotalProductPrice + productQuantity
-
-          if (this.isCashbackApply) {
-            this.totalProductPrice = this.subtotalProductPrice - this.totalCashback
-          } else {
-            this.totalProductPrice = this.subtotalProductPrice
-          }
-
-        });
-
-        this.subtotalProductPrice = parseFloat(this.subtotalProductPrice).toFixed(3)
-        this.getPriceProcess()
+        this.getTotalAndSubtotal()
       } else {
         this.nvCtrl.navigateForward("/tabs/home").then(() => {
           document.querySelector(".js-ico-car").classList.add("test")
@@ -181,6 +163,28 @@ export class CarPage implements OnInit {
         })
       }
     }, 400)
+  }
+
+  public getTotalAndSubtotal() {
+    this.subtotalProductPrice = 0
+
+    this.getCarLocalStorage().forEach(product => {
+      const productQuantity = parseFloat(product.price) * product.quantityProduct
+
+      this.subtotalProductPrice = this.subtotalProductPrice + productQuantity
+
+      if (this.isCashbackApply) {
+        this.totalProductPrice = this.subtotalProductPrice - this.totalCashback
+      } else {
+        this.totalProductPrice = this.subtotalProductPrice
+      }
+
+    });
+
+    this.subtotalProductPrice = parseFloat(this.subtotalProductPrice).toFixed(3)
+    this.getPriceProcess()
+
+    this.saveOrderDetailIntoLocalStorage()
   }
 
   public selectCashback(cashbackObject) {
@@ -208,7 +212,7 @@ export class CarPage implements OnInit {
 
   public getPriceProcess(): any {
     this.totalProductPriceProcess = parseFloat(this.totalProductPrice).toFixed(3)
-    
+
     if (
       parseFloat(parseFloat(this.totalProductPriceProcess).toFixed(3))
       > parseFloat(parseFloat(this.minimoComra).toFixed(3))

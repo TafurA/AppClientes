@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import { AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 import { LoginService } from '../services/login.service';
 import { BannerService } from '../services/banner.service';
-import { BannerComponent } from '../components/banner/banner.component';
-import { MarcasComponent } from '../components/marcas/marcas.component';
 import { MarcasService } from '../services/marcas.service';
-import { CategoryComponent } from '../components/category/category.component';
 import { CategoryService } from '../services/category.service';
 import { ProductService } from '../services/product.service';
+
+import { BannerComponent } from '../components/banner/banner.component';
+import { MarcasComponent } from '../components/marcas/marcas.component';
+import { CategoryComponent } from '../components/category/category.component';
 import { ProductComponent } from '../components/product/product/product.component';
 import { ListProductComponent } from '../components/product/list-product.component';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -31,24 +33,77 @@ import { AlertController } from '@ionic/angular';
     ListProductComponent
   ]
 })
+
 export class HomePage implements OnInit {
 
   listAddress = []
   codeConfirmAddress = ""
   buttonConfirmAddres = false;
 
-  constructor(private loginService: LoginService, private alertController: AlertController) {
+  public arrayDataProducts = new Array();
+  public loaded = false;
+
+  constructor(
+    private loginService: LoginService,
+    private alertController: AlertController,
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
+    public productService: ProductService
+  ) {
   }
 
   ngOnInit() {
-    if (this.loginService.validateSession()) {
-      setTimeout(() => {
-        if (
-          localStorage.getItem("AddressList") != "null") {
-          this.listOfAddress()
+
+  }
+
+  ionViewDidEnter() {
+    console.log("HAZLO MI REY :((")
+    console.log(this.route.snapshot.data.cache)
+    const shouldCache = this.route.snapshot.data.cache !== false;
+    if (!shouldCache) {
+      console.log("ESTA AQUI")
+      this.cdr.markForCheck();
+
+      if (sessionStorage.getItem("addressOk") !== "true") {
+        if (this.loginService.validateSession()) {
+          setTimeout(() => {
+            if (
+              localStorage.getItem("AddressList") != "null") {
+              console.log("MOSTRO O NO MOSOTRO?")
+              this.listOfAddress()
+            }
+          }, 1000)
         }
-      }, 1000)
+      }
+
+      this.getProducts()
     }
+  }
+
+  public slideOpts = {
+    slidesPerView: "auto",
+    autoHeight: true,
+    preventClicksPropagation: true,
+    preventClicks: true,
+    preventInteractionOnTransition: true,
+    spaceBetween: 16,
+    setWrapperSize: true
+  }
+
+  public async getProducts() {
+    this.loaded = false;
+
+    await this.productService.getCurrentProducts().then(() => {
+      if (this.productService.isproductsCharged) {
+        this.loaded = true
+      }
+    }).finally(() => {
+      this.arrayDataProducts = this.productService.arrayDataProducts
+    })
+  }
+
+  async fillArrayProducts() {
+    this.arrayDataProducts = this.productService.arrayDataProducts
   }
 
   public listOfAddress() {
@@ -61,6 +116,7 @@ export class HomePage implements OnInit {
 
     setTimeout(() => {
       alert.classList.add("is-show")
+      alert.classList.remove("none")
       const dataList = JSON.parse(localStorage.getItem("AddressList"))
       this.listAddress = dataList
     }, 2000)
@@ -69,6 +125,8 @@ export class HomePage implements OnInit {
     setTimeout(() => {
       this.validateAddressCode()
     }, 3000);
+
+    sessionStorage.setItem("addressOk", "true")
   }
 
   public validateAddressCode() {

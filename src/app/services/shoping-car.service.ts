@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
+import { AlertController } from '@ionic/angular';
 import axios from 'axios';
 
 import { environment } from 'src/environments/environment';
@@ -40,8 +41,9 @@ export class ShopingCarService {
   public arrayDataSeller = new Array()
   public idOrderCurrent: any;
   msjOrder: any;
+  isOrderOkey = true;
 
-  constructor(public loginService: LoginService, private http: HTTP) { }
+  constructor(public loginService: LoginService, private http: HTTP, public alertController: AlertController) { }
 
   public async getProductData(currentProduct) {
     this.product.productCode = currentProduct.codeProduct
@@ -141,7 +143,6 @@ export class ShopingCarService {
         if (booleanTest) {
           alertProduct.querySelector(".c-add-car").classList.add("test")
           this.alertProduct("success")
-          console.log("AQUIIIII")
           setTimeout(() => {
             alertProduct.classList.remove("is-show")
           }, 1500)
@@ -149,9 +150,6 @@ export class ShopingCarService {
             alertProduct.querySelector(".c-add-car").classList.remove("test")
           }, 1600)
         }
-
-        console.log("ES ESTEEE AQUIIII")
-        console.log(product)
 
         temporalProduct.productCode = product.productCode
         temporalProduct.nameProduct = product.nameProduct
@@ -454,19 +452,22 @@ export class ShopingCarService {
       .then(data => {
 
         const dataTem = JSON.parse(data.data)
+        this.msjOrder = dataTem.message
+
+        console.log("EL URO DATAAA")
+        console.log(dataTem)
 
         if (dataTem.response) {
           this.idOrderCurrent = dataTem.idpedido
-          this.msjOrder = dataTem.msj
         } else {
-          console.log("ERROR CREANDO LA ORDEN")
-          console.log(data)
+          this.isOrderOkey = false;
+          this.presentAlert("Error creando orden", this.msjOrder)
         }
 
       })
       .catch(error => {
-        console.log("error");
-        console.log(error);
+        this.isOrderOkey = false;
+        this.presentAlert("Crear order", error)
       });
   }
 
@@ -511,6 +512,17 @@ export class ShopingCarService {
       alertProduct.classList.add("is-show")
     }
 
+  }
+
+  async presentAlert(title: string, description: string) {
+    this.alert = await this.alertController.create({
+      header: title,
+      subHeader: description,
+      cssClass: `c-alert is-error`,
+      buttons: ['Aceptar'],
+    });
+
+    await this.alert.present();
   }
 
   public closeAlert() {

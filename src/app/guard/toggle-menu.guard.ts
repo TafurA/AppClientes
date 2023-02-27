@@ -11,6 +11,9 @@ export class ToggleMenuGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     setTimeout(() => {
       console.log('current url:', window.location.pathname);
+      // setTimeout(() => {
+      //   (document.querySelector("chatIframe") as HTMLElement).style.display = "none"
+      // }, 2000)
       if (window.location.pathname.includes("sidebar-menu")) {
         document.querySelector("app-header").classList.add("test")
         document.querySelector("ion-tab-bar").classList.remove("test")
@@ -25,7 +28,7 @@ export class ToggleMenuGuard implements CanActivate {
         window.location.pathname.includes("favorite") ||
         window.location.pathname.includes("poll") ||
         window.location.pathname.includes("register") ||
-        window.location.pathname.includes("car")||
+        window.location.pathname.includes("car") ||
         window.location.pathname.includes("update-personal-data") ||
         window.location.pathname.includes("update-credentials") ||
         window.location.pathname.includes("updated-password") ||

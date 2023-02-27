@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChatBotGuard } from '../guard/chat-bot.guard';
 import { SessionGuard } from '../guard/session.guard';
 import { ToggleMenuGuard } from '../guard/toggle-menu.guard';
 import { TabsPage } from './tabs.page';
@@ -10,21 +11,9 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
-      },
-      {
-        path: 'tab2/:codigo',
-        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
-      {
         path: 'login',
         loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
       },
       {
         path: 'register',
@@ -39,27 +28,28 @@ const routes: Routes = [
       {
         path: 'welcome',
         loadChildren: () => import('../welcome/welcome.module').then(m => m.WelcomePageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
       },
       {
         path: 'profile',
         loadChildren: () => import('../profile/profile.module').then(m => m.ProfilePageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
       },
       {
         path: 'home',
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
+        data: { cache: false }
       },
       {
         path: 'sidebar-menu',
         loadChildren: () => import('../sidebar-menu/sidebar-menu.module').then(m => m.SidebarMenuPageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
       },
       {
         path: 'offert',
         loadChildren: () => import('../offert/offert.module').then(m => m.OffertPageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
       },
       {
         path: 'car',
@@ -89,7 +79,7 @@ const routes: Routes = [
       {
         path: 'order-history',
         loadChildren: () => import('../order-history/order-history.module').then(m => m.OrderHistoryPageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
       },
       {
         path: 'update-credentials',
@@ -114,11 +104,12 @@ const routes: Routes = [
       {
         path: 'favorite',
         loadChildren: () => import('../favorite/favorite.module').then(m => m.FavoritePageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, ChatBotGuard],
       },
       {
         path: 'support',
-        loadChildren: () => import('../support/support.module').then(m => m.SupportPageModule)
+        loadChildren: () => import('../support/support.module').then(m => m.SupportPageModule),
+        canActivate: [ChatBotGuard]
       },
       {
         path: 'detail-product/:idProduct',
