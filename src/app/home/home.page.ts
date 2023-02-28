@@ -57,11 +57,8 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log("HAZLO MI REY :((")
-    console.log(this.route.snapshot.data.cache)
     const shouldCache = this.route.snapshot.data.cache !== false;
     if (!shouldCache) {
-      console.log("ESTA AQUI")
       this.cdr.markForCheck();
 
       if (sessionStorage.getItem("addressOk") !== "true") {

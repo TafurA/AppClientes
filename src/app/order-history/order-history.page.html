@@ -84,12 +84,16 @@
               <label class="o-information__input">Total de la compra: <strong>{{ order.valped_b }}</strong></label>
               <label class="o-information__input">Número de productos: <strong>{{ order.productos }}</strong></label>
 
-              <a
-                class="o-link o-link_secondary"
-                [routerLink]="['/tabs/order-detail/', order.idpedido]"
-              >
-                VER DETALLES
-              </a>
+              <div>
+                <a
+                  class="o-link o-link_secondary"
+                  [routerLink]="['/tabs/order-detail/', order.idpedido]"
+                >
+                  VER DETALLES
+                </a>
+
+                <app-modal [modalid]="typeOrder.orderType + order.idpedido"></app-modal>
+              </div>
 
             </div>
 
