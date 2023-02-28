@@ -49,3 +49,13 @@
   font-weight: $f-semibold;
   color: $c-primary;
 }
+
+.o-footer-btn{
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+  height: auto;
+  justify-content: flex-start;
+  background-color: $c-gray-10;
+  
+}

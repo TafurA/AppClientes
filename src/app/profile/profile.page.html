@@ -45,6 +45,318 @@
       </div>
 
     </div>
+    <!-- Credentials -->
+    <div class="o-information">
+      
+      <h2 class="o-information__title">Puntos de envío</h2>
+      
+      <div class="o-information__form">
+        
+        <label class="o-information__label" for="">DIRECCIÓN</label>
+        <input class="o-information__input" type="text" value="{{ shippingPoint }}">
+        <label class="o-information__label" for="">BARRIO</label>
+        <input class="o-information__input" type="text" value="{{ neighborhood }}">
+<div class="o-footer-btn">
+  <button class="o-link o-link_secondary i-plus" id="open-modal" >AGREGAR</button>
+  <button class="o-link o-link_secondary  i-trash" (click)="removeShippingPoint()">ELIMINAR</button>
+
+</div>
+      </div>
+
+    </div>
+
+
+    <!-- modal hacer pun puntos de envio -->
+    <!-- //modal  -->
+    <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+      <ng-template class="o-canvas">
+        <ion-content class="ion-padding content-modal ">
+
+          
+          <a class="o-button-ico i-arrow-left o-btn-back" (click)="cancel()"></a>
+          
+          <div class="c-welcome">
+            
+          
+          <!-- Logo Surtilider -->
+          <figure class="o-logo">
+            <img class="o-img" src="assets/image/logo_color.svg" alt="Logo a color de Surtilider SAS">
+          </figure>
+  
+          <h1 class="o-headline__title">¡Surtimos con Liderazgo!</h1>
+          <p class="o-headline__text o-color-light">
+            Si tienes una nueva sede o quieres que tus pedidos lleguen a otra dirección, Aquí podrás enviar una solicitud para agregar un nuevo punto de envío.
+          </p>
+        <!-- Car image -->
+        <figure class="c-welcome_figure">
+          <img class="o-img" src="assets/image/car.png" alt="Carro repartidos de Surtilider SAS">
+        </figure>  
+        </div>
+
+        <form class="o-form" [formGroup]="shippingForm">
+
+    
+          <div class="o-form__field">
+            <div class="o-form__field-wrap">
+              <select 
+              id="barrio"
+              class="o-form__input"
+              type="text"
+              formControlName="barrio"
+              >
+              <option value="" >Barrio</option>
+              <option *ngFor="let datos of listBarrios" value="{{datos.desbar_b}}" >
+                {{datos.desbar_b}}
+              </option>
+            </select>
+          </div>
+          <span class="o-form__error">{{ getError('barrio')}}</span> 
+          </div>
+          <div class="o-form__field">
+            <div class="o-form__field-wrap">
+              
+              <select 
+                id="municipio"
+                class="o-form__input"
+                formControlName="municipio"
+              >
+              <option  value="" >Municipio</option>
+                <option *ngFor="let datos of dataMunicipios" value="{{datos.nombre}}" >
+                  {{datos.nombre}}
+                </option>
+              </select>
+            </div>
+             <span class="o-form__error">{{ getError('municipio')}}</span> 
+          </div>
+          
+          
+          
+          
+          <div class="o-form__field">
+            <div class="o-form__field-wrap">
+              <ion-select interface="popover"
+              id="dirparam1"
+              class="o-form__input"
+              placeholder="Seleccione"
+              formControlName="dirparam1"
+              (ionChange)="validarNomenclatura($event)"
+              >
+              <ion-select-option value="">Seleccionar</ion-select-option>
+              <ion-select-option  *ngFor="let paramNomen of tipo1" value="{{paramNomen.abreviatura}}">{{paramNomen.abreviatura}} ({{paramNomen.descripcion}})</ion-select-option>
+            </ion-select>
+              </div>
+              <span class="o-form__error">{{ getError('dirparam1')}}</span>   
+            </div>
+            
+    <div class=" column">
+
+          <div class="o-form__field">
+            <div class="o-form__field-wrap">
+                <ion-input
+                
+                  id="dirparam2"
+                  class="o-form__input"
+                  type="tel"
+                  placeholder="#"
+                  formControlName="dirparam2"
+                >
+                
+                </ion-input>	
+              </div> 
+              
+              <span class="o-form__error">{{ getError('dirparam2')}}</span>                     
+          </div>
+
+          <div class="o-form__field">
+              <div class="o-form__field-wrap" >
+                <ion-select
+                  interface="popover"
+                  id="param3"
+                  class="o-form__input"
+                  placeholder="Seleccione"
+                  formControlName="dirparam3"
+                >
+                <ion-select-option value="">Seleccionar</ion-select-option>
+                <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}">{{param.descripcion}}</ion-select-option>
+                
+                </ion-select>
+            </div>
+          </div>
+    </div>
+    <div class=" column">
+
+          <div class="o-form__field" *ngIf="nomenclatura=='Mostrar'">
+          <div class="o-form__field-wrap">
+                <ion-select
+                  interface="popover"
+                  id="param4"
+                  class="o-form__input"
+                  placeholder="mostrar"
+                  formControlName="dirparam4"
+                >
+                <ion-select-option value="">Seleccionar</ion-select-option>
+                <ion-select-option  *ngFor="let param of tipo3" value="{{param.abreviatura}}">{{param.abreviatura}} ({{param.descripcion}})</ion-select-option>
+                
+                </ion-select>
+              </div>
+            </div>     
+  
+            <div class="o-form__field">
+              <div class="o-form__field-wrap" >
+                <ion-input
+                  id="param5"
+                  class="o-form__input"
+                  placeholder="#"
+                  type="tel"
+                  formControlName="dirparam5"
+                ></ion-input>
+              </div>
+              <span class="o-form__error">{{ getError('dirparam5')}}</span>                        
+            </div>
+        
+  </div>
+  <div class=" column">
+          <div class="o-form__field">
+            <div class="o-form__field-wrap">
+                <ion-select  interface="popover"
+                  id="param6"
+                  class="o-form__input"
+                  placeholder="Seleccione"
+                  formControlName="dirparam6"
+                >
+                <ion-select-option value="">Seleccionar</ion-select-option>
+                <ion-select-option  *ngFor="let param of tipo7" value="{{param.descripcion}}">{{param.descripcion}}</ion-select-option>
+                
+                </ion-select>
+              </div>
+          </div>
+
+          <div class="o-form__field">
+            <div class="o-form__field-wrap">
+                <ion-input interface="popover"
+                  id="param7"
+                  class="o-form__input"
+                  placeholder="#"
+                  type="tel"
+                  formControlName="dirparam7"
+                >
+                </ion-input>
+              </div>                     
+              <span class="o-form__error">{{ getError('dirparam7')}}</span> 
+          </div>
+  </div>
+  <div class=" column">        
+          <div class="o-form__field" *ngIf="nomenclatura2=='Mostrar'">
+            <div class="o-form__field-wrap">
+                <ion-select
+                  interface="popover"
+                  id="param8"
+                  class="o-form__input"
+                  placeholder="mostrar"
+                  formControlName="dirparam8"
+                >
+                <ion-select-option   value=""> Seleccione </ion-select-option>
+                <ion-select-option  *ngFor="let param of tipo3" value="{{param.abreviatura}}"> {{param.abreviatura}} ({{param.descripcion}})</ion-select-option>
+                
+                </ion-select>
+            </div>
+          </div>
+
+  </div> 
+          <div class="o-form__field" >
+
+            <button class="o-button btn-modal"  (click)="otherNomenclatures()" >{{textBotton}}</button>
+
+          </div>
+
+        
+  <div class=" column"> 
+                <div class="o-form__field" *ngIf="otherNomen">
+                  <div class="o-form__field-wrap" >
+                    <ion-select
+                      interface="popover"
+                      id="param9"
+                      class="o-form__input"
+                      placeholder="Seleccione"
+                      formControlName="dirparam9"
+                    >
+                    <ion-select-option value="">Seleccionar</ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo5" value="{{param.abreviatura}}"> {{param.abreviatura}} ({{param.descripcion}}) </ion-select-option>
+                    
+                    </ion-select>
+                    
+                  </div> 
+                  
+                                    
+                </div>
+                <div class="o-form__field" *ngIf="otherNomen">
+                  <div class="o-form__field-wrap" >
+                    <ion-input
+                    
+                      id="dirparam10"
+                      class="o-form__input"
+                      type="tel"
+                      placeholder="#"
+                      formControlName="dirparam10"
+                    >
+                    </ion-input>	
+                    
+                  </div>
+                  <span class="o-form__error">{{ getError('dirparam10')}}</span>   
+                </div>
+
+  </div>
+  <div class=" column"> 
+                <div class="o-form__field" *ngIf="otherNomen">
+                  <div class="o-form__field-wrap">
+                    <ion-select
+                      interface="popover"
+                      id="dirparam11"
+                      class="o-form__input"
+                      placeholder="Seleccione"
+                      formControlName="dirparam11"
+                    >
+                    <ion-select-option value="">Seleccionar</ion-select-option>
+                    <ion-select-option  *ngFor="let param of tipo5" value="{{param.abreviatura}}"> {{param.abreviatura}} ({{param.descripcion}})</ion-select-option>
+                    
+                    </ion-select>
+                  </div>
+                </div>
+
+                <div class="o-form__field" *ngIf="otherNomen">
+                  <div class="o-form__field-wrap" >
+                    <ion-input
+                    
+                      id="dirparam12"
+                      class="o-form__input"
+                      type="tel"
+                      placeholder="#"
+                      formControlName="dirparam12"
+                    >
+                    </ion-input>	
+                  </div> 
+                  
+                  <span class="o-form__error">{{ getError('dirparam12')}}</span>                     
+                </div>
+                
+
+              </div>
+          
+          <div class="o-form__field">
+
+            <button class="o-button" (click)="confirm()" [disabled]="shippingForm.invalid" >Envíar solicitud</button>
+          
+          </div>
+        </form>
+         
+        </ion-content>
+      </ng-template>
+    </ion-modal>
+    <!-- modal hacer pun puntos de envio -->
+
+
+
+
 
   </div>
 
