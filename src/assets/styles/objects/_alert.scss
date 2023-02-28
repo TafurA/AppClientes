@@ -356,8 +356,9 @@
 
 
 .clasificacion {
-  direction: rtl;
-  display: inline;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
 @keyframes rotateAnimation {

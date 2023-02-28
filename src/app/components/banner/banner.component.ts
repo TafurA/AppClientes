@@ -24,7 +24,6 @@ export class BannerComponent {
   constructor(private bannerService: BannerService) { }
 
   ngAfterViewInit() {
-    console.log("ajkkjajka si o si")
     this.bannerService.getBannerList().then(() => {
       if (this.bannerService.isBannersCharged) {
         this.loaded = true
@@ -33,10 +32,6 @@ export class BannerComponent {
       this.bannerList = this.bannerService.arrayBanner()
     });
   }
-
-  // ngAfterViewInit() {
-  //   this.fillArrayList()
-  // }
 
   public slideOpts = {
     slidesPerView: "auto",

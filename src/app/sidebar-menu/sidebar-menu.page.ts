@@ -31,11 +31,8 @@ export class SidebarMenuPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    console.log("jKAJAJJAJAJA ME MUESTRA SIEMRE ESTE H Y YO SUFRIENDO")
-
     const shouldCache = this.route.snapshot.data.cache !== false;
     if (!shouldCache) {
-      console.log("ESTA AQUI dos")
       this.cdr.markForCheck();
       this.validateSession();
     } else {
@@ -49,7 +46,6 @@ export class SidebarMenuPage implements OnInit {
   }
 
   validateSession() {
-    console.log("EEEEE")
     if (!localStorage.userSessionData) {
       this.navController.navigateForward("/tabs/login")
     } else {
@@ -61,8 +57,6 @@ export class SidebarMenuPage implements OnInit {
     this.userName = `${this.loginService.validateSession()['nomcli_b']} ${this.loginService.validateSession()['ape1cli_b']}`
     this.userCashback = `${this.loginService.validateSession()['valor_acomulado']}`
 
-    console.log("this.userName")
-    console.log(this.userName)
     if (this.userName.includes("undefined")) {
       this.navController.navigateForward("/tabs/welcome")
 

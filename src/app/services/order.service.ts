@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HTTP } from '@awesome-cordova-plugins/http/ngx';
-import axios from 'axios';
+
 import { environment } from 'src/environments/environment';
+
 import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class OrderService {
 
   public arrayDataOrders = []
@@ -99,39 +101,13 @@ export class OrderService {
       });
   }
 
-  // async getOrderById(orderId) {
-  //   this.arrayCurrentOrderDetial = []
-  //   const storageOrders = JSON.parse(localStorage.ordersUser)
+  async sendSatisfiedForm(numfac_b, estado, observacion) {
+    await this.http.get(`${environment.url}${environment.apiPath}getDelivery?numfac_b=${numfac_b}&estado=${estado}&observacion=${observacion}`, "", environment.headers)
+      .then(data => {
+        console.log(data)
 
-  //   for (const key in storageOrders) {
-  //     const order = storageOrders[key];
-
-  //     order.order.forEach(orderDetail => {
-
-  //       if (orderDetail.idpedido == orderId) {
-
-  //         const currentOrderDetail = {
-  //           address: orderDetail.dircli_b,
-  //           status: orderDetail.estped_b,
-  //           date: orderDetail.fecha,
-  //           name: orderDetail.nomcli_b,
-  //           orderId: orderDetail.idpedido,
-  //           phone: orderDetail.telcli_b,
-  //           totalValue: orderDetail.valped_b,
-  //           vendedorEncargado: orderDetail.venped_b,
-  //         }
-
-  //         this.arrayCurrentOrderDetial.push(currentOrderDetail)
-
-  //       }
-
-  //     });
-
-  //   }
-
-  //   console.log("NUEVO ORDER DETAIL")
-  //   console.log(this.arrayCurrentOrderDetial)
-  // }
+      })
+  }
 
   private getClientCode() {
     return this.loginService.validateSession()['codcli_b'];

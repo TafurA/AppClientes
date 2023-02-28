@@ -16,15 +16,6 @@ export class CategoryService {
   }
 
   async getCategoryList() {
-    // await axios.get(`${environment.apiPath}/getCategory`, environment.headerConfig).then(response => {
-
-    //   for (let index = 0; index < response.data.data.length; index++) {
-    //     const element = response.data.data[index];
-    //     this.arrayDataCategory[index] = element
-    //   }
-
-    // })
-
     await this.http.get(`${environment.url}${environment.apiPath}getCategory`, "", environment.headers)
       .then(data => {
 
@@ -34,14 +25,10 @@ export class CategoryService {
           this.arrayDataCategory[index] = element
         }
 
-        console.log("this.arrayDataCategory")
-        console.log(this.arrayDataCategory)
-
       })
       .catch(error => {
         console.log("error categorias");
         console.log(error);
-
       });
   }
 

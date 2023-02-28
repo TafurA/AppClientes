@@ -24,15 +24,10 @@ export class MarcasService {
           const element = dataMarcasTemp.data[index];
           this.arrayDataMarcas[index] = element
         }
-
-        console.log("this.arrayDataMarcas")
-        console.log(this.arrayDataMarcas)
-
       })
       .catch(error => {
         console.log("error marcas");
         console.log(error);
-
       });
   }
 

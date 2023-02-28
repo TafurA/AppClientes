@@ -8,6 +8,7 @@ import { OrderHistoryPageRoutingModule } from './order-history-routing.module';
 
 import { OrderHistoryPage } from './order-history.page';
 import { HeaderBackComponent } from '../components/layout/header-back/header-back.component';
+import { ModalComponent } from '../components/modal/modal.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { HeaderBackComponent } from '../components/layout/header-back/header-bac
     IonicModule,
     OrderHistoryPageRoutingModule
   ],
-  declarations: [OrderHistoryPage, HeaderBackComponent]
+  declarations: [OrderHistoryPage, HeaderBackComponent, ModalComponent]
 })
 export class OrderHistoryPageModule {}
