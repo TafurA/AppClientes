@@ -110,3 +110,11 @@
   align-items: center;
   row-gap: 16px;
 }
+
+.column{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
