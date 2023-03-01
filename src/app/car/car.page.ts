@@ -16,8 +16,8 @@ export class CarPage implements OnInit {
   isRemoved = false;
   isCashbackApply = false
   isSellerApply = false
-  public totalProductPrice: any = 0
-  public subtotalProductPrice: any = 0
+  public totalProductPrice: number = 0
+  public subtotalProductPrice: number = 0
   public totalProductPriceProcess: any = 0
   public isTotalCompra = false
   public totalCashback: any = 0
@@ -57,7 +57,7 @@ export class CarPage implements OnInit {
     })
 
     this.shopingService.getMinimoCompra(this.loginService.validateSession()['bodcli_b']).then(() => {
-      this.minimoComra = parseFloat(localStorage.getItem("MinimoCompra")).toFixed(3)
+      this.minimoComra = parseFloat(localStorage.getItem("MinimoCompra"))
     }).finally(() => {
       this.getPriceTotalProducts()
       this.getPriceProcess()
@@ -181,7 +181,7 @@ export class CarPage implements OnInit {
 
     });
 
-    this.subtotalProductPrice = parseFloat(this.subtotalProductPrice).toFixed(3)
+    this.subtotalProductPrice = this.subtotalProductPrice
     this.getPriceProcess()
 
     this.saveOrderDetailIntoLocalStorage()
@@ -190,9 +190,9 @@ export class CarPage implements OnInit {
   public selectCashback(cashbackObject) {
     let totalWithCashback = 0
     this.subtotalProductPrice = this.getPriceProcess()
-    totalWithCashback = this.getPriceProcess() - parseFloat(cashbackObject.dinero)
-    this.totalCashback = parseFloat(cashbackObject.dinero).toFixed(3)
-    this.totalProductPriceProcess = totalWithCashback.toFixed(3)
+    totalWithCashback = this.getPriceProcess() - cashbackObject.dinero
+    this.totalCashback = cashbackObject.dinero
+    this.totalProductPriceProcess = totalWithCashback
     this.isCashbackApply = true
     document.querySelector(".js-car-dropdown").classList.remove("is-dropdown-show")
 
@@ -210,11 +210,59 @@ export class CarPage implements OnInit {
   }
 
   public getPriceProcess(): any {
-    this.totalProductPriceProcess = parseFloat(this.totalProductPrice).toFixed(3)
+    this.totalProductPriceProcess = this.totalProductPrice
+
+    console.log("ESTEEE")
+
+    let num = this.totalProductPriceProcess;
+    let numFormatted = num.toString(); // "495.05"
+    let decimalIndex = numFormatted.indexOf("."); // 3
+    if (decimalIndex === -1) {
+      numFormatted += ".000"; // si no hay decimales, se agregan tres ceros al final
+    } else {
+      let decimals = numFormatted.substring(decimalIndex + 1); // "05"
+      if (decimals.length < 3) {
+        numFormatted += "0".repeat(3 - decimals.length); // si hay menos de tres decimales, se agregan los ceros faltantes
+      }
+    }
+
+    console.log("DOS INTNER")
+    console.log(this.totalProductPriceProcess)
+    console.log(this.totalProductPriceProcess.toString().length)
+
+    // if (this.totalProductPriceProcess.toString().length == 5) {
+    //   const este = parseFloat(numFormatted).toLocaleString('en-US') + "00"
+    //   console.log("ANTES")
+    //   console.log(este)
+    //   this.totalProductPriceProcess = este
+    //   console.log("desues 00")
+    //   console.log(this.totalProductPriceProcess)
+    // }
+    // else if (this.totalProductPriceProcess.toString().length == 7 || this.totalProductPriceProcess.toString().length == 6) {
+    //   const este = parseFloat(numFormatted).toLocaleString('en-US') + "0"
+    //   console.log("ANTES")
+    //   console.log(este)
+    //   this.totalProductPriceProcess = este
+    //   console.log("desues")
+    //   console.log(this.totalProductPriceProcess)
+    // } else {
+    //   console.log(parseFloat(numFormatted).toLocaleString('en-US'))
+    // }
+    
+    const options = {
+      style: 'decimal',
+      minimumFractionDigits: 3,
+      maximumFractionDigits: 3,
+      useGrouping: true
+    };
+
+    console.log("parseFloat(numFormatted).toLocaleString('en-US')")
+    console.log(parseFloat(numFormatted).toLocaleString('en-US', options))
+    this.totalProductPriceProcess = parseFloat(numFormatted).toLocaleString('en-US', options)
 
     if (
-      parseFloat(parseFloat(this.totalProductPriceProcess).toFixed(3))
-      > parseFloat(parseFloat(this.minimoComra).toFixed(3))
+      this.totalProductPriceProcess
+      > this.minimoComra
     ) {
       this.isTotalCompra = true
     } else {

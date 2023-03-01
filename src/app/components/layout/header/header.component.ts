@@ -89,11 +89,13 @@ export class HeaderComponent implements OnInit {
   public getUrlProduct(e) {
     this.arraySearchProducts.forEach(element => {
       if (element.nameProduct != null) {
-        if (element.nameProduct.trim() == e.target.innerHTML.trim()) {
+
+        if (element.nameProduct.trim() == e.target.textContent.trim()) {
           this.nvCtrl.navigateForward(`/tabs/detail-product/${element.codeProduct}`).then(() => {
             document.querySelector(".c-list-search-box").classList.remove("is-search-type")
           })
         }
+
       }
     });
   }

@@ -65,7 +65,17 @@
                 </div>
   
                 <span class="c-product__amount">
-                  ${{ (productObject.quantityProduct * productObject.price).toFixed(3) }}
+                  ${{ 
+                    (productObject.quantityProduct * productObject.price).toLocaleString(
+                      'en-US', 
+                      {
+                        style: 'decimal',
+                        minimumFractionDigits: 3,
+                        maximumFractionDigits: 3,
+                        useGrouping: true
+                      }
+                    )
+                  }}
   
                   <p class="c-product-horizontal__amount-wrap">
                     Cantidad:
