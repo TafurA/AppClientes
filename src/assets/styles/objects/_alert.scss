@@ -288,7 +288,8 @@
 }
 
 .c-add-car__box {
-  max-width: 120px;
+  min-width: 120px;
+  max-width: 130px;
   margin-right: 0;
   margin-left: auto;
   display: flex;
