@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 
-// import { FavoriteService } from 'src/app/service/favorite/favorite.service';
 import { LoginService } from 'src/app/services/login.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { ShopingCarService } from 'src/app/services/shoping-car.service';
@@ -112,18 +111,16 @@ export class ProductComponent implements OnInit {
   }
 
   getFavoriteTag() {
-    console.log("GET FAVORITE TAGGG")
     this.fillArrayFavoriteList().then(() => {
+      setTimeout(() => {
+        for (let index = 0; index < this.favoriteList.length; index++) {
+          const element = this.favoriteList[index];
 
-
-      for (let index = 0; index < this.favoriteList.length; index++) {
-        const element = this.favoriteList[index];
-        if (element.codeProduct == this.productObject.codeProduct) {
-          this.isFavorite = true
+          if (element.codeProduct == this.productObject.codeProduct) {
+            this.isFavorite = true
+          }
         }
-      }
-
-
+      }, 1000)
     })
   }
 
