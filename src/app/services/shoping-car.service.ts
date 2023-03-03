@@ -40,6 +40,7 @@ export class ShopingCarService {
   public arrayDataCashback = new Array()
   public arrayDataSeller = new Array()
   public idOrderCurrent: any;
+  public numberOfroductCar: any;
   msjOrder: any;
   isOrderOkey = true;
 
@@ -205,13 +206,13 @@ export class ShopingCarService {
   }
 
   public async getMinimoCompra(bodegaId) {
-    await this.http.get(`https://intranet.surtilider.com:9001/IntranetSurti/WebServicesSurtiAppRest/GetValidation?bodega=${bodegaId}`, "", environment.headers)
+    await this.http.get(`${environment.url}${environment.apiPath}GetValidation?bodega=${bodegaId}`, "", environment.headers)
       .then(data => {
         const dataTem = JSON.parse(data.data)
         localStorage.setItem("MinimoCompra", dataTem.data.minimo_compra)
       })
       .catch(error => {
-        console.log("error getMaximoCompra");
+        console.log("error getMinimoCompra");
         console.log(error);
       });
   }
@@ -229,6 +230,7 @@ export class ShopingCarService {
   }
 
   public updateProductQuantity(codeProduct, action, themeage) {
+
     const storageCarProducts = JSON.parse(localStorage.productsCar)
     const newDataCarProducts = JSON.parse(localStorage.productsCar)
 
@@ -314,7 +316,7 @@ export class ShopingCarService {
   private changeCurrentValueQuantityProductDetail(quantity) {
     const numberQuantityProdudct = document.querySelector(".js-detail-number");
 
-    numberQuantityProdudct.innerHTML = quantity
+    this.numberOfroductCar = quantity
 
     numberQuantityProdudct.classList.add("is-animated")
     setTimeout(() => {

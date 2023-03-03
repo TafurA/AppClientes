@@ -241,6 +241,10 @@ export class DetailProductPage {
 
   public addQuantitifyProductToCar() {
     this.shopingCarService.addProductQuantityDetail(this.product)
+
+    setTimeout(() => {
+      this.counterProductsCar = this.shopingCarService.numberOfroductCar
+    }, 100)
   }
 
   public removeQuantitifyProductToCar() {
@@ -265,6 +269,8 @@ export class DetailProductPage {
         alert.classList.remove("is-show")
       }, 3000)
     }
+
+    this.counterProductsCar = this.shopingCarService.numberOfroductCar
   }
 
   addProductToFavorite(idProduct) {

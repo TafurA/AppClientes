@@ -112,18 +112,17 @@ export class ProductComponent implements OnInit {
   }
 
   getFavoriteTag() {
+    console.log("GET FAVORITE TAGGG")
     this.fillArrayFavoriteList().then(() => {
 
-      setTimeout(() => {
 
-        for (let index = 0; index < this.favoriteList.length; index++) {
-          const element = this.favoriteList[index];
-          if (element.codeProduct == this.productObject.codeProduct) {
-            this.isFavorite = true
-          }
+      for (let index = 0; index < this.favoriteList.length; index++) {
+        const element = this.favoriteList[index];
+        if (element.codeProduct == this.productObject.codeProduct) {
+          this.isFavorite = true
         }
+      }
 
-      }, 1000)
 
     })
   }

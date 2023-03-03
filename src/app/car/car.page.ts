@@ -72,7 +72,11 @@ export class CarPage implements OnInit {
   public getMinPurchase() {
     this.shopingService.getMinimoCompra(this.loginService.validateSession()['bodcli_b']).then(
       () => {
-        this.minimoCompra = this.convertNumberToDecimal(localStorage.getItem("MinimoCompra"))
+        const minimoCompraBefore: number = this.convertNumberToDecimal(localStorage.getItem("MinimoCompra"))
+
+        // Mostrar precio en el template bien renderizado
+        this.minimoCompra = this.convertToFloat(minimoCompraBefore) / 1000
+
       }).finally(() => {
         // Renderiza el Total y Subtotal de la orden
         this.getPriceTotalProducts()
@@ -225,7 +229,7 @@ export class CarPage implements OnInit {
   }
 
   public validateMinValueOfOrder() {
-    if (this.convertToFloat(this.totalProductPriceProcess) > this.convertToFloat(this.minimoCompra)) {
+    if (this.convertToFloat(this.totalProductPriceProcess) > this.minimoCompra) {
       this.isTotalCompra = true
     } else {
       this.isTotalCompra = false

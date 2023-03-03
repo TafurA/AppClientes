@@ -72,10 +72,8 @@ export class GridProductComponent implements OnInit {
   fillArrayProducts() {
     // For list of favorite products
     if (window.location.pathname.includes("favorite")) {
-      // setInterval(() => {
       this.arrayDataProducts = this.favoriteService.arrayDataFavorites
       this.isFavoriteNull = this.favoriteService.getIsFavoriteNull();
-      // }, 1000)
     }
     else {
       // List of General products
