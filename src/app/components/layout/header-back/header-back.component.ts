@@ -28,10 +28,8 @@ export class HeaderBackComponent implements OnInit {
     setTimeout(() => {
 
       if (this.loginService.validateSession()) {
-        console.log("ESTE NO")
         return this.navCtrl.back()
       } else {
-        console.log("ESTE SI")
         return this.navCtrl.navigateForward("/tabs/welcome")
       }
 

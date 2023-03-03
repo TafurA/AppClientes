@@ -216,7 +216,21 @@
           <header class="o-cashback-bigger__header i-cash">
             <div>
               <h3 class="o-cashback-bigger__title">Minimo de compra:</h3>
-              <p class="o-cashback-bigger__text">El minimo de compra es de ${{ minimoComra }} COP.</p>
+              <p class="o-cashback-bigger__text">
+                El minimo de compra es de
+                ${{ 
+                    minimoCompra.toLocaleString(
+                    'en-US', 
+                    {
+                      style: 'decimal',
+                      minimumFractionDigits: 3,
+                      maximumFractionDigits: 3,
+                      useGrouping: true
+                    }
+                  )
+                }}
+                COP.
+              </p>
             </div>
           </header>
         </div>

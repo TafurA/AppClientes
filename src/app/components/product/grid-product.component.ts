@@ -4,9 +4,6 @@ import { LoadingController } from '@ionic/angular';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { ProductService } from 'src/app/services/product.service';
 
-// import { SearchService } from 'src/app/service/search/search.service';
-
-ProductService
 @Component({
   selector: 'app-grid-product',
   templateUrl: './grid-product.component.html',
@@ -25,7 +22,6 @@ export class GridProductComponent implements OnInit {
   constructor(
     public productService: ProductService,
     public favoriteService: FavoriteService,
-    // public searchService: SearchService,
     public loadingController: LoadingController
   ) { }
 
@@ -72,10 +68,8 @@ export class GridProductComponent implements OnInit {
   fillArrayProducts() {
     // For list of favorite products
     if (window.location.pathname.includes("favorite")) {
-      // setInterval(() => {
       this.arrayDataProducts = this.favoriteService.arrayDataFavorites
       this.isFavoriteNull = this.favoriteService.getIsFavoriteNull();
-      // }, 1000)
     }
     else {
       // List of General products
@@ -83,23 +77,6 @@ export class GridProductComponent implements OnInit {
       this.isSearchProductsNull = true
     }
   }
-
-  // public changeSearchProducts() {
-  //   const form = document.querySelector(".js-search-header");
-
-  //   this.searchService.getProductsOfSearch(
-  //     form.querySelector("input").value.toLowerCase()
-  //   ).then(() => {
-  //     this.arrayDataProducts = JSON.parse(window.localStorage.getItem("productsSearch"))
-  //   }).finally(() => {
-  //     if (this.arrayDataProducts.length > 0) {
-  //       this.isSearchProductsNull = true
-  //     } else {
-  //       this.isSearchProductsNull = false
-  //     }
-  //   })
-
-  // }
 
   async showLoader() {
     this.loader = await this.loadingController.create({
