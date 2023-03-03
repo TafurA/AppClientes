@@ -22,7 +22,7 @@
         <input class="o-information__input" type="text" value="{{ userEmal }}">
         <input class="o-information__input" type="text" value="Tel: {{ userPhone }}">
 
-        <a class="o-link o-link_secondary" [routerLink]="['/tabs/update-personal-data']">EDITAR DETALLES</a>
+        <a class="o-link o-link_primary" [routerLink]="['/tabs/update-personal-data']">EDITAR DETALLES</a>
 
       </div>
 
@@ -40,7 +40,7 @@
         <label class="o-information__label" for="">CONTRASEÑA</label>
         <input class="o-information__input" type="password" value="**********">
 
-        <a class="o-link o-link_secondary" [routerLink]="['/tabs/update-credentials']">EDITAR CREDENCIALES</a>
+        <a class="o-link o-link_primary" [routerLink]="['/tabs/update-credentials']">EDITAR CREDENCIALES</a>
 
       </div>
 
@@ -57,7 +57,7 @@
         <label class="o-information__label" for="">BARRIO</label>
         <input class="o-information__input" type="text" value="{{ neighborhood }}">
 <div class="o-footer-btn">
-  <button class="o-link o-link_secondary i-plus" id="open-modal" >AGREGAR</button>
+  <a class="o-link o-link_primary i-plus" id="open-modal" >AGREGAR</a>
   <button class="o-link o-link_secondary  i-trash" (click)="removeShippingPoint()">ELIMINAR</button>
 
 </div>

@@ -45,7 +45,45 @@
             </div>
             
             <div class="content">
-              <form  id="form">
+              <form  id="form" class="formulario">
+                <div class="cuestions"  *ngIf="listQuestion[0].idencuesta == 1">
+                    <div class="cuestion">
+                      <p>¿{{listQuestion[0].pregunta}}</p> 
+                    </div>
+                    <div class="clasificacion radio">
+                      <input id="cuestion1-1" type="radio" name="question1" value="S" [(ngModel)]="question1">
+                      <label for="cuestion1-1">Si</label>
+                      <input id="cuestion1-2" type="radio" name="question1" value="N" [(ngModel)]="question1">
+                      <label for="cuestion1-2">No</label>
+                    </div>
+                </div>
+                <div class="cuestions" *ngIf="listQuestion[1].idencuesta == 2">
+                  <div class="cuestion ">
+                    <p >¿{{listQuestion[1].pregunta}}</p> 
+                  </div>
+                  <div class="clasificacion radio">
+                    <input id="cuestion2-1" type="radio" name="question2" value="S" [(ngModel)]="question2">
+                    <label for="cuestion2-1">SI</label>
+                    <input id="cuestion2-2" type="radio" name="question2" value="N" [(ngModel)]="question2">
+                    <label for="cuestion2-2">NO</label>
+
+                  </div>
+                </div>
+                <div class="cuestions" *ngIf="listQuestion[2].idencuesta == 3">
+                  <div class="cuestion">
+                    <p >¿{{listQuestion[2].pregunta}}</p> 
+                  </div>
+                  <div class="clasificacion radio">
+                    <input id="cuestion3-1" type="radio" name="question3" value="N" [(ngModel)]="question3">
+                    <label for="cuestion3-1">SI</label>
+                    <input id="cuestion3-2" type="radio" name="question3" value="S" [(ngModel)]="question3">
+                    <label for="cuestion3-2">NO</label> 
+                  </div>
+                </div>
+                
+              </form>
+
+              <!-- <form  id="form">
                 <div class="cuestions"  *ngIf="listQuestion[0].idencuesta == 1">
                     <div class="cuestion">
                       <p>¿{{listQuestion[0].pregunta}}</p> 
@@ -98,7 +136,7 @@
                   </div>
                 </div>
                 
-              </form>
+              </form> -->
             </div>
             <div class="o-form__actions">
               <button class="o-button" (click)="confirm()" [disabled]="!question1 || !question2 || !question3" >Envíar encuesta</button>

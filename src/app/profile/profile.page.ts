@@ -42,6 +42,8 @@ export class ProfilePage implements OnInit {
   public listBarrios: any;
   public isRemoved=false
   @ViewChild(IonModal) modal: IonModal;
+  message: string;
+  direccion: string;
 
   //ACTUALIZAR --- NO BORRAR
   //---
@@ -204,38 +206,83 @@ export class ProfilePage implements OnInit {
   // // OTRAS NOMENCLATURAS DIRECCION -- NO BORRAR
   // modal direccion
   confirm() {
-    this.shippingPointService.showLoader()
-    this.modal.dismiss( this.shippingForm.value, 'confirm');
     const dataForm = this.shippingForm.value;
-    const direccion = dataForm.dirparam1 +' '+
-                      dataForm.dirparam2 + ' '+
-                      dataForm.dirparam3 +' '+
-                      dataForm.dirparam4 +' '+
-                      dataForm.dirparam5 +' '+
-                      dataForm.dirparam6 +' '+
-                      dataForm.dirparam7 +' '+
-                      dataForm.dirparam8 + ' '+
-                      dataForm.dirparam9 + ' '+
-                      dataForm.dirparam10 + ' '+
-                      dataForm.dirparam11 + ' '+
-                      dataForm.dirparam12 
+    this.modal.dismiss( dataForm.dirparam1 +' '+
+    dataForm.dirparam2 + ' '+
+    dataForm.dirparam3 +' '+
+    dataForm.dirparam4 +' '+
+    dataForm.dirparam5 +' '+
+    dataForm.dirparam6 +' '+
+    dataForm.dirparam7 +' '+
+    dataForm.dirparam8 + ' '+
+    dataForm.dirparam9 + ' '+
+    dataForm.dirparam10 + ' '+
+    dataForm.dirparam11 + ' '+
+    dataForm.dirparam12
+    , 'confirm');
 
-    this.shippingPointService.addShippingPoint(this.userCredential, dataForm.barrio, dataForm.municipio, direccion )
-    
-    console.log(this.shippingForm)            
-    
   }
 
     cancel() {
-      this.modal.dismiss(null, 'cancel');        
+      this.modal.dismiss(null, 'cancel');       
+      this.shippingForm.setValue({dirparam1:'',
+      dirparam2:'',
+      dirparam3:'',
+      dirparam4:'',
+      dirparam5:'',
+      dirparam6:'',
+      dirparam7:'',
+      dirparam8:'',
+      dirparam9:'',
+      dirparam10:'',
+      dirparam11:'',
+      dirparam12:'',
+      barrio:'',
+      municipio:''
+    }) 
     }
-    onWillDismiss(event: Event) {
+    onWillDismiss(event: Event) { 
       const ev = event as CustomEvent<OverlayEventDetail<string>>;
       if (ev.detail.role === 'confirm') {
-        console.log(`${ev.detail.data}`);
-        this.shippingForm.reset()
+        const dataForm = this.shippingForm.value;
+        this.direccion = `${ev.detail.data}`;
+        dataForm.ver_direccion = this.message;
+  
+
+        this.shippingPointService.addShippingPoint(this.userCredential, dataForm.barrio, dataForm.municipio,this.direccion) 
+        console.log(this.shippingForm)
+
+        this.shippingForm.setValue({dirparam1:'',
+                                    dirparam2:'',
+                                    dirparam3:'',
+                                    dirparam4:'',
+                                    dirparam5:'',
+                                    dirparam6:'',
+                                    dirparam7:'',
+                                    dirparam8:'',
+                                    dirparam9:'',
+                                    dirparam10:'',
+                                    dirparam11:'',
+                                    dirparam12:'',
+                                    barrio:'',
+                                    municipio:''
+                                  })
       }else{
-        this.shippingForm.reset()
+        this.shippingForm.setValue({dirparam1:'',
+                                    dirparam2:'',
+                                    dirparam3:'',
+                                    dirparam4:'',
+                                    dirparam5:'',
+                                    dirparam6:'',
+                                    dirparam7:'',
+                                    dirparam8:'',
+                                    dirparam9:'',
+                                    dirparam10:'',
+                                    dirparam11:'',
+                                    dirparam12:'',
+                                    barrio:'',
+                                    municipio:''
+                                  })
       }
   }
   public removeShippingPoint(){

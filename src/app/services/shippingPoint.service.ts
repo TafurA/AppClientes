@@ -27,9 +27,9 @@ export class ShippingPointService {
 
       const dataLoginTemp = JSON.parse(data.data)
       if (dataLoginTemp.response) {
-        this.presentAlert("¡Exelente!",dataLoginTemp.message, "is-success");
-        this.nvCtrl.navigateForward("/profile");
         this.removeLoader()    
+        this.presentAlert("¡Exelente!",dataLoginTemp.message, "is-success");
+        this.nvCtrl.navigateForward("/tabs/profile");
       }else{
         this.presentAlert("¡Error!",dataLoginTemp.message, "is-error");
       }
