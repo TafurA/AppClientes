@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import {
   PushNotifications,
 } from '@capacitor/push-notifications';
 
-import { SessionGuard } from '../guard/session.guard';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -13,10 +12,25 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
+  public alert;
+  isOnline = navigator.onLine;
 
-  constructor(public loginService: LoginService, public nav: NavController) { }
+  constructor(public loginService: LoginService, public nav: NavController, public alertController: AlertController) { }
 
   ngOnInit() {
+    this.validateSession()
+  }
+
+  validateNetwork() {
+    if (this.isOnline) {
+      this.nav.navigateForward("/tabs/home")
+    } else {
+      console.log("no tiene sale alerta")
+      this.presentAlert()
+    }
+  }
+
+  validateSession() {
 
     if (this.loginService.validateSession()) {
       PushNotifications.requestPermissions().then(result => {
@@ -32,9 +46,22 @@ export class WelcomePage implements OnInit {
       });
     } else {
       this.nav.navigateForward("/tabs/welcome")
-      console.log("aquis")
     }
+  }
 
+  async presentAlert() {
+    this.alert = await this.alertController.create({
+      header: "Problemas de conexion",
+      subHeader: "No se ha podido obtener una conexion, por favor intenta de nuevo.",
+      cssClass: `c-alert is-error`
+      // buttons: ['OK'],
+    });
+
+    await this.alert.present();
+
+    setTimeout(() => {
+      this.alert.dismiss()
+    }, 5000)
   }
 
 }
