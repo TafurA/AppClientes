@@ -28,8 +28,6 @@ export class DetailBannerPage implements OnInit {
 
   getDataCurrentBanner() {
     this.bannerService.getBannerDetail(this.getActiveBannerId()).finally(() => {
-      console.log("this.bannerService.arrayDetailProductBanner()")
-      console.log(this.bannerService.arrayDetailProductBanner())
       this.banner.imagen = this.bannerService.arrayDetailProductBanner()["imagen"]
     })
   }

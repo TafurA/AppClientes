@@ -78,9 +78,6 @@ export class OrderService {
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
 
-        console.log("DASDADASD")
-        console.log(dataObjTemp)
-
         const currentOrderDetail = {
           address: dataObjTemp.data[0].dircli_b,
           status: dataObjTemp.data[0].estped_b,
@@ -102,8 +99,11 @@ export class OrderService {
   }
 
   async sendSatisfiedForm(numfac_b, estado, observacion) {
+    console.log("numfac_b, estado, observacion")
+    console.log(numfac_b, estado, observacion)
     await this.http.get(`${environment.url}${environment.apiPath}getDelivery?numfac_b=${numfac_b}&estado=${estado}&observacion=${observacion}`, "", environment.headers)
       .then(data => {
+        console.log("service")
         console.log(data)
 
       })

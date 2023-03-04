@@ -1,13 +1,20 @@
 ion-modal.o-modal {
-  --width: fit-content;
+  --width: 90%;
   --min-width: 250px;
   --height: fit-content;
-  --border-radius: 6px;
-  --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+  --border-radius: 16px;
+
+  .swiper-pagination-bullets {
+    bottom: 0;
+
+    .swiper-pagination-bullet-active {
+      background-color: $c-secondary !important;
+    }
+  }
 }
 
 ion-modal.o-modal h1 {
-  margin: 20px 20px 10px 20px;
+  margin: 20px 20px 10px;
 }
 
 ion-modal.o-modal ion-icon {
@@ -22,5 +29,146 @@ ion-modal.o-modal ion-icon {
 }
 
 ion-modal.o-modal .wrapper {
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
+  padding: 16px;
+}
+
+ion-modal.o-modal {
+  .o-modal__factura {
+    text-align: right;
+    display: block;
+    font-size: 14px;
+    font-weight: 800;
+    color: $c-gray;
+  }
+
+  .o-modal__title {
+    font-weight: 700;
+    font-size: 24px;
+    margin: 32px 0;
+    max-width: 250px;
+  }
+
+  .o-modal__content {
+    margin-bottom: 32px;
+
+    textarea {
+      border: 1px solid #f2f2f2;
+      background: #FAFAFA;
+      max-height: 74px;
+      width: 100%;
+      padding: 16px;
+      font-size: 14px;
+    }
+  }
+
+  .o-modal__radios {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 180px;
+    margin: 0 auto;
+    column-gap: 32px;
+  }
+
+  .o-modal__radio {
+    position: relative;
+
+    input {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      opacity: 0;
+
+      &:checked + label {
+        &::before {
+          color: $c-neutro;
+          background-color: $c-primary;
+        }
+      }
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 16px;
+      font-size: 16px;
+
+      &::before {
+        width: 46px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        font-size: 24px;
+        color: $c-primary;
+        background-color: rgba($color: $c-primary, $alpha: 0.1);
+        transition: all 0.1s ease-in-out;
+      }
+    }
+
+  }
+
+  .o-modal__success {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .o-modal__title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      row-gap: 8px;
+      margin-bottom: 16px;
+
+      &::before {
+        width: 32px;
+        height: 32px;
+        border: 2px solid #28B850;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: #28B850;
+      }
+    }
+  }
+
+  .o-modal__text {
+    max-width: 200px;
+    font-size: 16px;
+    color: #B1B1B1;
+  }
+
+  .o-modal__btn {
+    display: block;
+    text-align: center;
+    min-width: auto;
+    margin: 32px auto;
+    max-width: max-content;
+    padding: 10px 24px;
+
+    &.test {
+      display: none !important;
+    }
+  }
+
+}
+
+.o-modal__btn {
+  display: block;
+  text-align: center;
+  min-width: max-content;
+  margin: 0;
+  max-width: max-content;
+  padding: 10px;
+  font-size: 12px;
 }

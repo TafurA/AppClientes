@@ -14,7 +14,6 @@
 
   .o-link {
     justify-content: flex-end;
-    width: 100%;
     font-size: 12px;
   }
 }
@@ -50,12 +49,19 @@
   color: $c-primary;
 }
 
-.o-footer-btn{
+.o-information__actions {
+  display: flex;
+  align-items: center;
+  column-gap: 24px;
+  justify-content: flex-end;
+}
+
+.o-footer-btn {
   width: 100%;
   font-size: 12px;
   display: flex;
   height: auto;
   justify-content: flex-start;
   background-color: $c-gray-10;
-  
+
 }

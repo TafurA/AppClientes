@@ -46,7 +46,7 @@
         [ngClass]="{'test': !isDiscountProduct, '': isDiscountProduct}"
       >
         <span class="c-product__ico_discount-txt">{{ totalProductValue }}%</span>
-        <span class="c-product__ico-txt">${{ totalProductDiscount }}</span>
+        <span [ngClass]="{'test': isAnonymousUser, '': !isAnonymousUser}" class="c-product__ico-txt">${{ totalProductDiscount }}</span>
       </div>
 
       <div [ngClass]="{'test': !isCashbackProduct, '': isCashbackProduct}" (click)="presentAlert()">

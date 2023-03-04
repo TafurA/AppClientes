@@ -34,11 +34,7 @@ export class OrderDetailPage implements OnInit {
   ngOnInit() {
 
     this.getOrderDetail().then(() => {
-      console.log("ANTES DE ENTRAR AL SERVICE")
-      console.log(this.order.orderId)
       this.orderService.getDataUserOrderDetail(this.order.orderId).finally(() => {
-        console.log("DATOS QUE NECESITO")
-        console.log(this.orderService.arrayCurrentOrderDetial[0])
         this.order.orderId = this.orderService.arrayCurrentOrderDetial[0].orderId;
         this.order.totalValue = this.orderService.arrayCurrentOrderDetial[0].totalValue;
         this.order.customerName = this.orderService.arrayCurrentOrderDetial[0].name;

@@ -21,7 +21,6 @@ export class CategoryProductComponent implements OnInit {
         this.nameCategory = params.nameCategory
         this.categoryService.getSubCategoryList(this.categoryId).then(() => {
           this.arrayDataSubCategory = JSON.parse(localStorage.test)
-          console.log("this.arrayDataSubCategory")
 
           if (this.arrayDataSubCategory.length <= 1) {
             this.productsNull = true;

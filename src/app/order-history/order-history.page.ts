@@ -23,8 +23,6 @@ export class OrderHistoryPage implements OnInit {
   getOrdersByClient() {
     this.orderService.getOrdersByClient().then(() => {
       this.arrayDataOrders = JSON.parse(localStorage.ordersUser)
-      console.log("this")
-      console.log(this.arrayDataOrders)
     }).finally(() => {
       if (this.orderService.isOrdersCharged) {
         this.loaded = true

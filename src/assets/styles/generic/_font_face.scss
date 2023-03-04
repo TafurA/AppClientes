@@ -248,3 +248,15 @@
     content: $i-pencil;
   }
 }
+
+.i-face-good {
+  &::before {
+    content: $i-face-good;
+  }
+}
+
+.i-face-sad {
+  &::before {
+    content: $i-face-sad;
+  }
+}

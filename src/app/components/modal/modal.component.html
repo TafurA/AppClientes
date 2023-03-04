@@ -1,24 +1,101 @@
-<ion-button [id]="modalid" expand="block">modal ara {{ modalid }}</ion-button>
+<button [id]="modalid" class="o-modal__btn o-button" *ngIf="isHideButtonEnviado">Dejar calificación</button>
 
 <ion-modal [id]="modalid" class="o-modal" #modal trigger="{{ modalid }}">
   <ng-template>
     <div class="wrapper">
-      <h1>{{ modalid }}</h1>
 
-      <ion-list lines="none">
-        <ion-item button="true" detail="false" (click)="modal.dismiss()">
-          <ion-icon name="person-circle"></ion-icon>
-          <ion-label>Item 1</ion-label>
-        </ion-item>
-        <ion-item button="true" detail="false" (click)="modal.dismiss()">
-          <ion-icon name="person-circle"></ion-icon>
-          <ion-label>Item 2</ion-label>
-        </ion-item>
-        <ion-item button="true" detail="false" (click)="modal.dismiss()">
-          <ion-icon name="person-circle"></ion-icon>
-          <ion-label>Item 3</ion-label>
-        </ion-item>
-      </ion-list>
+      <span class="o-modal__factura">Factura: #{{ idFactura }}</span>
+
+      <swiper
+        #swiper
+        [config]="config"
+        [virtual]="true"
+        (slideChange)="onSlideChange()"
+      >
+        <ng-template swiperSlide>
+          <div>
+            <h2 class="o-title o-modal__title">¿El pedido ha sido entregado?</h2>
+      
+            <div class="o-modal__content">
+      
+              <!-- 1 pregunta -->
+              <div class="o-modal__radios">
+                <div class="o-modal__radio">
+                  <input type="radio" id="si" name="entregado" value="S" [(ngModel)]="entregado" (click)="changeStateButtonSuccess()">
+                  <label for="si" class="i-face-good">
+                    <span>Entregado</span>
+                  </label>
+                </div>
+      
+                <div class="o-modal__radio">
+                  <input type="radio" id="no" name="entregado" value="N" [(ngModel)]="entregado" (click)="changeStateButtonSuccess()">
+                  <label for="no" class="i-face-sad">
+                    <span>Devuelto</span>
+                  </label>
+                </div>
+              </div>
+      
+            </div>
+
+            <button
+              class="o-modal__btn o-button"
+              (click)="slideNext()"
+              *ngIf="!isHideButtonEntregado"
+              >
+              Continuar
+            </button>
+          </div>
+        </ng-template>
+
+        <ng-template swiperSlide>
+          <div>
+            <h2 class="o-modal__title o-title">¿Tienes alguna observación?</h2>
+            
+            <div class="o-modal__content">
+      
+              <!-- 2 pregunta -->
+              <textarea
+                name="observacion"
+                id="observacion"
+                cols="30"
+                rows="10"
+                [(ngModel)]="observacion"
+                placeholder="Observación..."
+                (input)="changeStateButtonObservation($e)"
+              >
+              </textarea>
+            </div>
+      
+            <button
+              class="o-modal__btn o-button is-observation test"
+              (click)="sendObservation()"
+            >
+              {{ msgButton }}
+            </button>
+          </div>
+        </ng-template>
+
+        <ng-template swiperSlide>
+          <!-- Exito -->
+          <div class="o-modal__success">
+            <h2 class="o-modal__title o-title i-check">
+              <span>
+                Calificación enviada
+              </span>
+            </h2>
+            <span class="o-modal__text">Se registro la información que enviaste en el formulario.</span>
+
+            <button
+              class="o-modal__btn o-button"
+              (click)="setOpen(false)"
+              *ngIf="!isHideButtonEnviado"
+              >
+              Cerrar
+            </button>
+          </div>
+        </ng-template>
+      </swiper>
+
     </div>
   </ng-template>
 </ion-modal>
