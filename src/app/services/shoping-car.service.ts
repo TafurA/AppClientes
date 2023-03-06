@@ -456,15 +456,15 @@ export class ShopingCarService {
         const dataTem = JSON.parse(data.data)
         this.msjOrder = dataTem.message
 
-        console.log("EL URO DATAAA")
-        console.log(dataTem)
-
-        if (dataTem.response) {
-          this.idOrderCurrent = dataTem.idpedido
-        } else {
-          this.isOrderOkey = false;
-          this.presentAlert("Error creando orden", this.msjOrder)
-        }
+        setTimeout(() => {
+          if (dataTem.response) {
+            this.idOrderCurrent = dataTem.idpedido
+            this.isOrderOkey = true
+          } else {
+            this.isOrderOkey = false;
+            this.presentAlert("Error creando orden", this.msjOrder)
+          }
+        }, 2000)
 
       })
       .catch(error => {

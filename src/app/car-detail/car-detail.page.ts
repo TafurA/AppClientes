@@ -145,35 +145,38 @@ export class CarDetailPage implements OnInit {
     this.showLoader();
 
     this.shopingService.sendOrder().then(() => {
-      this.getConfirmOrderDetail();
-      this.getConfirmProductsOrderDetail();
+      this.getConfirmOrderDetail().then(() => {
+        this.getConfirmProductsOrderDetail();
+      });
     }).finally(() => {
-      this.removeLoader();
-      if (!this.shopingService.isOrderOkey) {
-        this.groupPago = false
-        this.groupConfirm = false
-        this.groupAddres = true
+      setTimeout(() => {
+        this.removeLoader();
+        if (!this.shopingService.isOrderOkey) {
+          this.groupPago = false
+          this.groupConfirm = false
+          this.groupAddres = true
 
-        const stes = document.querySelectorAll(".c-steps__step");
-        stes.forEach((e, i) => {
-          if (i != 0) {
-            e.classList.remove("is-checked")
-          }
-          if (i != 1) {
-            e.classList.remove("is-current")
-          } else {
-            e.classList.add("is-current")
-          }
-        })
-        this.navController.navigateForward("/tabs/car")
-      } else {
-        this.showConfirmOrder();
-      }
+          const stes = document.querySelectorAll(".c-steps__step");
+          stes.forEach((e, i) => {
+            if (i != 0) {
+              e.classList.remove("is-checked")
+            }
+            if (i != 1) {
+              e.classList.remove("is-current")
+            } else {
+              e.classList.add("is-current")
+            }
+          })
+          this.navController.navigateForward("/tabs/car")
+        } else {
+          this.showConfirmOrder();
+        }
+      }, 2000)
     });
   }
 
-  public getConfirmOrderDetail() {
-    this.orderService.getDataUserOrderDetail(this.shopingService.idOrderCurrent).finally(() => {
+  public async getConfirmOrderDetail() {
+    await this.orderService.getDataUserOrderDetail(this.shopingService.idOrderCurrent).finally(() => {
       this.order.orderId = this.orderService.arrayCurrentOrderDetial[0].orderId;
       this.order.totalValue = this.orderService.arrayCurrentOrderDetial[0].totalValue;
       this.order.customerName = this.orderService.arrayCurrentOrderDetial[0].name;

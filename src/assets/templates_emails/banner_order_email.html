@@ -1,0 +1,770 @@
+<!-- // <a href="SurtiTiendas://tabs/home">Haz clic aquí para ir a la pantalla principal de mi aplicación</a> -->
+
+<!DOCTYPE html   PUBLIC "-//W3C//DTDXHTML1.0Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta
+    http-equiv="X-UA-Compatible" content="ie=edge"/>
+
+    <!-- Estilos insertados -->
+    <style type="text/css">
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        color: #575757;
+      }
+
+      /*  Reset */
+      .table {
+        border: none;
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      .img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .u-block {
+        display: block;
+      }
+
+      /*  Contenedores */
+      .table__main {
+        width: 100%;
+      }
+
+      .u-width-90 {
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        padding-top: 32px;
+      }
+
+      .u-width-90 > tbody {
+        width: 100%;
+        display: block;
+      }
+
+      .u-width-50 {
+        display: block;
+        width: 60%;
+        margin-left: auto;
+        margin-right: 0;
+        padding-right: 40px;
+      }
+
+      .u-width-50 > tbody {
+        width: 100%;
+        display: block;
+      }
+
+      .column__num {
+        text-align: right;
+      }
+
+      .table_total {
+        font-size: 14px;
+      }
+      .table_total .column_70 {
+        padding-bottom: 8px;
+      }
+
+      .table_wrapper {
+        width: 600px;
+        border: 1px solid #B5B5B5;
+      }
+
+      .row,
+      .column {
+        padding: 0;
+        margin: 0;
+      }
+
+
+      /*  Header  */
+      .row {
+        width: 100%;
+      }
+
+      /*  Contenido  */
+
+      .column_center {
+        text-align: center;
+      }
+
+      .column_70 {
+        width: 70px;
+      }
+
+      .column_50 {
+        width: 50px;
+        text-align: center;
+      }
+
+      .table__header {
+        display: block;
+        padding: 32px;
+      }
+
+      .table__title {
+        color: #263238;
+        font-size: 28px;
+        margin: 0 0 16px;
+      }
+
+      .table__caption {
+        display: inline-block;
+        margin-top: 16px;
+        color: #A6A6A6;
+      }
+
+      .table__text {
+        color: #A6A6A6;
+        margin: 0 0 8px;
+      }
+
+      .table__headline {
+        color: #273238;
+      }
+
+      .table__bg_grey {
+        display: block;
+        padding: 16px;
+        border-radius: 8px;
+        border: 1px solid #B7B7B7;
+        background: #F8F8F8;
+      }
+
+      .button {
+        display: inline-block;
+        min-width: 250px;
+        border-radius: 16px;
+        padding: 20px 16px;
+        font-size: 18px;
+        text-decoration: none;
+        color: #ffffff;
+        background: #013D7E;
+      }
+
+      .table__subtitle {
+        color: #263238;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 0 24px;
+      }
+
+      .row_padding {
+        display: block;
+        padding: 0 32px;
+      }
+
+      .link {
+        color: #469fc5;
+        text-decoration: none;
+      }
+
+      .column__oroduct {
+        display: flex;
+        align-items: center;
+        width: 70px;
+      }
+
+      .column__oroduct_img {
+        width: 60px;
+        margin-right: 16px;
+      }
+
+      .column__oroduct_text {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 300;
+      }
+
+      .content {
+        width: 100%;
+      }
+
+      /*  Footer  */
+      .table__footer {
+        display: block;
+        padding: 80px 40px 24px;
+      }
+
+      .table__footer_title {
+        padding-bottom: 16px;
+        display: block;
+        border-bottom: 1px solid #CECECE;
+        color: #CECECE;
+        font-size: 14px;
+      }
+
+      .table__footer_social {
+        display: block;
+        padding-top: 32px;
+        padding-bottom: 32px;
+      }
+
+      .coy_footer {
+        display: block;
+        margin-top: 8px;
+      }
+
+      .coy_footer a {
+        color: #013D7E;
+      }
+
+      .table__footer-social-ico {
+        width: 42px;
+        display: inline-block;
+        margin-right: 56px;
+      }
+
+      .table__footer-social-ico:last-of-type {
+        margin-right: 0;
+      }
+
+      .btn {
+        display: inline-block;
+        min-width: 214px;
+        padding: 14px 18px;
+        vertical-align: middle;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        line-height: 1;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 8px;
+        border: 2px solid #16223f;
+        background-color: #16223f;
+        transition: all 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #442686;
+        border: 2px solid #442686;
+      }
+
+      .body__footer {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: block;
+        border-top: 1px solid #dddddd;
+      }
+
+      .box {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        padding: 2.375rem 0 0.9375rem;
+        border-bottom: 1px solid #D3D3D3;
+      }
+
+      .chip__avatar_box {
+        margin: 0 auto;
+        height: 115px;
+        width: 115px;
+        max-width: 115px;
+        min-width: 115px;
+        font-size: 54px;
+        padding: 0;
+        display: inline-block;
+        overflow: hidden;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 24px;
+        border-radius: 87%;
+        background-color: #16223F;
+        transition: all 0.2s;
+      }
+
+
+      .chip__img {
+        width: 100%;
+        vertical-align: bottom;
+      }
+
+      .box__text {
+        margin-top: 22px;
+        margin-top: 1.375rem;
+        margin-left: -133px;
+        line-height: 1.6;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        font-size: 14px;
+      }
+
+      .box__border {
+        border-bottom: 1px solid #D8D8D8;
+      }
+
+      .link {
+        cursor: pointer;
+        color: #442686;
+        transition: all 0.2s;
+        text-decoration: underline;
+      }
+
+      .link:hover {
+        color: #16223F;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <!-- Contenido principal -->
+    <table class="table__main table">
+      <tr class="row">
+        <td
+          class="column" align="center">
+
+          <!-- Tabla con ancho de 600px -->
+          <table
+            class="table table_wrapper" bgcolor="#ffffff">
+
+            <!-- Imagen del banner principal -->
+            <tr class="row">
+              <td class="column">
+                <img src="/Users/andrestafur/Documents/Mine/Proyectos/surtilider2.0/AppClientes/src/assets/templates_emails/assets/banner_img.jpeg" alt="Vendedora de SurtiLider mostrandole el catalogo a un cliente" class="img">
+              </td>
+            </tr>
+
+            <!-- Titulo y descripcion del correo -->
+            <tr class="row">
+              <td class="column">
+
+                <table class="table content" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff">
+                  <tr class="table__header">
+                    <td class="column">
+                      <h2 class="table__title">¡Orden realizada exitosamente!</h2>
+                      <span>{{ Aqui debe ir la descricion que esta en el correo actual. }}</span>
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- Boton y caption  -->
+            <tr class="row">
+              <td class="column">
+
+                <table class="table content" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff">
+                  <tr class="tow">
+                    <td class="column_center">
+                      <a class="button" href="SurtiTiendas://tabs/home">RASTREAR MI ORDEN</a>
+                      <span class="table__caption">
+                        Desde aquí podras hacerle seguimiento a tu orden.
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- Detalle de la orden -->
+            <tr class="row">
+              <td class="column">
+
+                <table class="table u-width-90" cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    <tr class="u-block">
+                      <td class="column table__bg_grey">
+
+                        <table class="table content" cellpadding="0" cellspacing="0" border="0">
+                          <tr class="row">
+                            <td class="column">
+                              <h3 class="table__subtitle">Detalle de la orden:</h3>
+                            </td>
+                          </tr>
+                          <tr class="row">
+                            <td class="column">
+                              <p class="table__text">NÚMERO PEDIDO:</p>
+                            </td>
+                            <td class="column">
+                              <strong class="table__text">
+                                244585694
+                              </strong>
+                            </td>
+                          </tr>
+                          <tr class="row">
+                            <td class="column">
+                              <p class="table__text">FECHA:</p>
+                            </td>
+                            <td class="column">
+                              <strong class="table__text">
+                                2022 - 01 - 11
+                              </strong>
+                            </td>
+                          </tr>
+                          <tr class="row">
+                            <td class="column">
+                              <p class="table__text">DOCUMENTO:</p>
+                            </td>
+                            <td class="column">
+                              <strong class="table__text">
+                                123456789
+                              </strong>
+                            </td>
+                          </tr>
+                          <tr class="row">
+                            <td class="column">
+                              <p class="table__text">NOMBRE:</p>
+                            </td>
+                            <td class="column">
+                              <strong class="table__text">
+                                Elkin achon
+                              </strong>
+                            </td>
+                          </tr>
+                          <tr class="row">
+                            <td class="column">
+                              <p class="table__text">DIRECCIÓN:</p>
+                            </td>
+                            <td class="column">
+                              <strong class="table__text">
+                                CRA 77 A # 11
+                              </strong>
+                            </td>
+                          </tr>
+                          <tr class="row">
+                            <td class="column">
+                              <p class="table__text">TELEFÓNO:</p>
+                            </td>
+                            <td class="column">
+                              <strong class="table__text">
+                                123456789
+                              </strong>
+                            </td>
+                          </tr>
+                          <tr class="row">
+                            <td class="column">
+                              <p class="table__text">CORREO:</p>
+                            </td>
+                            <td class="column">
+                              <a href="mailto:correo@gmail.com">correo@gmail.com</a>
+                            </td>
+                          </tr>
+                        </table>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- Cabecera Listado de productos -->
+            <tr class="row">
+              <td class="column">
+
+                <table class="table u-width-90" cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    <tr class="u-block">
+                      <td class="column table__bg_grey">
+
+                        <table class="table content" cellpadding="0" cellspacing="0" border="0">
+
+                          <tr class="row">
+                            <td class="column column_70">
+                              <strong class="table__headline">Producto</strong>
+                            </td>
+                            <td class="column column_50">
+                              <strong class="table__headline">
+                                Cant.
+                              </strong>
+                            </td>
+                            <td class="column column_50">
+                              <strong class="table__headline">
+                                Base
+                              </strong>
+                            </td>
+                            <td class="column column_50">
+                              <strong class="table__headline">
+                                IVA
+                              </strong>
+                            </td>
+                            <td class="column column_50">
+                              <strong class="table__headline">
+                                Valor U.
+                              </strong>
+                            </td>
+                          </tr>
+
+                        </table>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- Listado de productos -->
+            <tr class="row">
+              <td class="column">
+
+                <table class="table u-width-90" cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    <tr class="u-block">
+                      <td class="column u-block">
+
+                        <table class="table content" cellpadding="0" cellspacing="0" border="0">
+
+                          <tr class="row">
+                            <td class="column column_70">
+                              <div class="column__oroduct">
+                                <img src="/Users/andrestafur/Documents/Mine/Proyectos/surtilider2.0/AppClientes/src/assets/templates_emails/assets/shapes.jpeg" alt="" class="column__oroduct_img">
+                                <h4 class="column__oroduct_text">Nombre del roducto normalmente largo</h4>
+                              </div>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                2
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                $ 7,450
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                19%
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                $ 12.450
+                              </p>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              &nbsp;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  &nbsp;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  &nbsp;
+                            </td>
+                          </tr>
+
+                          <tr class="row">
+                            <td class="column column_70">
+                              <div class="column__oroduct">
+                                <img src="/Users/andrestafur/Documents/Mine/Proyectos/surtilider2.0/AppClientes/src/assets/templates_emails/assets/shapes.jpeg" alt="" class="column__oroduct_img">
+                                <h4 class="column__oroduct_text">Nombre del roducto normalmente largo</h4>
+                              </div>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                2
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                $ 7,450
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                19%
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                $ 12.450
+                              </p>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              &nbsp;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  &nbsp;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  &nbsp;
+                            </td>
+                          </tr>
+
+                          <tr class="row">
+                            <td class="column column_70">
+                              <div class="column__oroduct">
+                                <img src="/Users/andrestafur/Documents/Mine/Proyectos/surtilider2.0/AppClientes/src/assets/templates_emails/assets/shapes.jpeg" alt="" class="column__oroduct_img">
+                                <h4 class="column__oroduct_text">Nombre del roducto normalmente largo</h4>
+                              </div>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                2
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                $ 7,450
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                19%
+                              </p>
+                            </td>
+                            <td class="column column_50 column_center">
+                              <p class="table__headline">
+                                $ 12.450
+                              </p>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>
+                              &nbsp;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  &nbsp;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  &nbsp;
+                            </td>
+                          </tr>
+
+                        </table>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- Total y subtotal -->
+            <tr class="row">
+              <td class="column">
+
+                <table class="table u-width-50 table_total" cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    <tr class="u-block">
+                      <td class="column table__bg_grey">
+
+                        <table class="table content" cellpadding="0" cellspacing="0" border="0">
+
+                          <tr class="row">
+                            <td class="column column_70">
+                              <strong class="table__headline">Subtotal (2 roductos)</strong>
+                            </td>
+                            <td class="column column_70 column__num">
+                              <strong class="table__headline">$24.450</strong>
+                            </td>
+                          </tr>
+
+                          <tr class="row">
+                            <td class="column column_70">
+                              <strong class="table__headline">Cashback</strong>
+                            </td>
+                            <td class="column column_70 column__num">
+                              <strong class="table__headline">$5.000</strong>
+                            </td>
+                          </tr>
+
+                          <tr class="row">
+                            <td class="column column_70">
+                              <strong class="table__headline">Total</strong>
+                            </td>
+                            <td class="column column_70 column__num">
+                              <strong class="table__headline">$19.450</strong>
+                            </td>
+                          </tr>
+
+                        </table>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr class="row">
+              <td class="column">
+
+                <table class="table content table__footer" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff">
+                  <tr class="table__footer_title">
+                    <td class="column">
+                      <span>Si tiene alguna pregunta o problema no dude en contactarse con nosotros por medio de nuestros canales de soporte.</span>
+                    </td>
+                  </tr>
+
+                  <tr class="row table__footer_social">
+                    <td class="u-block table__main">
+
+                      <table class="table content column_center" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff">
+                        <tr class="">
+                          <td class="column table__footer-social-ico">
+                            <svg width="41" height="40" viewbox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M40.1003 20.0501C40.1003 8.98246 31.1178 0 20.0501 0C8.98246 0 0 8.98246 0 20.0501C0 29.7544 6.89724 37.8346 16.0401 39.6992V26.0652H12.0301V20.0501H16.0401V15.0376C16.0401 11.1679 19.188 8.02005 23.0576 8.02005H28.0702V14.0351H24.0602C22.9574 14.0351 22.0551 14.9373 22.0551 16.0401V20.0501H28.0702V26.0652H22.0551V40C32.1805 38.9975 40.1003 30.4561 40.1003 20.0501Z" fill="#013D7E"/>
+                            </svg>
+                          </td>
+                          <td class="column table__footer-social-ico">
+                            <svg width="41" height="40" viewbox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M0.108613 40L2.81261 30.064C1.03089 27.0097 0.0948047 23.536 0.100613 20C0.100613 8.95399 9.05461 0 20.1006 0C31.1466 0 40.1006 8.95399 40.1006 20C40.1006 31.046 31.1466 40 20.1006 40C16.5662 40.0057 13.0939 39.0703 10.0406 37.29L0.108613 40ZM12.8826 10.616C12.6243 10.632 12.372 10.7001 12.1406 10.816C11.9236 10.9389 11.7256 11.0924 11.5526 11.272C11.3126 11.498 11.1766 11.694 11.0306 11.884C10.2914 12.846 9.89383 14.0268 9.90061 15.24C9.90461 16.22 10.1606 17.174 10.5606 18.066C11.3786 19.87 12.7246 21.78 14.5026 23.55C14.9306 23.976 15.3486 24.404 15.7986 24.802C18.0054 26.7449 20.6351 28.1461 23.4786 28.894L24.6166 29.068C24.9866 29.088 25.3566 29.06 25.7286 29.042C26.3111 29.0119 26.8798 28.8542 27.3946 28.58C27.6565 28.4451 27.9121 28.2983 28.1606 28.14C28.1606 28.14 28.2466 28.084 28.4106 27.96C28.6806 27.76 28.8466 27.618 29.0706 27.384C29.2366 27.212 29.3806 27.01 29.4906 26.78C29.6466 26.454 29.8026 25.832 29.8666 25.314C29.9146 24.918 29.9006 24.702 29.8946 24.568C29.8866 24.354 29.7086 24.132 29.5146 24.038L28.3506 23.516C28.3506 23.516 26.6106 22.758 25.5486 22.274C25.4366 22.2252 25.3166 22.1974 25.1946 22.192C25.0578 22.1779 24.9195 22.1933 24.7891 22.2371C24.6587 22.281 24.5392 22.3522 24.4386 22.446V22.442C24.4286 22.442 24.2946 22.556 22.8486 24.308C22.7656 24.4195 22.6513 24.5038 22.5202 24.5501C22.3891 24.5964 22.2472 24.6026 22.1126 24.568C21.9823 24.5331 21.8546 24.489 21.7306 24.436C21.4826 24.332 21.3966 24.292 21.2266 24.218L21.2166 24.214C20.0724 23.7144 19.013 23.0397 18.0766 22.214C17.8246 21.994 17.5906 21.754 17.3506 21.522C16.5638 20.7685 15.878 19.916 15.3106 18.986L15.1926 18.796C15.1078 18.6683 15.0393 18.5306 14.9886 18.386C14.9126 18.092 15.1106 17.856 15.1106 17.856C15.1106 17.856 15.5966 17.324 15.8226 17.036C16.0108 16.7966 16.1864 16.5476 16.3486 16.29C16.5846 15.91 16.6586 15.52 16.5346 15.218C15.9746 13.85 15.3946 12.488 14.7986 11.136C14.6806 10.868 14.3306 10.676 14.0126 10.638C13.9046 10.626 13.7966 10.614 13.6886 10.606C13.42 10.5926 13.1509 10.5953 12.8826 10.614V10.616Z" fill="#013D7E"/>
+                            </svg>
+                          </td>
+                          <td class="column table__footer-social-ico">
+                            <svg width="41" height="40" viewbox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M20.1006 0C25.5346 0 26.2126 0.0199999 28.3446 0.12C30.4746 0.22 31.9246 0.554 33.2006 1.05C34.5206 1.558 35.6326 2.246 36.7446 3.356C37.7616 4.35579 38.5485 5.56518 39.0506 6.9C39.5446 8.174 39.8806 9.626 39.9806 11.756C40.0746 13.888 40.1006 14.566 40.1006 20C40.1006 25.434 40.0806 26.112 39.9806 28.244C39.8806 30.374 39.5446 31.824 39.0506 33.1C38.5499 34.4356 37.7628 35.6452 36.7446 36.644C35.7445 37.6606 34.5352 38.4475 33.2006 38.95C31.9266 39.444 30.4746 39.78 28.3446 39.88C26.2126 39.974 25.5346 40 20.1006 40C14.6666 40 13.9886 39.98 11.8566 39.88C9.72659 39.78 8.27659 39.444 7.00059 38.95C5.66524 38.4489 4.45564 37.6619 3.45659 36.644C2.4394 35.6444 1.65245 34.4349 1.15059 33.1C0.654586 31.826 0.320586 30.374 0.220586 28.244C0.126586 26.112 0.100586 25.434 0.100586 20C0.100586 14.566 0.120586 13.888 0.220586 11.756C0.320586 9.624 0.654586 8.176 1.15059 6.9C1.65106 5.56436 2.43819 4.35464 3.45659 3.356C4.45593 2.33846 5.66544 1.55146 7.00059 1.05C8.27659 0.554 9.72459 0.22 11.8566 0.12C13.9886 0.0259999 14.6666 0 20.1006 0ZM20.1006 10C17.4484 10 14.9049 11.0536 13.0295 12.9289C11.1542 14.8043 10.1006 17.3478 10.1006 20C10.1006 22.6522 11.1542 25.1957 13.0295 27.0711C14.9049 28.9464 17.4484 30 20.1006 30C22.7528 30 25.2963 28.9464 27.1717 27.0711C29.047 25.1957 30.1006 22.6522 30.1006 20C30.1006 17.3478 29.047 14.8043 27.1717 12.9289C25.2963 11.0536 22.7528 10 20.1006 10ZM33.1006 9.5C33.1006 8.83696 32.8372 8.20107 32.3684 7.73223C31.8995 7.26339 31.2636 7 30.6006 7C29.9375 7 29.3017 7.26339 28.8328 7.73223C28.364 8.20107 28.1006 8.83696 28.1006 9.5C28.1006 10.163 28.364 10.7989 28.8328 11.2678C29.3017 11.7366 29.9375 12 30.6006 12C31.2636 12 31.8995 11.7366 32.3684 11.2678C32.8372 10.7989 33.1006 10.163 33.1006 9.5ZM20.1006 14C21.6919 14 23.218 14.6321 24.3432 15.7574C25.4684 16.8826 26.1006 18.4087 26.1006 20C26.1006 21.5913 25.4684 23.1174 24.3432 24.2426C23.218 25.3679 21.6919 26 20.1006 26C18.5093 26 16.9832 25.3679 15.8579 24.2426C14.7327 23.1174 14.1006 21.5913 14.1006 20C14.1006 18.4087 14.7327 16.8826 15.8579 15.7574C16.9832 14.6321 18.5093 14 20.1006 14Z" fill="#013D7E"/>
+                            </svg>
+                          </td>
+                          <td class="column table__footer-social-ico">
+                            <svg width="41" height="40" viewbox="0 0 41 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M36.9006 0H3.30059C2.45189 0 1.63796 0.337142 1.03784 0.937258C0.437728 1.53737 0.100586 2.35131 0.100586 3.2V36.8C0.100586 37.6487 0.437728 38.4626 1.03784 39.0627C1.63796 39.6629 2.45189 40 3.30059 40H36.9006C37.7493 40 38.5632 39.6629 39.1633 39.0627C39.7634 38.4626 40.1006 37.6487 40.1006 36.8V3.2C40.1006 2.35131 39.7634 1.53737 39.1633 0.937258C38.5632 0.337142 37.7493 0 36.9006 0ZM13.7006 29.6C13.7006 30.0243 13.532 30.4313 13.232 30.7314C12.9319 31.0314 12.5249 31.2 12.1006 31.2C11.6762 31.2 11.2693 31.0314 10.9692 30.7314C10.6692 30.4313 10.5006 30.0243 10.5006 29.6V16.8C10.5006 16.3757 10.6692 15.9687 10.9692 15.6686C11.2693 15.3686 11.6762 15.2 12.1006 15.2C12.5249 15.2 12.9319 15.3686 13.232 15.6686C13.532 15.9687 13.7006 16.3757 13.7006 16.8V29.6ZM12.1006 12.8C11.6259 12.8 11.1619 12.6592 10.7672 12.3955C10.3725 12.1318 10.0649 11.757 9.88328 11.3184C9.70162 10.8799 9.6541 10.3973 9.7467 9.93178C9.83931 9.46623 10.0679 9.03859 10.4035 8.70294C10.7392 8.3673 11.1668 8.13872 11.6324 8.04611C12.0979 7.95351 12.5805 8.00104 13.019 8.18269C13.4576 8.36434 13.8324 8.67195 14.0961 9.06663C14.3598 9.46131 14.5006 9.92533 14.5006 10.4C14.5006 11.0365 14.2477 11.647 13.7976 12.0971C13.3476 12.5471 12.7371 12.8 12.1006 12.8ZM31.3006 29.6C31.3006 30.0243 31.132 30.4313 30.832 30.7314C30.5319 31.0314 30.1249 31.2 29.7006 31.2C29.2762 31.2 28.8693 31.0314 28.5692 30.7314C28.2692 30.4313 28.1006 30.0243 28.1006 29.6V22.4C28.1006 21.3391 27.6792 20.3217 26.929 19.5716C26.1789 18.8214 25.1615 18.4 24.1006 18.4C23.0397 18.4 22.0223 18.8214 21.2722 19.5716C20.522 20.3217 20.1006 21.3391 20.1006 22.4V29.6C20.1006 30.0243 19.932 30.4313 19.632 30.7314C19.3319 31.0314 18.9249 31.2 18.5006 31.2C18.0762 31.2 17.6693 31.0314 17.3692 30.7314C17.0692 30.4313 16.9006 30.0243 16.9006 29.6V16.8C16.8995 16.4062 17.0436 16.0259 17.3054 15.7318C17.5672 15.4376 17.9282 15.2504 18.3195 15.2058C18.7107 15.1612 19.1046 15.2625 19.4259 15.4902C19.7471 15.7179 19.9731 16.0561 20.0606 16.44C21.1432 15.7061 22.4053 15.281 23.7113 15.2103C25.0174 15.1396 26.318 15.4259 27.4735 16.0387C28.6291 16.6514 29.5959 17.5673 30.2701 18.6881C30.9444 19.8088 31.3006 21.0921 31.3006 22.4V29.6Z" fill="#013D7E"/>
+                            </svg>
+                          </td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+
+                  <tr class="row">
+                    <td class="column column_center ">
+                      <span>Copyright
+                        <strong>2022</strong>
+                        Surtilider</span>
+                    </td>
+                  </tr>
+
+                  <tr class="row">
+                    <td class="column column_center coy_footer">
+                      Visitanos en nuestro sitio Web
+                      <a href="https://surtilider.com/" target="_blank">https://surtilider.com/</a>
+                    </td>
+                  </tr>
+
+                </table>
+
+              </td>
+            </tr>
+
+          </table>
+
+        </td>
+      </tr>
+    </table>
+
+  </body>
+
+</html>
