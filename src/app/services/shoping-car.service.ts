@@ -360,7 +360,7 @@ export class ShopingCarService {
 
       if (!window.location.pathname.includes("detail-product")) {
         setTimeout(() => {
-          document.querySelector(".js-number-card-product").innerHTML = "1"
+          document.querySelector(".js-number-card-product-card").innerHTML = "1"
         }, 1000)
       }
     }
@@ -454,17 +454,15 @@ export class ShopingCarService {
       .then(data => {
 
         const dataTem = JSON.parse(data.data)
-        this.msjOrder = dataTem.message
+        this.msjOrder = dataTem.msj
 
-        setTimeout(() => {
-          if (dataTem.response) {
-            this.idOrderCurrent = dataTem.idpedido
-            this.isOrderOkey = true
-          } else {
-            this.isOrderOkey = false;
-            this.presentAlert("Error creando orden", this.msjOrder)
-          }
-        }, 2000)
+        if (dataTem.response) {
+          this.idOrderCurrent = dataTem.idpedido
+          this.isOrderOkey = true
+        } else {
+          this.isOrderOkey = false;
+          this.presentAlert("Error creando orden", this.msjOrder)
+        }
 
       })
       .catch(error => {

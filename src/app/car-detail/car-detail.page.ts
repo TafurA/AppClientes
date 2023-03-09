@@ -58,6 +58,9 @@ export class CarDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
     this.addressData.userCurrent = this.loginService.validateSession()['nomcli_b'] + " " + this.loginService.validateSession()['ape1cli_b']
 
     if (localStorage.getItem("AddressList") != "null") {
@@ -141,6 +144,31 @@ export class CarDetailPage implements OnInit {
     }, 1000)
   }
 
+  public resetCarButton() {
+    this.resetCar()
+
+    document.querySelector(".js-number-card-product-card").innerHTML = "1"
+    localStorage.removeItem("productsCurrentOrderDetail")
+  }
+
+  public resetCar() {
+    this.groupPago = false
+    this.groupConfirm = false
+    this.groupAddres = true
+
+    const stes = document.querySelectorAll(".c-steps__step");
+    stes.forEach((e, i) => {
+      if (i != 0) {
+        e.classList.remove("is-checked")
+      }
+      if (i != 1) {
+        e.classList.remove("is-current")
+      } else {
+        e.classList.add("is-current")
+      }
+    })
+  }
+
   public sendOrder() {
     this.showLoader();
 
@@ -152,21 +180,7 @@ export class CarDetailPage implements OnInit {
       setTimeout(() => {
         this.removeLoader();
         if (!this.shopingService.isOrderOkey) {
-          this.groupPago = false
-          this.groupConfirm = false
-          this.groupAddres = true
-
-          const stes = document.querySelectorAll(".c-steps__step");
-          stes.forEach((e, i) => {
-            if (i != 0) {
-              e.classList.remove("is-checked")
-            }
-            if (i != 1) {
-              e.classList.remove("is-current")
-            } else {
-              e.classList.add("is-current")
-            }
-          })
+          this.resetCar()
           this.navController.navigateForward("/tabs/car")
         } else {
           this.showConfirmOrder();
