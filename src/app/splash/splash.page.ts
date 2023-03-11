@@ -11,14 +11,10 @@ export class SplashPage implements OnInit {
   constructor(public nvcControl: NavController,) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      document.querySelector("body").classList.add("is-white")
-    }, 5000)
 
 
     setTimeout(() => {
       this.nvcControl.navigateForward("/tabs/welcome")
-      document.querySelector(".img-splash").classList.add("test")
     }, 8000)
 
   }
