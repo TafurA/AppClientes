@@ -229,12 +229,23 @@
       </ul>
   
       <!-- <button class="o-checkout__btn o-button o-button_secondary">Cancelar pedido</button> -->
-      <button
-        class="o-checkout__btn o-button"
-        [routerLink]="['/tabs/order-detail/', order.orderId]"
-      >
-        Ver detalle
-      </button>
+      <div class="o-checkout-actions">
+
+        <button
+          class="o-checkout__btn o-button"
+          [routerLink]="['/tabs/order-detail/', order.orderId]"
+        >
+          Ver detalle
+        </button>
+        <button
+          class="o-checkout__btn o-button o-button_secondary"
+          [routerLink]="['/tabs/home/']"
+          (click)="resetCarButton()"
+        >
+          Regresar al Home
+        </button>
+
+      </div>
 
     </div>
 
