@@ -66,7 +66,6 @@ export class HomePage implements OnInit {
           setTimeout(() => {
             if (
               localStorage.getItem("AddressList") != "null") {
-              console.log("MOSTRO O NO MOSOTRO?")
               this.listOfAddress()
             }
           }, 1000)
@@ -132,10 +131,19 @@ export class HomePage implements OnInit {
     for (let index = 0; index < radios.length; index++) {
       const element = radios[index];
       element.addEventListener("click", e => {
-        this.codeConfirmAddress = (e.target as HTMLInputElement).value
+        this.codeConfirmAddress = (e.target as HTMLInputElement).value // Código de la dirección seleccionada
         this.buttonConfirmAddres = true;
+
+        // Obtener el bodcli de la dirección seleccionada
+        JSON.parse(localStorage.getItem("AddressList")).forEach(element => {
+          if (element.codcli_b == this.codeConfirmAddress) {
+            localStorage.setItem("codeBodCli", element.bodcli_b)
+          }
+        });
+
       })
     }
+
 
   }
 

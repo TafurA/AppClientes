@@ -34,7 +34,6 @@ export class LoginService {
             this.setUserCode()
           }, 1000)
 
-          console.log("dataLoginTemp")
           // Address
           if (dataLoginTemp.data.length > 1) {
             const listAddress = []
@@ -43,7 +42,8 @@ export class LoginService {
               const dataTempAddress = {
                 codcli_b: element.codcli_b,
                 dircli_b: element.dircli_b,
-                telcli_b: element.telcli_b
+                telcli_b: element.telcli_b,
+                bodcli_b: element.bodcli_b
               }
 
               listAddress.push(dataTempAddress)
@@ -52,6 +52,11 @@ export class LoginService {
             localStorage.setItem("AddressList", JSON.stringify(listAddress))
           } else {
             localStorage.setItem("AddressList", null)
+
+            // Guardar el bodcli del usuario cuando no hay direccione
+            console.log("data a giardar")
+            console.log(dataLoginTemp.data[0])
+            this.setBodCli(dataLoginTemp.data[0][9])
           }
 
           this.nvCtrl.navigateForward("/tabs/home")
@@ -68,11 +73,18 @@ export class LoginService {
 
   setUserCode() {
     const encodeString = localStorage.userSessionData
-    const obj = []
-
     let jsonUserData = JSON.parse(encodeString)
 
     localStorage.setItem("codeUserAddress", jsonUserData[0]);
+  }
+
+  setBodCli(bodCli) {
+    const encodeString = localStorage.userSessionData
+
+    console.log("jsonUserData")
+    console.log(bodCli)
+
+    localStorage.setItem("codeBodCli", bodCli);
   }
 
   getUserCode() {

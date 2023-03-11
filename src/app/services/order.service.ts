@@ -74,6 +74,9 @@ export class OrderService {
   }
 
   async getDataUserOrderDetail(orderId) {
+
+    this.arrayCurrentOrderDetial = []
+
     await this.http.get(`${environment.url}${environment.apiPath}getDatosclientePed?idpedido=${orderId}`, "", environment.headers)
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
@@ -105,7 +108,6 @@ export class OrderService {
       .then(data => {
         console.log("service")
         console.log(data)
-
       })
   }
 

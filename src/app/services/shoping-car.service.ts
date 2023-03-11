@@ -454,12 +454,16 @@ export class ShopingCarService {
       .then(data => {
 
         const dataTem = JSON.parse(data.data)
-        this.msjOrder = dataTem.msj
+
+        console.log("ESTOS SON LOS DATOS")
+        console.log(dataTem)
 
         if (dataTem.response) {
           this.idOrderCurrent = dataTem.idpedido
+          this.msjOrder = dataTem.msj
           this.isOrderOkey = true
         } else {
+          this.msjOrder = dataTem.message
           this.isOrderOkey = false;
           this.presentAlert("Error creando orden", this.msjOrder)
         }
@@ -467,6 +471,7 @@ export class ShopingCarService {
       })
       .catch(error => {
         this.isOrderOkey = false;
+        console.log("ERROR CREANDO ORDEN")
         this.presentAlert("Crear order", error)
       });
   }

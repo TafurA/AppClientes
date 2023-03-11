@@ -89,29 +89,29 @@ export class FavoriteService {
     // })
 
     await this.http.get(`${environment.url}${environment.apiPath}getFavoritos?nitcli_b=${this.getClientCode()}`, "", environment.headers)
-      .then(data => {
-        const dataObjTemp = JSON.parse(data.data)
+      // .then(data => {
+      //   const dataObjTemp = JSON.parse(data.data)
 
-        // console.log("FAVORITOOOS")
-        // console.log(dataObjTemp)
+      //   // console.log("FAVORITOOOS")
+      //   // console.log(dataObjTemp)
 
-        if (dataObjTemp.favorites) {
-          for (let index = 0; index < dataObjTemp.favorites.length; index++) {
-            const element = dataObjTemp.favorites[index];
-            this.arrayDataFavorites[index] = element
-          }
-          this.setIsFavoriteNull(false)
-        } else {
-          this.setIsFavoriteNull(true)
-        }
+      //   if (dataObjTemp.favorites) {
+      //     for (let index = 0; index < dataObjTemp.favorites.length; index++) {
+      //       const element = dataObjTemp.favorites[index];
+      //       this.arrayDataFavorites[index] = element
+      //     }
+      //     this.setIsFavoriteNull(false)
+      //   } else {
+      //     this.setIsFavoriteNull(true)
+      //   }
 
-      }).finally(() => {
-        this.getFavoriteProductsList()
-      })
-      .catch(error => {
-        console.log("error favorite list");
-        console.log(error);
-      });
+      // }).finally(() => {
+      //   this.getFavoriteProductsList()
+      // })
+      // .catch(error => {
+      //   console.log("error favorite list");
+      //   console.log(error);
+      // });
 
   }
 

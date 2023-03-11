@@ -104,8 +104,9 @@ export class ProductService {
 
   async getOffertProducts() {
     this.arrayDataProducts = []
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
 
-    await this.http.get(`${environment.url}${environment.apiPath}getProductOffers`, "", environment.headers)
+    await this.http.get(`${environment.url}${environment.apiPath}getProductOffers?bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
 
         const dataObjTemp = JSON.parse(data.data)

@@ -170,12 +170,15 @@ export class CarDetailPage implements OnInit {
   }
 
   public sendOrder() {
+    console.log("ENVIANDO NUEVO CARRITO")
     this.showLoader();
 
     this.shopingService.sendOrder().then(() => {
-      this.getConfirmOrderDetail().then(() => {
-        this.getConfirmProductsOrderDetail();
-      });
+      setTimeout(() => {
+        this.getConfirmOrderDetail().then(() => {
+          this.getConfirmProductsOrderDetail();
+        });
+      }, 1000)
     }).finally(() => {
       setTimeout(() => {
         this.removeLoader();
@@ -190,17 +193,26 @@ export class CarDetailPage implements OnInit {
   }
 
   public async getConfirmOrderDetail() {
-    await this.orderService.getDataUserOrderDetail(this.shopingService.idOrderCurrent).finally(() => {
-      this.order.orderId = this.orderService.arrayCurrentOrderDetial[0].orderId;
-      this.order.totalValue = this.orderService.arrayCurrentOrderDetial[0].totalValue;
-      this.order.customerName = this.orderService.arrayCurrentOrderDetial[0].name;
-      this.order.address = this.orderService.arrayCurrentOrderDetial[0].address;
-      this.order.phone = this.orderService.arrayCurrentOrderDetial[0].phone;
-      this.order.date = this.orderService.arrayCurrentOrderDetial[0].date;
-      this.order.image = this.orderService.arrayCurrentOrderDetial[0].img_prod;
-    }).finally(() => {
-      this.mensajeUno = this.shopingService.msjOrder
-    });
+
+    console.log("SE ENVIAAAA")
+    console.log(this.shopingService.idOrderCurrent)
+
+    if (this.shopingService.idOrderCurrent) {
+      await this.orderService.getDataUserOrderDetail(this.shopingService.idOrderCurrent).then(() => {
+        console.log("DENTROOOO")
+        console.log(this.orderService.arrayCurrentOrderDetial[0])
+        this.order.orderId = this.orderService.arrayCurrentOrderDetial[0].orderId;
+        this.order.totalValue = this.orderService.arrayCurrentOrderDetial[0].totalValue;
+        this.order.customerName = this.orderService.arrayCurrentOrderDetial[0].name;
+        this.order.address = this.orderService.arrayCurrentOrderDetial[0].address;
+        this.order.phone = this.orderService.arrayCurrentOrderDetial[0].phone;
+        this.order.date = this.orderService.arrayCurrentOrderDetial[0].date;
+        this.order.image = this.orderService.arrayCurrentOrderDetial[0].img_prod;
+      }).finally(() => {
+        this.mensajeUno = this.shopingService.msjOrder
+      });
+
+    }
   }
 
   public getConfirmProductsOrderDetail() {
