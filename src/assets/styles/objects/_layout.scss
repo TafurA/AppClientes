@@ -34,16 +34,7 @@
 .o-section-splash {
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 100%;
   height: 100%;
-  background-color: #144375;
-  transition: all .2s ease-in;
-
-  .is-white & {
-    background-color: white;
-  }
-
-  img {
-    width: 100%;
-  }
+  // background-color: #144375;
 }
