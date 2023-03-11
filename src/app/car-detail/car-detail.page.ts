@@ -170,7 +170,6 @@ export class CarDetailPage implements OnInit {
   }
 
   public sendOrder() {
-    console.log("ENVIANDO NUEVO CARRITO")
     this.showLoader();
 
     this.shopingService.sendOrder().then(() => {
@@ -194,13 +193,9 @@ export class CarDetailPage implements OnInit {
 
   public async getConfirmOrderDetail() {
 
-    console.log("SE ENVIAAAA")
-    console.log(this.shopingService.idOrderCurrent)
 
     if (this.shopingService.idOrderCurrent) {
       await this.orderService.getDataUserOrderDetail(this.shopingService.idOrderCurrent).then(() => {
-        console.log("DENTROOOO")
-        console.log(this.orderService.arrayCurrentOrderDetial[0])
         this.order.orderId = this.orderService.arrayCurrentOrderDetial[0].orderId;
         this.order.totalValue = this.orderService.arrayCurrentOrderDetial[0].totalValue;
         this.order.customerName = this.orderService.arrayCurrentOrderDetial[0].name;
