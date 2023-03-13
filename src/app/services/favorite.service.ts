@@ -87,8 +87,9 @@ export class FavoriteService {
     //   }
 
     // })
-
-    await this.http.get(`${environment.url}${environment.apiPath}getFavoritos?nitcli_b=${this.getClientCode()}`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    
+    await this.http.get(`${environment.url}${environment.apiPath}getFavoritos?nitcli_b=${this.getClientCode()}&bodega=${codeBodCli}`, "", environment.headers)
       // .then(data => {
       //   const dataObjTemp = JSON.parse(data.data)
 

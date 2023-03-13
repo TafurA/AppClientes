@@ -70,8 +70,8 @@ export class ProductService {
 
   async getRecomendedProducts(nit) {
     this.arrayDataProducts = []
-
-    await this.http.get(`${environment.url}${environment.apiPath}getRecommended?nit=${nit}`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    await this.http.get(`${environment.url}${environment.apiPath}getRecommended?nit=${nit}&bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
         JSON.parse(data.data).data.forEach(element => {
           this.arrayDataProducts.push(element)
@@ -87,8 +87,8 @@ export class ProductService {
 
   async getRelatedProducts(bannerId) {
     this.arrayDataProducts = []
-
-    await this.http.get(`${environment.url}${environment.apiPath}getProductoRelated?searchword=${bannerId}`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    await this.http.get(`${environment.url}${environment.apiPath}getProductoRelated?searchword=${bannerId}&bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
         JSON.parse(data.data).dataObjRelated.forEach(element => {
           this.arrayDataProducts.push(element)
