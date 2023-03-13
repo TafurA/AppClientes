@@ -46,25 +46,27 @@
 
     </div>
     <!-- Credentials -->
-    <div class="o-information">
+    <h2 class="o-information__title">Puntos de envío <a class="o-link o-link_primary i-plus o-btn-points-add" id="open-modal" >AGREGAR PUNTO DE ENVÍO</a></h2>
+    
+    <ion-slides class="c-banner" pager="true" [options]="slideOpts">
+      <ion-slide class="o-information" *ngFor="let points of ListPonts">
       
-      <h2 class="o-information__title">Puntos de envío</h2>
       
-      <div class="o-information__form">
-        
-        <label class="o-information__label" for="">DIRECCIÓN</label>
-        <input class="o-information__input" type="text" value="{{ shippingPoint }}">
-        <label class="o-information__label" for="">BARRIO</label>
-        <input class="o-information__input" type="text" value="{{ neighborhood }}">
-<div class="o-footer-btn">
-  <a class="o-link o-link_primary i-plus" id="open-modal" >AGREGAR</a>
-  <button class="o-link o-link_secondary  i-trash" (click)="removeShippingPoint()">ELIMINAR</button>
+      <div class="o-information__form o-list-shipping-point">  
+        <input class="o-information__input" type="hidden" value="{{ points.codcli_b }}">
+          <label class="o-information__label" for="">DIRECCIÓN</label>
+          <input class="o-information__input" type="text" value="{{ points.dircli_b }}">
+          <label class="o-information__label" for="" >BARRIO</label>
+          <input class="o-information__input" type="text" value="{{ points.barcli_b }}">
 
-</div>
+        <div class="o-footer-btn">
+          <button class="o-link o-link_secondary  i-trash" (click)="removeShippingPoint(points.codcli_b)">ELIMINAR</button>
+
+          </div>
       </div>
-
-    </div>
-
+  
+      </ion-slide>
+    </ion-slides>
 
     <!-- modal hacer pun puntos de envio -->
     <!-- //modal  -->

@@ -15,9 +15,50 @@ export class ShippingPointService {
   public dataDireccion=[];
   public alert;
   public loader: any;
+  public ListPonts=[];
 
   constructor(public nvCtrl: NavController,  private alertController: AlertController, public sessionGuard: SessionGuard,private loadingController: LoadingController, private http: HTTP) {
   }
+
+// ----------------- 
+async ListShippingPoint(identificacion: string){
+  await this.http.get(`${environment.url}${environment.apiPath}customerClient?identificacion=${identificacion}`,"", environment.headers).then(data => {
+    const dataPointsTemp = JSON.parse(data.data)
+
+
+    console.log(dataPointsTemp)
+    console.log("dataPointsTemp")
+    if (dataPointsTemp.response) {
+
+      dataPointsTemp.data.forEach(element => {
+        const data = {
+          codcli_b: element.codcli_b,
+          barcli_b: element.barcli_b,
+          dircli_b: element.dircli_b
+        }
+        this.ListPonts.push(data)
+      });
+
+      console.log("Correcto, puntos de envío listados")
+      console.log(this.ListPonts)
+      console.log("this.ListPonts")
+    
+    }else{
+      console.log("Ocurrio un error");
+    }
+  }).catch((error) => {
+  console.log("error.status");
+  console.log(error)
+  })
+}
+public ListShippingPointData(): Object {
+  this.ListPonts;
+  return this.ListPonts;
+}
+// ----------------
+
+
+
 
   async addShippingPoint(codigo: string,
     barrio: string,
@@ -54,6 +95,10 @@ export class ShippingPointService {
     console.log(error)
     })
   }
+
+
+
+
   async presentAlert(title: string, description: string, alertType: string) {
     this.alert = await this.alertController.create({
       header: title,

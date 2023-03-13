@@ -44,6 +44,7 @@ export class ProfilePage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
   message: string;
   direccion: string;
+  public ListPonts: any;
 
   //ACTUALIZAR --- NO BORRAR
   //---
@@ -66,6 +67,7 @@ export class ProfilePage implements OnInit {
      this.BuildshippingForm()
      this.municipios()
      this.barrios()
+     this.ListShippingPoints()
      
      //ACTUALIZAR --- NO BORRAR
   }
@@ -76,6 +78,8 @@ export class ProfilePage implements OnInit {
     this.userCredential = `${this.loginService.validateSession()['codcli_b']}`
     this.userPhone = `${this.loginService.validateSession()['telcli_b']}`
     this.userEmal = `${this.loginService.validateSession()['emacli_b']}`
+
+    //-----------------
     this.shippingPoint = `${this.loginService.validateSession()['dircli_b']}`
     this.neighborhood = `${this.loginService.validateSession()['barcli_b']}`
 
@@ -285,12 +289,12 @@ export class ProfilePage implements OnInit {
                                   })
       }
   }
-  public removeShippingPoint(){
+  public removeShippingPoint(element){
     this.presentAlert().finally(() => {
 
       if (this.isRemoved) {
         this.shippingPointService.showLoader()
-        this.shippingPointService.removeShippingPoint(this.userCredential)
+        this.shippingPointService.removeShippingPoint(element)
       }
 
     })
@@ -327,6 +331,26 @@ export class ProfilePage implements OnInit {
 
 
   //------------------------------
+
+
+  //------- listar puntos de envío
+
+
+  public async ListShippingPoints(){
+    const identificacion=this.loginService.validateSession()['nitcli_b']
+    await this.shippingPointService.ListShippingPoint(identificacion).then(() => {
+      if (this.shippingPointService.ListShippingPointData()) {
+        this.ListPonts =this.shippingPointService.ListShippingPointData();
+        console.log(this.ListPonts);
+        console.log("this.ListPonts =this.shippingPointService.ListShippingPointData()");
+        console.log("this.ListPonts =this.shippingPointService.ListShippingPointData()");
+      }else{
+        console.log("error");
+      }
+    });
+    
+  }
+  // -------------------
 
 
 }
