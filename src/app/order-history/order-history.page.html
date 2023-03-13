@@ -92,7 +92,7 @@
                   VER DETALLES
                 </a>
 
-                <div *ngIf="order.entregado == '0'">
+                <div *ngIf="order.entregado == '0' && order.estped_b == 'entregado'">
                   <app-modal [modalid]="typeOrder.orderType + order.idpedido" [idFactura]="order.idpedido"></app-modal>
                 </div>
               </div>

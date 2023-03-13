@@ -237,13 +237,22 @@
   
       </div>
   
-      <button
-        class="c-cashback-box__btn o-button"
-        (click)="saveOrderIntoLocalStorage()"
-        [ngClass]="{'test': !isTotalCompra, '': isTotalCompra}"
-      >
-        Continuar
-      </button>
+      <div class="o-checkout-actions">
+        <button
+          class="c-cashback-box__btn o-button"
+          (click)="saveOrderIntoLocalStorage()"
+          [ngClass]="{'test': !isTotalCompra, '': isTotalCompra}"
+        >
+          Continuar
+        </button>
+
+        <button
+          class="o-checkout__btn o-button o-button_secondary"
+          [routerLink]="['/tabs/home/']"
+        >
+          Regresar al Home
+        </button>
+      </div>
 
     </ng-template>
 
