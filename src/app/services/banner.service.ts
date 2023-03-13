@@ -34,7 +34,9 @@ export class BannerService {
 
   async getBannerDetail(bannerId) {
 
-    await this.http.get(`${environment.url}${environment.apiPath}getDetailBanner?codigo=${bannerId}`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+
+    await this.http.get(`${environment.url}${environment.apiPath}getDetailBanner?codigo=${bannerId}&bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
 
         const dataBennerTemp = JSON.parse(data.data)

@@ -33,8 +33,8 @@ export class CategoryService {
   }
 
   async getSubCategoryList(idCategory) {
-
-    await this.http.get(`${environment.url}${environment.apiPath}getSubCategory?codecategory=${idCategory}`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    await this.http.get(`${environment.url}${environment.apiPath}getSubCategory?codecategory=${idCategory}&bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
 
         this.arrayDataSubCategory = []

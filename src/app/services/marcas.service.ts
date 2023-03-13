@@ -32,7 +32,8 @@ export class MarcasService {
   }
 
   async getProviderDetail(idProvider) {
-    await this.http.get(`${environment.url}${environment.apiPath}/getDetailProvider?provider=${idProvider}`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    await this.http.get(`${environment.url}${environment.apiPath}/getDetailProvider?provider=${idProvider}&bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
 
         this.arrayDataSubProvider = []

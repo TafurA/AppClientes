@@ -27,6 +27,9 @@ export class OrderHistoryPage implements OnInit {
       if (this.orderService.isOrdersCharged) {
         this.loaded = true
       }
+
+      console.log("this.arrayDataOrders")
+      console.log(this.arrayDataOrders)
     })
   }
 
