@@ -107,11 +107,11 @@ export class LoginService {
     console.log("numberCar.innerHTML")
     console.log(numberCar.innerHTML)
 
-    if (numberCar.innerHTML.toString() == "1") {
-      numberCar.innerHTML == "0"
-      search.classList.add("is-none-car")
-      icoCar.classList.add("test")
-    }
+    // if (numberCar.innerHTML.toString() == "1") {
+    numberCar.innerHTML == "0"
+    search.classList.add("is-none-car")
+    icoCar.classList.add("test")
+    // }
   }
 
   saveDataIntoLocalStorage(data: string) {
