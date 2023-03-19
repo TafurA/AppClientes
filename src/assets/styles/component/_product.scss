@@ -202,6 +202,31 @@
   font-size: 20px;
   color: $c-secondary;
   background: transparent;
+
+  .is-product-add & {
+    animation: reboteOut 1s 1;
+  }
+}
+
+@keyframes reboteOut {
+
+  25% {
+
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  100% {
+
+    transform: scale(0.0);
+    opacity: 0;
+
+  }
+
 }
 
 .c-product__add {
@@ -216,6 +241,31 @@
   background: rgba($c-primary, 0.2);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   transform: matrix(1, 0, 0, -1, 0, 0);
+
+  &.is-product-add {
+    animation: reboteOut 1s 1;
+  }
+}
+
+@keyframes reboteOut {
+
+  25% {
+
+    transform: scale(0.9);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  100% {
+
+    transform: scale(0.0);
+    opacity: 0;
+
+  }
+
 }
 
 .ngx-pagination {
@@ -299,4 +349,28 @@
   font-size: 18px;
   color: $c-text;
   background: transparent;
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  transition: all 0.2s ease-in;
+
+  &.i-pencil {
+    &:hover {
+      background: rgba($color: $c-primary, $alpha: 0.1);
+    }
+
+    &::before {
+      color: rgba($color: $c-primary, $alpha: 0.5);
+    }
+  }
+
+  &.i-trash {
+    &:hover {
+      background: rgba($color: $c-primary, $alpha: 0.1);
+    }
+
+    &::before {
+      color: rgba($color: $c-secondary, $alpha: 0.5);
+    }
+  }
 }

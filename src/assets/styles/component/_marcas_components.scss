@@ -29,6 +29,7 @@
   border-radius: 4px;
   padding: 8px;
   background-color: $c-gray-20;
+  transition: all 0.2s ease-in;
 
   .c-list-items__slide_group & {
     flex-direction: column;
@@ -36,6 +37,10 @@
     justify-content: center;
     row-gap: 4px;
     height: 100%;
+  }
+
+  &:hover {
+    transform: scale(0.9);
   }
 }
 

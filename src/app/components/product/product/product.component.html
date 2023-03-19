@@ -68,21 +68,21 @@
     <!-- Button add to favorites -->
     <button
       class="c-product__favorite i-heart-outline"
-      (click)="addProductToFavorite(productObject.codeProduct)"
+      (click)="addProductToFavorite($event, productObject.codeProduct)"
       *ngIf="!isFavorite;else buttonAddFavorite"
     ></button>
 
     <ng-template #buttonAddFavorite>
       <button
         class="c-product__favorite i-heart-fill"
-        (click)="removeProductToFavorite(productObject.codeProduct)"
+        (click)="removeProductToFavorite($event, productObject.codeProduct)"
       ></button>
     </ng-template>
 
 
     <button
       class="c-product__add i-plus"
-      (click)="getProductData(productObject)"
+      (click)="getProductData($event, productObject)"
     ></button>
 
   </footer>

@@ -55,11 +55,16 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  addProductToFavorite(idProduct) {
+  addProductToFavorite(e, idProduct) {
     if (this.loginService.validateSession()) {
       this.favoriteService.addProductToFavorite(idProduct).finally(() => {
         if (this.favoriteService.productAddSuccess()) {
           this.isFavorite = true
+          e.target.closest("footer").classList.add("is-product-add")
+          setTimeout(() => {
+            e.target.closest("footer").classList.remove("is-product-add")
+          }, 500)
+
         }
       });
     } else {
@@ -67,10 +72,17 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  removeProductToFavorite(idProduct) {
+  removeProductToFavorite(e, idProduct) {
     this.favoriteService.removeFavoriteProducts(idProduct).finally(() => {
       if (!this.favoriteService.productAddSuccess()) {
         this.isFavorite = false
+
+        e.target.closest("footer").classList.add("is-product-add")
+        console.log(e.target)
+        setTimeout(() => {
+          e.target.closest("footer").classList.remove("is-product-add")
+        }, 500)
+
       }
     });
   }
@@ -157,9 +169,15 @@ export class ProductComponent implements OnInit {
     await alert.present();
   }
 
-  async getProductData(e) {
+  async getProductData(event, e) {
     if (this.loginService.validateSession()) {
       this.shopingCarService.saveIntoCar(e)
+
+      event.target.classList.add("is-product-add")
+      console.log(event.target)
+      setTimeout(() => {
+        event.target.classList.remove("is-product-add")
+      }, 500)
     }
     else {
       this.navController.navigateForward("/tabs/login")
