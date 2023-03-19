@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   apiPath: 'IntranetSurti/WebServicesSurtiAppRest/',
-  url: 'https://surtiapp.surtilider.com:9001/',
-  // url: 'https://intranet.surtilider.com:9001/',
+  // url: 'https://surtiapp.surtilider.com:9001/',
+  url: 'https://intranet.surtilider.com:9001/',
   headerConfig: {
     headers: {
       'Authorization': `Basic U3VydGlBcHA6MzFhNWE1YjAxNDBlMDEzN2UwOGFhZGFhNjBlYjAxNmE0YjQzNDgxMg==`,

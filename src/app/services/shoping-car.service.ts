@@ -206,7 +206,8 @@ export class ShopingCarService {
   }
 
   public async getMinimoCompra(bodegaId) {
-    await this.http.get(`${environment.url}${environment.apiPath}GetValidation?bodega=${bodegaId}`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    await this.http.get(`${environment.url}${environment.apiPath}GetValidation?bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
         const dataTem = JSON.parse(data.data)
         localStorage.setItem("MinimoCompra", dataTem.data.minimo_compra)
