@@ -33,6 +33,7 @@ export class CarPage implements OnInit {
   // muestra u oculta alerta de cashback
   public minimoCompra: any = 0
   public isTotalCompra = false
+  public shippingPoint: string;
 
   constructor(
     public alertController: AlertController,
@@ -41,10 +42,14 @@ export class CarPage implements OnInit {
     public nvCtrl: NavController,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.setUserData()
+  }
+
 
   ionViewDidEnter() {
     this.setProductsIntoArray().finally(() => {
+      this.setUserData()
       this.loaded = true;
     })
 
@@ -61,6 +66,10 @@ export class CarPage implements OnInit {
     // Obtiene el minimo de compra por vendedor
     this.getMinPurchase()
 
+  }
+
+  setUserData() {
+    this.shippingPoint = `${this.loginService.validateSession()['dircli_b']}`
   }
 
   // Retorna el listado de productos

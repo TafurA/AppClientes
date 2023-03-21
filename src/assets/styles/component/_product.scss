@@ -374,3 +374,15 @@
     }
   }
 }
+
+.o-shippingPoint {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  background-color: $c-gray-10;
+  color: $c-primary;
+  flex-direction: column;
+  margin: 15px auto;
+  text-align: center;
+}

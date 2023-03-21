@@ -18,6 +18,7 @@ import { BannerComponent } from '../components/banner/banner.component';
 export class SidebarMenuPage implements OnInit {
   public userName = ""
   public userCashback = ""
+  public shippingPoint="";
 
   constructor(
     public loginService: LoginService,
@@ -56,6 +57,8 @@ export class SidebarMenuPage implements OnInit {
   setUserData() {
     this.userName = `${this.loginService.validateSession()['nomcli_b']} ${this.loginService.validateSession()['ape1cli_b']}`
     this.userCashback = `${this.loginService.validateSession()['valor_acomulado']}`
+    this.shippingPoint = `${this.loginService.validateSession()['dircli_b']}`
+
 
     if (this.userName.includes("undefined")) {
       this.navController.navigateForward("/tabs/welcome")
