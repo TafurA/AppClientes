@@ -1,4 +1,4 @@
-package com.surtilider.SurtiTiendas;
+package com.surtilider.SurtiTienda;
 
 import com.getcapacitor.BridgeActivity;
 

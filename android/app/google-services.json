@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:104891019349:android:69866e9a7ea0d8ee3f24dc",
+        "mobilesdk_app_id": "1:104891019349:android:189f45a7f358d4fb3f24dc",
         "android_client_info": {
-          "package_name": "com.surtilider.SurtiTiendas"
+          "package_name": "com.surtilider.SurtiTienda"
         }
       },
       "oauth_client": [

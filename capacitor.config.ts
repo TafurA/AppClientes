@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.surtilider.SurtiTiendas',
+  appId: 'com.surtilider.SurtiTienda',
   appName: 'SurtiTiendas',
   webDir: 'www',
   bundledWebRuntime: false
