@@ -4,6 +4,7 @@ import { ChatBotGuard } from '../guard/chat-bot.guard';
 import { SessionGuard } from '../guard/session.guard';
 import { ToggleMenuGuard } from '../guard/toggle-menu.guard';
 import { TabsPage } from './tabs.page';
+import { RecoverPasswordGuard } from '../guard/recover-password.guard';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
       {
         path: 'splash',
         loadChildren: () => import('../splash/splash.module').then(m => m.SplashPageModule),
-        canActivate: [ToggleMenuGuard],
+        canActivate: [ToggleMenuGuard, RecoverPasswordGuard],
       },
       {
         path: 'welcome',

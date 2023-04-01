@@ -92,19 +92,6 @@ export class ForgotPasswordService {
   }
 
   async serviceUpdatePassword(securityCode: string, newPassword: string) {
-    // await axios.get(`${environment.apiPath}/Changepassword?codigo=${securityCode}&passd=${newPassword}`,
-    //   environment.headerConfig).then(response => {
-
-    //     if (response.data.response) {
-
-    //     } else {
-    //     }
-
-    //   }).catch((error) => {
-    //     console.log("error.status");
-    //     console.log(error)
-    //   })
-
     await this.http.get(`${environment.url}${environment.apiPath}Changepassword?codigo=${securityCode}&passd=${newPassword}`, "", environment.headers)
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
@@ -113,6 +100,8 @@ export class ForgotPasswordService {
           this.presentAlert('Contraseña actualizada', dataObjTemp.message, 'is-success')
           this.nvCtrl.navigateForward('/tabs/login')
           localStorage.removeItem('credentialUser');
+          window.localStorage.removeItem("recoverPassword")
+          window.localStorage.removeItem("recoverPasswordEmail")
         } else {
           this.presentAlert('Error al actualizar contraseña', dataObjTemp.message, 'is-error')
         }

@@ -36,6 +36,12 @@ export class ForgotPasswordPage implements OnInit {
   ngOnInit() {
     this.buildValidateCredentialForm();
     this.validateLengthCodeSecurity();
+
+    if (window.localStorage.getItem("recoverPassword") == "change") {
+      this.stepOne = true;
+      this.emailString = window.localStorage.getItem("recoverPasswordEmail")
+      this.securityCodeComponent.timer(); // Init timer of security code
+    }
   }
 
   // form.get('first')?.enable();
@@ -43,7 +49,7 @@ export class ForgotPasswordPage implements OnInit {
 
   private buildValidateCredentialForm() {
     this.validateCredentialForm = this.formBuilder.group({
-       credential: ['', [Validators.required,Validators.pattern("^[0-9]*$")]],
+      credential: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       code: ['', Validators.required],
       email: ['', Validators.required],
     });
@@ -68,6 +74,9 @@ export class ForgotPasswordPage implements OnInit {
           this.emailString = this.forgotPasswordService.confirmData()[1]
 
           this.securityCodeComponent.timer(); // Init timer of security code
+
+          window.localStorage.setItem('recoverPassword', 'change')
+          window.localStorage.setItem('recoverPasswordEmail', this.emailString)
 
           // Save credential for re send a new code
           this.securityCodeComponent.setCredentialString(dataForm.credential);
