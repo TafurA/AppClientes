@@ -34,15 +34,8 @@ export class GridProductComponent implements OnInit {
     if (window.location.pathname.includes("favorite")) {
       if (localStorage.getItem("userSessionData")) {
         this.isViewOfFavorite = true;
-        this.isFavoriteNull = this.favoriteService.getIsFavoriteNull();
-
-        this.favoriteService.getFavoriteProductsList().then(() => {
-          this.fillArrayProducts()
-        }).finally(() => {
-          if (this.productService.isproductsCharged) {
-            this.loaded = true
-          }
-        })
+        this.fillArrayProducts()
+        this.loaded = true
       }
     } else if (window.location.pathname.includes("/offert")) {
       this.productService.getOffertProducts().then(() => {
@@ -68,8 +61,12 @@ export class GridProductComponent implements OnInit {
   fillArrayProducts() {
     // For list of favorite products
     if (window.location.pathname.includes("favorite")) {
-      this.arrayDataProducts = this.favoriteService.arrayDataFavorites
-      this.isFavoriteNull = this.favoriteService.getIsFavoriteNull();
+      this.arrayDataProducts = JSON.parse(localStorage.getItem("favoriteList"))
+      if (this.arrayDataProducts.toString() == "0") {
+        this.isFavoriteNull = true;
+      } else if (this.arrayDataProducts.length > 0) {
+        this.isFavoriteNull = false;
+      }
     }
     else {
       // List of General products

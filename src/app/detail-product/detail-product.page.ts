@@ -275,34 +275,24 @@ export class DetailProductPage {
 
   addProductToFavorite(idProduct) {
     this.favoriteService.addProductToFavorite(idProduct).finally(() => {
-      console.log(idProduct)
-      if (this.favoriteService.productAddSuccess()) {
-        this.isFavorite = true
-      }
+      this.isFavorite = true
     });
   }
 
   removeProductToFavorite(idProduct) {
     this.favoriteService.removeFavoriteProducts(idProduct).finally(() => {
-      if (!this.favoriteService.productAddSuccess()) {
-        this.isFavorite = false
-      }
+      this.isFavorite = false
     });
   }
 
   async fillArrayFavoriteList() {
-    this.favoriteService.getFavoriteProductsList().then(() => {
-      this.favoriteList = this.favoriteService.arrayDataFavorites
 
-      console.log(this.favoriteList)
+    this.favoriteList = JSON.parse(localStorage.getItem("favoriteList"))
+    let isProductFavorite = this.favoriteList.filter(product => product.codeProduct === this.product.productCode)
 
-      for (let index = 0; index < this.favoriteList.length; index++) {
-        const element = this.favoriteList[index];
-        if (element.codeProduct == this.product.productCode) {
-          this.isFavorite = true
-        }
-      }
-    })
+    if (isProductFavorite.length > 0) {
+      this.isFavorite = true
+    }
   }
 
   async getProductData(e) {

@@ -36,6 +36,8 @@ export class FavoriteService {
             this.presentAlert("Error al agregar a favorito", dataObjTemp.message, "is-error")
           }
 
+        }).finally(() => {
+          this.getFavoriteProductsList()
         })
         .catch(error => {
           console.log("error add favorite");
@@ -75,45 +77,25 @@ export class FavoriteService {
   async getFavoriteProductsList() {
     this.arrayDataFavorites = []
 
-    // await axios.get(`${environment.apiPath}getFavoritos?nitcli_b=${this.getClientCode()}`, environment.headerConfig).then(response => {
-    //   if (response.data.favorites) {
-    //     for (let index = 0; index < response.data.favorites.length; index++) {
-    //       const element = response.data.favorites[index];
-    //       this.arrayDataFavorites[index] = element
-    //     }
-    //     this.setIsFavoriteNull(false)
-    //   } else {
-    //     this.setIsFavoriteNull(true)
-    //   }
-
-    // })
     const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
-    
-    await this.http.get(`${environment.url}${environment.apiPath}getFavoritos?nitcli_b=${this.getClientCode()}&bodega=${codeBodCli}`, "", environment.headers)
-      .then(data => {
-        const dataObjTemp = JSON.parse(data.data)
 
-        // console.log("FAVORITOOOS")
-        //console.log(dataObjTemp)
+    await this.http.get(`${environment.url}${environment.apiPath}getFavoritosProblemas?nitcli_b=${this.getClientCode()}&bodega=${codeBodCli}`, "", environment.headers)
+      .then(data => {
+        let dataObjTemp = JSON.parse(data.data)
 
         if (dataObjTemp.favorites) {
-          for (let index = 0; index < dataObjTemp.favorites.length; index++) {
-            const element = dataObjTemp.favorites[index];
-            this.arrayDataFavorites[index] = element
-          }
+          window.localStorage.setItem("favoriteList", JSON.stringify(dataObjTemp.favorites))
           this.setIsFavoriteNull(false)
         } else {
           this.setIsFavoriteNull(true)
+          window.localStorage.setItem("favoriteList", "0")
         }
 
-      }).finally(() => {
-        this.getFavoriteProductsList()
       })
       .catch(error => {
         console.log("error favorite list");
         console.log(error);
       });
-
   }
 
   public arrayFavorites() {

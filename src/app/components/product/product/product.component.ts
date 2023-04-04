@@ -4,10 +4,12 @@ import { AlertController, NavController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login.service';
 import { FavoriteService } from 'src/app/services/favorite.service';
 import { ShopingCarService } from 'src/app/services/shoping-car.service';
+import { GridProductComponent } from '../grid-product.component';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
+  providers: [GridProductComponent]
 })
 
 export class ProductComponent implements OnInit {
@@ -33,7 +35,8 @@ export class ProductComponent implements OnInit {
     public shopingCarService: ShopingCarService,
     private alertController: AlertController,
     public loginService: LoginService,
-    public navController: NavController
+    public navController: NavController,
+    public gridProductComponent: GridProductComponent
   ) { }
 
   ngOnInit() {
@@ -46,6 +49,7 @@ export class ProductComponent implements OnInit {
   }
 
   async initAllFunctionsProduct() {
+    this.favoriteList = JSON.parse(localStorage.getItem("favoriteList"))
     this.productWithCashback()
     this.productWithDiscount()
     if (window.location.pathname.includes("favorite")) {
@@ -78,7 +82,11 @@ export class ProductComponent implements OnInit {
         this.isFavorite = false
 
         e.target.closest("footer").classList.add("is-product-add")
-        console.log(e.target)
+
+        if (window.location.pathname.includes("favorite")) {
+          e.target.closest(".c-product").setAttribute("style", "display: none")
+        }
+
         setTimeout(() => {
           e.target.closest("footer").classList.remove("is-product-add")
         }, 500)
@@ -123,39 +131,19 @@ export class ProductComponent implements OnInit {
   }
 
   getFavoriteTag() {
-    this.fillArrayFavoriteList().then(() => {
-      setTimeout(() => {
-        for (let index = 0; index < this.favoriteList.length; index++) {
-          const element = this.favoriteList[index];
-
-          if (element.codeProduct == this.productObject.codeProduct) {
-            this.isFavorite = true
-          }
-        }
-      }, 1000)
-    })
+    this.isFavorite = true
   }
 
-  getFavoriteTagAnotherPages() {
+  getFavoriteTagAnotherPages(): void {
     if (localStorage.getItem("userSessionData")) {
-      this.favoriteService.getFavoriteProductsList().then(() => {
-        this.fillArrayFavoriteList().finally(() => {
 
-          setTimeout(() => {
-            for (let index = 0; index < this.favoriteList.length; index++) {
-              const element = this.favoriteList[index];
-              if (element.codeProduct == this.productObject.codeProduct) {
-                this.isFavorite = true
-              }
-            }
-          }, 1000)
-        })
-      })
+      let isProductFavorite = this.favoriteList.filter(product => product.codeProduct === this.productObject.codeProduct)
+
+      if (isProductFavorite.length > 0) {
+        this.getFavoriteTag()
+      }
+
     }
-  }
-
-  async fillArrayFavoriteList() {
-    this.favoriteList = this.favoriteService.arrayFavorites()
   }
 
   async presentAlert() {

@@ -14,6 +14,7 @@ import { MarcasComponent } from '../components/marcas/marcas.component';
 import { CategoryComponent } from '../components/category/category.component';
 import { ProductComponent } from '../components/product/product/product.component';
 import { ListProductComponent } from '../components/product/list-product.component';
+import { FavoriteService } from '../services/favorite.service';
 
 @Component({
   selector: 'app-home',
@@ -48,7 +49,8 @@ export class HomePage implements OnInit {
     private alertController: AlertController,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
-    public productService: ProductService
+    public productService: ProductService,
+    public favoriteService: FavoriteService
   ) {
   }
 
@@ -72,7 +74,10 @@ export class HomePage implements OnInit {
         }
       }
 
-      this.getProducts()
+      this.favoriteService.getFavoriteProductsList()
+      setTimeout(() => {
+        this.getProducts()
+      }, 500)
     }
   }
 
