@@ -25,7 +25,7 @@
 
         <footer class="c-welcome__actions">
 
-          <button class="o-button" [routerLink]="['/tabs/login']">
+          <button class="o-button" (click)="validateNetwork($event)" data-href="login">
             Iniciar sesión con tu usuario
           </button>
 
@@ -33,11 +33,11 @@
             <span class="c-welcome__separator-txt">ó tambien puedes</span>
           </p>
 
-          <button class="o-button o-button_secondary" [routerLink]="['/tabs/register']">
+          <button class="o-button o-button_secondary" (click)="validateNetwork($event)" data-href="register">
             Crear una cuenta
           </button>
 
-          <button class="o-button o-button_outline" (click)="validateNetwork()">
+          <button class="o-button o-button_outline" (click)="validateNetwork(null)" data-href="home">
             Continuar sin usuario dentro
           </button>
 

@@ -21,12 +21,27 @@ export class WelcomePage implements OnInit {
     this.validateSession()
   }
 
-  validateNetwork() {
+  validateNetwork(event: any) {
+    let hrefToRedirect: string = ""
+
+    if (event != null) {
+      hrefToRedirect = event.target.dataset.href
+    }
+
     if (this.isOnline) {
-      this.nav.navigateForward("/tabs/home")
+      switch (hrefToRedirect) {
+        case "login":
+          this.nav.navigateForward("/tabs/login")
+          break;
+        case "register":
+          this.nav.navigateForward("/tabs/register")
+          break;
+        default:
+          this.nav.navigateForward("/tabs/home")
+          break;
+      }
     } else {
-      console.log("no tiene sale alerta")
-      this.presentAlert()
+      this.alertWithoutNetwork()
     }
   }
 
@@ -42,26 +57,25 @@ export class WelcomePage implements OnInit {
           console.log("error en alertas")
         }
       }).finally(() => {
-        this.nav.navigateForward("/tabs/home")
+        this.validateNetwork(null)
       });
     } else {
       this.nav.navigateForward("/tabs/welcome")
     }
   }
 
-  async presentAlert() {
+  async alertWithoutNetwork() {
     this.alert = await this.alertController.create({
       header: "Problemas de conexion",
       subHeader: "No se ha podido obtener una conexion, por favor intenta de nuevo.",
       cssClass: `c-alert is-error`
-      // buttons: ['OK'],
     });
 
     await this.alert.present();
 
     setTimeout(() => {
       this.alert.dismiss()
-    }, 5000)
+    }, 4000)
   }
 
 }
