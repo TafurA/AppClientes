@@ -14,6 +14,7 @@ import { LoginService } from '../services/login.service';
 import { RegisterService } from '../services/register.service';
 // import { ModalDireccionComponent } from 'src/app/component/layout/modal-direccion/modal-direccion.component';
 // import { LoginService } from 'src/app/service/login/login.service';
+import TomSelect from 'tom-select'
 
 @Component({
   selector: 'app-register',
@@ -91,6 +92,80 @@ export class RegisterPage implements OnInit {
     window.open(url, "_blank");
   }
 
+  public seleccionarBarrio() {
+    new TomSelect('#barrio',{
+      optionClass: 'option',
+      itemClass: 'item',
+      render:{
+        option: function(data, escape) {
+          return '<div>' + escape(data.text) + '</div>';
+        },
+        item: function(data, escape) {
+          return '<div></div>';
+        },
+        option_create: function(data, escape) {
+          return '<div></div>';
+        },
+        no_results:function(data,escape){
+          return '<div class="no-results">No results found for "'+escape(data.input)+'"</div>';
+        },
+        not_loading:function(data,escape){
+          // no default content
+        },
+        optgroup: function(data) {
+          // no default content
+        },
+        optgroup_header: function(data, escape) {
+          return '<div></div>';
+        },
+        loading:function(data,escape){
+          return '<div></div>';
+        },
+        dropdown:function(){
+          return '<div></div>';
+        }
+      }
+    });
+
+  }
+  public seleccionarMunicipio(e) {
+    new TomSelect('#municipio',{
+      optionClass: 'option',
+      itemClass: 'item',
+      render:{
+        option: function(data, escape) {
+          return '<div>' + escape(data.text) + '</div>';
+        },
+        item: function(data, escape) {
+          return '<div></div>';
+        },
+        option_create: function(data, escape) {
+          return '<div></div>';
+        },
+        no_results:function(data,escape){
+          return '<div class="no-results">No results found for "'+escape(data.input)+'"</div>';
+        },
+        not_loading:function(data,escape){
+          // no default content
+        },
+        optgroup: function(data) {
+          // no default content
+        },
+        optgroup_header: function(data, escape) {
+          return '<div></div>';
+        },
+        loading:function(data,escape){
+          return '<div></div>';
+        },
+        dropdown:function(){
+          return '<div></div>';
+        }
+      }
+    });
+
+  }
+
+
   private BuildRegisterForm() {
     //tipo
     const mintipoLength = 7;
@@ -105,8 +180,7 @@ export class RegisterPage implements OnInit {
     const maxEstablecimiento = 50
     //PATERN NUMBER
     const soloNumeros = "^[0-9]*$";
-    //PATTERN LETRAS SIN ESPACIOS
-    const letrasEspacio = '[a-zA-Z\s]*';
+    //PATTERN LETRAS
     const letras = '[a-zA-Z ]+$';
     const razonSocial='^[a-zA-Z0-9 .]+$';
     const email ='[^&#$%/!?¡]*';
@@ -123,7 +197,7 @@ export class RegisterPage implements OnInit {
       ]],
       primerNombre: ['', [
         Validators.required,
-        Validators.pattern(letrasEspacio),
+        Validators.pattern(letras),
         Validators.minLength(minNomLength),
         Validators.maxLength(maxNomLength)
       ]],
@@ -133,13 +207,13 @@ export class RegisterPage implements OnInit {
       ]],
       primerApellido: ['', [
         Validators.required,
-        Validators.pattern(letrasEspacio),
+        Validators.pattern(letras),
         Validators.minLength(minNomLength),
         Validators.maxLength(maxNomLength)
 
       ]],
       segundoApellido: ['', [
-        Validators.pattern(letrasEspacio),
+        Validators.pattern(letras),
         Validators.minLength(minNomLength),
         Validators.maxLength(maxNomLength)
 
@@ -176,14 +250,10 @@ export class RegisterPage implements OnInit {
       ver_direccion: ['', [
         Validators.required
       ]],
-      barrio: ['', [
-        Validators.required,
-        Validators.maxLength(maxRazonSocialLength)
-      ]],
-      municipio: ['', [
-        Validators.required,
-        Validators.maxLength(maxRazonSocialLength)
-      ]],
+      barrio: ['', 
+        Validators.required],
+      municipio: ['', 
+        Validators.required],
       vendedor: ['',],
       dirparam1: ['', Validators.required],
       dirparam2: ['',
@@ -191,6 +261,7 @@ export class RegisterPage implements OnInit {
         Validators.pattern(soloNumeros)
         ]],
       dirparam3: [''],
+      dirparamBis: [''],
       dirparam4: [''],
       dirparam5: ['',
         [Validators.required,
@@ -372,6 +443,7 @@ export class RegisterPage implements OnInit {
     dataForm.ver_direccion = dataForm.dirparam1 + ' ' +
       dataForm.dirparam2 + ' ' +
       dataForm.dirparam3 + ' ' +
+      dataForm.dirparamBis + ' ' +
       dataForm.dirparam4 + ' ' +
       dataForm.dirparam5 + ' ' +
       dataForm.dirparam6 + ' ' +
@@ -411,6 +483,7 @@ export class RegisterPage implements OnInit {
     this.modal.dismiss(dataForm.dirparam1 + ' ' +
       dataForm.dirparam2 + ' ' +
       dataForm.dirparam3 + ' ' +
+      dataForm.dirparamBis + ' ' +
       dataForm.dirparam4 + ' ' +
       dataForm.dirparam5 + ' ' +
       dataForm.dirparam6 + ' ' +

@@ -185,6 +185,27 @@
             </div>
           </div>
     </div>
+
+    <div class=" column">
+
+      <div class="o-form__field" >
+      <div class="o-form__field-wrap">
+            <ion-select
+              interface="popover"
+              id="dirparamBis"
+              class="o-form__input"
+              placeholder="Seleccionar"
+              formControlName="dirparamBis"
+            >
+            <ion-select-option value="">Seleccionar</ion-select-option>
+            <ion-select-option  *ngFor="let param of tipo6" value="{{param.abreviatura}}">{{param.abreviatura}} ({{param.descripcion}})</ion-select-option>
+            
+            </ion-select>
+          </div>
+        </div>     
+    
+</div>
+
     <div class=" column">
 
           <div class="o-form__field" *ngIf="nomenclatura=='Mostrar'">
@@ -193,7 +214,7 @@
                   interface="popover"
                   id="param4"
                   class="o-form__input"
-                  placeholder="mostrar"
+                  placeholder="Seleccionar"
                   formControlName="dirparam4"
                 >
                 <ion-select-option value="">Seleccionar</ion-select-option>

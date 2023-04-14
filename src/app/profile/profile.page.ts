@@ -313,7 +313,7 @@ export class ProfilePage implements OnInit {
           },
         },
         {
-          text: 'Aceptar',
+          text: 'Si, Enviar Solicitud',
           role: 'confirm',
           handler: () => {
             this.isRemoved = true;
