@@ -119,6 +119,7 @@ export class ProfilePage implements OnInit {
                           Validators.pattern(soloNumeros)
                         ]],
       dirparam8:       [''],
+      dirparamBis:     [''],
       dirparam9:       [''],
       dirparam10:       ['',Validators.pattern(soloNumeros)],
       dirparam11:       [''],
