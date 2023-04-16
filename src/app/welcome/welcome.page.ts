@@ -5,6 +5,7 @@ import {
 } from '@capacitor/push-notifications';
 
 import { LoginService } from '../services/login.service';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Component({
   selector: 'app-welcome',
@@ -12,13 +13,21 @@ import { LoginService } from '../services/login.service';
   styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
+  private NUMBER_PUBLIC_VERSION = "1.2";
   public alert;
   isOnline = navigator.onLine;
+  currentVersion: boolean = true;
+  currentNumberVersion: string = '';
 
-  constructor(public loginService: LoginService, public nav: NavController, public alertController: AlertController) { }
+  constructor(
+    public loginService: LoginService,
+    public nav: NavController,
+    public alertController: AlertController,
+    private appVersion: AppVersion
+  ) { }
 
   ngOnInit() {
-    this.validateSession()
+    this.validateVersion()
   }
 
   validateNetwork(event: any) {
@@ -64,6 +73,30 @@ export class WelcomePage implements OnInit {
     }
   }
 
+  /**
+   * Valida si la versión descargada es igual a la versión publicada 
+   * para continuar al flujo de sesion. this.validateSession()
+   * 
+   * @memberof WelcomePage
+   */
+  validateVersion() {
+    this.appVersion.getVersionNumber().then((uploadNumberVersion) => {
+      this.currentNumberVersion = uploadNumberVersion
+      if (uploadNumberVersion != this.NUMBER_PUBLIC_VERSION) {
+        this.alertUnUpdatedVersion(
+          '¡Actualizar aplicación!',
+          'Si ve este mensaje, verifique que tenga la aplicación actualizada, gracias',
+          'is-error'
+        )
+        this.currentVersion = false
+      } else {
+        this.validateSession()
+      }
+    }).catch((error) => {
+      console.log('Error al obtener la versión:', error);
+    })
+  }
+
   async alertWithoutNetwork() {
     this.alert = await this.alertController.create({
       header: "Problemas de conexion",
@@ -76,6 +109,16 @@ export class WelcomePage implements OnInit {
     setTimeout(() => {
       this.alert.dismiss()
     }, 4000)
+  }
+
+  async alertUnUpdatedVersion(title: string, description: string, alertType: string) {
+    this.alert = await this.alertController.create({
+      header: title,
+      subHeader: description,
+      cssClass: `c-alert untouched ${alertType}`
+    });
+
+    await this.alert.present();
   }
 
 }

@@ -1,6 +1,10 @@
 .c-alert {
   align-items: flex-end;
 
+  &.untouched {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 
   .alert-wrapper {
     min-width: 100%;

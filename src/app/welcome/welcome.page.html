@@ -18,12 +18,15 @@
         <!-- Welcome header -->
         <header class="o-headline u-text-align-center">
           <h1 class="o-headline__title">¡Surtimos con Liderazgo!</h1>
-          <p class="o-headline__text o-color-light">
+          <p class="o-headline__text o-color-light u-margin-bottom-16">
             Somos la comercializadora de productos masivos aliada de su negocio.
+          </p>
+          <p class="o-text o-text-fs-12">
+            <strong>Versión {{ currentNumberVersion }}</strong>
           </p>
         </header>
 
-        <footer class="c-welcome__actions">
+        <footer *ngIf="currentVersion" class="c-welcome__actions">
 
           <button class="o-button" (click)="validateNetwork($event)" data-href="login">
             Iniciar sesión con tu usuario
