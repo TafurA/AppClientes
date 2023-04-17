@@ -68,3 +68,18 @@
   opacity: 0;
   visibility: hidden;
 }
+
+
+// Styles for inputs selects customs of TOM SELECT
+.styles {
+  display: flex;
+  flex-direction: column-reverse;
+  row-gap: 8px;
+
+  input {
+    border: none;
+    background: transparent;
+    font-size: 16px;
+    font-family: "Open Sans";
+  }
+}

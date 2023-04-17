@@ -29,6 +29,16 @@
   }
 }
 
+.o-form__field-wrap_tom {
+  flex-direction: column-reverse;
+
+  select {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+  }
+}
+
 .o-form__label {
   display: flex;
   justify-content: flex-end;

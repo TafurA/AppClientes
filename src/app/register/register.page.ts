@@ -20,7 +20,7 @@ import TomSelect from 'tom-select'
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  providers: [RegisterValidator, HTTP, LoginService,RegisterService, HeaderBackComponent]
+  providers: [RegisterValidator, HTTP, LoginService, RegisterService, HeaderBackComponent]
 })
 export class RegisterPage implements OnInit {
   public RegisterForm: FormGroup;
@@ -35,7 +35,7 @@ export class RegisterPage implements OnInit {
   public nomenclatura !: string;
   public nomenclatura2 !: string;
   public otherNomen !: string;
-  public textBotton !:string;
+  public textBotton !: string;
   public currentFood = undefined;
   public validarNomenc = undefined;
   //mostrar y ocultar
@@ -75,7 +75,7 @@ export class RegisterPage implements OnInit {
     this.barrios();
     this.DireccionNomenclaturas();
     this.validarExistenciaDireccion();
-    this.textBotton ='Agregar Campos'; 
+    this.textBotton = 'Agregar Campos';
   }
   tipo = [
     {
@@ -92,78 +92,8 @@ export class RegisterPage implements OnInit {
     window.open(url, "_blank");
   }
 
-  public seleccionarBarrio() {
-    new TomSelect('#barrio',{
-      optionClass: 'option',
-      itemClass: 'item',
-      render:{
-        option: function(data, escape) {
-          return '<div>' + escape(data.text) + '</div>';
-        },
-        item: function(data, escape) {
-          return '<div></div>';
-        },
-        option_create: function(data, escape) {
-          return '<div></div>';
-        },
-        no_results:function(data,escape){
-          return '<div class="no-results">No results found for "'+escape(data.input)+'"</div>';
-        },
-        not_loading:function(data,escape){
-          // no default content
-        },
-        optgroup: function(data) {
-          // no default content
-        },
-        optgroup_header: function(data, escape) {
-          return '<div></div>';
-        },
-        loading:function(data,escape){
-          return '<div></div>';
-        },
-        dropdown:function(){
-          return '<div></div>';
-        }
-      }
-    });
 
-  }
-  public seleccionarMunicipio(e) {
-    new TomSelect('#municipio',{
-      optionClass: 'option',
-      itemClass: 'item',
-      render:{
-        option: function(data, escape) {
-          return '<div>' + escape(data.text) + '</div>';
-        },
-        item: function(data, escape) {
-          return '<div></div>';
-        },
-        option_create: function(data, escape) {
-          return '<div></div>';
-        },
-        no_results:function(data,escape){
-          return '<div class="no-results">No results found for "'+escape(data.input)+'"</div>';
-        },
-        not_loading:function(data,escape){
-          // no default content
-        },
-        optgroup: function(data) {
-          // no default content
-        },
-        optgroup_header: function(data, escape) {
-          return '<div></div>';
-        },
-        loading:function(data,escape){
-          return '<div></div>';
-        },
-        dropdown:function(){
-          return '<div></div>';
-        }
-      }
-    });
 
-  }
 
 
   private BuildRegisterForm() {
@@ -182,8 +112,8 @@ export class RegisterPage implements OnInit {
     const soloNumeros = "^[0-9]*$";
     //PATTERN LETRAS
     const letras = '[a-zA-Z ]+$';
-    const razonSocial='^[a-zA-Z0-9 .]+$';
-    const email ='[^&#$%/!?¡]*';
+    const razonSocial = '^[a-zA-Z0-9 .]+$';
+    const email = '[^&#$%/!?¡]*';
 
     this.RegisterForm = this.formBuilder.group({
       tipo_doc: ['', [
@@ -250,9 +180,9 @@ export class RegisterPage implements OnInit {
       ver_direccion: ['', [
         Validators.required
       ]],
-      barrio: ['', 
+      barrio: ['',
         Validators.required],
-      municipio: ['', 
+      municipio: ['',
         Validators.required],
       vendedor: ['',],
       dirparam1: ['', Validators.required],
@@ -272,14 +202,15 @@ export class RegisterPage implements OnInit {
       Validators.pattern(soloNumeros)
       ]],
       dirparam8: [''],
-      dirparam9:       [''],
-      dirparam10:       ['',Validators.pattern(soloNumeros)],
-      dirparam11:       [''],
-      dirparam12:       ['',Validators.pattern(soloNumeros)],
+      dirparam9: [''],
+      dirparam10: ['', Validators.pattern(soloNumeros)],
+      dirparam11: [''],
+      dirparam12: ['', Validators.pattern(soloNumeros)],
       tratamientoDatos: ['', Validators.required
       ]
 
     });
+
   }
   public getError(controlName: any) {
     return this.registerValidator.getError(controlName, this.RegisterForm);
@@ -317,7 +248,7 @@ export class RegisterPage implements OnInit {
       this.form1 = "1";
       this.form2 = "";
       this.form3 = "";
-      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
+      this.RegisterService.presentAlert("¡Error!", 'Por favor Diligencie correctamente el formulario', "is-error");
     }
     else {
       this.form1 = "";
@@ -327,22 +258,56 @@ export class RegisterPage implements OnInit {
   }
   // mostrar seccion entrega
   public async continuarform3() {
+    setTimeout(() => {
+
+      this.instanceOfTomSelectFor('#barrio')
+      this.instanceOfTomSelectFor('#municipio')
+
+      setTimeout(() => {
+        let controlFieldTomSelect = document.querySelectorAll(".ts-wrapper>.ts-control")
+        controlFieldTomSelect.forEach((f) => { f.classList.add("styles") })
+      }, 200)
+
+    }, 500)
+
     if ((this.RegisterForm.controls['tipo_doc'].invalid || this.RegisterForm.controls['documento'].invalid || this.RegisterForm.controls['digitoVer'].invalid || this.RegisterForm.controls['razonSocial'].invalid) && (this.RegisterForm.controls['tipo_doc'].invalid || this.RegisterForm.controls['documento'].invalid || this.RegisterForm.controls['primerNombre'].invalid || this.RegisterForm.controls['segundoNombre'].invalid || this.RegisterForm.controls['primerApellido'].invalid || this.RegisterForm.controls['segundoApellido'].invalid)) {
       this.form1 = "1";
       this.form2 = "";
       this.form3 = "";
-      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
+      this.RegisterService.presentAlert("¡Error!", 'Por favor Diligencie correctamente el formulario', "is-error");
     } else if (this.RegisterForm.controls['email'].invalid || this.RegisterForm.controls['telefono'].invalid) {
       this.form1 = "";
       this.form2 = "2";
       this.form3 = "";
-      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
+      this.RegisterService.presentAlert("¡Error!", 'Por favor Diligencie correctamente el formulario', "is-error");
     } else {
       this.form1 = "";
       this.form2 = "";
       this.form3 = "3";
     }
   }
+
+  public instanceOfTomSelectFor(field: string) {
+    new TomSelect(field, {
+      optionClass: 'option',
+      itemClass: 'item',
+      render: {
+        dropdown: function () {
+          return '<div></div>';
+        },
+        option: function (data, escape) {
+          return '<div>' + escape(data.text) + '</div>';
+        },
+        item: function (data, escape) {
+          return '<span>Selección: '+ escape(data.text) +'</span>';
+        },
+        no_results: function (data, escape) {
+          return '<span>No se encuentran coincidencias para "' + escape(data.input) + '"</span>';
+        },
+      }
+    });
+  }
+
   // datos input municipios 
   public async municipios() {
     await this.RegisterService.tbl_municipios().then(() => {
@@ -379,20 +344,20 @@ export class RegisterPage implements OnInit {
     });
   }
   // OTRAS NOMENCLATURAS DIRECCION
-  public async otherNomenclatures(){
+  public async otherNomenclatures() {
 
-    if(this.otherNomen=='habilitar'){
-      this.otherNomen='';
-      this.textBotton ='Agregar Campos';
-      this.RegisterForm.controls['dirparam9'].setValue('') ;
+    if (this.otherNomen == 'habilitar') {
+      this.otherNomen = '';
+      this.textBotton = 'Agregar Campos';
+      this.RegisterForm.controls['dirparam9'].setValue('');
       this.RegisterForm.controls['dirparam10'].setValue('');
       this.RegisterForm.controls['dirparam11'].setValue('');
       this.RegisterForm.controls['dirparam12'].setValue('');
 
-    }else{
-      this.otherNomen='habilitar';
-      this.textBotton ='Ocultar Campos';
-      this.RegisterForm.controls['dirparam9'].setValue('') ;
+    } else {
+      this.otherNomen = 'habilitar';
+      this.textBotton = 'Ocultar Campos';
+      this.RegisterForm.controls['dirparam9'].setValue('');
       this.RegisterForm.controls['dirparam10'].setValue('');
       this.RegisterForm.controls['dirparam11'].setValue('');
       this.RegisterForm.controls['dirparam12'].setValue('');
@@ -448,9 +413,9 @@ export class RegisterPage implements OnInit {
       dataForm.dirparam5 + ' ' +
       dataForm.dirparam6 + ' ' +
       dataForm.dirparam7 + ' ' +
-      dataForm.dirparam8 +' ' +
-      dataForm.dirparam9 +' ' +
-      dataForm.dirparam10 +' ' +
+      dataForm.dirparam8 + ' ' +
+      dataForm.dirparam9 + ' ' +
+      dataForm.dirparam10 + ' ' +
       dataForm.dirparam11 + ' ' +
       dataForm.dirparam12;
 
@@ -469,9 +434,9 @@ export class RegisterPage implements OnInit {
         dataForm.barrio,
         dataForm.municipio,
         dataForm.vendedor);
-        this.RegisterService.showLoader();
+      this.RegisterService.showLoader();
     } else {
-      this.RegisterService.presentAlert("¡Error!",'Por favor Diligencie correctamente el formulario', "is-error");
+      this.RegisterService.presentAlert("¡Error!", 'Por favor Diligencie correctamente el formulario', "is-error");
     }
   }
   //modal direccion
@@ -488,10 +453,10 @@ export class RegisterPage implements OnInit {
       dataForm.dirparam5 + ' ' +
       dataForm.dirparam6 + ' ' +
       dataForm.dirparam7 + ' ' +
-      dataForm.dirparam8+ ' ' +
-      dataForm.dirparam9+ ' ' +
-      dataForm.dirparam10+ ' ' +
-      dataForm.dirparam11+ ' ' +
+      dataForm.dirparam8 + ' ' +
+      dataForm.dirparam9 + ' ' +
+      dataForm.dirparam10 + ' ' +
+      dataForm.dirparam11 + ' ' +
       dataForm.dirparam12, 'confirm');
 
   }

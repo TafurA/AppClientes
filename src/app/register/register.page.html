@@ -236,23 +236,7 @@
           </div>
   
           <div class="o-form__field">
-            <div class="o-form__field-wrap">
-              <select 
-              id="barrio"
-              class="o-form__input"
-              type="text"
-              formControlName="barrio"
-              >
-              <option value="" >Barrio</option>
-              <option *ngFor="let datos of listBarrios" value="{{datos.desbar_b}}" >
-                {{datos.desbar_b}}
-              </option>
-            </select>
-          </div>
-          <span class="o-form__error">{{ getError('barrio')}}</span> 
-          </div>
-          <div class="o-form__field">
-            <div class="o-form__field-wrap">
+            <div class="o-form__field-wrap o-form__field-wrap_tom">
               
               <select 
                 id="municipio"
@@ -265,8 +249,26 @@
                 </option>
               </select>
             </div>
-             <span class="o-form__error">{{ getError('municipio')}}</span> 
+            <span class="o-form__error">{{ getError('municipio')}}</span>
           </div>
+          
+          <div class="o-form__field">
+            <div class="o-form__field-wrap o-form__field-wrap_tom">
+              <select 
+                id="barrio"
+                class="o-form__input"
+                type="text"
+                formControlName="barrio"
+              >
+                <option value="" >Barrio</option>
+                <option *ngFor="let datos of listBarrios" value="{{datos.desbar_b}}" >
+                  {{datos.desbar_b}}
+                </option>
+              </select>
+            </div>
+            <span class="o-form__error">{{ getError('barrio')}}</span> 
+          </div>
+
           <div class="o-form__field">
             <div class="o-form__field">
               <div class="o-form__field-wrap">
