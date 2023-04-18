@@ -42,9 +42,7 @@ export class CarPage implements OnInit {
     public nvCtrl: NavController,
   ) { }
 
-  ngOnInit(): void { 
-    this.setUserData()
-  }
+  ngOnInit(): void { }
 
 
   ionViewDidEnter() {
@@ -68,8 +66,16 @@ export class CarPage implements OnInit {
 
   }
 
-  setUserData() {
-    this.shippingPoint = `${this.loginService.validateSession()['dircli_b']}`
+  public setUserData() {
+    const dataAddresList = JSON.parse(localStorage.getItem("AddressList"))
+
+    dataAddresList.forEach(address => {
+      const { codcli_b, dircli_b } = address
+
+      if (codcli_b == localStorage.getItem("codeUserAddress")) {
+        this.shippingPoint = dircli_b
+      }
+    });
   }
 
   // Retorna el listado de productos

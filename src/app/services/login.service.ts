@@ -90,7 +90,7 @@ export class LoginService {
   getUserCode() {
     return localStorage.getItem("codeUserAddress")
   }
-  // 1000122116
+
   logOutIntoSystem() {
     localStorage.removeItem("userSessionData")
     localStorage.clear()
