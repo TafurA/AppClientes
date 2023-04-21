@@ -14,6 +14,7 @@ export class OrderService {
   public arrayDataOrders = []
   public arrayCurrentOrderDetial = []
   public arrayProductsCurrentOrderDetail = []
+  public msjFechaOrden = ""
 
   public isOrdersCharged = false
 
@@ -114,4 +115,13 @@ export class OrderService {
   private getClientCode() {
     return this.loginService.validateSession()['codcli_b'];
   }
+
+  async GetFechaFactura(bodcli) {
+    await this.http.get(`${environment.url}${environment.apiPath}GetFechaFactura?bodega=${bodcli}`, "", environment.headers)
+      .then(data => {
+        const dataParse = JSON.parse(data.data)
+        this.msjFechaOrden = dataParse.Msj
+      })
+  }
+
 }

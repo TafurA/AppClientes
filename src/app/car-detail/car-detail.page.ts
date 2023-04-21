@@ -46,6 +46,7 @@ export class CarDetailPage implements OnInit {
   public groupConfirm = false;
   productsCurrentOrderDetail: any;
   public mensajeUno = "";
+  public checkDate = ""
 
   public loader: any;
 
@@ -72,6 +73,7 @@ export class CarDetailPage implements OnInit {
     }
 
     this.getOrderDeliveryDate()
+    this.getFechaFactura()
 
     this.getOrderDetail()
   }
@@ -107,6 +109,13 @@ export class CarDetailPage implements OnInit {
     if (this.detailData.subtotal == "0") {
       this.detailData.subtotal = this.detailData.total
     }
+  }
+
+  getFechaFactura() {
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    this.orderService.GetFechaFactura(codeBodCli).finally(() => {
+      this.checkDate = this.orderService.msjFechaOrden
+    })
   }
 
   public showPaymentStep() {
@@ -192,7 +201,6 @@ export class CarDetailPage implements OnInit {
   }
 
   public async getConfirmOrderDetail() {
-
 
     if (this.shopingService.idOrderCurrent) {
       await this.orderService.getDataUserOrderDetail(this.shopingService.idOrderCurrent).then(() => {
