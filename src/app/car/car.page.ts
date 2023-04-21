@@ -85,7 +85,8 @@ export class CarPage implements OnInit {
 
   // Obtiene el minimo de compra por vendedor
   public getMinPurchase() {
-    this.shopingService.getMinimoCompra(this.loginService.validateSession()['bodcli_b']).then(
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    this.shopingService.getMinimoCompra(codeBodCli).then(
       () => {
         const minimoCompraBefore: number = this.convertNumberToDecimal(localStorage.getItem("MinimoCompra"))
 

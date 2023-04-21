@@ -55,9 +55,9 @@ export class SidebarMenuPage implements OnInit {
   }
 
   setUserData() {
+    const dataAddresList = JSON.parse(localStorage.getItem("AddressList"))
     this.userName = `${this.loginService.validateSession()['nomcli_b']} ${this.loginService.validateSession()['ape1cli_b']}`
     this.userCashback = `${this.loginService.validateSession()['valor_acomulado']}`
-    this.shippingPoint = `${this.loginService.validateSession()['dircli_b']}`
 
 
     if (this.userName.includes("undefined")) {
@@ -70,6 +70,13 @@ export class SidebarMenuPage implements OnInit {
         this.userCashback = parseFloat(this.userCashback).toFixed(3)
       }
     }
+    dataAddresList.forEach(address => {
+      const { codcli_b, dircli_b } = address
+
+      if (codcli_b == localStorage.getItem("codeUserAddress")) {
+        this.shippingPoint = dircli_b
+      }
+    });
 
 
   }

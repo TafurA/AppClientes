@@ -113,7 +113,7 @@ export class OrderService {
   }
 
   private getClientCode() {
-    return this.loginService.validateSession()['codcli_b'];
+    return JSON.parse(localStorage.getItem("codeUserAddress"))
   }
 
   async GetFechaFactura(bodcli) {

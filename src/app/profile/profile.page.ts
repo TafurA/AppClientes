@@ -215,6 +215,7 @@ export class ProfilePage implements OnInit {
     this.modal.dismiss( dataForm.dirparam1 +' '+
     dataForm.dirparam2 + ' '+
     dataForm.dirparam3 +' '+
+    dataForm.dirparamBis + ' ' +
     dataForm.dirparam4 +' '+
     dataForm.dirparam5 +' '+
     dataForm.dirparam6 +' '+
@@ -260,6 +261,7 @@ export class ProfilePage implements OnInit {
         this.shippingForm.setValue({dirparam1:'',
                                     dirparam2:'',
                                     dirparam3:'',
+                                    dirparamBis:'',
                                     dirparam4:'',
                                     dirparam5:'',
                                     dirparam6:'',
@@ -276,6 +278,7 @@ export class ProfilePage implements OnInit {
         this.shippingForm.setValue({dirparam1:'',
                                     dirparam2:'',
                                     dirparam3:'',
+                                    dirparamBis:'',
                                     dirparam4:'',
                                     dirparam5:'',
                                     dirparam6:'',
