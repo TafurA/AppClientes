@@ -423,9 +423,9 @@ export class ShopingCarService {
   }
 
   public setArrayOfOrder(reference, seller) {
-
+    const codcli = JSON.parse(localStorage.getItem("codeUserAddress"))
     this.order[0].shoppingDetail = []
-    this.order[0].customerCodeOrder = this.loginService.validateSession()['codcli_b']
+    this.order[0].customerCodeOrder = codcli
     this.order[0].discount = reference
     this.order[0].vendedor = seller
 
