@@ -13,7 +13,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
   styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
-  private NUMBER_PUBLIC_VERSION = "1.2";
+  private NUMBER_PUBLIC_VERSION = "1.3";
   public alert;
   isOnline = navigator.onLine;
   currentVersion: boolean = true;
@@ -115,7 +115,19 @@ export class WelcomePage implements OnInit {
     this.alert = await this.alertController.create({
       header: title,
       subHeader: description,
-      cssClass: `c-alert untouched ${alertType}`
+      cssClass: `c-alert ${alertType}`,
+      buttons: [
+        {
+          text: 'Actualizar',
+          cssClass: 'o-button o-button_small',
+          handler: () => {
+            console.log("entroo")
+            setTimeout(() => {
+              window.location.href = "https://play.google.com/store/apps/details?id=com.surtilider.SurtiTienda&rdid=com.surtilider.SurtiTienda&feature=md&offerId"
+            }, 200);
+          },
+        },
+      ],
     });
 
     await this.alert.present();
