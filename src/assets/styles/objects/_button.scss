@@ -57,7 +57,7 @@
 }
 
 .o-button_secondary {
-  background-color: $c-secondary;
+  background-color: $c-secondary !important;
 
   &:active,
   &:focus {
