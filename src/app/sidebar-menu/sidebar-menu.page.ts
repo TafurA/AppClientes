@@ -18,7 +18,7 @@ import { BannerComponent } from '../components/banner/banner.component';
 export class SidebarMenuPage implements OnInit {
   public userName = ""
   public userCashback = ""
-  public shippingPoint="";
+  public shippingPoint = "";
 
   constructor(
     public loginService: LoginService,
@@ -56,6 +56,7 @@ export class SidebarMenuPage implements OnInit {
 
   setUserData() {
     const dataAddresList = JSON.parse(localStorage.getItem("AddressList"))
+
     this.userName = `${this.loginService.validateSession()['nomcli_b']} ${this.loginService.validateSession()['ape1cli_b']}`
     this.userCashback = `${this.loginService.validateSession()['valor_acomulado']}`
 
@@ -70,15 +71,18 @@ export class SidebarMenuPage implements OnInit {
         this.userCashback = parseFloat(this.userCashback).toFixed(3)
       }
     }
-    dataAddresList.forEach(address => {
-      const { codcli_b, dircli_b } = address
 
-      if (codcli_b == localStorage.getItem("codeUserAddress")) {
-        this.shippingPoint = dircli_b
-      }
-    });
+    if (dataAddresList == null) {
+      this.shippingPoint = this.loginService.validateSession()['dircli_b']
+    } else {
+      dataAddresList.forEach(address => {
+        const { codcli_b, dircli_b } = address
 
-
+        if (codcli_b == localStorage.getItem("codeUserAddress")) {
+          this.shippingPoint = dircli_b
+        }
+      });
+    }
   }
 
   logOut() {

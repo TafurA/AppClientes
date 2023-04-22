@@ -54,8 +54,6 @@ export class LoginService {
             localStorage.setItem("AddressList", null)
 
             // Guardar el bodcli del usuario cuando no hay direccione
-            console.log("data a giardar")
-            console.log(dataLoginTemp.data[0])
             this.setBodCli(dataLoginTemp.data[0][9])
           }
 

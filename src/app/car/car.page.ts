@@ -67,15 +67,18 @@ export class CarPage implements OnInit {
   }
 
   public setUserData() {
-    const dataAddresList = JSON.parse(localStorage.getItem("AddressList"))
-
-    dataAddresList.forEach(address => {
-      const { codcli_b, dircli_b } = address
-
-      if (codcli_b == localStorage.getItem("codeUserAddress")) {
-        this.shippingPoint = dircli_b
-      }
-    });
+    let dataAddresList = JSON.parse(localStorage.getItem("AddressList"))
+    if(dataAddresList == null) {
+      this.shippingPoint = this.loginService.validateSession()['dircli_b']
+    } else {
+      dataAddresList.forEach(address => {
+        const { codcli_b, dircli_b } = address
+  
+        if (codcli_b == localStorage.getItem("codeUserAddress")) {
+          this.shippingPoint = dircli_b
+        }
+      });
+    }
   }
 
   // Retorna el listado de productos
