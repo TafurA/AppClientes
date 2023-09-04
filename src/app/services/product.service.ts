@@ -16,10 +16,10 @@ export class ProductService {
   constructor(private http: HTTP, public loginService: LoginService) { }
 
   async getProductsSearch() {
-    await this.http.get(`${environment.url}${environment.apiPath}consultarProductos`, "", environment.headers)
+    const codeBodCli = JSON.parse(localStorage.getItem("codeBodCli"))
+    await this.http.get(`${environment.url}${environment.apiPath}GetProductoSearch?bodega=${codeBodCli}`, "", environment.headers)
       .then(data => {
         const dataObjTemp = JSON.parse(data.data)
-
         for (let index = 0; index < dataObjTemp.data.length; index++) {
           const element = dataObjTemp.data[index];
           this.arrayDataProductSearch[index] = element

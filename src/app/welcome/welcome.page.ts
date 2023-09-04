@@ -13,7 +13,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
   styleUrls: ['./welcome.page.scss'],
 })
 export class WelcomePage implements OnInit {
-  private NUMBER_PUBLIC_VERSION = "1.4";
+  private NUMBER_PUBLIC_VERSION = "1.6";
   public alert;
   isOnline = navigator.onLine;
   currentVersion: boolean = true;
